@@ -54,7 +54,8 @@ config.wsl_domains = {
     -- order for the domain to be useful.
 
     distribution = 'Ubuntu',
-
+    default_cwd = "~"
+    
   },
 
 }
