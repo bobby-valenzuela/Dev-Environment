@@ -130,21 +130,10 @@ mp3_dl(){
     youtube-dl -x --audio-format mp3 $1
 }
 
+# NODE VERSION MANAGER
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
-function test_echo(){
-
-    # printf "hi kids\n"
-
-    if [[ ${1} =~ ssh ]]
-    then
-	printf "no SSH!\n"
-    fi
-
-}
 
 function restart_hive(){
 
@@ -154,6 +143,7 @@ function restart_hive(){
 	
 }
 
+##### Google Cloud SDK
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/bobby_vz/sandbox/google-cloud-sdk/path.zsh.inc' ]; then . '/home/bobby_vz/sandbox/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -169,4 +159,10 @@ if [ -f '/home/bobby_vz/sandbox/google-cloud-sdk/completion.zsh.inc' ]; then . '
 source $HOME/zsh_utils/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 alias cc='quickconnect'
 
+
+# NVIM to use binary in /opt if it exists there
 export PATH="$HOME/.local/bin":$PATH
+
+if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
+    alias nvim="/opt/nvim-linux64/bin/nvim"
+fi
