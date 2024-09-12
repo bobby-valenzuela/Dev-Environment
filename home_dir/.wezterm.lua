@@ -27,8 +27,11 @@ local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
 
+-- Fav ones
 --config.color_scheme = 'Batman'
-config.color_scheme = 'Calamity'
+-- config.color_scheme = 'Calamity'
+-- config.color_scheme = 'cyberpunk'
+config.color_scheme = 'catppuccin-frappe'
 config.font = wezterm.font 'JetBrains Mono'
 
 config.wsl_domains = {
