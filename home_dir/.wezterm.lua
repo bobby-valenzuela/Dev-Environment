@@ -16,7 +16,7 @@ local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
 
-config.color_scheme = 'Batman'
+config.color_scheme = 'Atelier Sulphurpool (base16)'
 config.font = wezterm.font 'JetBrains Mono'
 
 
