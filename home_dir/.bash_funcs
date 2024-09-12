@@ -1,0 +1,44 @@
+# Collection of bash functions I use for work/personal use (don't forget to source this in your main .zshrc/.bashrc/etc)
+
+# Re-track current branch to repo
+git_reset(){
+
+   git checkout master && git pull && git branch -D ${1} && git checkout --track origin/${1}
+
+}
+
+# Stage and commit
+git_addcommit(){
+    git add -A && git commit -m "${1}" && echo "Staged and Committed!"
+}
+
+git_fixconflict(){
+    git checkout master
+    git pull
+    git branch -D $1 2> /dev/null
+    git checkout -b $1
+    git pull origin $1 --no-commit
+}
+
+
+clear_wgets(){
+    sudo find "${1}" -iname 'wget-log*' -exec rm -f '{}' ';'
+    echo "Cleaned Up all wget-log files in ${1}"
+}
+
+half_file(){
+    LINE_COUNT=$(wc -l ${1} 2> /dev/null | cut -d " " -f1)
+    LINE_COUNT_HALF=$((LINE_COUNT/2))
+    [[ ${LINE_COUNT_HALF} -gt 0 ]] && sed -in "1,${LINE_COUNT_HALF}d" ${1}
+}
+
+perlygrep(){
+    grep -HErniA 5 ${1} --include=\*.pl /home/control-io/
+}
+
+# Execute files
+alias perly="$(which perl) /home/control-io/www/DevSandbox/Sandbox/_templates/perly.pl"
+alias perlyprod="$(which perl) /home/control-io/www/DevSandbox/Sandbox/_templates/perlyprod.pl"
+alias prod_scratch="$(which perl) /home/control-io/www/DevSandbox/Sandbox/_templates/prod_scratch.pl"
+alias basher="$(which bash) /home/control-io/www/DevSandbox/Sandbox/_templates/basher.sh"
+
