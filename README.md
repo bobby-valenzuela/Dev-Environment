@@ -91,7 +91,35 @@ __Helpful Related Links (WSL + GUI)__
 
 # Quick Reference
 
-Quick refernces for key-bindings I commonly use.
+Quick references for key-bindings I commonly use.
+
+<br />
+
+### General copy/paste/searching within this setup
+
+<br />
+
+__Tmux search__
+- Enter copy mode: `<bind-key> + [` 
+- Start search: `/`
+- Enter search term and then `<Enter>` (then use `n/N` to search throughout matches - search starts at top of page, use `N` to search backwards)
+- End search: `q`
+
+<br />
+
+__tmux copy/paste [MAIN]__  _(copy to tmux buffer and clipboard)_
+- Enter copy mode: <bind-key>  `[`
+- Use arrows to find text to start to copy from
+-Start Selection: `v`
+- Copy: `y`
+- Paste (from tmux buffer): `<bind-key> + ]`
+- Paste (from system clipboard): `Ctrl+Shift+V`
+
+<br />
+
+__Neovim and Cli quick copy commands__
+- Tmux quick copy (from cli to system clipboard): `Mouse select + y (while selecting)`
+- Neovim copy (clipboard) => `Select (mouse/v) + y`
 
 <br />
 
