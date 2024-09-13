@@ -32,7 +32,8 @@ local config = wezterm.config_builder()
 -- config.color_scheme = 'Calamity'
 -- config.color_scheme = 'cyberpunk'
 -- config.color_scheme = 'catppuccin-frappe'
-config.color_scheme = 'catppuccin-macchiato'
+-- config.color_scheme = 'catppuccin-macchiato'
+config.color_scheme = 'Rebecca (base16)'
 config.font = wezterm.font 'JetBrains Mono'
 
 config.wsl_domains = {
