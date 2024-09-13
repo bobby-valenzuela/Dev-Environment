@@ -168,4 +168,4 @@ if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
 fi
 
 # Mount Alpha
-sshfs -o IdentityFile=<key> ubuntu@<src_ip>:/home/control-io/ /home/bobby/pbx/alpha
+shfs alpha:/home/control-io/ alpha -oIdentityFile=/home/bobby/.ssh/pbx-pems/<key>.pem
