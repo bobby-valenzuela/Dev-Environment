@@ -30,11 +30,11 @@ local config = wezterm.config_builder()
 -- Fav ones
 --config.color_scheme = 'Batman'
 -- config.color_scheme = 'Calamity'
--- config.color_scheme = 'cyberpunk'
 -- config.color_scheme = 'catppuccin-frappe'
 -- config.color_scheme = 'catppuccin-macchiato'
 -- config.color_scheme = 'Tokyo Night Storm (Gogh)'
-config.color_scheme = 'Rebecca (base16)'
+-- config.color_scheme = 'Rebecca (base16)'
+config.color_scheme = 'cyberpunk'
 config.font = wezterm.font 'JetBrains Mono'
 
 config.wsl_domains = {
