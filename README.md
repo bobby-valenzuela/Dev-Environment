@@ -17,7 +17,8 @@
 
 Preliminaries
 - [Install Wezterm Editor](https://wezfurlong.org/wezterm/install/linux.html)
--   If on WSL then you will need to copy your ~/.wezterm.lua file to your windows home dir: `cp ~/.wezterm.lua /mnt/c/Users/<username>`
+  - If on WSL then you will need to copy your ~/.wezterm.lua file to your windows home dir: `cp ~/.wezterm.lua /mnt/c/Users/<username>`
+- [Install node version manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
 ```bash
 sudo apt install libstdc++6 -y
 sudo apt install curl -y
