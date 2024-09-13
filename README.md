@@ -209,6 +209,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `"_dd`  - Delete line and yank to black hole register (keeps registers the same).  
 `ayy` - Yank line to "a" register (overwriting register a).  
 `Ayy` - Yank line to "a" register (appending to register a)  
+`d` or `dd` - Cuts (Deletes and yanks)
 
 <br />
 
