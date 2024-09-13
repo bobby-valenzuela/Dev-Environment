@@ -24,6 +24,7 @@ sudo apt install curl -y
 sudo apt install gcc -y
 sudo apt install git-all
 sudo apt install xse
+sudo apt install lua5.3 # Or later version
 ```
 
 <br />
