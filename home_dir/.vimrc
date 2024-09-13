@@ -1,3 +1,4 @@
+set nocompatible    " Set compatibility to Vim-Only (not vi)
 set smarttab
 set mouse=a
 set number
@@ -12,7 +13,6 @@ set hlsearch        " Use highlighting when doing a search.
 set history=1000    " Set the commands to save in history default number is 20.
 syntax on           " Turn syntax highlighting on.
 set laststatus=2    " Status Bar
-set nocompatible    " Set compatibility to Vim-Only (not vi)
 set wrap            " Text-Wrap
 " colorscheme desert
 
