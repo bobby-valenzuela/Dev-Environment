@@ -23,6 +23,7 @@ sudo apt install libstdc++6 -y
 sudo apt install curl -y
 sudo apt install gcc -y
 sudo apt install git-all
+sudo apt install xse
 ```
 
 <br />
