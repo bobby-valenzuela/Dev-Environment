@@ -166,3 +166,6 @@ export PATH="$HOME/.local/bin":$PATH
 if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
     alias nvim="/opt/nvim-linux64/bin/nvim"
 fi
+
+# Mount Alpha
+sshfs -o IdentityFile=<key> ubuntu@<src_ip>:/home/control-io/ /home/bobby/pbx/alpha
