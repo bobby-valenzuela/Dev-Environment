@@ -150,19 +150,17 @@ if [ -f '/home/bobby_vz/sandbox/google-cloud-sdk/path.zsh.inc' ]; then . '/home/
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/bobby_vz/sandbox/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/bobby_vz/sandbox/google-cloud-sdk/completion.zsh.inc'; fi
 
+alias scpdownloads='cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads'
 
-
-
-
-# MUST BE AT THE BOTTOM!!!
+# MUST BE AT THE BOTTOM!!! (last plugin)
 # Command Line Synax Highlighting - 
 source $HOME/zsh_utils/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 alias cc='quickconnect'
 
 
-# NVIM to use binary in /opt if it exists there
 export PATH="$HOME/.local/bin":$PATH
 
+# NVIM to use binary in /opt if it exists there
 if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
     alias nvim="/opt/nvim-linux64/bin/nvim"
 fi
