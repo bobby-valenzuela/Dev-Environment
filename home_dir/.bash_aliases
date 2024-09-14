@@ -49,4 +49,3 @@ alias scpdownloads='cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Document
 alias ssh-keyupdate="{ eval $(ssh-agent -s) ; } && ssh-add ~/.ssh/id_rsa"
 
 
-

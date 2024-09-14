@@ -158,3 +158,4 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ ${ALIASES_LOADED} -ne 1 && -s ~/.bash_aliases ]] && source ~/.bash_aliases
 [[ ${PBX_LOADED} -ne 1 && -s ~/.bash_pbx ]] && source ~/.bash_pbx
 [[ ${GIT_LOADED} -ne 1 && -s ~/.bash_git ]] && source ~/.bash_git
+[[ ${UTILS_LOADED} -ne 1 && -s ~/.bash_utils ]] && source ~/.bash_utils

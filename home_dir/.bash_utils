@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+UTILS_LOADED=1
+
+# Get side-by-side diff only showing diffs
+diffy(){
+    diff $1 $2 -y --color --suppress-common-lines
+}
+
+
