@@ -34,6 +34,10 @@ sudo apt install lua5.3 # Or later version
 - [Install ZSH with OhMyZsh](https://ohmyz.sh/)
   - Replace ~/.zshrc with one saved.
 - [ZSH Syntaz highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+  - Just run this (Ubuntu) .zsrhc already has needed snippet
+  - ```
+    bash sudo apt install zsh-syntax-highlighting -y
+```   
 - [Install Powerline10k Theme](https://github.com/romkatv/powerlevel10k)
   - Be sure to install the fonts mentioned and select those fonts for your terminal.
   - [Down and Install a NerdFont](https://www.nerdfonts.com/)
