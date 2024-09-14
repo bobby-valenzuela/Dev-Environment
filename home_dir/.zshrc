@@ -168,4 +168,6 @@ if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
 fi
 
 # Mount Alpha
-sshfs alpha:/home/control-io/ alpha -oIdentityFile=/home/bobby/.ssh/pbx-pems/<key>.pem
+SSHFS_MOUNT_COUNT=$(ps aux | grep -i sftp | grep -v grep | wc -l )
+[[ ${SSHFS_MOUNT_COUNT} -eq 0 ]] && sudo sshfs alpha:/home/control-io/ /home/bobby/alpha -oIdentityFile=/home/bobby/.ssh/pbx-pems/<key>.pem
+
