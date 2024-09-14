@@ -112,36 +112,18 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# === Custom Aliases ===
-
 # Enforce color scheme
 alias tmux="tmux -2"
-alias force_git_push="eval \$(ssh-agent -s) && ssh-add ~/.ssh/id_rsa && git push && echo 'Pushed to GitHub!'"
-#alias fgp="eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rs"
-
-
 export TERM=screen-256color
-
-# Git ones
-alias ssh-keyupdate="{ eval $(ssh-agent -s) ; } && ssh-add ~/.ssh/id_rsa"
-
-# funcs
-mp3_dl(){
-    youtube-dl -x --audio-format mp3 $1
-}
 
 # NODE VERSION MANAGER
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-function restart_hive(){
 
-	ssh hive01 'sudo systemctl restart apache2 && echo "hive-01 restarted!"'
-	ssh hive02 'sudo systemctl restart apache2 && echo "hive-02 restarted!"'
-	ssh hive03 'sudo systemctl restart apache2 && echo "hive-03 restarted!"'
-	
-}
+# Add .local/bin to PATH
+export PATH="$HOME/.local/bin":$PATH
 
 ##### Google Cloud SDK
 # The next line updates PATH for the Google Cloud SDK.
@@ -150,22 +132,29 @@ if [ -f '/home/bobby_vz/sandbox/google-cloud-sdk/path.zsh.inc' ]; then . '/home/
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/bobby_vz/sandbox/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/bobby_vz/sandbox/google-cloud-sdk/completion.zsh.inc'; fi
 
-alias scpdownloads='cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads'
-
-# MUST BE AT THE BOTTOM!!! (last plugin)
-# Command Line Synax Highlighting - 
-source $HOME/zsh_utils/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-alias cc='quickconnect'
-
-
-export PATH="$HOME/.local/bin":$PATH
 
 # NVIM to use binary in /opt if it exists there
 if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
     alias nvim="/opt/nvim-linux64/bin/nvim"
 fi
 
-# Mount Alpha
-SSHFS_MOUNT_COUNT=$(ps aux | grep -i sftp | grep -v grep | wc -l )
-[[ ${SSHFS_MOUNT_COUNT} -eq 0 ]] && sudo sshfs alpha:/home/control-io/ /home/bobby/alpha -oIdentityFile=/home/bobby/.ssh/pbx-pems/<key>.pem
 
+# MUST BE AT THE BOTTOM!!! (last plugin)
+# Command Line Syntax Highlighting - 
+# Set path to zsh highlighting (must have already instead => sudo apt install zsh-syntax-highlighting -y)
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+
+# Mount SSHFS dirs as needed 
+# SSHFS_MOUNT_COUNT=$(ps aux | grep -i sftp | grep -v grep | wc -l )
+# [[ ${SSHFS_MOUNT_COUNT} -eq 0 ]] && sudo sshfs alpha:/home/control-io/ /home/bobby/alpha -oIdentityFile=/home/bobby/.ssh/pbx-pems/<key>.pem
+
+
+
+
+
+# Load .bash_alises file if not loaded
+[[ ${ALIASES_LOADED} -ne 1 && -s ~/.bash_aliases ]] && source ~/.bash_aliases
+[[ ${PBX_LOADED} -ne 1 && -s ~/.bash_pbx ]] && source ~/.bash_pbx
+[[ ${GIT_LOADED} -ne 1 && -s ~/.bash_git ]] && source ~/.bash_git
