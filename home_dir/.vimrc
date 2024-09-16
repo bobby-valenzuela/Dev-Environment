@@ -20,10 +20,8 @@ set encoding=utf-8  "" encoding
 " set softtabstop
 
 " copy (write) highlighted text to .vimbuffer
-vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| clip.exe <CR><CR>    
 
 " paste from buffer
-vmap <C-v> :r ~/.vimbuffer<CR> 
 
 
 
@@ -78,15 +76,18 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 
 Plug 'vimcolorschemes/vimcolorschemes'
 
-
+" vim-visual-multi (equiv. to Ctrl+d in vscode)
+" Allows one to use Ctrl+n to highlight next identical occurences (once text is highlighted)
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 call plug#end()
 
-
-
-
-
-
+ " copy (write) highlighted text to .vimbuffer
+ "
+ " -vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \|
+ " clip.exe <CR><CR>
+ "
+ " paste from buffer
 
 " =============== COLOR SCHEMES ============== "
 " Defining custome color schemes needs to be here - after all plugins have loaded
