@@ -27,14 +27,26 @@ local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
 
--- Fav ones
 --config.color_scheme = 'Batman'
 -- config.color_scheme = 'Calamity'
--- config.color_scheme = 'catppuccin-frappe'
--- config.color_scheme = 'catppuccin-macchiato'
--- config.color_scheme = 'Rebecca (base16)'
 -- config.color_scheme = 'cyberpunk'
+-- config.color_scheme = 'catppuccin-frappe'
+config.color_scheme = 'cyberpunk'
+-- config.color_scheme = 'Rebecca (base16)'
+config.color_scheme = 'Tokyo Night Storm (Gogh)'
+-- config.color_scheme = 'catppuccin-macchiato'
+-- config.color_scheme = 'tokyonight-storm'
+
 config.font = wezterm.font 'JetBrains Mono'
+
+
+config.keys = {
+
+        -- Turn off the default ctrl+v "input the next character literally",
+        -- because it works badly with the Windows Clipboard Manager Win+v.
+        -- With this update, just select entry from Win+v then Ctrl+Shift+V to paste plain text
+        { key = 'v', mods = 'CTRL', action = wezterm.action.Nop },
+}
 
 config.wsl_domains = {
 
@@ -55,12 +67,13 @@ config.wsl_domains = {
     -- order for the domain to be useful.
 
     distribution = 'Ubuntu',
-    default_cwd = "~"
-    
+
+     default_cwd = "~"
   },
 
 }
 
 config.default_domain = 'WSL:Ubuntu'
+
 
 return config
