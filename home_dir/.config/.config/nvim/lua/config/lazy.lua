@@ -53,3 +53,5 @@ require("lazy").setup({
     },
   },
 })
+
+-- Configure LSPs
