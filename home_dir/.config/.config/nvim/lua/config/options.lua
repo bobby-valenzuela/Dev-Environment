@@ -4,3 +4,5 @@
 vim.opt.wrap = true
 vim.g.autoformat = false
 vim.opt.termguicolors = true
+vim.opt.number = true
+vim.opt.relativenumber = true
