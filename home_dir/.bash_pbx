@@ -28,15 +28,6 @@ clear_wgets(){
     echo "Cleaned Up all wget-log files in ${1}"
 }
 
-gitsync_c4(){
-  gitsync "/home/bobby/pbx/c4" "$1"
-}
-
-gitsync_voutlook365(){
-  gitsync "/home/bobby/pbx/voutlook365" "$1"
-}
-
-
 
 
 
