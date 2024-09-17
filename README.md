@@ -6,8 +6,8 @@
   - [VIM](#vim)
   - [Trouble Shooting (WSL)](#trouble-shooting-wsl)
 - [Quick Reference](#quick-reference)
-  - [TMUX](#tmux-1)
-  - [Vim](#vim-1)
+  - [TMUX](#tmux)
+  - [Vim](#vim)
 
 ---
 
