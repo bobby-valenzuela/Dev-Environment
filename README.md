@@ -13,8 +13,8 @@ Quick references for key-bindings I commonly use.
 
 <br />
 
-### General copy/paste/searching within this setup
-
+## General copy/paste/searching within this setup
+---
 <br />
 
 __Tmux search__
@@ -41,6 +41,8 @@ __Neovim and Cli quick copy commands__
 
 <br />
 
+<br />
+
 ## TMUX
 
 - Enable TMUX plugins by install TPM: `https://github.com/tmux-plugins/tpm`
@@ -49,6 +51,7 @@ __Neovim and Cli quick copy commands__
 
 <br />
 
+---
 ### Sessions
 Open tmux as a named session: `tmux new -s <name>`  
 To detach a tmux session: `Ctrl+B+D`  
@@ -60,6 +63,7 @@ __Where ‘0’ is your session id/name__
 
 <br />
 
+---
 ### Windows
 Rename Window: `Ctrl+B+,`  
 Create new Window: `Ctrl+B+C`  
@@ -70,6 +74,7 @@ Close Window: `exit`
 
 <br />
 
+---
 ### Panes
 Split Windows Vertically: `Ctrl+B+%`  
 Split Windows Horizontally: `Ctrl+B+"`  
@@ -82,14 +87,25 @@ Close pane: `exit` or `Ctrl+B+Z`
 
 <br />
 
+<br />
+
 ## Vim
 There are loads of good vim cheat sheets out there and this isn't a substitution, but rather a list of common/handy ones I've found to be efficient on my workflow.  
 [Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)
 
+
 <br />
 
 ---
+### Modes
 
+`SHIFT v` - Visual Line Mode  
+`SHIFT B` - Visual Block Mode  
+
+
+<br />
+
+---
 ### Windows
 `<leader> w w` - switch windows [Lazyvim]  
 `<leader> w q` - close window [Lazyvim]  
@@ -102,11 +118,10 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 <br />
 
 ---  
-
 ### Buffers
 `:E` - Open file nav (short for `explore`)  
 `:e ~/.vimrc` - edit a file by name (short for `:edit`).  
-`:ls` or `buffers`   - view buffers  
+`:ls` or `buffers`   - view buffers   
 `C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers.  
 `:bn` - rotate to next buffer.  
 `:bp` - rotate back to previous buffer.  
@@ -124,18 +139,19 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `<leader>  {1..5}` - Harpoon to (open) specific file  
 #### Lazyvim
 ``<leader> ` `` =  switch last file (buffer)  
+`<leader> f b` - view open buffers
 `<leader> b e` - View buffer explorer  
 
 <br />
 
+---
 ### Moving
 `: {num}` - Go to line  
+`I/A` - Go to begin/end of line
 `m {a-z}`	Setting markers/waypoints as {a-z}  
 `‘ {a-z}`	Move to marker/position {a-z}  
 `:delm!`  - vim clear all marks (or specific ranges like `:delm a-zA-Z0-9`)  
 `''`	- Move to previous position  (thats two single quotes in succession, not a single double quote)  
-`[i` - Go to the top of code block (via mini-indentscope) [Zazyvim]  
-`]i`- Go to the bottom of code block (via mini-indentscope) [Zazyvim]  
 `[[` - Go to top of file (via ...) [Zazyvim]  
 `]]` - Go to bottom of file (via ...) [Zazyvim]  
 `s {first_char}{second_char}` - search forward to matches and show labels + enter the label of the match you want to go to (via leap)  
@@ -145,13 +161,47 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 
 <br />
 
----  
+#### Brackets && Braces
 
+`[i` - Go to the top of code block (via mini-indentscope) [Zazyvim]  
+`]i`- Go to the bottom of code block (via mini-indentscope) [Zazyvim]  
+`v%` - Select Content within parens/brackets (inclusively) if you're right before a bracket.  
+`vi{` - Selects everything within the block... then Esc to leave you at ending "}  
+`ci{` - Change text inside brackets (exclusively)  
+`ca{` - Change text inside brackets (inclusively)  
+`yi{` - Yank text inside brackets (inclusively)  
+`ya{` - Yank text inside brackets (exclusively)  
+`di{` - Delete text inside brackets (inclusively)  
+`da{` - Delete text inside brackets (exclusively)  
+
+<br />
+
+---  
 ### Selecting
 `/` - Search (grep): type text and enter then `n/N` to iterate through matches  
 `o`    - Reverse order while continuing to select  
 `/<term>` - While in visual mode, select lines based on RegEx  
-`C-v` - enter visual block mode. Once text is selected enter insert mode (`a/A`,`i/I`,`c/C`,`p/P`,`o/O` etc) and make changes. They will appear on the first line, but once you hit Esc those changes will be made to all selected lines. 
+`C-v` - enter visual block mode. Once text is selected enter insert mode (`a/A`,`i/I`,`c/C`,`p/P`,`o/O` etc) and make changes. They will appear on the first line, but once you hit Esc those changes will be made to all selected lines.  
+`gs{char}` - Global surround. Example: Select text then `gs"`  
+
+<br />
+
+__Finding Multiple Occurrences__  
+1. Select text (in visual mode)
+2. `*` to highlight all occurences (begins at next occurence)
+3. `#` to highlight all occurences (begins at previus occurence)
+4. `n/N` to select next/previous occurences
+5. `v` again to select the highlighted occurence
+
+<br />
+
+#### Continguous Lines of text (paragraph)
+`yap` - Yank with newlines  
+`yip` - Yank without newlines  
+`cap` - Change with newlines  
+`cip` - Change without newlines  
+`dap` - Delete with newlines  
+`dip` - Delete without newlines  
 
 <br />
 
@@ -184,8 +234,8 @@ _Note: '^J' in a register will be changed to a newline when pasting._
 <br />
 
 ---  
-
 ### Editing
+`ciw` - Change inner word (replace)
 `xp`    - swap two adjacent letters (move letter cursor one place to the right)  
 `J`     - Merge lines: Apend line below to the end of the current line.  
 `cc` - change entire line.  
@@ -198,7 +248,6 @@ _Note: '^J' in a register will be changed to a newline when pasting._
 
 
 ---
-
 ### Numbers
 `C-a`    - Increment Highlighted Numbers  
 `gC-a`   - Increment Highlight Numbers in sequence (each matched item will increment one more than previous match).  
@@ -208,7 +257,6 @@ _Note: '^J' in a register will be changed to a newline when pasting._
 <br />
 
 ---  
-
 ### Indenting
 `=` - Auto-Indenting (based on rules - works on selected text as well)  
 `=ap` -  Auto-Indent Paragraph  
@@ -233,39 +281,8 @@ __Best Practices when recording macros__
 <br />
 
 ---
+  
 
-### Continguous Lines of text (paragraph)
-`yap` - Yank with newlines  
-`yip` - Yank without newlines  
-`cap` - Change with newlines  
-`cip` - Change without newlines  
-`dap` - Delete with newlines  
-`dip` - Delete without newlines  
-
-<br />
-
----  
-
-### Brackets && Braces
-
-##### Before brackets
-`v%` - Select Content within parens/brackets (inclusively) if you're right before a bracket.  
-
-<br />
-
-##### Within Brackets
-Finding begin/end of curly braces you're inside of...  
-`vi{` - Selects everything within the block... then Esc to leave you at ending "}  
-`ci{` - Change text inside brackets (exclusively)  
-`ca{` - Change text inside brackets (inclusively)  
-`yi{` - Yank text inside brackets (inclusively)  
-`ya{` - Yank text inside brackets (exclusively)  
-`di{` - Delete text inside brackets (inclusively)  
-`da{` - Delete text inside brackets (exclusively)  
-
-<br />
-
----  
 
 Note: `C-` should be taken to mean `Ctrl+`. All other keys are to be entered in succession (not simultaneously).
 
