@@ -177,7 +177,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `‘ {a-z}`	Move to marker/position {a-z}  
 `'` - view all previous markers (and previously visited locations)
 `:delm!`  - vim clear all marks (or specific ranges like `:delm a-zA-Z0-9`)  
-`''`	- Move to previous position  (thats two single quotes in succession, not a single double quote)  
+`''`	- Move to previous marker position  (thats two single quotes in succession, not a single double quote)  
 `[[` - Go to top of file (via ...) [Zazyvim]  
 `]]` - Go to bottom of file (via ...) [Zazyvim]  
 `s {first_char}{second_char}` - search forward to matches and show labels + enter the label of the match you want to go to (via leap)  
