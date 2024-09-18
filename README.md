@@ -26,7 +26,7 @@ __Tmux search__
 <br />
 
 __tmux copy/paste [MAIN]__  _(copy to tmux buffer and clipboard)_
-- Enter copy mode: <bind-key>  `[`
+- Enter copy mode: `<bind-key>  [`
 - Use arrows to find text to start to copy from 
 -Start Selection: `v`
 - Copy: `y`
