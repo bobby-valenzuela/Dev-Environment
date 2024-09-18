@@ -35,7 +35,7 @@ sudo apt install lua5.3 # Or later version
   - Replace ~/.zshrc with one saved.
 - [ZSH Syntaz highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
   - Just run this (Ubuntu) .zsrhc already has needed snippet
-  - ```
+```
     bash sudo apt install zsh-syntax-highlighting -y
 ```   
 - [Install Powerline10k Theme](https://github.com/romkatv/powerlevel10k)
