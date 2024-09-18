@@ -76,8 +76,8 @@ Close Window: `exit`
 
 ---
 ### Panes
-Split Windows Vertically: `Ctrl+B+%`  (With my conf I uaw `|` instead of `%`)  
-Split Windows Horizontally: `Ctrl+B+"`  (With my conf I uaw `_` instead of `"`)  
+Split Windows Vertically: `Ctrl+B+%`  (with my conf I use `|` instead of `%`)  
+Split Windows Horizontally: `Ctrl+B+"`  (w/66ith my conf I use `_` instead of `"`)  
 Navigate subwindows (panes): c  
 Show pane numbers: `Ctrl+B+Q`  
 Move current pane left: `Ctrl+B+{`  
@@ -91,19 +91,28 @@ Close pane: `exit` or `Ctrl+B+Z`
 
 ## Vim
 There are loads of good vim cheat sheets out there and this isn't a substitution, but rather a list of common/handy ones I've found to be efficient on my workflow.  
-[Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)
+[Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)  
 
-                                                                                                                                                                                                                                               ---                                                                                                                                                                                                                                              ###
-Common/General                                                                                                                                                                                                                                    
-`wa ` - ("write all") save all open buffers  
+---
+### Common/General                                                                                                                                                                                                                                    
+`wa ` - ("write all") save all open buffers    
+`:e!` - erase all unsaved changes  
+`:bufdo e!` - erase all unsaved changes (in all open buffers)  
+`:w !diff %` - view changes in vim before saving
+
 
 <br />
 
 ---
 ### Lazyvim  (neovim)  
+`<leader> <leader>` - file search  
 `<leader> f t` - Open terminal (root)  
-`Ctrl  /` - Show/Hide terminal  
-`K` - get pop-up with code info
+`Ctrl  /` - Show/Hide terminal   
+`K` - get pop-up with code info  
+`<spave> /` - grep (make sure neo-tree isn't inside a folder otherwise that will be root)  
+	- `Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)  
+`<space> e` - opens working dir file treee (what buffer is open)  
+`<spave> E` - opens Root Dir (better - grep and stuff)  
 
 
 
@@ -206,6 +215,8 @@ Common/General
 `/<term>` - While in visual mode, select lines based on RegEx  
 `C-v` - enter visual block mode. Once text is selected enter insert mode (`a/A`,`i/I`,`c/C`,`p/P`,`o/O` etc) and make changes. They will appear on the first line, but once you hit Esc those changes will be made to all selected lines.  
 `gs{char}` - Global surround. Example: Select text then `gs"`  
+`viw` - selects just the word.  
+`vaw` - selects the word plus any surrounding whitespace.  
 
 <br />
 
