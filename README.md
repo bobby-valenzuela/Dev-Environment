@@ -68,7 +68,7 @@ __Where ‘0’ is your session id/name__
 Rename Window: `Ctrl+B+,`  
 Create new Window: `Ctrl+B+C`  
 Show all Windows: `Ctrl+B+S`  
-Show all Windows (with preview): `Ctrl+B+W` _Enter to select_  
+Show all Windows (with preview): `Ctrl+B+w` _Enter to select_  
 Switch between windows: `Ctrl+B+<number>`  
 Close Window: `exit`
 
