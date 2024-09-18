@@ -95,7 +95,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 
 ---
 ### Common/General                                                                                                                                                                                                                                    
-`wa ` - ("write all") save all open buffers    
+`:wa ` - ("write all") save all open buffers    
 `:e!` - erase all unsaved changes  
 `:bufdo e!` - erase all unsaved changes (in all open buffers)  
 `:w !diff %` - view changes in vim before saving
