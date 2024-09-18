@@ -1,13 +1,9 @@
 ### Table of Contents
 
 - [Setup](#setup)
-  - [ZSH](#zsh)
-  - [TMUX](#tmux)
-  - [VIM](#vim)
-  - [Trouble Shooting (WSL)](#trouble-shooting-wsl)
+- [Trouble Shooting (WSL)](#trouble-shooting-wsl)
 
 ---
-
 
 
 # Setup
@@ -69,12 +65,71 @@ sudo apt install lua5.3 # Or later version
 
 <br />
 
+---
 ## Neovim (via lazy vim)
 - [Install Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md)
-- [Install LazyVim](https://www.lazyvim.org/installation)
+- [Install LazyVim](https://www.lazyvim.org/installation)  
+
+
+LazyGit tutorial: https://www.youtube.com/watch?v=Ihg37znaiBo  
+
+Use `:LazyExtras` to enable some extra plugins
+- Harpoon
+- mini.indentscope
+Check `nvim/lazy-lock.json` for full current list in use.
 
 <br />
 
+### INSTALL PERL LANGUAGE SERVER ###
+
+General Guide: https://climatechangechat.com/setting_up_lsp_nvim-lspconfig_and_perl_in_neovim.html#basic-setup-get-a-perl-language-server-up-and-running-with-neovim
+
+
+--- Install PLS package
+```
+perl -MCPAN -e shell
+install PLS
+```
+
+add this into `init.lua` OR `~/.config/nvim/lua/config/lazy.lua`  
+
+```
+local lspconfig = require("lspconfig")
+
+-- Perl PLS (Perl Language Server)
+lspconfig.perlpls.setup({})
+```
+
+<br />
+
+### PERL SYNTAX HIGHLIGHTING ###
+
+Install Treesitter-perl: https://metacpan.org/pod/Text::Treesitter
+
+In your `~/.config/nvim/lua/plugins/treesitter.lua` (or a similar file where you configure plugins):
+
+```lua
+return {
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = function()
+    require("nvim-treesitter.configs").setup({
+      -- Ensure that Tree-sitter parsers are installed
+      ensure_installed = {
+        "perl", -- Add Perl as a language to be supported by Tree-sitter
+        -- You can include other languages here too
+      },
+      highlight = {
+        enable = true, -- Enable syntax highlighting
+      },
+    })
+  end,
+}
+```
+
+<br />
+
+---
 ## Trouble Shooting (WSL)
 
 I've been using this without issue in WSL, butin case you're having issues, it could be to do with your `DISPLAY1 environment variable.
