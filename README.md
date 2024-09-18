@@ -109,8 +109,8 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `<leader> f t` - Open terminal (root)  
 `Ctrl  /` - Show/Hide terminal   
 `K` - get pop-up with code info  
-`<spave> /` - grep (make sure neo-tree isn't inside a folder otherwise that will be root)  
-	- `Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)  
+`<space> /` - grep (make sure neo-tree isn't inside a folder otherwise that will be root)  
+`Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)  
 `<space> e` - opens working dir file treee (what buffer is open)  
 `<spave> E` - opens Root Dir (better - grep and stuff)  
 
