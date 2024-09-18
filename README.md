@@ -27,7 +27,7 @@ __Tmux search__
 
 __tmux copy/paste [MAIN]__  _(copy to tmux buffer and clipboard)_
 - Enter copy mode: <bind-key>  `[`
-- Use arrows to find text to start to copy from
+- Use arrows to find text to start to copy from 
 -Start Selection: `v`
 - Copy: `y`
 - Paste (from tmux buffer): `<bind-key> + ]`
@@ -76,8 +76,8 @@ Close Window: `exit`
 
 ---
 ### Panes
-Split Windows Vertically: `Ctrl+B+%`  
-Split Windows Horizontally: `Ctrl+B+"`  
+Split Windows Vertically: `Ctrl+B+%`  (With my conf I uaw `|` instead of `%`)  
+Split Windows Horizontally: `Ctrl+B+"`  (With my conf I uaw `_` instead of `"`)  
 Navigate subwindows (panes): c  
 Show pane numbers: `Ctrl+B+Q`  
 Move current pane left: `Ctrl+B+{`  
@@ -92,6 +92,10 @@ Close pane: `exit` or `Ctrl+B+Z`
 ## Vim
 There are loads of good vim cheat sheets out there and this isn't a substitution, but rather a list of common/handy ones I've found to be efficient on my workflow.  
 [Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)
+
+                                                                                                                                                                                                                                               ---                                                                                                                                                                                                                                              ###
+Common/General                                                                                                                                                                                                                                    
+`wa ` - ("write all") save all open buffers  
 
 <br />
 
@@ -173,8 +177,15 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 
 <br />
 
-#### Brackets && Braces
+---
+#### Folding
+`zc` - fold a block of code (z = fold and c = close)  
+`zo` - unfold a block of code (z = fold and c = open)  
 
+<br />
+
+#### Brackets && Braces
+`%` - Select top/bottom of current block  
 `[i` - Go to the top of code block (via mini-indentscope) [Zazyvim]  
 `]i`- Go to the bottom of code block (via mini-indentscope) [Zazyvim]  
 `v%` - Select Content within parens/brackets (inclusively) if you're right before a bracket.  
@@ -252,7 +263,11 @@ _Note: '^J' in a register will be changed to a newline when pasting._
 `~` - Change casing of selected text/character under cursor.  
 `g~w` - change case of word (until whitespace)  
 `g~~` - change case of entire line  
-`dt/<searchterm>` - Delete text up until search term
+`dt/<searchterm>` - Delete text up until search term  
+`<<`/`>>` - Indent code left/right  
+`==`/`=` - Auto indent code (`==` for one line and `=` for multiple lines)  
+`:sort`/`:sort!` - When lines are selected, this will sort in ASC/DESC order respectively.  
+`read !<shell_command>` - Paste shell output into buffer.  
 
 <br />
 
