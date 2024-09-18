@@ -1,99 +1,11 @@
 ### Table of Contents
 
-- [Setup](#setup)
-  - [ZSH](#zsh)
-  - [TMUX](#tmux)
-  - [VIM](#vim)
-  - [Trouble Shooting (WSL)](#trouble-shooting-wsl)
 - [Quick Reference](#quick-reference)
   - [TMUX](#tmux)
   - [Vim](#vim)
 
 ---
 
-
-
-# Setup
-
-Preliminaries
-- [Install Wezterm Editor](https://wezfurlong.org/wezterm/install/linux.html)
-  - If on WSL then you will need to copy your ~/.wezterm.lua file to your windows home dir: `cp ~/.wezterm.lua /mnt/c/Users/<username>`
-- [Install node version manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
-```bash
-sudo apt install libstdc++6 -y
-sudo apt install curl -y
-sudo apt install gcc -y
-sudo apt install git-all
-sudo apt install xse
-sudo apt install lua5.3 # Or later version
-```
-
-<br />
-
-## ZSH
-- [Install ZSH with OhMyZsh](https://ohmyz.sh/)
-  - Replace ~/.zshrc with one saved.
-- [ZSH Syntaz highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
-  - Just run this (Ubuntu) .zsrhc already has needed snippet
-```
-    bash sudo apt install zsh-syntax-highlighting -y
-```   
-- [Install Powerline10k Theme](https://github.com/romkatv/powerlevel10k)
-  - Be sure to install the fonts mentioned and select those fonts for your terminal.
-  - [Down and Install a NerdFont](https://www.nerdfonts.com/)
-    - I already have the JetBrains fonts I prefer zipped up in this repo.  
-    - [OLD] For WSL I used to install "MesloLGS NF" and "DroidSansM Nerd Font" and set the "DroidSansM" in terminal. DroidSansM: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/DroidSansMono.zip 
-  - Replace ~/.p10k.zshrc with one saved and source.
-  - [Font glyphs from Nerdfont](https://www.nerdfonts.com/cheat-sheet)
-- [Install ZSH syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
-  - One cmd: `mkdir ~/zsh_utils/ && cd ~/zsh_utils && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
-
-
-<br />
-
-## TMUX
-- [Install tmux: Terminal MultiPlexer](https://github.com/tmux/tmux/wiki/Installing)
-- [Install tmux plugin manager](https://github.com/tmux-plugins/tpm)
-  - One cmd: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` 
-- [Install Catppuccin Theme](https://github.com/catppuccin/tmux)
-  - Already installed is tpm is installed. 
-- Install all plugins loaded with `<prefix>+I` in a tmux session.
-- Replace ~/.tmux.conf with saved one and source with `tmux source-file ~/.tmux.conf`
-
-<br />
-
-## VIM
-- [Install Vim-Plug plugin manager](https://github.com/junegunn/vim-plug)
-- - Actually, this is more of a backup as I've added the auto-install snippet for vim-plug into the .vimrc file
-- Replace ~/.vimrc with saved one (source with :so % or just close/re-open)
-- If you have ~/.vimrc.plug, replace that with saved ones
-- Load plugins by opening .vimrc or vimrc.plug file (whichever has plugins loaded) and running `:PlugInstall`
-- Make sure to do both the Linux and Neovim install
-
-<br />
-
-## Neovim (via lazy vim)
-- [Install Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md)
-- [Install LazyVim](https://www.lazyvim.org/installation)
-
-<br />
-
-## Trouble Shooting (WSL)
-
-I've been using this without issue in WSL, butin case you're having issues, it could be to do with your `DISPLAY1 environment variable.
-If you still get the “cannot open display” error, set the DISPLAY variable as shown below.
-```bash
-echo "export DISPLAY=localhost:0.0" >> ~/.bashrc
-```
-Note: IP is the local workstation’s IP where you want the GUI application to be displayed.  
-
-__Helpful Related Links (WSL + GUI)__
-- [Link 0](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
-- [Link 1](https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj)
-- [Link 2](https://wiki.ubuntu.com/WSL#Running_Graphical_Applications)
-- [Link 3](https://wiki.iihe.ac.be/Use_X11_forwarding_with_WSL)
-
-<br />
 
 # Quick Reference
 
@@ -106,10 +18,10 @@ Quick references for key-bindings I commonly use.
 <br />
 
 __Tmux search__
-- Enter copy mode: `<bind-key> + [` 
-- Start search: `/`
-- Enter search term and then `<Enter>` (then use `n/N` to search throughout matches - search starts at top of page, use `N` to search backwards)
-- End search: `q`
+- `<bind-key> + [` - Enter copy mode 
+  - `/` - Start search
+  - Enter search term and then `<Enter>` (then use `n/N` to search throughout matches - search starts at top of page, use `N` to search backwards)
+  - End search: `q`
 
 <br />
 
@@ -176,6 +88,19 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 
 <br />
 
+---
+
+### Windows
+`<leader> w w` - switch windows [Lazyvim]  
+`<leader> w q` - close window [Lazyvim]  
+`<leader> w v` - verical split window [Lazyvim]  
+`<leader> w o` - close all other windows [Lazyvim]  
+`<space> w |` - max width of current window [Lazyvim]  
+`<leader> w =` - equal width of current windows [Lazyvim]  
+(in NeoTree) `s` - to open in new window in vertical split [Lazyvim]  
+
+<br />
+
 ---  
 
 ### Buffers
@@ -192,34 +117,38 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `:badd myfile.txt` - add a new buffer by filename  
 `:bd myfile.txt` - delete a buffer by buffer number or filename  
 `:%bd` - Delete all open buffers  
+#### Harpoon
 `:wall` - Write to all open buffers  
+`<leader> H` - Add file to harpoon list  
+`<leader>  h` - View harpoon quick menu  
+`<leader>  {1..5}` - Harpoon to (open) specific file  
+#### Lazyvim
+``<leader> ` `` =  switch last file (buffer)  
+`<leader> b e` - View buffer explorer  
 
 <br />
 
 ### Moving
+`: {num}` - Go to line  
 `m {a-z}`	Setting markers/waypoints as {a-z}  
 `‘ {a-z}`	Move to marker/position {a-z}  
-`''`	- Move to previous position  (thats two single quotes in succession, not a single double quote)
-
-
-<br />
-
----  
-
-### Editing
-`xp`    - swap two adjacent letters (move letter cursor one place to the right)  
-`J`     - Merge lines: Apend line below to the end of the current line.  
-`cc` - change entire line.  
-`~` - Change casing of selected text/character under cursor.  
-`g~w` - change case of word (until whitespace)  
-`g~~` - change case of entire line  
-`dt/<searchterm>` - Delete text up until search term
+`:delm!`  - vim clear all marks (or specific ranges like `:delm a-zA-Z0-9`)  
+`''`	- Move to previous position  (thats two single quotes in succession, not a single double quote)  
+`[i` - Go to the top of code block (via mini-indentscope) [Zazyvim]  
+`]i`- Go to the bottom of code block (via mini-indentscope) [Zazyvim]  
+`[[` - Go to top of file (via ...) [Zazyvim]  
+`]]` - Go to bottom of file (via ...) [Zazyvim]  
+`s {first_char}{second_char}` - search forward to matches and show labels + enter the label of the match you want to go to (via leap)  
+`S {first_char}{second_char}` - search backward to matches and show labels + enter the label of the match you want to go to (via leap)  
+`gs {first_char}{second_char}` - search _forward_ to matches and show labels + enter the label of the match you want to go to (via leap). _Global search (across windows splits)_  
+`gS {first_char}{second_char}` - search  _backward_ to matches and show labels enter the label of the match you want to go to (via leap). _Global search (across windows splits)_  
 
 <br />
 
 ---  
 
 ### Selecting
+`/` - Search (grep): type text and enter then `n/N` to iterate through matches  
 `o`    - Reverse order while continuing to select  
 `/<term>` - While in visual mode, select lines based on RegEx  
 `C-v` - enter visual block mode. Once text is selected enter insert mode (`a/A`,`i/I`,`c/C`,`p/P`,`o/O` etc) and make changes. They will appear on the first line, but once you hit Esc those changes will be made to all selected lines. 
@@ -245,13 +174,28 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `"_dd`  - Delete line and yank to black hole register (keeps registers the same).  
 `ayy` - Yank line to "a" register (overwriting register a).  
 `Ayy` - Yank line to "a" register (appending to register a)  
-`d` or `dd` - Cuts (Deletes and yanks)
+`d` or `dd` - Cuts (Deletes and yanks)  
+`<leader> p` - View Yank history (via yanky) [Zazyvim]  
 
 <br />
 
 _Note: '^J' in a register will be changed to a newline when pasting._
 
 <br />
+
+---  
+
+### Editing
+`xp`    - swap two adjacent letters (move letter cursor one place to the right)  
+`J`     - Merge lines: Apend line below to the end of the current line.  
+`cc` - change entire line.  
+`~` - Change casing of selected text/character under cursor.  
+`g~w` - change case of word (until whitespace)  
+`g~~` - change case of entire line  
+`dt/<searchterm>` - Delete text up until search term
+
+<br />
+
 
 ---
 
