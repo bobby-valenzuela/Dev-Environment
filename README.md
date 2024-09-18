@@ -175,6 +175,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `I/A` - Go to begin/end of line  
 `m {a-z}`	Setting markers/waypoints as {a-z}  
 `‘ {a-z}`	Move to marker/position {a-z}  
+`'` - view all previous markers (and previously visited locations)
 `:delm!`  - vim clear all marks (or specific ranges like `:delm a-zA-Z0-9`)  
 `''`	- Move to previous position  (thats two single quotes in succession, not a single double quote)  
 `[[` - Go to top of file (via ...) [Zazyvim]  
