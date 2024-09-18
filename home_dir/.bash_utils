@@ -7,4 +7,7 @@ diffy(){
     diff $1 $2 -y --color --suppress-common-lines
 }
 
-
+# 'gs' aliased to gitsync
+function gs(){
+    gitsync "$1" "$2"
+}
