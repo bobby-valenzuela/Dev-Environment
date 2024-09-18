@@ -93,6 +93,18 @@ Close pane: `exit` or `Ctrl+B+Z`
 There are loads of good vim cheat sheets out there and this isn't a substitution, but rather a list of common/handy ones I've found to be efficient on my workflow.  
 [Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)
 
+<br />
+
+---
+### Lazyvim  (neovim)  
+`<leader> f t` - Open terminal (root)  
+`Ctrl  /` - Show/Hide terminal  
+`K` - get pop-up with code info
+
+
+
+
+
 
 <br />
 
@@ -206,7 +218,6 @@ __Finding Multiple Occurrences__
 <br />
 
 ---
-
 ### RegEx && Searching
 `\r`                - This represents newline  
 `%s/(foo)/\1\r`     - Replaces matches with itself followed by a newline   
@@ -215,9 +226,8 @@ __Finding Multiple Occurrences__
 <br />
 
 ---  
-
 ### Copy/Pasting
-`reg`    - View registers  
+`:reg`/`=`    - View registers (vim/lazyvim)  
 `0p`     - Paste from 0 register   
 `C-r0`  - Paste from 0 register into vim command line. (Useful for pasting into a search regex)  
 `C-rw`  - Copy whatever word is under cursot and paste into vim command line. (Useful for pasting into a search regex)  
@@ -266,9 +276,9 @@ _Note: '^J' in a register will be changed to a newline when pasting._
 <br />
 
 ---  
-
 ### Macros
-`q<letter><commands>q` - record a macro  
+`q<letter>` - start recording a macro  
+`q` - stop recording a macro  
 `@<letter>` - execute macro (once)  
 `<number>@<letter>` - To execute the macro <number> times  
 `:3,9 normal @b` - Run macro "b" on lines 3-9.  
@@ -281,8 +291,23 @@ __Best Practices when recording macros__
 <br />
 
 ---
-  
+### Commenting/Uncommenting  
+__Uncommenting__
+- Put your cursor on the first comment character (like #), and enter Visual-Block mode (Ctrl+b for me)
+- Go down until the last commented line and press `x`  
 
+<br />
+
+__Commenting__
+
+_Option 1_
+- Enter Visual-Block mode (Ctrl+b for me) then enter `:s/^/#/`  
+
+_Option 2_
+- Enter Visual-Block mode (Ctrl+b for me)
+- Go down until last line and press `I`, then press `#` (or other comment character), then `Esc`.
+
+<br />
 
 Note: `C-` should be taken to mean `Ctrl+`. All other keys are to be entered in succession (not simultaneously).
 
