@@ -172,7 +172,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 ---
 ### Moving
 `: {num}` - Go to line  
-`I/A` - Go to begin/end of line
+`I/A` - Go to begin/end of line  
 `m {a-z}`	Setting markers/waypoints as {a-z}  
 `‘ {a-z}`	Move to marker/position {a-z}  
 `:delm!`  - vim clear all marks (or specific ranges like `:delm a-zA-Z0-9`)  
