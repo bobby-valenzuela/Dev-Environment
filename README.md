@@ -138,6 +138,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `<leader> w o` - close all other windows [Lazyvim]  
 `<space> w |` - max width of current window [Lazyvim]  
 `<leader> w =` - equal width of current windows [Lazyvim]  
+`:vert sb {filename}` - Split buffer with another (you can enter file name or use tab to cycle through open buffers)  
 (in NeoTree) `s` - to open in new window in vertical split [Lazyvim]  
 
 <br />
