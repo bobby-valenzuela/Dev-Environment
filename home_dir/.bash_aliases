@@ -48,4 +48,5 @@ alias cc='quickconnect'
 alias scpdownloads='cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads'
 alias ssh-keyupdate="{ eval $(ssh-agent -s) ; } && ssh-add ~/.ssh/id_rsa"
 
-
+# General/Misc.
+alias configsync="bash ~/.config_sync.sh"

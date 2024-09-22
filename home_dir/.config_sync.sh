@@ -15,4 +15,5 @@ cp -v ~/.tmux.conf  $DEST
 cp -v ~/.vimrc  $DEST
 cp -v ~/.zshrc   $DEST
 cp -v ~/.config_sync.sh  $DEST
+cp -v ~/.tmux_init.sh  $DEST
 echo "Done!"

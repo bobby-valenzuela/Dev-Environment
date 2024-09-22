@@ -154,8 +154,19 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 
-# Load .bash_alises file if not loaded
+
+
+
+# Load other bash files if not loaded
 [[ ${ALIASES_LOADED} -ne 1 && -s ~/.bash_aliases ]] && source ~/.bash_aliases
 [[ ${PBX_LOADED} -ne 1 && -s ~/.bash_pbx ]] && source ~/.bash_pbx
 [[ ${GIT_LOADED} -ne 1 && -s ~/.bash_git ]] && source ~/.bash_git
 [[ ${UTILS_LOADED} -ne 1 && -s ~/.bash_utils ]] && source ~/.bash_utils
+
+
+# Load tmux session (PBX) if onf VPN
+current_ip=$(curl -4 icanhazip.com)
+if [[ ${current_ip} == '135.148.26.4' ]]; then
+    bash ~/.tmux_init.sh 2>/dev/null
+    tmux attach-session -t PBX 2>/dev/null
+fi
