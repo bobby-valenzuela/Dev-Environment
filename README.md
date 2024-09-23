@@ -278,7 +278,8 @@ __Finding Multiple Occurrences__
 `\r`                - This represents newline  
 `%s/(foo)/\1\r`     - Replaces matches with itself followed by a newline   
 `s///g` - When text is selected you can use a replace (without the %) to replace text within the selected range  
-`s/\VTEXTOMATCH/REPLACEWITHTHIS/` - The `\V` (very no magic mode_ treats all characters literaly except the `\`  
+`s/\VTEXTOMATCH/REPLACEWITHTHIS/` - The `\V` (very no magic mode treats all characters literaly except the `\`  
+`s/\v\w+/` - The `\v` (very magic mode treats most special cahrs as special - as in regular regex    
 
 <br />
 
