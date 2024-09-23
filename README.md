@@ -172,8 +172,8 @@ _Viewing Buffers_
  <br /> 
  
 _Switching Buffers_  
+`<leader>`` ` or `C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers.  
 `:bf` or `:bl` - go to first/last buffer (f/l)  
-`C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers.  
 `:bn` - rotate to next buffer.  
 `:bp` - rotate back to previous buffer.  
 `:b3`     - Select buffer #3.  
