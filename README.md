@@ -186,6 +186,8 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `S {first_char}{second_char}` - search backward to matches and show labels + enter the label of the match you want to go to (via leap)  
 `gs {first_char}{second_char}` - search _forward_ to matches and show labels + enter the label of the match you want to go to (via leap). _Global search (across windows splits)_  
 `gS {first_char}{second_char}` - search  _backward_ to matches and show labels enter the label of the match you want to go to (via leap). _Global search (across windows splits)_  
+`gd` - 'Go to Definition' -> Find where a function/sub is defined when highlighting one  
+`gr` - 'Go to References' -> Find where a functions/sub is referenced when highlighting one  
 
 <br />
 
