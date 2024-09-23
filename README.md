@@ -162,17 +162,24 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 ### Buffers
 `:E` - Open file nav (short for `explore`)  
 `:e ~/.vimrc` - edit a file by name (short for `:edit`).  
+
+_Viewing Buffers_ 
 `:ls` or `buffers`   - view buffers   
+`:b` then `<C-d>` - show all open buffers to cycle though.
+
+_Switching Buffers_  
+`:bf` or `:bl` - go to first/last buffer (f/l)  
 `C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers.  
 `:bn` - rotate to next buffer.  
 `:bp` - rotate back to previous buffer.  
-`:bf` or `:bl` - go to first/last buffer (f/l)  
 `:b3`     - Select buffer #3.  
 `:b file1.txt`     - Select by filename.  
-`:b` then `<C-d>` - show all open buffers to cycle though.
 `:badd myfile.txt` - add a new buffer by filename  
+
+_Deleting Buffers_  
 `:bd myfile.txt` - delete a buffer by buffer number or filename  
 `:%bd` - Delete all open buffers  
+
 #### Harpoon
 `:wall` - Write to all open buffers  
 `<leader> H` - Add file to harpoon list  
