@@ -120,11 +120,18 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 
 <br />  
 
+### Custom  
+`<leader> C-t` - Tmux bind key (Ctrl+t)   
+`<leader> C-b` - Visual-Block mode (Ctrl+B)  
+`<leader> gu` - Git undo last commit  
+`<leader> gS` - Git stash unsaved changes  
+`<leader> rm` - Remove markers  
+`<leader> tt` - Toggle Twlight  
+
 ### LSP-related stuff  
 `K` - get pop-up with code info  
 `gd` - 'Go to Definition' -> Find where a function/sub is defined when highlighting one  
 `gr` - 'Go to References' -> Find where a functions/sub is referenced when highlighting one  
-
 
 
 <br />
