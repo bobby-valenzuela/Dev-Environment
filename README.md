@@ -121,8 +121,8 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 <br />  
 
 ### Custom  
-`<leader> C-t` - Tmux bind key (Ctrl+t)   
-`<leader> C-b` - Visual-Block mode (Ctrl+B)  
+`C-t` - Tmux bind key (Ctrl+t)   
+`C-b` - Visual-Block mode (Ctrl+B)  
 `<leader> gu` - Git undo last commit  
 `<leader> gS` - Git stash unsaved changes  
 `<leader> rm` - Remove markers  
