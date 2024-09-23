@@ -112,8 +112,8 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `<space> /` - grep (make sure neo-tree isn't inside a folder otherwise that will be root)  
 `Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)  
 `<space> e` - opens working dir file treee (what buffer is open)  
-`<spave> E` - opens Root Dir (better - grep and stuff)  
-`:Masoninstall <lanuage_server>` - Use mason to install a lanuage server  
+`<space> E` - opens Root Dir (better - grep and stuff)  
+`:Masoninstall <lanuage_server>` - Use mason to install a language server  
 `:LazyExtras` - Manage LazyExtra plugins  
 `:LspInfo` - Get info on current LSP  
 
