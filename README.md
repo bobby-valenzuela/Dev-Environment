@@ -109,14 +109,18 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `<leader> <leader>` - file search  
 `<leader> f t` - Open terminal (root)  
 `Ctrl  /` - Show/Hide terminal   
-`K` - get pop-up with code info  
 `<space> /` - grep (make sure neo-tree isn't inside a folder otherwise that will be root)  
 `Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)  
 `<space> e` - opens working dir file treee (what buffer is open)  
 `<spave> E` - opens Root Dir (better - grep and stuff)  
 
 
+<br />  
 
+### LSP-related stuff  
+`K` - get pop-up with code info  
+`gd` - 'Go to Definition' -> Find where a function/sub is defined when highlighting one  
+`gr` - 'Go to References' -> Find where a functions/sub is referenced when highlighting one  
 
 
 
@@ -186,8 +190,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `S {first_char}{second_char}` - search backward to matches and show labels + enter the label of the match you want to go to (via leap)  
 `gs {first_char}{second_char}` - search _forward_ to matches and show labels + enter the label of the match you want to go to (via leap). _Global search (across windows splits)_  
 `gS {first_char}{second_char}` - search  _backward_ to matches and show labels enter the label of the match you want to go to (via leap). _Global search (across windows splits)_  
-`gd` - 'Go to Definition' -> Find where a function/sub is defined when highlighting one  
-`gr` - 'Go to References' -> Find where a functions/sub is referenced when highlighting one  
+
 
 <br />
 
