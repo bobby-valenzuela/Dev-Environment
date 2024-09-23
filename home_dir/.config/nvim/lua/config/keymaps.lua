@@ -15,3 +15,6 @@ vim.keymap.set('n', '<leader>gS', '<cmd>git stash save<CR>', { desc= 'Git stash'
 
 -- 'Remove Markers' | Remove all markers
 vim.keymap.set('n', '<leader>rm', ':delm a-zA-Z0-9<CR>', { desc= 'Remove All Markers', noremap = true, silent = true })
+
+-- Toggle twlilight
+vim.keymap.set('n', '<leader>tt', ':Twilight<CR>', { desc= 'Toggle Twilight', noremap = true, silent = true })

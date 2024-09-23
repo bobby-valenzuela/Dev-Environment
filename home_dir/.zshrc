@@ -169,9 +169,3 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -s ~/.bash_git ]] && source ~/.bash_git
 [[ -s ~/.bash_utils ]] && source ~/.bash_utils
 
-# Load tmux session (PBX) if onf VPN
-current_ip=$(curl -s -4 icanhazip.com 2>/dev/null)
-if [[ ${current_ip} == '135.148.26.4' ]]; then
-    bash ~/.tmux_init.sh 2>/dev/null
-    tmux attach-session -t PBX 2>/dev/null
-fi

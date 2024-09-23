@@ -11,3 +11,8 @@ diffy(){
 function gs(){
     gitsync "$1" "$2"
 }
+
+function tmux_init(){
+    bash ~/.tmux_init.sh 2>/dev/null
+    tmux attach-session -t Main 2>/dev/null
+}

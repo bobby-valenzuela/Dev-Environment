@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-PBX_DIR="/home/bobby/pbx/"
-SESH="PBX"
+SESH="Main"
 WINDOW="home"
+PBX_DIR="/home/bobby/pbx/"
 
 
  # If session already exists, attach it otherwise create it
@@ -53,5 +53,8 @@ else
     tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh hive02" ENTER
     tmux send-keys -t ${SESH}:${WINDOW}.3 "ssh hive03" ENTER
 
+    
+    # Finish off by returning to window 2
+    tmux select-window -t "alpha"
 
 fi
