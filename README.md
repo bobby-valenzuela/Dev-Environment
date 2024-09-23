@@ -166,6 +166,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
  <br /> 
  
 _Viewing Buffers_  
+`<leader> f b` - View open buffers  
 `:ls` or `buffers`   - view buffers   
 `:b` then `<C-d>` - show all open buffers to cycle though.
 
