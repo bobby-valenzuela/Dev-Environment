@@ -92,6 +92,7 @@ Close pane: `exit` or `Ctrl+B+Z`
 ## Vim
 There are loads of good vim cheat sheets out there and this isn't a substitution, but rather a list of common/handy ones I've found to be efficient on my workflow.  
 [Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)  
+[LeanXinY](https://learnxinyminutes.com/docs/vim/)  
 
 ---
 ### Common/General                                                                                                                                                                                                                                    
@@ -246,6 +247,7 @@ __Finding Multiple Occurrences__
 `\r`                - This represents newline  
 `%s/(foo)/\1\r`     - Replaces matches with itself followed by a newline   
 `s///g` - When text is selected you can use a replace (without the %) to replace text within the selected range  
+`s/\VTEXTOMATCH/REPLACEWITHTHIS/` - The `\V` (very no magic mode_ treats all characters literaly except the `\`  
 
 <br />
 
@@ -281,6 +283,11 @@ _Note: '^J' in a register will be changed to a newline when pasting._
 `==`/`=` - Auto indent code (`==` for one line and `=` for multiple lines)  
 `:sort`/`:sort!` - When lines are selected, this will sort in ASC/DESC order respectively.  
 `read !<shell_command>` - Paste shell output into buffer.  
+`u` Selected text to lower case  
+`U` Selected text to upper case  
+`:sort`  Sort all lines  
+`:sort!` Sort all lines in reverse  
+`:sort u` Sort all lines and remove duplicates  
 
 <br />
 
