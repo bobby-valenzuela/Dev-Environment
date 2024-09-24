@@ -18,3 +18,7 @@ vim.keymap.set('n', '<leader>rm', ':delm a-zA-Z0-9<CR>', { desc= 'Remove All Mar
 
 -- Toggle twlilight
 vim.keymap.set('n', '<leader>tt', ':Twilight<CR>', { desc= 'Toggle Twilight', noremap = true, silent = true })
+
+-- move up/down in 20-step jumps
+vim.keymap.set('n', '<leader><down><down>', '20<C-e>', { desc= 'Move down 20 steps', noremap = true, silent = true })
+vim.keymap.set('n', '<leader><up><up>', '20<C-y>', { desc= 'Move down 20 steps', noremap = true, silent = true })
