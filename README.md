@@ -99,8 +99,8 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `:wa ` - ("write all") save all open buffers    
 `:e!` - erase all unsaved changes  
 `:bufdo e!` - erase all unsaved changes (in all open buffers)  
-`:w !diff %` - view changes in vim before saving
-
+`:w !diff %` - view changes in vim before saving  
+`:verbose map Q` - see what is mapped to the `Q` key  
 
 <br />
 
@@ -173,6 +173,7 @@ _Viewing Buffers_
  <br /> 
  
 _Switching Buffers_  
+`L` - Cycle through all open buffers  
 `<leader>`` ` or `C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers.  
 `:bf` or `:bl` - go to first/last buffer (f/l)  
 `:bn` - rotate to next buffer.  
@@ -212,10 +213,10 @@ _Deleting Buffers_
 `''`	- Move to previous marker position  (thats two single quotes in succession, not a single double quote)  
 `[[` - Go to top of file (via ...) [Zazyvim]  
 `]]` - Go to bottom of file (via ...) [Zazyvim]  
-`s {first_char}{second_char}` - search forward to matches and show labels + enter the label of the match you want to go to (via leap)  
-`S {first_char}{second_char}` - search backward to matches and show labels + enter the label of the match you want to go to (via leap)  
-`gs {first_char}{second_char}` - search _forward_ to matches and show labels + enter the label of the match you want to go to (via leap). _Global search (across windows splits)_  
-`gS {first_char}{second_char}` - search  _backward_ to matches and show labels enter the label of the match you want to go to (via leap). _Global search (across windows splits)_  
+`s {first_char}{second_char}` - search forward to matches and show labels + enter the label of the match you want to go to [leap]  
+`S {first_char}{second_char}` - search backward to matches and show labels + enter the label of the match you want to go to [leap]  
+`gs {first_char}{second_char}` - search _forward_ to matches and show labels + enter the label of the match you want to go to [leap]. _Global search (across windows splits)_  
+`gS {first_char}{second_char}` - search  _backward_ to matches and show labels enter the label of the match you want to go to [leap]. _Global search (across windows splits)_  
 
 
 <br />
@@ -317,11 +318,19 @@ _Note: '^J' in a register will be changed to a newline when pasting._
 `read !<shell_command>` - Paste shell output into buffer.  
 `u` Selected text to lower case  
 `U` Selected text to upper case  
+
+_Sorting_  
 `:sort`  Sort all lines  
 `:sort!` Sort all lines in reverse  
 `:sort u` Sort all lines and remove duplicates  
 
+_Surrounding_  
+`faiw"` - Surround inner word with " (press fa fast) [mini-surround]   
+`fd"` - Remove surrounding quotes (press fd fast) [mini-surround]  
+`fr"'` = replace surrounding double quotes with single-quotes (press fr fast) [mini-surround]  
+
 <br />
+
 
 
 ---
@@ -359,6 +368,11 @@ __Best Practices when recording macros__
 
 ---
 ### Commenting/Uncommenting  
+`gcc` - to comment out current line [vim-commentary]  
+`gc` - to comment out multiple selected lines [vim-commentary]  
+
+<br />
+
 __Uncommenting__
 - Put your cursor on the first comment character (like #), and enter Visual-Block mode (Ctrl+b for me)
 - Go down until the last commented line and press `x`  
