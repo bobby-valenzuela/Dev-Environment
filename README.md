@@ -116,7 +116,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `:Masoninstall <lanuage_server>` - Use mason to install a language server  
 `:LazyExtras` - Manage LazyExtra plugins  
 `:LspInfo` - Get info on current LSP  
-
+`:source $MYVIMRC` - Reload config (and plugins) without restarting nvim  
 
 <br />  
 
