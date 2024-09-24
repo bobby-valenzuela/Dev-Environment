@@ -112,17 +112,17 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `<space> /` - grep (make sure neo-tree isn't inside a folder otherwise that will be root)  
 `Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)  
 `<space> e` - opens working dir file treee (what buffer is open)  
-`<spave> E` - opens Root Dir (better - grep and stuff)  
-`:Masoninstall <lanuage_server>` - Use mason to install a lanuage server  
+`<space> E` - opens Root Dir (better - grep and stuff)  
+`:Masoninstall <lanuage_server>` - Use mason to install a language server  
 `:LazyExtras` - Manage LazyExtra plugins  
 `:LspInfo` - Get info on current LSP  
-
+`:source $MYVIMRC` - Reload config (and plugins) without restarting nvim  
 
 <br />  
 
 ### Custom  
-`<leader> C-t` - Tmux bind key (Ctrl+t)   
-`<leader> C-b` - Visual-Block mode (Ctrl+B)  
+`C-t` - Tmux bind key (Ctrl+t)   
+`C-b` - Visual-Block mode (Ctrl+B)  
 `<leader> gu` - Git undo last commit  
 `<leader> gS` - Git stash unsaved changes  
 `<leader> rm` - Remove markers  
@@ -162,17 +162,33 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 ### Buffers
 `:E` - Open file nav (short for `explore`)  
 `:e ~/.vimrc` - edit a file by name (short for `:edit`).  
+ 
+ <br /> 
+ 
+_Viewing Buffers_  
+`<leader> f b` - View open buffers  
 `:ls` or `buffers`   - view buffers   
-`C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers.  
+`:b` then `<C-d>` - show all open buffers to cycle though.
+
+ <br /> 
+ 
+_Switching Buffers_  
+`<leader>`` ` or `C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers.  
+`:bf` or `:bl` - go to first/last buffer (f/l)  
 `:bn` - rotate to next buffer.  
 `:bp` - rotate back to previous buffer.  
-`:bf` or `:bl` - go to first/last buffer (f/l)  
 `:b3`     - Select buffer #3.  
 `:b file1.txt`     - Select by filename.  
-`:b` then `<C-d>` - show all open buffers to cycle though.
 `:badd myfile.txt` - add a new buffer by filename  
+
+ <br /> 
+ 
+_Deleting Buffers_  
 `:bd myfile.txt` - delete a buffer by buffer number or filename  
 `:%bd` - Delete all open buffers  
+
+ <br /> 
+ 
 #### Harpoon
 `:wall` - Write to all open buffers  
 `<leader> H` - Add file to harpoon list  
@@ -262,7 +278,8 @@ __Finding Multiple Occurrences__
 `\r`                - This represents newline  
 `%s/(foo)/\1\r`     - Replaces matches with itself followed by a newline   
 `s///g` - When text is selected you can use a replace (without the %) to replace text within the selected range  
-`s/\VTEXTOMATCH/REPLACEWITHTHIS/` - The `\V` (very no magic mode_ treats all characters literaly except the `\`  
+`s/\VTEXTOMATCH/REPLACEWITHTHIS/` - The `\V` (very no magic mode treats all characters literaly except the `\`  
+`s/\v\w+/` - The `\v` (very magic mode treats most special cahrs as special - as in regular regex    
 
 <br />
 
