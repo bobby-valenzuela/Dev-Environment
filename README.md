@@ -309,9 +309,9 @@ __Finding Multiple Occurrences__
 `D/d$` - 	Cut to end of line  
 `y$` -	Yank/Copy to end of line  
 `:reg`/`=`    - View registers (vim/lazyvim)  
-`0p`     - Paste from 0 register   
-`C-r0`  - Paste from 0 register into vim command line. (Useful for pasting into a search regex)  
-`C-rw`  - Copy whatever word is under cursot and paste into vim command line. (Useful for pasting into a search regex)  
+`0p`     - Paste from 0 register (in normal mode)  
+`C-r0`  - Paste from 0 register (in insert mode or into vim command line). Useful for pasting into a search regex  
+`C-rw`  - Copy whatever word is under cursor and paste into vim command line. (Useful for pasting into a search regex)  
 `"_dd`  - Delete line and yank to black hole register (keeps registers the same).  
 `ayy` - Yank line to "a" register (overwriting register a).  
 `Ayy` - Yank line to "a" register (appending to register a)  
