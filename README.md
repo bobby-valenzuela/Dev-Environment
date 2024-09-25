@@ -340,6 +340,7 @@ _Note: '^J' in a register will be changed to a newline when pasting._
 `read !<shell_command>` - Paste shell output into buffer.  
 `u` Selected text to lower case  
 `U` Selected text to upper case  
+`:MarkdownPreview` - View MarkdownPreview in browser [🔌 Markdown-Preview]  
 
 _Sorting_  
 `:sort`  Sort all lines  
