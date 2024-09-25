@@ -95,7 +95,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 [LeanXinY](https://learnxinyminutes.com/docs/vim/)  
 
 ---
-### Common/General                                                                                                                                                                                                                                    
+### CommonGeneral                                                                                                                                                                                                                                    
 `:wa ` - ("write all") save all open buffers    
 `:e!` - erase all unsaved changes  
 `:bufdo e!` - erase all unsaved changes (in all open buffers)  
@@ -106,16 +106,18 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 
 ---
 ### Lazyvim  (neovim)  
-`<leader> <leader>` - file search  
-`<leader> f t` - Open terminal (root)  
-`Ctrl  /` - Show/Hide terminal   
-`<space> /` - grep (make sure neo-tree isn't inside a folder otherwise that will be root)  
-`Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)  
-`<space> e` - opens working dir file treee (what buffer is open)  
-`<space> E` - opens Root Dir (better - grep and stuff)  
-`:Masoninstall <lanuage_server>` - Use mason to install a language server  
-`:LazyExtras` - Manage LazyExtra plugins  
-`:LspInfo` - Get info on current LSP  
+`<leader> <leader>` - file search  [🔌 fzf]  
+`<leader> fF` - file search (from cwd)  [🔌fzf]  
+`<leader> f t` - Open terminal (root) [🔌]   
+`Ctrl  /` - Show/Hide terminal [🔌]    
+`<leader>  sG` - grep (from cwd) [🔌]  
+`<space> /` - grep (working dir) [🔌]    
+`Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`) [🔌]   
+`<leader> e` - opens working dir file treee (what buffer is open)  [🔌]  
+`<leader> E` - opens Root Dir (better - grep and stuff)  [🔌]  
+`:Masoninstall <lanuage_server>` - Use mason to install a language server [🔌 Mason]   
+`:LazyExtras` - Manage LazyExtra plugins  [🔌]  
+`:LspInfo` - Get info on current LSP  [🔌]  
 `:source $MYVIMRC` - Reload config (and plugins) without restarting nvim  
 
 <br />  
@@ -129,9 +131,9 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `<leader> tt` - Toggle Twlight  
 
 ### LSP-related stuff  
-`K` - get pop-up with code info  
-`gd` - 'Go to Definition' -> Find where a function/sub is defined when highlighting one  
-`gr` - 'Go to References' -> Find where a functions/sub is referenced when highlighting one  
+`K` - get pop-up with code info [🔌]   
+`gd` - 'Go to Definition' -> Find where a function/sub is defined when highlighting one [🔌]   
+`gr` - 'Go to References' -> Find where a functions/sub is referenced when highlighting one [🔌]   
 
 
 <br />
@@ -146,15 +148,31 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 <br />
 
 ---
-### Windows
+### Windows (lazy)
 `<leader> w w` - switch windows [Lazyvim]  
 `<leader> w q` - close window [Lazyvim]  
 `<leader> w v` - verical split window [Lazyvim]  
 `<leader> w o` - close all other windows [Lazyvim]  
 `<space> w |` - max width of current window [Lazyvim]  
 `<leader> w =` - equal width of current windows [Lazyvim]  
-`:vert sb {filename}` - Split buffer with another (you can enter file name or use tab to cycle through open buffers)  
 (in NeoTree) `s` - to open in new window in vertical split [Lazyvim]  
+
+### Windows
+`:vert sb {filename}` - Split buffer with another (you can enter file name or use tab to cycle through open buffers)  
+:e filename	Edit filename in current window
+:split filename	Split the window and open filename
+ctrl-w up arrow	Put cursor in top window
+ctrl-w ctrl-w	Put cursor in next window
+ctrl-w_	Maximize current window vertically
+ctrl-w|	Maximize current window horizontally
+ctrl-w=	Gives the same size to all windows
+10 ctrl-w+	Add 10 lines to current window
+:vsplit file	Split window vertically
+:sview file	Same as :split in Read Only Mode
+:hide	Close current window
+:­nly	Close all windows, except current
+:b 2	Open #2 in this window
+
 
 <br />
 
@@ -166,15 +184,15 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
  <br /> 
  
 _Viewing Buffers_  
-`<leader> f b` - View open buffers  
-`:ls` or `buffers`   - view buffers   
+`<leader> f b` - View open buffers [🔌]   
+`:ls` or `buffers`   - view buffers  [🔌]   
 `:b` then `<C-d>` - show all open buffers to cycle though.
 
  <br /> 
  
 _Switching Buffers_  
 `L` - Cycle through all open buffers  
-`<leader>`` ` or `C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers.  
+`<leader>`` ` or `C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers. [🔌]   
 `:bf` or `:bl` - go to first/last buffer (f/l)  
 `:bn` - rotate to next buffer.  
 `:bp` - rotate back to previous buffer.  
@@ -192,9 +210,10 @@ _Deleting Buffers_
  
 #### Harpoon
 `:wall` - Write to all open buffers  
-`<leader> H` - Add file to harpoon list  
-`<leader>  h` - View harpoon quick menu  
-`<leader>  {1..5}` - Harpoon to (open) specific file  
+`<leader> H` - Add file to harpoon list [🔌]   
+`<leader>  h` - View harpoon quick menu [🔌]   
+`<leader>  {1..5}` - Harpoon to (open) specific file [🔌]  
+  
 #### Lazyvim
 ``<leader> ` `` =  switch last file (buffer)  
 `<leader> f b` - view open buffers
@@ -213,10 +232,10 @@ _Deleting Buffers_
 `''`	- Move to previous marker position  (thats two single quotes in succession, not a single double quote)  
 `[[` - Go to top of file (via ...) [Zazyvim]  
 `]]` - Go to bottom of file (via ...) [Zazyvim]  
-`s {first_char}{second_char}` - search forward to matches and show labels + enter the label of the match you want to go to [leap]  
-`S {first_char}{second_char}` - search backward to matches and show labels + enter the label of the match you want to go to [leap]  
-`gs {first_char}{second_char}` - search _forward_ to matches and show labels + enter the label of the match you want to go to [leap]. _Global search (across windows splits)_  
-`gS {first_char}{second_char}` - search  _backward_ to matches and show labels enter the label of the match you want to go to [leap]. _Global search (across windows splits)_  
+`s {first_char}{second_char}` - search forward to matches and show labels + enter the label of the match you want to go to [🔌leap]  
+`S {first_char}{second_char}` - search backward to matches and show labels + enter the label of the match you want to go to [🔌leap]  
+`gs {first_char}{second_char}` - search _forward_ to matches and show labels + enter the label of the match you want to go to [🔌leap]. _Global search (across windows splits)_  
+`gS {first_char}{second_char}` - search  _backward_ to matches and show labels enter the label of the match you want to go to [🔌leap]. _Global search (across windows splits)_  
 
 
 <br />
@@ -230,10 +249,10 @@ _Deleting Buffers_
 
 #### Brackets && Braces
 `%` - Select top/bottom of current block  
-`[i` - Go to the top of code block (via mini-indentscope) [Zazyvim]  
-`]i`- Go to the bottom of code block (via mini-indentscope) [Zazyvim]  
+`[i` - Go to the top of code block (via mini-indentscope) [🔌 Identscope]  
+`]i`- Go to the bottom of code block (via mini-indentscope) [🔌 Identscope]  
 `v%` - Select Content within parens/brackets (inclusively) if you're right before a bracket.  
-`vi{` - Selects everything within the block... then Esc to leave you at ending "}  
+`vi{` - Selects everything within the block... then Esc to leave you at ending "}"  
 `ci{` - Change text inside brackets (exclusively)  
 `ca{` - Change text inside brackets (inclusively)  
 `yi{` - Yank text inside brackets (inclusively)  
@@ -282,10 +301,13 @@ __Finding Multiple Occurrences__
 `s/\VTEXTOMATCH/REPLACEWITHTHIS/` - The `\V` (very no magic mode treats all characters literaly except the `\`  
 `s/\v\w+/` - The `\v` (very magic mode treats most special cahrs as special - as in regular regex    
 
+
 <br />
 
 ---  
-### Copy/Pasting
+### Copy/Pasting/Cutting/Deleting
+`D/d$` - 	Cut to end of line  
+`y$` -	Yank/Copy to end of line  
 `:reg`/`=`    - View registers (vim/lazyvim)  
 `0p`     - Paste from 0 register   
 `C-r0`  - Paste from 0 register into vim command line. (Useful for pasting into a search regex)  
@@ -294,7 +316,7 @@ __Finding Multiple Occurrences__
 `ayy` - Yank line to "a" register (overwriting register a).  
 `Ayy` - Yank line to "a" register (appending to register a)  
 `d` or `dd` - Cuts (Deletes and yanks)  
-`<leader> p` - View Yank history (via yanky) [Zazyvim]  
+`<leader> p` - View Yank history [🔌 Yanky]  
 
 <br />
 
@@ -325,9 +347,9 @@ _Sorting_
 `:sort u` Sort all lines and remove duplicates  
 
 _Surrounding_  
-`faiw"` - Surround inner word with " (press fa fast) [mini-surround]   
-`fd"` - Remove surrounding quotes (press fd fast) [mini-surround]  
-`fr"'` = replace surrounding double quotes with single-quotes (press fr fast) [mini-surround]  
+`faiw"` - Surround inner word with " (press fa fast) [🔌 mini-surround]   
+`fd"` - Remove surrounding quotes (press fd fast) [🔌 mini-surround]  
+`fr"'` = replace surrounding double quotes with single-quotes (press fr fast) [🔌 mini-surround]  
 
 <br />
 
@@ -336,8 +358,8 @@ _Surrounding_
 ---
 ### Numbers
 `C-a`    - Increment Highlighted Numbers  
-`gC-a`   - Increment Highlight Numbers in sequence (each matched item will increment one more than previous match).  
 `C-x`    - Decrement Highlighted Numbers  
+`gC-a`   - Increment Highlight Numbers in sequence (each matched item will increment one more than previous match).  
 `gC-x`   - Decrement Highlight Numbers in sequence (each matched item will increment one more than previous match).
 
 <br />
@@ -368,8 +390,8 @@ __Best Practices when recording macros__
 
 ---
 ### Commenting/Uncommenting  
-`gcc` - to comment out current line [vim-commentary]  
-`gc` - to comment out multiple selected lines [vim-commentary]  
+`gcc` - to comment out current line [🔌 vim-commentary]  
+`gc` - to comment out multiple selected lines [🔌 vim-commentary]  
 
 <br />
 
