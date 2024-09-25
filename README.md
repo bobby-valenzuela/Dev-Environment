@@ -315,6 +315,7 @@ __Finding Multiple Occurrences__
 `Ayy` - Yank line to "a" register (appending to register a)  
 `d` or `dd` - Cuts (Deletes and yanks)  
 `<leader> p` - View Yank history [🔌 Yanky]  
+`:1,500y` - Copy everything from line 1 to 500 (use `d` for delete) (can start/end on any line - usefull for slicing bits)     
 
 <br />
 
