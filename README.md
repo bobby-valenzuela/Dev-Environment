@@ -326,6 +326,8 @@ _Note: '^J' in a register will be changed to a newline when pasting._
 
 ---  
 ### Editing
+`u` - undo last change (normal mode)  
+`C-u` - undo last change (insert mode)  
 `ciw` - Change inner word (replace)
 `xp`    - swap two adjacent letters (move letter cursor one place to the right)  
 `J`     - Merge lines: Apend line below to the end of the current line.  
