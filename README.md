@@ -158,20 +158,18 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 (in NeoTree) `s` - to open in new window in vertical split [Lazyvim]  
 
 ### Windows
-`:vert sb {filename}` - Split buffer with another (you can enter file name or use tab to cycle through open buffers)  
-:e filename	Edit filename in current window
-:split filename	Split the window and open filename
-ctrl-w up arrow	Put cursor in top window
-ctrl-w ctrl-w	Put cursor in next window
-ctrl-w_	Maximize current window vertically
-ctrl-w|	Maximize current window horizontally
-ctrl-w=	Gives the same size to all windows
-10 ctrl-w+	Add 10 lines to current window
-:vsplit file	Split window vertically
-:sview file	Same as :split in Read Only Mode
-:hide	Close current window
-:­nly	Close all windows, except current
-:b 2	Open #2 in this window
+`:vert sb {filename}` - Split buffer with another open buffer (you can enter file name or use tab to cycle through open buffers)  
+`:e` filename	- Edit filename in current window  
+`:split` filename	- Split the window and open filename  
+`:vsplit file` - Split window vertically
+`ctrl-w <up arrow>` - Put cursor in top window (workf for any direction)
+`ctrl-w ctrl-w` - Put cursor in next window  
+`ctrl-w_` - Maximize current window vertically  
+`ctrl-w|` - Maximize current window horizontlly  
+`ctrl-w=` - Gives the sme size to all windows  
+`10 ctrl-w+` - Add 10 lines to current window  
+`:hide` - Close current window  
+`:­nly` - 	Close all windows, except current 
 
 
 <br />
