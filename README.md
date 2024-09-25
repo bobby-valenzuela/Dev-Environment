@@ -178,6 +178,8 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 ### Buffers
 `:E` - Open file nav (short for `explore`)  
 `:e ~/.vimrc` - edit a file by name (short for `:edit`).  
+`:e` - reload current buffer from disk  
+`:e!` - Remove all unsaved changes  
  
  <br /> 
  
