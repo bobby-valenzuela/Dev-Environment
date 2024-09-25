@@ -50,3 +50,4 @@ alias ssh-keyupdate="{ eval $(ssh-agent -s) ; } && ssh-add ~/.ssh/id_rsa"
 
 # General/Misc.
 alias configsync="bash ~/.config_sync.sh"
+alias gitsync_thisdir_to_alpha="gitsync . alpha ongoing"
