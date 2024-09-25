@@ -32,7 +32,7 @@ sudo apt install lua5.3 # Or later version
     bash sudo apt install zsh-syntax-highlighting -y
 ```   
 - [Install Powerline10k Theme](https://github.com/romkatv/powerlevel10k)
-  - _(use ohmyzsh installation - don't need to to any of this if .zshrc and .oh-my-zsh files are copied into ~)_
+  - _(use ohmyzsh installation)_
   - Be sure to install the fonts mentioned and select those fonts for your terminal.
   - [Down and Install a NerdFont](https://www.nerdfonts.com/)
     - I already have the JetBrains fonts I prefer zipped up in this repo.  
