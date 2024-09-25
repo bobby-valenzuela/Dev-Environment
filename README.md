@@ -169,7 +169,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `ctrl-w=` - Gives the sme size to all windows  
 `10 ctrl-w+` - Add 10 lines to current window  
 `:hide` - Close current window  
-`:­nly` - 	Close all windows, except current 
+`:o­nly` - 	Close all windows, except current 
 
 
 <br />
