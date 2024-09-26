@@ -50,3 +50,6 @@ alias ssh-keyupdate="{ eval $(ssh-agent -s) ; } && ssh-add ~/.ssh/id_rsa"
 
 # General/Misc.
 alias gitsync_thisdir_to_alpha="gitsync . alpha ongoing"
+
+# My Main nvim install is a lazyvim dist - adding an alias to my custom install (~/.config/nvim-custom/)
+alias nvim-custom='NVIM_APPNAME="nvim-custom" nvim'

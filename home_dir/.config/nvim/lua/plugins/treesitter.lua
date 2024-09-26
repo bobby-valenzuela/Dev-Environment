@@ -16,7 +16,7 @@ return {
 
       require("nvim-treesitter.configs").setup({
 
-        ensure_installed = { "lua", "python", "javascript", "html", "css" , "c", "bash", "asm", "dockerfile", "json", "nginx","objdump","sql", "svelte", "ssh_config", "tmux", "perl"}, -- Languages you need
+        ensure_installed = { "lua", "python", "javascript", "html", "css" , "c", "bash", "asm", "dockerfile", "json", "nginx","objdump","sql", "svelte", "ssh_config", "tmux", "perl", "markdown", "markdown_inline"}, -- Languages you need
 
         highlight = {
 
