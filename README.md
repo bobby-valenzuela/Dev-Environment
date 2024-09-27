@@ -1,4 +1,4 @@
-### Table of Contents
+ ### Table of Contents
 
 - [Quick Reference](#quick-reference)
   - [TMUX](#tmux)
@@ -188,7 +188,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 _Viewing Buffers_  
 `:b` then `<C-d>` - show all open buffers to cycle though.  
 `<leader> f b` - View open buffers [🔌]   
-`:ls` or `buffers`   - view buffers  [🔌]   
+`:ls`  - view buffers or (`buffers` with plugin)   
 
  <br /> 
  
@@ -196,7 +196,7 @@ _Switching Buffers_
 `:b file1.txt`     - Select by filename (tab shows open buffers, but can open new files as well)
 `:bn` - rotate to next buffer.  
 `:bp` - rotate back to previous buffer.  
-`:b3`     - Select buffer #3.  
+`:b3`     - Select buffer #3 (may need to force with `b!3`).  
 `L` - Cycle through all open buffers [🔌]  
 `<leader>`` ` or `C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers. [🔌]   
 `:bf` or `:bl` - go to first/last buffer (f/l)  
