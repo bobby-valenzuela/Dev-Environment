@@ -107,6 +107,16 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 
 <br />
 
+_Bare Vim (common settings to apply on a ad-hoc plain vim editor)_
+```vim
+syntax on
+colorscheme slate
+set number/relativenumber
+
+filetype on
+set wrap! (toggle on of off)
+```
+
 ---
 ### Lazyvim  (neovim)  
 `<leader> <leader>` - file search  [🔌 fzf]  
