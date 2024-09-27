@@ -253,7 +253,7 @@ _Moving along file_
 _Markers_  
 `m {a-z}`	Setting markers/waypoints as {a-z}  
 `‘ {a-z}`	Move to marker/position {a-z}  
-`'` - view all previous markers (and previously visited locations)
+`'` - view all previous markers (and previously visited locations)  
 `:delm!`  - vim clear all marks (or specific ranges like `:delm a-zA-Z0-9`)  
 `''`	- Move to previous marker position  (thats two single quotes in succession, not a single double quote)  
 
