@@ -11,28 +11,35 @@
 Preliminaries
 - [Install Wezterm Editor](https://wezfurlong.org/wezterm/install/linux.html)  
   - If on WSL then you will need to copy your ~/.wezterm.lua file to your windows home dir: `cp ~/.wezterm.lua /mnt/c/Users/<username>`
-- [Install node version manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
+- Common Generals
 ```bash
-sudo apt install libstdc++6 -y
-sudo apt install curl -y
-sudo apt install gcc -y
-sudo apt install git-all
-sudo apt install xse -y
-sudo apt install lua5.3 # Or later version
+sudo apt install make gcc ripgrep unzip git git-all xclip zsh build-essential p7zip-full jq curl locate sshfs sshpass xsel lua5.3 cmake xse libstdc++6 -y
 ```
+- [Install Python](https://www.python.org/downloads/source/) => Download source and compile  
+- [Install Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)  => Download binary from tar and just extract into /opt/nvim-linux64  
+- [Install node version manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
+- [Install Node using nvm](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04)
+ - ```bash
+    nvm list-remote       # avaiable versions
+    nvm install v14.10.0  # install a version
+    nvm list              # View installed versions
+    nvm use v14.10.0      # Use specific version
+   ```
+
 
 <br />
 
 ## ZSH
 - [Install ZSH with OhMyZsh](https://ohmyz.sh/) 
-  - Replace ~/.zshrc with one saved.
-- [ZSH Syntaz highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
-  - Just run this (Ubuntu) .zsrhc already has needed snippet
-```
-    bash sudo apt install zsh-syntax-highlighting -y
-```   
+  - ⚠️Replace ~/.zshrc with one saved.
+- [ZSH Syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+  - ⚠️ This can be skipped if you're copying my ~/.zshrc and ~/.oh-my-zsh. (I already have bit in zshrc that checks and clones repo)  
+  - Just run this (Ubuntu) .zsrhc already has needed snippet (checks for /usr/share/zsh-syntax-highlighting)
+  - ```bash
+      sudo apt install zsh-syntax-highlighting -y
+    ```  
 - [Install Powerline10k Theme](https://github.com/romkatv/powerlevel10k)
-  - _(use ohmyzsh installation)_
+  - ⚠️ _(use ohmyzsh installation)_
   - Be sure to install the fonts mentioned and select those fonts for your terminal.
   - [Down and Install a NerdFont](https://www.nerdfonts.com/)
     - I already have the JetBrains fonts I prefer zipped up in this repo.  
