@@ -36,7 +36,6 @@ endif
 "
 
 
-call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
 "   - Vim (Windows): '~/vimfiles/plugged'
@@ -53,6 +52,10 @@ call plug#begin()
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 
 " ============================================================================="
+" ============================================================================="
+
+" BEGIN PLUGINS
+call plug#begin()
 
 
 " Catppuccin syntax highlighting [https://github.com/catppuccin/vim/tree/main]
@@ -80,14 +83,26 @@ Plug 'vimcolorschemes/vimcolorschemes'
 " Allows one to use Ctrl+n to highlight next identical occurences (once text is highlighted)
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-call plug#end()
+" [+] Bufferline
+Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+" Plug 'ryanoasis/vim-devicons' Icons without colours
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
- " copy (write) highlighted text to .vimbuffer
- "
- " -vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \|
- " clip.exe <CR><CR>
- "
- " paste from buffer
+
+
+call plug#end()
+" END PLUGINS
+
+" =================================================================================="
+" ============================================================================="
+
+
+" copy (write) highlighted text to .vimbuffer
+"
+" -vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \|
+" clip.exe <CR><CR>
+"
+" paste from buffer
 
 " =============== COLOR SCHEMES ============== "
 " Defining custome color schemes needs to be here - after all plugins have loaded

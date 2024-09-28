@@ -69,17 +69,6 @@ DISABLE_AUTO_TITLE="true"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -140,22 +129,43 @@ if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
 fi
 
 
+# =========================================================
+# ============== [START] OH-MY-ZSH-PLUGINS ================
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+
 # MUST BE AT THE BOTTOM!!! (last plugin)
 # Command Line Syntax Highlighting - 
 # Set path to zsh highlighting (must have already instead => sudo apt install zsh-syntax-highlighting -y)
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# instead if the above, lets auto-install if not installed, and install it in oh-my-zsh
+if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+# activate plugin
+export plugins=( git zsh-syntax-highlighting )
+
+source $ZSH/oh-my-zsh.sh
+
+# ============== [END] OH-MY-ZSH-PLUGINS ================
+# =========================================================
+
+
+
 
 
 
 # Mount SSHFS dirs as needed 
 # SSHFS_MOUNT_COUNT=$(ps aux | grep -i sftp | grep -v grep | wc -l )
 # [[ ${SSHFS_MOUNT_COUNT} -eq 0 ]] && sudo sshfs alpha:/home/control-io/ /home/bobby/alpha -oIdentityFile=/home/bobby/.ssh/pbx-pems/<key>.pem
-
-
-
-
-
-
 
 
 # Load other bash files if not loaded
@@ -169,7 +179,7 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -s ~/.bash_pbx ]] && source ~/.bash_pbx
 [[ -s ~/.bash_git ]] && source ~/.bash_git
 [[ -s ~/.bash_utils ]] && source ~/.bash_utils
-
+[[ -s ~/.oh-my-zsh/oh-my-zsh.sh ]] && source ~/.oh-my-zsh/oh-my-zsh.sh
 
 
 
@@ -178,4 +188,3 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # =======  Packages to install ===========
 #
 # https://github.com/charmbracelet/glow
-# jq

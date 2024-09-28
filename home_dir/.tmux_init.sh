@@ -28,7 +28,15 @@ else
     tmux send-keys -t ${SESH}:${WINDOW}.1 "echo -e '\n===== Joke of the Day =====\n' && chatgpt 'Tell me an I.T. joke'" ENTER
 
 
-    # WINDOW 2 (alpha)
+    # WINDOW 2 (local)
+    WINDOW="local"
+    tmux new-window -t ${SESH} -n ${WINDOW}
+    tmux split-window -h -p 50
+    tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nvim ." ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh alpha" ENTER
+
+    
+    # WINDOW 3 (alpha)
     WINDOW="alpha"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h -p 50
@@ -36,7 +44,7 @@ else
     tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh alpha" ENTER
 
     
-    # WINDOW 3 (beta)
+    # WINDOW 4 (beta)
     WINDOW="beta"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h -p 50
@@ -44,7 +52,7 @@ else
     tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh beta02" ENTER
 
 
-    # WINDOW 4 (prod)
+    # WINDOW 5 (prod)
     WINDOW="prod"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h
@@ -55,6 +63,6 @@ else
 
     
     # Finish off by returning to window 2
-    tmux select-window -t "alpha"
+    tmux select-window -t "home"
 
 fi
