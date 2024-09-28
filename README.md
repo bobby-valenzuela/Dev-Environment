@@ -48,13 +48,13 @@ __Neovim and Cli quick copy commands__
 - Enable TMUX plugins by install TPM: `https://github.com/tmux-plugins/tpm`
 - Reload config file: `tmux source ~/.tmux.conf`
 - Reload TMUX environment: `Ctrl+I`  _For re-loading Theme for example_
-
+- Custom Bind key I've set: `Ctrl+t`
 <br />
 
 ---
 ### Sessions
 Open tmux as a named session: `tmux new -s <name>`  
-To detach a tmux session: `Ctrl+B+D`  
+To detach a tmux session: `<bind_key> D`  
 View tmux sessions (from cli): `tmux ls`  
 Re-attach to session (from cli): `tmux attach -t 0`  
 Rename tmux sessions (from cli): `tmux rename-sesssion -t 0 <name>`  
@@ -65,24 +65,24 @@ __Where ‘0’ is your session id/name__
 
 ---
 ### Windows
-Rename Window: `Ctrl+B+,`  
-Create new Window: `Ctrl+B+C`  
-Show all Windows: `Ctrl+B+S`  
-Show all Windows (with preview): `Ctrl+B+w` _Enter to select_  
-Switch between windows: `Ctrl+B+<number>`  
-Close Window: `exit`
+Rename Window: `<bind_key> ,`  
+Create new Window: `<bind_key> c`  
+Show all Windows: `<bind_key> S`  
+Show all Windows (with preview): `<bind_key> w` _Enter to select_  
+Switch between windows: `<bind_key> <number>`  
+Close Window: `<bind_key> &` (or `exit` if all panes are closed)  
 
 <br />
 
 ---
 ### Panes
-Split Windows Vertically: `Ctrl+B+%`  (with my conf I use `|` instead of `%`)  
-Split Windows Horizontally: `Ctrl+B+"`  (w/66ith my conf I use `_` instead of `"`)  
+Split Windows Vertically: `<bind_key> %`  (with my conf I use `|` instead of `%`)  
+Split Windows Horizontally: `<bind_key> "`  (with my conf I use `_` instead of `"`)  
 Navigate subwindows (panes): c  
-Show pane numbers: `Ctrl+B+Q`  
-Move current pane left: `Ctrl+B+{`  
-Move current pane right: `Ctrl+B+}`  
-Zoom in/out to make pane full screen: `Ctrl+B+Z`
+Show pane numbers: `<bind_key> Q`  
+Move current pane left: `<bind_key> {`  
+Move current pane right: `<bind_key> }`  
+Zoom in/out to make pane full screen: `<bind_key> z`
 Close pane: `exit` or `Ctrl+B+Z`
 
 <br />
