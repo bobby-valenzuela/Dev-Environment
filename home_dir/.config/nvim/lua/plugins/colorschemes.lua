@@ -1,28 +1,31 @@
 return {
 
---    {
---        "folke/tokyonight.nvim",
---        lazy = false,
---        opts = {
---        },
---        priority = 1000  -- Ensure it loads first
---    },
+{
+    "folke/tokyonight.nvim",
+    lazy = false,
+    opts = {
+    },
+    priority = 1000  -- Ensure it loads first
+},
 --    {
 --      "LazyVim/LazyVim",
 --      opts = {
 --        colorscheme = "tokyonight-storm",
 --      }
 --    },
-    {
-    "catppuccin/nvim",
-    lazy = false,
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme "catppuccin-mocha"
-    end
-  }
+  --   {
+  --   "catppuccin/nvim",
+  --   lazy = false,
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme "catppuccin-mocha"
+  --   end
+  -- }
 }
+
+
+
 --    {
 --      "LazyVim/LazyVim",
 --      opts = {
