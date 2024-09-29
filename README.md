@@ -93,9 +93,12 @@ Close pane: `exit` or `Ctrl+B+Z`
 There are loads of good vim cheat sheets out there and this isn't a substitution, but rather a list of common/handy ones I've found to be efficient on my workflow.  
 [Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)  
 [LeanXinY](https://learnxinyminutes.com/docs/vim/)  
+[vim.rtott](https://vim.rtorr.com/)  
 
 ---
-### CommonGeneral                                                                                                                                                                                                                                    
+### CommonGeneral                                                                                                                                                                                                                     
+`ter[minal]` - Open terminal  
+
 `:wa ` - ("write all") save all open buffers    
 `:e!` - erase all unsaved changes  
 `:bufdo e!` - erase all unsaved changes (in all open buffers)  
@@ -161,19 +164,39 @@ set wrap! (toggle on of off)
 <br />
 
 ---
+### Tabs
+`:tabnew` or `:tabnew {file}` - open a file in a new tab  
+`Ctrl+w T` - move the current split window into its own tab  
+`gt` - move to the next tab  
+`:tabc` - close the current tab and all its windows  
+`:tabo` - Tabonly - close all tabs except for the current one  
+`:tabdo {cmd}` - run the command on all tabs (e.g. :tabdo q - closes all opened tabs)  
+
+
+<br />
+
+---
 ### Windows
+`Ctrl+w s` - Split open buffer horizontally  
+`Ctrl+w v` - Split open buffer vertically    
 `:vert sb {filename}` - Split buffer with another open buffer (you can enter file name or use tab to cycle through open buffers)  
 `:e` filename	- Edit filename in current window  
-`:split` filename	- Split the window and open filename  
-`:vsplit file` - Split window vertically
-`ctrl-w <up arrow>` - Put cursor in top window (workf for any direction)
-`ctrl-w ctrl-w` - Put cursor in next window  
+`:sp {filename}`	- Split the window and open filename (if empty just splits the same buffer)    
+`:vs file` - Vertically split window  (enter open/unopened file)  
+
+_Managing Windows_  
+`ctrl-w <up arrow>` - Put cursor in top window (workf for any direction)  
+`ctrl-w w` - Switch to next window    
 `ctrl-w_` - Maximize current window vertically  
 `ctrl-w|` - Maximize current window horizontlly  
 `ctrl-w=` - Gives the sme size to all windows  
+`Ctrl+w H` - make current window full height at far left (leftmost vertical window)  
+`:Ctrl+w q` - Close current window  
 `10 ctrl-w+` - Add 10 lines to current window  
-`:hide` - Close current window  
-`:o­nly` - 	Close all windows, except current 
+`:o­nly` - 	Close all windows, except current  
+`clo` - Close a window  
+`hide`/`unhide` - Hide/Unhide a window (only 1)  
+
 
 ### Windows (lazy)
 `<leader> w w` - switch windows [Lazyvim]  
@@ -192,6 +215,8 @@ set wrap! (toggle on of off)
 `:e ~/.vimrc` - edit a file by name (short for `:edit`).  
 `:e` - reload current buffer from disk  
 `:e!` - Remove all unsaved changes  
+`:vert ba` - edit all buffers as vertical windows  
+`:tab ba` - edit all buffers as tabs  
  
  <br /> 
  
@@ -251,9 +276,10 @@ _Moving along file_
 `]i`- Go to the bottom of code block (via mini-indentscope) [🔌 Identscope]  
 
 _Markers_  
+`:marks` - View all markers  
+`'` - View all markers w/explanations [🔌]    
 `m {a-z}`	Setting markers/waypoints as {a-z}  
 `‘ {a-z}`	Move to marker/position {a-z}  
-`'` - view all previous markers (and previously visited locations)  
 `:delm!`  - vim clear all marks (or specific ranges like `:delm a-zA-Z0-9`)  
 `''`	- Move to previous marker position  (thats two single quotes in succession, not a single double quote)  
 
@@ -273,9 +299,12 @@ _Markers_
 _RegEx_  
 `\r`                - This represents newline  
 `%s/(foo)/\1\r`     - Replaces matches with itself followed by a newline   
-`s///g` - When text is selected you can use a replace (without the %) to replace text within the selected range  
+`s/old/new/g` - When text is selected you can use a replace (without the %) to replace text within the selected range (use `gc` to replace with confirmation first)    
 `s/\VTEXTOMATCH/REPLACEWITHTHIS/` - The `\V` (very no magic mode treats all characters literaly except the `\`  
 `s/\v\w+/` - The `\v` (very magic mode treats most special cahrs as special - as in regular regex    
+`noh` - "No Highlighting" - remove highlited matches  
+`vim /function/ **/*.pl` - Grep all matches of `function` in every '.pl. file in current dir (recursively). Then `:cope` to create a QuickFix list  
+`vim /\Vfunction/ /home/ubuntu/**/*.pl` - Grep all matches of `function` in every '.pl. file in current dir (recursively). Then `:cope` to create a QuickFix list  
 
 <br />
 
@@ -309,15 +338,24 @@ _(Can also use dgn to delete multiple references)_
 `C-v` - enter visual block mode. Once text is selected enter insert mode (`a/A`,`i/I`,`c/C`,`p/P`,`o/O` etc) and make changes. They will appear on the first line, but once you hit Esc those changes will be made to all selected lines.  
 `gs{char}` - Global surround. Example: Select text then `gs"`  
 `d` or `dd` - Cuts (Deletes and yanks)  
+`D/d$` - 	Cut to end of line  
+`y$` -	Yank/Copy to end of line  
 `<leader> p` - View Yank history [🔌 Yanky]  
 
 <br />
 
-_Mass Multi-Line_  
+_Multi-Line_
+`10y` -  Yank 10 lines  
+`10d` -  Delete 10 lines  
+`10V` -  Select 10 lines  
+
+
+<br />
+
+_Mass Select_  
 `ggVG` - Select entire file  
-`D/d$` - 	Cut to end of line  
-`y$` -	Yank/Copy to end of line  
 `:1,500y` - Copy everything from line 1 to 500 (use `d` for delete) (can start/end on any line - usefull for slicing bits)  
+
 <br />
 
 <br />
@@ -333,7 +371,7 @@ _Continguous Lines of text (paragraph)_
 <br />
 
 _Registers: Viewing/Yanking/Pasting_  
-`:reg`/`=`    - View registers (vim/lazyvim)  
+`:reg`    - View registers (vim)  
 `0p`     - Paste from 0 register (in normal mode)  
 `C-r0`  - Paste from 0 register (in insert mode or into vim command line). Useful for pasting into a search regex  
 `"_dd`  - Delete line and yank to black hole register (keeps registers the same).  
@@ -429,6 +467,7 @@ _Numbers_
 `q<letter>` - start recording a macro  
 `q` - stop recording a macro  
 `@<letter>` - execute macro (once)  
+`@@` - Rerun the last ran macro  
 `<number>@<letter>` - To execute the macro <number> times  
 `:3,9 normal @b` - Run macro "b" on lines 3-9.  
 `reg <macro_letter>` - View register (holds macros as well - note '[^' represents the Esc key)  
