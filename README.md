@@ -102,7 +102,8 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 
 <br />
 
-_File Explorer (netrw)_
+_File Explorer (netrw)_  
+`:Explore` - Explorer (opens file tree)  
 `:Vex` - Vertical Explorer (opens file tree)  
 `i` - Rotate betweeb views (3rd is tree mode)  
 `v` - Open file in vertical split (opens to left by default unless `set splitright` is set  
