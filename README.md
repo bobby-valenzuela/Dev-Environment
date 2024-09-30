@@ -64,7 +64,7 @@ __Where ‘0’ is your session id/name__
 <br />
 
 ---
-### Windows
+### Windows  
 Rename Window: `<bind_key> ,`  
 Create new Window: `<bind_key> c`  
 Show all Windows: `<bind_key> S`  
@@ -98,12 +98,25 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 ---
 ### CommonGeneral                                                                                                                                                                                                                     
 `ter[minal]` - Open terminal  
+`:verbose map Q` - see what is mapped to the `Q` key  
 
+<br />
+
+_File Explorer (netrw)_
+`:Vex` - Vertical Explorer (opens file tree)  
+`i` - Rotate betweeb views (3rd is tree mode)  
+`v` - Open file in vertical split (opens to left by default unless `set splitright` is set  
+`u` - Go up one level  
+`C-L` -  Move window to far left  
+
+
+<br />
+
+_Managing Changes_  
 `:wa ` - ("write all") save all open buffers    
 `:e!` - erase all unsaved changes  
 `:bufdo e!` - erase all unsaved changes (in all open buffers)  
 `:w !diff %` - view changes in vim before saving  
-`:verbose map Q` - see what is mapped to the `Q` key  
 `u` - undo last change (normal mode)  
 `C-u` - undo last change (insert mode)  
 `C-r` - Redo  
@@ -185,17 +198,18 @@ set wrap! (toggle on of off)
 `:vs file` - Vertically split window  (enter open/unopened file)  
 
 _Managing Windows_  
-`ctrl-w <up arrow>` - Put cursor in top window (workf for any direction)  
-`ctrl-w w` - Switch to next window    
-`ctrl-w_` - Maximize current window vertically  
-`ctrl-w|` - Maximize current window horizontlly  
-`ctrl-w=` - Gives the sme size to all windows  
-`Ctrl+w H` - make current window full height at far left (leftmost vertical window)  
-`:Ctrl+w q` - Close current window  
-`10 ctrl-w+` - Add 10 lines to current window  
+`:Ctrl+w q` or `:clo` - Close current window  
+`Ctrl+w <up arrow>` - Put cursor in top window (works for any direction)  
+`Ctrl+w w` - Switch to next window    
+`Ctrl+w H` - Make Leftmost full  vertical window  
+`Ctrl+w L` - Make Rightmost full  vertical window  
+`Ctrl+w=` - Gives the same size to all windows  
+`Ctrl_w|` - Current window width = 100%  
+`50Ctrl_w|` - Current window width = 50% of initial window width    
+`Ctrl+w_` - Maximize current window vertically  
 `:o­nly` - 	Close all windows, except current  
-`clo` - Close a window  
 `hide`/`unhide` - Hide/Unhide a window (only 1)  
+`:qa` - Quit All open windows (exits vim if on last tab)  
 
 
 ### Windows (lazy)
