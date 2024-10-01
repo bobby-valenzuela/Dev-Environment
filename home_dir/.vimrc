@@ -16,12 +16,34 @@ set laststatus=2    " Status Bar
 set wrap            " Text-Wrap
 " colorscheme desert
 
-set encoding=utf-8  "" encoding
+" encoding
+set encoding=utf-8  
 " set softtabstop
+
+set splitright
+set splitbelow
+
+" Configure file exlplorer
+" set netrw_browse_split=3
+" let g:netrw_winsize = 20
+" let g:netrw_banner = 0
+
+
+
+"
+"
+"
+"
 
 " copy (write) highlighted text to .vimbuffer
 
 " paste from buffer
+
+
+
+" Use ':Diff' to see a diff between your current unsaved version and what's on the hard disk.
+command Diff execute 'w !git diff --no-index % -'
+
 
 
 
