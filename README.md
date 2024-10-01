@@ -136,15 +136,15 @@ set wrap! (toggle on of off)
 
 ---
 ### Lazyvim  (neovim)  
-`<leader> <leader>` - file search  [🔌 fzf]  
-`<leader> fF` - file search (from cwd)  [🔌fzf]  
+`<leader>/` - grep (from cwd) [🔌]  
+`<leader> <space>` - file search (from cwd)  [🔌telescope]  
+
 `<leader> f t` - Open terminal (root) [🔌]   
 `Ctrl  /` - Show/Hide terminal [🔌]    
-`<leader>  sG` - grep (from cwd) [🔌]  
-`<space> /` - grep (working dir) [🔌]    
+
+
 `Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`) [🔌]   
-`<leader> e` - opens working dir file treee (what buffer is open)  [🔌]  
-`<leader> E` - opens Root Dir (better - grep and stuff)  [🔌]  
+`<leader> e` - opens explorer in PWD  [🔌]  
 `:Masoninstall <lanuage_server>` - Use mason to install a language server [🔌 Mason]   
 `:LazyExtras` - Manage LazyExtra plugins  [🔌]  
 `:LspInfo` - Get info on current LSP  [🔌]  
