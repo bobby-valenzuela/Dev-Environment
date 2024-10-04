@@ -284,6 +284,7 @@ _Moving along file_
 `gg` - Go to top of file  
 `G` - go to bottom of file  
 `: {num}` - Go to line  
+`zz` - Center screen with cursor position (don't confuse with ZZ - save)  
 `I/A` - Go to begin/end of line  
 `[[` - Go to top of file [🔌]  
 `]]` - Go to bottom of file  [🔌]  
