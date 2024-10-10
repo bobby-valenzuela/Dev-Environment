@@ -25,7 +25,6 @@ else
 
     # Split window into two vertical (50% width each)
     tmux split-window -h -p 50
-    tmux send-keys -t ${SESH}:${WINDOW}.1 "echo -e '\n===== Joke of the Day =====\n' && chatgpt 'Tell me an I.T. joke'" ENTER
 
 
     # WINDOW 2 (local)
@@ -33,14 +32,14 @@ else
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h -p 50
     tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nvim ." ENTER
-    tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh alpha" ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.2 "cd pbx" ENTER
 
     
     # WINDOW 3 (alpha)
     WINDOW="alpha"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h -p 50
-    tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nvim ." ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh alpha" ENTER
     tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh alpha" ENTER
 
     
