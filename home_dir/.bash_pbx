@@ -28,7 +28,10 @@ clear_wgets(){
     echo "Cleaned Up all wget-log files in ${1}"
 }
 
-
+download_veeam_report(){
+    ssh queenbee "cd /home/control-io/metabase-tools/ && perl beyonce-show-veeam-lics.pl reportforveeam > $1-Veeam-Lics-Report.csv"
+    scp queenbee:/home/control-io/metabase-tools/$1-Veeam-Lics-Report.csv /mnt/c/Users/BobbyValenzuela/Downloads/
+}
 
 
 
