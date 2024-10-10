@@ -293,6 +293,7 @@ _Moving along file_
 
 _Markers_  
 `:marks` - View all markers  
+`:cc 22` - View the 22nd quickfix item    
 `'` - View all markers w/explanations [🔌]    
 `m {a-z}`	Setting markers/waypoints as {a-z}  
 `‘ {a-z}`	Move to marker/position {a-z}  
