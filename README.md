@@ -390,6 +390,7 @@ _Continguous Lines of text (paragraph)_
 _Registers: Viewing/Yanking/Pasting_  
 `:reg`    - View registers (vim)  
 `0p`     - Paste from 0 register (in normal mode)  
+`2p`     - Paste 2nd to last thing yanked (grabs from 2 register in normal mode)  
 `C-r0`  - Paste from 0 register (in insert mode or into vim command line). Useful for pasting into a search regex  
 `"_dd`  - Delete line and yank to black hole register (keeps registers the same).  
 `ayy` - Yank line to "a" register (overwriting register a).  
