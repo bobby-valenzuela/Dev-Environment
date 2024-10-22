@@ -129,7 +129,7 @@ _Bare Vim (common settings to apply on a ad-hoc plain vim editor)_
 syntax on
 colorscheme slate
 set number/relativenumber
-
+set mouse=a
 filetype on
 set wrap! (toggle on of off)
 ```
