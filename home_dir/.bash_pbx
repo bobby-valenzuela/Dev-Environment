@@ -13,10 +13,6 @@ alias perlyprod="$(which perl) /home/control-io/www/DevSandbox/Sandbox/_template
 alias prod_scratch="$(which perl) /home/control-io/www/DevSandbox/Sandbox/_templates/prod_scratch.pl"
 alias basher="$(which bash) /home/control-io/www/DevSandbox/Sandbox/_templates/basher.sh"
 
-perlygrep(){
-    grep -HErniA 5 ${1} --include=\*.pl /home/control-io/
-}
-
 restart_hive(){
     ssh hive01 'sudo systemctl restart apache2 && echo "hive-01 restarted!"'
     ssh hive02 'sudo systemctl restart apache2 && echo "hive-02 restarted!"'
@@ -33,6 +29,10 @@ download_veeam_report(){
     scp queenbee:/home/control-io/metabase-tools/$1-Veeam-Lics-Report.csv /mnt/c/Users/BobbyValenzuela/Downloads/
 }
 
+perlygrep(){
+    grep -HErniA 5 ${1} --include=\*.pl /home/control-io/
+}
+# Example: perlygrep 'VeeamObjectsLink' | sed -E 's/^.*\t+//g' | vim - -c 'set filetype=perl' +'colorscheme desert'
 
 
 

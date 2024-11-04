@@ -27,15 +27,20 @@ else
     tmux split-window -h -p 50
 
 
-    # WINDOW 2 (local)
-    WINDOW="local"
+    # WINDOW 2 (pbx-local-nvim)
+    WINDOW="pbx-local-nvim"
+    tmux new-window -t ${SESH} -n ${WINDOW}
+    tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nvim ." ENTER
+
+    # WINDOW 3 (pbx-local)
+    WINDOW="pbx-local"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h -p 50
-    tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nvim ." ENTER
-    tmux send-keys -t ${SESH}:${WINDOW}.2 "cd pbx" ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR}www" ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.2 "cd ${PBX_DIR}" ENTER
 
     
-    # WINDOW 3 (alpha)
+    # WINDOW 4 (alpha)
     WINDOW="alpha"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h -p 50
@@ -43,7 +48,7 @@ else
     tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh alpha" ENTER
 
     
-    # WINDOW 4 (beta)
+    # WINDOW 5 (beta)
     WINDOW="beta"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h -p 50
@@ -51,7 +56,7 @@ else
     tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh beta02" ENTER
 
 
-    # WINDOW 5 (prod)
+    # WINDOW 6 (prod)
     WINDOW="prod"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h
