@@ -117,10 +117,11 @@ _Managing Changes_
 `:wa ` - ("write all") save all open buffers    
 `:e!` - erase all unsaved changes  
 `:bufdo e!` - erase all unsaved changes (in all open buffers)  
-`:w !diff %` - view changes in vim before saving  
 `u` - undo last change (normal mode)  
 `C-u` - undo last change (insert mode)  
 `C-r` - Redo  
+`:w !diff %` or `:w !git diff --no-index % -` - view changes in vim before saving (or add this in .vimrc `command Diff execute 'w !git diff --no-index % -'`)  
+ 
 
 <br />
 
