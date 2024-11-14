@@ -117,10 +117,11 @@ _Managing Changes_
 `:wa ` - ("write all") save all open buffers    
 `:e!` - erase all unsaved changes  
 `:bufdo e!` - erase all unsaved changes (in all open buffers)  
-`:w !diff %` - view changes in vim before saving  
 `u` - undo last change (normal mode)  
 `C-u` - undo last change (insert mode)  
 `C-r` - Redo  
+`:w !diff %` or `:w !git diff --no-index % -` - view changes in vim before saving (or add this in .vimrc `command Diff execute 'w !git diff --no-index % -'`)  
+ 
 
 <br />
 
@@ -526,4 +527,20 @@ Note: `C-` should be taken to mean `Ctrl+`. All other keys are to be entered in 
 
 
 
+---
+### Other  
 
+__Kickstart notes__  
+https://github.com/bobby-valenzuela/kickstart.nvim.git  
+`git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim-kickstart`  
+When you run Neovim using nvim-kickstart alias it will use the alternative config directory and the matching local directory ~/.local/share/nvim-kickstart. You can apply this approach to any Neovim distribution that you would like to try out.  
+`alias nvim-custom='NVIM_APPNAME="nvim-kickstart" nvim'`
+
+<br />
+
+__Running Neovim on older machines__  
+https://mihai.fm/running-neovim-on-older-linux-boxes/  
+https://stackoverflow.com/questions/46534957/configure-error-these-critical-programs-are-missing-or-too-old-gcc-make-w/62252633#62252633  
+
+
+patchelf --set-interpreter /home/ubuntu/glibc/lib/ld-linux-x86-64.so.2 --set-rpath /home/ubuntu/glibc/lib:/usr/lib64 ./nvim-linux64/bin/nvim
