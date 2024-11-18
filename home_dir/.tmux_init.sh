@@ -27,8 +27,8 @@ else
     tmux split-window -h -p 50
 
 
-    # WINDOW 2 (pbx-local-nvim)
-    WINDOW="pbx-local-nvim"
+    # WINDOW 2 (pbx-local-code)
+    WINDOW="pbx-local-code"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nvim ." ENTER
 
