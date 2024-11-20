@@ -98,6 +98,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 ---
 ### CommonGeneral                                                                                                                                                                                                                     
 `ter[minal]` - Open terminal  
+`exit` then `Ctrl-w + q` - to close terminal window  
 `:verbose map Q` - see what is mapped to the `Q` key  
 
 <br />
