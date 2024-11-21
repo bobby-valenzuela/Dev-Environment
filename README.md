@@ -338,9 +338,10 @@ __Finding Multiple Occurrences__
 
 __Change multiple instances without multi-cursor__  
 1. Select text to change  
-2. `#` to highlight all matches (selects next match)  
-3. `cgn` - change globally (when done changing, press `Esc` to exit insert mode)  
-4.  `.` to change every subsequent match.  
+2. `#` to highlight all matches (selects next match)
+3. Make sure you're in normal mode    
+4. `cgn` - change globally (when done changing, press `Esc` to exit insert mode)  
+5.  `.` to change every subsequent match.  
 
 _(Can also use dgn to delete multiple references)_
 
