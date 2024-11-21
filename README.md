@@ -128,10 +128,13 @@ _Managing Changes_
 
 _Bare Vim (common settings to apply on a ad-hoc plain vim editor)_
 ```vim
-syntax on
-colorscheme slate
+colo slate
 set number/relativenumber
 set mouse=a
+set hlsearch
+
+# Additional
+syntax on
 filetype on
 set wrap! (toggle on of off)
 ```
