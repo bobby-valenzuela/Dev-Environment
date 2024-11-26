@@ -128,10 +128,13 @@ _Managing Changes_
 
 _Bare Vim (common settings to apply on a ad-hoc plain vim editor)_
 ```vim
-colo slate
-set number/relativenumber
-set mouse=a
-set hlsearch
+colo slate  
+set number/relativenumber  
+set mouse=a  
+set ignorecase  
+set hlsearch  
+set incsearch  
+set cursorline  
 
 # Additional
 syntax on
