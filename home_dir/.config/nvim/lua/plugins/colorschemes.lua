@@ -7,6 +7,13 @@ return {
     },
     priority = 1000  -- Ensure it loads first
 },
+-- {
+--     "folke/tokyonight.nvim",
+--     lazy = false,
+--     opts = {
+--     },
+--     priority = 1000  -- Ensure it loads first
+-- },
 --    {
 --      "LazyVim/LazyVim",
 --      opts = {

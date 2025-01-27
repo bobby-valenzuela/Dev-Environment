@@ -41,11 +41,11 @@ else
 
     
     # WINDOW 4 (alpha)
-    WINDOW="alpha"
-    tmux new-window -t ${SESH} -n ${WINDOW}
-    tmux split-window -h -p 50
-    tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh alpha" ENTER
-    tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh alpha" ENTER
+    # WINDOW="alpha"
+    # tmux new-window -t ${SESH} -n ${WINDOW}
+    # tmux split-window -h -p 50
+    # tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh alpha" ENTER
+    # tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh alpha" ENTER
 
     
     # WINDOW 5 (beta)
