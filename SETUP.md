@@ -155,7 +155,14 @@ __Helpful Related Links (WSL + GUI)__
 
 <br />
 
+<br />
 
+__Installing vulkan drivers__
+
+```bash
+sudo apt update
+sudo apt install mesa-utils vulkan-tools
+```
 
 
 
