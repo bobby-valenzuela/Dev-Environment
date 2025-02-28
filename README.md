@@ -538,6 +538,16 @@ Note: `C-` should be taken to mean `Ctrl+`. All other keys are to be entered in 
 ---
 ### Other  
 
+__Dadbod DB setup__
+- Install MySql
+ ```bash
+sudo apt install mysql-server
+```
+- Install sqlcmd: https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools?view=sql-server-ver16&tabs=redhat-install
+- Install ODBC: https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver16&tabs=alpine18-install%2Calpine17-install%2Cdebian8-install%2Credhat7-13-install%2Crhel7-offline
+
+
+
 __Kickstart notes__  
 https://github.com/bobby-valenzuela/kickstart.nvim.git  
 `git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim-kickstart`  
