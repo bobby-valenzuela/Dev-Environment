@@ -183,6 +183,7 @@ sudo apt install mesa-utils vulkan-tools
 - Youtube Downloader https://github.com/yt-dlp/yt-dlp
 - mpv https://mpv.io/
 - go https://go.dev/doc/install
+- uv https://docs.astral.sh/
 
 
  <br />  
