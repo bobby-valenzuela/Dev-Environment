@@ -32,6 +32,11 @@ function config_sync(){
     cp -v ~/.vimrc  $DEST
     cp -v ~/.zshrc   $DEST
     cp -v ~/.tmux_init.sh  $DEST
+
+
+    DEST=~/my_repos/Dev-Environment/usr_local_bin/
+    cp /usr/local/bin/* $DEST
+
     echo "Done!"
 }
 
