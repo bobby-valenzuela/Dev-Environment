@@ -164,5 +164,36 @@ sudo apt update
 sudo apt install mesa-utils vulkan-tools
 ```
 
+<br />
+
+---
+# Utils
+- Lazygit https://github.com/jesseduffield/lazygit
+- Harlequin https://github.com/tconbeer/harlequin
+  - - Install DB Adapters `uv tool install 'harlequin[postgres,mysql,s3,sql-server,odbc]'`  and `sudo apt install unixodbc -y`
+- Posting https://github.com/darrenburns/posting
+- Lazydocker https://github.com/jesseduffield/lazydocker
+- ggh https://github.com/byawitz/ggh
+- Yazi file manager https://github.com/sxyazi/yazi
+- Tere (cd | ls) https://github.com/mgunyho/tere
+- csvlens https://github.com/YS-L/csvlens
+- tufw https://github.com/peltho/tufw
+- Eget https://github.com/zyedidia/eget  
+- Dust https://github.com/bootandy/dust
+- Youtube Downloader https://github.com/yt-dlp/yt-dlp
+- mpv https://mpv.io/
+- go https://go.dev/doc/install
+
+
+ <br />  
+
+General Must haves
+```bash
+sudo apt install curl -y
+sudo apt install sshfs -y
+sudo apt install sshpass -y
+```
+
+
 
 
