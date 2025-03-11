@@ -34,3 +34,12 @@ function config_sync(){
     cp -v ~/.tmux_init.sh  $DEST
     echo "Done!"
 }
+
+
+# cd + ls
+tere() {
+
+    local result=$(command tere "$@")
+    [ -n "$result" ] && cd -- "$result"
+
+}
