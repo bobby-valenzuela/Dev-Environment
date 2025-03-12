@@ -169,8 +169,6 @@ sudo apt install mesa-utils vulkan-tools
 ---
 # Utils
 - Lazygit https://github.com/jesseduffield/lazygit
-- Harlequin https://github.com/tconbeer/harlequin
-  - - Install DB Adapters `uv tool install 'harlequin[postgres,mysql,s3,sql-server,odbc]'`  and `sudo apt install unixodbc -y`
 - Posting https://github.com/darrenburns/posting
 - Lazydocker https://github.com/jesseduffield/lazydocker
 - ggh https://github.com/byawitz/ggh
