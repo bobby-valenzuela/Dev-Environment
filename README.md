@@ -509,8 +509,9 @@ __Best Practices when recording macros__
 
 ---
 ### Commenting/Uncommenting  
-`gcc` - to comment out current line [🔌 vim-commentary]  
-`gc` - to comment out multiple selected lines [🔌 vim-commentary]  
+`gcc` - comment out current line [🔌 vim-commentary]  
+`gc` - comment out a select range of lines [🔌 vim-commentary]  
+`gcgc` - uncomment adjacent lines [🔌 vim-commentary]  
 
 <br />
 
