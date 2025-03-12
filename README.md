@@ -190,6 +190,7 @@ set wrap! (toggle on of off)
 `:tabnew` or `:tabnew {file}` - open a file in a new tab  
 `Ctrl+w T` - move the current split window into its own tab  
 `gt` - move to the next tab  
+`2gt` - switch to tab #2  
 `:tabc` - close the current tab and all its windows  
 `:tabo` - Tabonly - close all tabs except for the current one  
 `:tabdo {cmd}` - run the command on all tabs (e.g. :tabdo q - closes all opened tabs)  
@@ -547,7 +548,11 @@ sudo apt install mysql-server
 - Install sqlcmd: https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools?view=sql-server-ver16&tabs=redhat-install
 - Install ODBC: https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver16&tabs=alpine18-install%2Calpine17-install%2Cdebian8-install%2Credhat7-13-install%2Crhel7-offline
 
+Adding Connections:
+- sql server: `sqlserver://{user}:{password>}@{host>}:{port}/{database}?trustServerCertificate=yes`  
+- mysql: `mysql://{user}:{password}@{host}:{port}/{database}`
 
+<br />
 
 __Kickstart notes__  
 https://github.com/bobby-valenzuela/kickstart.nvim.git  
