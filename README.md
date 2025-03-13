@@ -540,6 +540,34 @@ Note: `C-` should be taken to mean `Ctrl+`. All other keys are to be entered in 
 ---
 ### Other  
 
+__Harlequin SQL__
+- `F2` - focus on query editor  
+- `F5` Focus on the Results Viewer.  
+- `F6` Focus on the Data Catalog.  
+- `F8` Show the Query History Viewer.  
+- `F9`, `ctrl+b` Toggle the sidebar.  
+- `F10` Toggle full screen mode for the current widget.  
+- `ctrl+e` Export the returned data to a CSV, Parquet, or JSON file.  
+- `ctrl+r` Refresh the Data Catalog.  
+- `ctrl+enter`, `ctrl+j` Run the query  
+- `ctrl+s` Save the contents of the Query Editor to a file.  
+- `ctrl+n` Create a new buffer (editor tab).  
+- `ctrl+w` Close the current buffer (editor tab).  
+- `ctrl+k` View the next buffer (editor tab).  
+- `ctrl+/`, `ctrl+\_` Toggle comments on selected line(s).  
+- MySQL Connection: `harlequin -a mysql -h server.com -p 3306 -U user --password pass --theme tokyo-night`  
+- SQL Server: `harlequin -a odbc 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:server.com,1433;Database=mydb;Uid=user;Pwd=pass;Encrypt=yes;TrustServerCertificate=yes;Connection Timeout=30;' --theme tokyo-night`  
+
+Initialize project, Install harlequin, and add adapters
+```bash
+uv init
+uv tool install harlequin
+uv tool install 'harlequin[postgres,mysql,s3,odbc]'
+
+```
+
+<br />
+
 __Dadbod DB setup__
 - Install MySql
  ```bash
