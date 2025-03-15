@@ -24,4 +24,4 @@ vim.keymap.set('n', '<leader><down><down>', '20<C-e>', { desc= 'Move down 20 ste
 vim.keymap.set('n', '<leader><up><up>', '20<C-y>', { desc= 'Move down 20 steps', noremap = true, silent = true })
 
 
-vim.keymap.set('n', '<leader>rr', '<leader>S', { desc= 'Execute query under cursor (DBUI)', noremap = false, silent = false })
+vim.keymap.set('n', '<leader>rr', 'vip<Plug>(DBUI_ExecuteQuery)', { desc= 'Execute query under cursor (DBUI)', noremap = true, silent = true })
