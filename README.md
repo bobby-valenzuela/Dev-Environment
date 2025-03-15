@@ -582,6 +582,14 @@ Adding Connections:
 
 <br />
 
+Executing query under cursor with `<leader>rr`, add this custom key binding (lua).
+```lua
+vim.keymap.set('n', '<leader>rr', '<Plug>(DBUI_ExecuteQuery)', { desc= 'Execute query under cursor (DBUI)', noremap = true, silent = true })
+```
+
+
+<br />
+
 __Kickstart notes__  
 https://github.com/bobby-valenzuela/kickstart.nvim.git  
 `git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim-kickstart`  
