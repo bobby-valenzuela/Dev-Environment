@@ -22,3 +22,6 @@ vim.keymap.set('n', '<leader>tt', ':Twilight<CR>', { desc= 'Toggle Twilight', no
 -- move up/down in 20-step jumps
 vim.keymap.set('n', '<leader><down><down>', '20<C-e>', { desc= 'Move down 20 steps', noremap = true, silent = true })
 vim.keymap.set('n', '<leader><up><up>', '20<C-y>', { desc= 'Move down 20 steps', noremap = true, silent = true })
+
+
+vim.keymap.set('n', '<leader>rr', '<leader>S', { desc= 'Execute query under cursor (DBUI)', noremap = false, silent = false })

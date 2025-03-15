@@ -2,7 +2,11 @@ return {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
   enabled = function()
-    return LazyVim.pick.want() == "telescope"
+    if LazyVim and LazyVim.pick and LazyVim.pick.want then
+        return LazyVim.pick.want() == "telescope"
+    end
+    return true -- Default to enabling Telescope if unsure`
+    --return LazyVim.pick.want() == "telescope"
   end,
   version = false, -- telescope did only one release, so use HEAD for now
   dependencies = {

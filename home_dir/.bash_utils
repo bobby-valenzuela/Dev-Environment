@@ -27,6 +27,7 @@ function config_sync(){
     cp -v ~/.bashrc  $DEST
     cp -v -r ~/.oh-my-zsh  $DEST
     cp -v -r ~/.config/  $DEST
+    cp -v -r ~/.local/share/  $DEST
     cp -v ~/.p10k.zsh  $DEST
     cp -v ~/.tmux.conf  $DEST
     cp -v ~/.vimrc  $DEST
@@ -48,3 +49,7 @@ tere() {
     [ -n "$result" ] && cd -- "$result"
 
 }
+
+# Set base for posting
+export POSTING_ROOT=/home/bobby/posting/
+export POSTING_EDITOR=vim

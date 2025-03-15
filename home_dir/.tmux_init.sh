@@ -27,43 +27,44 @@ else
     tmux split-window -h -p 50
 
 
-    # WINDOW 2 (pbx-local-code)
-    WINDOW="pbx-local-code"
+    # WINDOW 2 (nvim)
+    WINDOW="nvim"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nvim ." ENTER
 
-    # WINDOW 3 (pbx-local)
-    WINDOW="pbx-local"
+    # WINDOW 3 (alpha)
+    WINDOW="alpha"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h -p 50
     tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR}www" ENTER
     tmux send-keys -t ${SESH}:${WINDOW}.2 "cd ${PBX_DIR}" ENTER
 
     
-    # WINDOW 4 (alpha)
-    # WINDOW="alpha"
-    # tmux new-window -t ${SESH} -n ${WINDOW}
+    # WINDOW 4 (sql)
+    WINDOW="sql"
+    tmux new-window -t ${SESH} -n ${WINDOW}
     # tmux split-window -h -p 50
-    # tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh alpha" ENTER
-    # tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh alpha" ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.1 "nvim" ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.1 Space
+    tmux send-keys -t ${SESH}:${WINDOW}.1 "D" ENTER     # Open dadbodui
+    tmux send-keys -t ${SESH}:${WINDOW}.1 ":only" ENTER     # Quit all other windows
+
 
     
-    # WINDOW 5 (beta)
-    WINDOW="beta"
+    # WINDOW 5 (api-client)
+    WINDOW="api-client"
     tmux new-window -t ${SESH} -n ${WINDOW}
-    tmux split-window -h -p 50
-    tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh beta01" ENTER
-    tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh beta02" ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.1 "posting" ENTER
 
 
-    # WINDOW 6 (prod)
-    WINDOW="prod"
+    # WINDOW 6 (servers)
+    WINDOW="servers"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux split-window -h
     tmux split-window -h
-    tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh hive01" ENTER
-    tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh hive02" ENTER
-    tmux send-keys -t ${SESH}:${WINDOW}.3 "ssh hive03" ENTER
+    # tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh hive01" ENTER
+    # tmux send-keys -t ${SESH}:${WINDOW}.2 "ssh hive02" ENTER
+    # tmux send-keys -t ${SESH}:${WINDOW}.3 "ssh hive03" ENTER
 
     
     # Finish off by returning to window 2

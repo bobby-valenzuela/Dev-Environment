@@ -1,0 +1,16 @@
+[application]
+DefaultPageSize = 300
+DisableSidebar = false
+SidebarOverlay = false
+
+[[database]]
+Name = 'metabase-prod-heimdall'
+URL = 'mysql://hive:rJZd9g5DbF3eB7B7@internaluse-metabase001-cache.probax.io/metabase001'
+Provider = 'mysql'
+Username = ''
+Password = ''
+Hostname = ''
+Port = ''
+DBName = 'metabase001'
+URLParams = ''
+Commands = []
