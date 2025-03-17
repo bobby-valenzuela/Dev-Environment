@@ -39,6 +39,8 @@ function config_sync(){
     DEST=$LOCAL_REPO/home_dir/.local/share/nvim/
     cp -v -r ~/.local/share/nvim/dadbod_ui/  $DEST
 
+    DEST=$LOCAL_REPO/
+    cp -v -r ~/posting/  $DEST
 
     DEST=$LOCAL_REPO/usr_local_bin/
     cp /usr/local/bin/* $DEST
