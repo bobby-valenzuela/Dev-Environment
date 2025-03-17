@@ -114,6 +114,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Add .local/bin to PATH
 export PATH="$HOME/.local/bin":$PATH
+export PATH="$HOME/.local/lib":$PATH
 
 ##### Google Cloud SDK
 # The next line updates PATH for the Google Cloud SDK.

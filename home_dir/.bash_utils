@@ -18,24 +18,29 @@ function tmux_init(){
 }
 
 function config_sync(){
+
+    LOCAL_REPO=~/my_repos/Dev-Environment
+
     # Sync local config files with cloned repo so i can push up my changes
-    DEST=~/my_repos/Dev-Environment/home_dir/
+    DEST=$LOCAL_REPO/home_dir/
     cp -v ~/.bash_aliases  $DEST
     cp -v ~/.bash_git  $DEST
     cp -v ~/.bash_pbx  $DEST
     cp -v ~/.bash_utils  $DEST
     cp -v ~/.bashrc  $DEST
     cp -v -r ~/.oh-my-zsh  $DEST
-    cp -v -r ~/.config/  $DEST
-    cp -v -r ~/.local/share/  $DEST
     cp -v ~/.p10k.zsh  $DEST
     cp -v ~/.tmux.conf  $DEST
     cp -v ~/.vimrc  $DEST
     cp -v ~/.zshrc   $DEST
     cp -v ~/.tmux_init.sh  $DEST
+    cp -v -r ~/.config/  $DEST
+
+    DEST=$LOCAL_REPO/home_dir/.local/share/nvim/
+    cp -v -r ~/.local/share/nvim/dadbod_ui/  $DEST
 
 
-    DEST=~/my_repos/Dev-Environment/usr_local_bin/
+    DEST=$LOCAL_REPO/usr_local_bin/
     cp /usr/local/bin/* $DEST
 
     echo "Done!"
