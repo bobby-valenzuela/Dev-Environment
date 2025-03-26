@@ -97,8 +97,8 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 
 ---
 ### CommonGeneral                                                                                                                                                                                                                     
-`ter[minal]` - Open terminal  
-`exit` then `Ctrl-w + q` - to close terminal window  
+`ter[minal]` - Open terminal (may need to hit `i` to beging typing)  
+`exit` / `Ctrl+d` then `Ctrl-w + q` - to close terminal window  
 `:verbose map Q` - see what is mapped to the `Q` key  
 
 <br />
