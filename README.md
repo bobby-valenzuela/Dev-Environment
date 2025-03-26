@@ -48,7 +48,7 @@ __Neovim and Cli quick copy commands__
 - Enable TMUX plugins by install TPM: `https://github.com/tmux-plugins/tpm`
 - Reload config file: `tmux source ~/.tmux.conf`
 - Reload TMUX environment: `Ctrl+I`  _For re-loading Theme for example_
-- Custom Bind key I've set: `Ctrl+t`
+- Custom Bind key I've set: `Ctrl+t  R`
 <br />
 
 ---
