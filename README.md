@@ -295,6 +295,7 @@ _Moving along file_
 `: {num}` - Go to line  
 `zz` - Center screen with cursor position (don't confuse with ZZ - save)  
 `I/A` - Go to begin/end of line  
+`{`/`}` -  move up/down along chunks of text (paragraphs)  
 `[[` - Go to top of file [🔌]  
 `]]` - Go to bottom of file  [🔌]  
 `[i` - Go to the top of code block (via mini-indentscope) [🔌 Identscope]  
