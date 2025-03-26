@@ -444,7 +444,6 @@ _Folding_
 `J`     - Merge lines: Apend line below to the end of the current line.  
 `cc` - change entire line.  
 `dt/<searchterm>` - Delete text up until search term  
-`J` - Join multiples lines into one line  
 
 <br />
 
