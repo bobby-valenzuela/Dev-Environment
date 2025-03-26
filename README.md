@@ -439,7 +439,7 @@ _Folding_
 
 ---  
 ### Editing  
-`ciw` - Change inner word (replace)
+`ciw` - Change inner word (replace)  
 `xp`    - swap two adjacent letters (move letter cursor one place to the right)  
 `J`     - Merge lines: Apend line below to the end of the current line.  
 `cc` - change entire line.  
