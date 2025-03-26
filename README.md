@@ -180,7 +180,7 @@ set wrap! (toggle on of off)
 ### Modes
 
 `SHIFT v` - Visual Line Mode  
-`SHIFT B` - Visual Block Mode  
+`SHIFT B` - (custom) Visual Block Mode  (default: ctrl+shift+v)  
 
 
 <br />
@@ -241,6 +241,7 @@ _Managing Windows_
 `:e!` - Remove all unsaved changes  
 `:vert ba` - edit all buffers as vertical windows  
 `:tab ba` - edit all buffers as tabs  
+`gf` - Find and open the file by filename under cursor  
  
  <br /> 
  
@@ -332,6 +333,7 @@ _RegEx_
 `noh` - "No Highlighting" - remove highlited matches  
 `vim /function/ **/*.pl` - Grep all matches of `function` in every '.pl. file in current dir (recursively). Then `:cope` to create a QuickFix list  
 `vim /\Vfunction/ /home/ubuntu/**/*.pl` - Grep all matches of `function` in every '.pl. file in current dir (recursively). Then `:cope` to create a QuickFix list  
+`g&` - Apply previous replace action to the entire file  
 
 <br />
 
@@ -358,6 +360,7 @@ _(Can also use dgn to delete multiple references)_
 ---
 ### SYDC (Selecting/Yanking/Deleting/Changing)  
 
+`gv` - Re-select last selected text  
 `viw` - selects just the word.  
 `vaw` - selects the word plus any surrounding whitespace.  
 `C-rw`  - Copy whatever word is under cursor and paste into vim command line. (Useful for pasting into a search regex)  
@@ -368,6 +371,7 @@ _(Can also use dgn to delete multiple references)_
 `d` or `dd` - Cuts (Deletes and yanks)  
 `D/d$` - 	Cut to end of line  
 `y$` -	Yank/Copy to end of line  
+`C` - 	Cut to end of line  
 `<leader> p` - View Yank history [🔌 Yanky]  
 
 <br />
@@ -406,6 +410,7 @@ _Registers: Viewing/Yanking/Pasting_
 `"_dd`  - Delete line and yank to black hole register (keeps registers the same).  
 `ayy` - Yank line to "a" register (overwriting register a).  
 `Ayy` - Yank line to "a" register (appending to register a)  
+`"+y` - Yank text into system clipboard  
 _Note: '^J' in a register will be changed to a newline when pasting._
 
 <br />
@@ -439,13 +444,17 @@ _Folding_
 `J`     - Merge lines: Apend line below to the end of the current line.  
 `cc` - change entire line.  
 `dt/<searchterm>` - Delete text up until search term  
+`J` - Join multiples lines into one line  
 
 <br />
 
-_Casing_  
+_Casing/Capitilization_  
+`gu` / `gU` - Lowercase/Uppercase character under cursor  
+`guiw` / `gUiw` - Lowercase/Uppercase word under cursor  
+`guu` / `gUU` - Lowercase/Uppercase entire line  
 `u` Selected text to lower case  
 `U` Selected text to upper case  
-`~` - Change casing of selected text/character under cursor.  
+`~` - Inverse casing of selected text/character under cursor.  
 `g~w` - change case of word (until whitespace)  
 `g~~` - change case of entire line  
 `read !<shell_command>` - Paste shell output into buffer.  
