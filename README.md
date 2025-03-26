@@ -402,7 +402,7 @@ _Continguous Lines of text (paragraph)_
 
 <br />
 
-_Working with vim cmd/shell _
+_Working with vim cmd/shell_  
 `C-r3`  - Paste from 3 register (in insert mode or into vim command line). Useful for pasting into a search regex  
 `read !<shell_command>` - Paste shell output into buffer.  
 
