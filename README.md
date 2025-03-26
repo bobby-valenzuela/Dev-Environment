@@ -258,7 +258,7 @@ _Switching Buffers_
 `:bp` - rotate back to previous buffer.  
 `:b3`     - Select buffer #3 (may need to force with `b!3`).  
 `L` - Cycle through all open buffers [🔌]  
-`<leader>`` ` or `C-^` (which is `Ctrl+Shift+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers. [🔌]   
+`<leader>`` ` or `C-^` (which is `Ctrl+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers. [🔌]   
 `:bf` or `:bl` - go to first/last buffer (f/l)  
 `:badd myfile.txt` - add a new buffer by filename  
 
