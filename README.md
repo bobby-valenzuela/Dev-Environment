@@ -112,6 +112,14 @@ _File Explorer (netrw)_
 `i` - Rotate betweeb views (3rd is tree mode)  
 `v` - Open file in vertical split (opens to left by default unless `set splitright` is set  
 `u` - Go up one level  
+`
+<br />
+
+_Working with vim cmd/shell_  
+`C-r3`  - Paste from 3 register (in insert mode or into vim command line). Useful for pasting into a search regex  
+`read !<shell_command>` - Paste shell output into buffer.  
+`:g/function/d` - Delete all lines matching the pattern 'function'  
+`q:` - Opens a buffer of previous commands to execute (with enter key)  
 `C-L` -  Move window to far left  
 
 
@@ -374,8 +382,8 @@ _(Can also use dgn to delete multiple references)_
 `C-v` - enter visual block mode. Once text is selected enter insert mode (`a/A`,`i/I`,`c/C`,`p/P`,`o/O` etc) and make changes. They will appear on the first line, but once you hit Esc those changes will be made to all selected lines.  
 `gs{char}` - Global surround. Example: Select text then `gs"`  
 `d` or `dd` - Cuts (Deletes and yanks)  
-`D/d$` - 	Cut to end of line  
-`y$` -	Yank/Copy to end of line  
+`D`/ `d$` - 	Cut to end of line  
+`Y` / `y$` -	Yank/Copy to end of line  
 `C` - 	Cut to end of line  
 `:m 5` - Move line under cursor (or selected lines) to line 5  
 `:2,7m 5` - Move lines 2-7  to line 5  
@@ -408,16 +416,6 @@ _Continguous Lines of text (paragraph)_
 `dip` - Delete without newlines  
 `vii` - Selects the "inner indent" block (lines with the same indentation level as the cursor, excluding surrounding blank lines)  
 `vai` - Selects "a indent" block (includes the inner block plus the lines immediately above/below with less indentation, like a function definition).
-
-
-
-<br />
-
-_Working with vim cmd/shell_  
-`C-r3`  - Paste from 3 register (in insert mode or into vim command line). Useful for pasting into a search regex  
-`read !<shell_command>` - Paste shell output into buffer.  
-`:g/function/d` - Delete all lines matching the pattern 'function'  
-`q:` - Opens a buffer of previous commands to execute (with enter key)  
 
 
 <br />
@@ -466,6 +464,10 @@ _Folding_
 `cc` - change entire line.  
 `dt/<searchterm>` - Delete text up until search term  
 `:sort` - Sort selected lines  
+`:norm I#` - Insert a '#' at the start of each selected line  
+`: norrm A;` - Append a ';' to the end of each highlited line  
+`:norm I/* A */` - Insert '/*' at the start of each selected line and append '*/' at the end of each selected line  
+`:g/error/norm I#` - Insert a '#' at the start of each line that matches the pattern /errorr/  
 
 <br />
 
