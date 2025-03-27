@@ -60,3 +60,7 @@ tere() {
 # Set base for posting
 export POSTING_ROOT=/home/bobby/posting/
 export POSTING_EDITOR=vim
+
+function cpp(){
+    cp -r -v $1 /mnt/c/Users/BobbyValenzuela/Downloads/WSL/
+}
