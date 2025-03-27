@@ -196,3 +196,71 @@ sudo apt install sshpass -y
 
 
 
+
+---
+### Other  
+
+__Harlequin SQL__
+- `F2` - focus on query editor  
+- `F5` Focus on the Results Viewer.  
+- `F6` Focus on the Data Catalog.  
+- `F8` Show the Query History Viewer.  
+- `F9`, `ctrl+b` Toggle the sidebar.  
+- `F10` Toggle full screen mode for the current widget.  
+- `ctrl+e` Export the returned data to a CSV, Parquet, or JSON file.  
+- `ctrl+r` Refresh the Data Catalog.  
+- `ctrl+enter`, `ctrl+j` Run the query  
+- `ctrl+s` Save the contents of the Query Editor to a file.  
+- `ctrl+n` Create a new buffer (editor tab).  
+- `ctrl+w` Close the current buffer (editor tab).  
+- `ctrl+k` View the next buffer (editor tab).  
+- `ctrl+/`, `ctrl+\_` Toggle comments on selected line(s).  
+- MySQL Connection: `harlequin -a mysql -h server.com -p 3306 -U user --password pass --theme tokyo-night`  
+- SQL Server: `harlequin -a odbc 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:server.com,1433;Database=mydb;Uid=user;Pwd=pass;Encrypt=yes;TrustServerCertificate=yes;Connection Timeout=30;' --theme tokyo-night`  
+
+Initialize project, Install harlequin, and add adapters
+```bash
+uv init
+uv tool install harlequin
+uv tool install 'harlequin[postgres,mysql,s3,odbc]'
+
+```
+
+<br />
+
+__Dadbod DB setup__
+- Install MySql
+ ```bash
+sudo apt install mysql-server
+```
+- Install sqlcmd: https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools?view=sql-server-ver16&tabs=redhat-install
+- Install ODBC: https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver16&tabs=alpine18-install%2Calpine17-install%2Cdebian8-install%2Credhat7-13-install%2Crhel7-offline
+
+Adding Connections:
+- sql server: `sqlserver://{user}:{password>}@{host>}:{port}/{database}?trustServerCertificate=yes`  
+- mysql: `mysql://{user}:{password}@{host}:{port}/{database}`
+
+<br />
+
+Executing query under cursor with `<leader>rr`, add this custom key binding (lua).
+```lua
+vim.keymap.set('n', '<leader>rr', '<Plug>(DBUI_ExecuteQuery)', { desc= 'Execute query under cursor (DBUI)', noremap = true, silent = true })
+```
+
+
+<br />
+
+__Kickstart notes__  
+https://github.com/bobby-valenzuela/kickstart.nvim.git  
+`git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim-kickstart`  
+When you run Neovim using nvim-kickstart alias it will use the alternative config directory and the matching local directory ~/.local/share/nvim-kickstart. You can apply this approach to any Neovim distribution that you would like to try out.  
+`alias nvim-custom='NVIM_APPNAME="nvim-kickstart" nvim'`
+
+<br />
+
+__Running Neovim on older machines__  
+https://mihai.fm/running-neovim-on-older-linux-boxes/  
+https://stackoverflow.com/questions/46534957/configure-error-these-critical-programs-are-missing-or-too-old-gcc-make-w/62252633#62252633  
+
+
+patchelf --set-interpreter /home/ubuntu/glibc/lib/ld-linux-x86-64.so.2 --set-rpath /home/ubuntu/glibc/lib:/usr/lib64 ./nvim-linux64/bin/nvim
