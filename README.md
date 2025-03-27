@@ -122,6 +122,8 @@ _Managing Changes_
 `C-u` - undo last change (insert mode)  
 `C-r` - Redo  
 `:w !diff %` or `:w !git diff --no-index % -` - view changes in vim before saving (or add this in .vimrc `command Diff execute 'w !git diff --no-index % -'`)  
+`:earlier 2h` - [Time-based undo] Reverts file to state 2hours ago (can use `m` or `s` for minutes/seconds)  
+`:later 2h` - [Time-based redo] Reverts file to state 2hours ago (can use `m` or `s` for minutes/seconds)  
  
 
 <br />
@@ -372,6 +374,8 @@ _(Can also use dgn to delete multiple references)_
 `D/d$` - 	Cut to end of line  
 `y$` -	Yank/Copy to end of line  
 `C` - 	Cut to end of line  
+`:m 5` - Move line under cursor (or selected lines) to line 5  
+`:2,7m 5` - Move lines 2-7  to line 5  
 `<leader> p` - View Yank history [🔌 Yanky]  
 
 <br />
@@ -442,6 +446,8 @@ _Brackets && Braces_
 <br />
 
 _Folding_  
+`zf` - Create a fold from selected lines  
+`zf10j` - Create fold from current line to 10 lines down  
 `zc` - fold a block of code (z = fold and c = close)  
 `zo` - unfold a block of code (z = fold and c = open)  
 `zM` - fold all blocks in buffer  
@@ -456,6 +462,7 @@ _Folding_
 `J`     - Merge lines: Apend line below to the end of the current line.  
 `cc` - change entire line.  
 `dt/<searchterm>` - Delete text up until search term  
+`:sort` - Sort selected lines  
 
 <br />
 
