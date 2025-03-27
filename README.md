@@ -399,12 +399,19 @@ _Continguous Lines of text (paragraph)_
 `cip` - Change without newlines  
 `dap` - Delete with newlines  
 `dip` - Delete without newlines  
+`vii` - Selects the "inner indent" block (lines with the same indentation level as the cursor, excluding surrounding blank lines)  
+`vai` - Selects "a indent" block (includes the inner block plus the lines immediately above/below with less indentation, like a function definition).
+
+
 
 <br />
 
 _Working with vim cmd/shell_  
 `C-r3`  - Paste from 3 register (in insert mode or into vim command line). Useful for pasting into a search regex  
 `read !<shell_command>` - Paste shell output into buffer.  
+`:g/function/d` - Delete all lines matching the pattern 'function'  
+`q:` - Opens a buffer of previous commands to execute (with enter key)  
+
 
 <br />
 
