@@ -164,7 +164,8 @@ set wrap! (toggle on of off)
 `Ctrl  /` - Show/Hide terminal [🔌]    
 
 
-`Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`) [🔌]   
+`Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)   
+`cn`/`cp` - Next/Previous item in quickfix list. Mapped to `F11`/`F12`.  
 `<leader> e` - opens explorer in PWD  [🔌]  
 `:Masoninstall <lanuage_server>` - Use mason to install a language server [🔌 Mason]   
 `:LazyExtras` - Manage LazyExtra plugins  [🔌]  
