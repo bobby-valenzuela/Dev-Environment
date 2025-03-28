@@ -193,7 +193,7 @@ set wrap! (toggle on of off)
 ### Modes
 
 `SHIFT v` - Visual Line Mode  
-`SHIFT B` - (custom) Visual Block Mode  (default: ctrl+shift+v)  
+`SHIFT B` - (custom) Visual Block Mode  (default: ctrl+shift+v or ctrl+Q)  
 
 
 <br />
@@ -523,7 +523,7 @@ _Numbers_
 
 
 ---  
-### Macros
+### Macros and automation
 `q<letter>` - start recording a macro  
 `q` - stop recording a macro  
 `@<letter>` - execute macro (once)  
@@ -531,6 +531,8 @@ _Numbers_
 `<number>@<letter>` - To execute the macro <number> times  
 `:3,9 normal @b` - Run macro "b" on lines 3-9.  
 `reg <macro_letter>` - View register (holds macros as well - note '[^' represents the Esc key)  
+`@:` - re-run last vim command  
+`.` - re-run last command in normal mode  
 
 <br /> 
 
