@@ -310,6 +310,8 @@ _Moving along file_
 `zz` - Center screen with cursor position (don't confuse with ZZ - save)  
 `I/A` - Go to begin/end of line  
 `{`/`}` -  move up/down along chunks of text (paragraphs)  
+`gd` - go to definition (where func/sub is defined)  
+`Ctrl+O` / `Ctrl+I` - Jump forward/backward in jump list (`:jumps`)  
 `[[` - Go to top of file [🔌]  
 `]]` - Go to bottom of file  [🔌]  
 `[i` - Go to the top of code block (via mini-indentscope) [🔌 Identscope]  
