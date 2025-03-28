@@ -323,6 +323,7 @@ _Markers_
 `‘ {a-z}`	Move to marker/position {a-z}  
 `:delm!`  - vim clear all marks (or specific ranges like `:delm a-zA-Z0-9`)  
 `''`	- Move to previous marker position  (thats two single quotes in succession, not a single double quote)  
+Note: Lowercase markers are local to a file and uppercase markers are global across all files. Meaning you can re-use `a` for different places in different files but `A` only refers to one place in a single file.  
 
 <br />
 
