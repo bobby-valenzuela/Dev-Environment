@@ -8,14 +8,7 @@
 ---
 
 
-Quick references for key-bindings I commonly use.
-
 <br />
-
-
-<br />
-
-
 
 
 # TMUX
