@@ -96,6 +96,7 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 [Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)  
 [LeanXinY](https://learnxinyminutes.com/docs/vim/)  
 [vim.rtott](https://vim.rtorr.com/)  
+[DevHints-vim](https://devhints.io/vim)  
 
 ---
 ### CommonGeneral                                                                                                                                                                                                                     
