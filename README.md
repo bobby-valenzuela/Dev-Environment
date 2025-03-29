@@ -1,22 +1,32 @@
  ### Table of Contents
 
-- [Quick Reference](#quick-reference)
-  - [TMUX](#tmux)
-  - [Vim](#vim)
+- [TMUX](#tmux)
+- [Vim](#vim)
+- [LazyVim](#lazyvim)
+
 
 ---
 
-
-# Quick Reference
 
 Quick references for key-bindings I commonly use.
 
 <br />
 
-## General copy/paste/searching within this setup
----
+
 <br />
 
+
+
+
+# TMUX
+
+- Enable TMUX plugins by install TPM: `https://github.com/tmux-plugins/tpm`
+- Reload config file: `tmux source ~/.tmux.conf`
+- Reload TMUX environment: `Ctrl+I`  _For re-loading Theme for example_
+- Custom Bind key I've set: `Ctrl+t  R`
+<br />
+
+---
 __Tmux search__
 - `<bind-key> + [` - Enter copy mode 
   - `/` - Start search
@@ -40,17 +50,6 @@ __Neovim and Cli quick copy commands__
 - Neovim copy (clipboard) => `Select (mouse/v) + y`
 
 <br />
-
-<br />
-
-## TMUX
-
-- Enable TMUX plugins by install TPM: `https://github.com/tmux-plugins/tpm`
-- Reload config file: `tmux source ~/.tmux.conf`
-- Reload TMUX environment: `Ctrl+I`  _For re-loading Theme for example_
-- Custom Bind key I've set: `Ctrl+t  R`
-<br />
-
 ---
 ### Sessions
 Open tmux as a named session: `tmux new -s <name>`  
@@ -92,7 +91,7 @@ Close pane: `exit` or `Ctrl+B+Z`
 
 <br />
 
-## Vim
+# Vim
 There are loads of good vim cheat sheets out there and this isn't a substitution, but rather a list of common/handy ones I've found to be efficient on my workflow.  
 [Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)  
 [LeanXinY](https://learnxinyminutes.com/docs/vim/)  
@@ -155,22 +154,6 @@ filetype on
 set wrap! (toggle on of off)
 ```
 
----
-### Lazyvim  (neovim)  
-`<leader>/` - grep (from cwd) [🔌]  
-`<leader> <space>` - file search (from cwd)  [🔌telescope]  
-
-`<leader> f t` - Open terminal (root) [🔌]   
-`Ctrl  /` - Show/Hide terminal [🔌]    
-
-
-`Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)   
-`cn`/`cp` - Next/Previous item in quickfix list. Mapped to `F11`/`F12`.  
-`<leader> e` - opens explorer in PWD  [🔌]  
-`:Masoninstall <lanuage_server>` - Use mason to install a language server [🔌 Mason]   
-`:LazyExtras` - Manage LazyExtra plugins  [🔌]  
-`:LspInfo` - Get info on current LSP  [🔌]  
-`:source $MYVIMRC` - Reload config (and plugins) without restarting nvim  
 
 <br />  
 
@@ -182,10 +165,6 @@ set wrap! (toggle on of off)
 `<leader> rm` - Remove markers  
 `<leader> tt` - Toggle Twlight  
 
-### LSP-related stuff  
-`K` - get pop-up with code info [🔌]   
-`gd` - 'Go to Definition' -> Find where a function/sub is defined when highlighting one [🔌]   
-`gr` - 'Go to References' -> Find where a functions/sub is referenced when highlighting one [🔌]   
 
 
 <br />
@@ -236,15 +215,6 @@ _Managing Windows_
 `:qa` - Quit All open windows (exits vim if on last tab)  
 
 
-### Windows (lazy)
-`<leader> w w` - switch windows [Lazyvim]  
-`<leader> w q` - close window [Lazyvim]  
-`<leader> w v` - verical split window [Lazyvim]  
-`<leader> w o` - close all other windows [Lazyvim]  
-`<space> w |` - max width of current window [Lazyvim]  
-`<leader> w =` - equal width of current windows [Lazyvim]  
-(in NeoTree) `s` - to open in new window in vertical split [Lazyvim]  
-
 <br />
 
 ---  
@@ -261,7 +231,6 @@ _Managing Windows_
  
 _Viewing Buffers_  
 `:b` then `<C-d>` - show all open buffers to cycle though.  
-`<leader> f b` - View open buffers [🔌]   
 `:ls`  - view buffers or (`buffers` with plugin)   
 
  <br /> 
@@ -270,9 +239,7 @@ _Switching Buffers_
 `:b file1.txt`     - Select by filename (tab shows open buffers, but can open new files as well)
 `:bn` - rotate to next buffer.  
 `:bp` - rotate back to previous buffer.  
-`:b3`     - Select buffer #3 (may need to force with `b!3`).  
-`L` - Cycle through all open buffers [🔌]  
-`<leader>`` ` or `C-^` (which is `Ctrl+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers. [🔌]   
+`:b3`     - Select buffer #3 (may need to force with `b!3`).   
 `:bf` or `:bl` - go to first/last buffer (f/l)  
 `:badd myfile.txt` - add a new buffer by filename  
 
@@ -284,13 +251,6 @@ _Deleting Buffers_
 
  <br /> 
  
-_Harpoon_  
-`:wall` - Write to all open buffers  
-`<leader> H` - Add file to harpoon list [🔌]   
-`<leader>  h` - View harpoon quick menu [🔌]   
-`<leader>  {1..5}` - Harpoon to (open) specific file [🔌]  
-
-<br />
 
 _Lazyvim buffer controls_  
 ``<leader> ` `` =  switch last file (buffer)  
@@ -313,10 +273,7 @@ _Moving along file_
 `{`/`}` -  move up/down along chunks of text (paragraphs)  
 `gd` - go to definition (where func/sub is defined)  
 `Ctrl+O` / `Ctrl+I` - Jump forward/backward in jump list (`:jumps`)  
-`[[` - Go to top of file [🔌]  
-`]]` - Go to bottom of file  [🔌]  
-`[i` - Go to the top of code block (via mini-indentscope) [🔌 Identscope]  
-`]i`- Go to the bottom of code block (via mini-indentscope) [🔌 Identscope]  
+
 
 _Markers_  
 `:marks` - View all markers  
@@ -334,10 +291,8 @@ Note: Lowercase markers are local to a file and uppercase markers are global acr
 ---
 ### Searching  
 `/` - Search (grep): type text and enter then `n/N` to iterate through matches  
-`s {first_char}{second_char}` - search forward to matches and show labels + enter the label of the match you want to go to [🔌leap]  
-`S {first_char}{second_char}` - search backward to matches and show labels + enter the label of the match you want to go to [🔌leap]  
-`gs {first_char}{second_char}` - search _forward_ to matches and show labels + enter the label of the match you want to go to [🔌leap]. _Global search (across windows splits)_  
-`gS {first_char}{second_char}` - search  _backward_ to matches and show labels enter the label of the match you want to go to [🔌leap]. _Global search (across windows splits)_  
+`Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)   
+`cn`/`cp` - Next/Previous item in quickfix list. Mapped to `F11`/`F12`.  
 
 <br />
 
@@ -391,7 +346,7 @@ _(Can also use dgn to delete multiple references)_
 `C` - 	Cut to end of line  
 `:m 5` - Move line under cursor (or selected lines) to line 5  
 `:2,7m 5` - Move lines 2-7  to line 5  
-`<leader> p` - View Yank history [🔌 Yanky]  
+
 
 <br />
 
@@ -484,7 +439,6 @@ _Casing/Capitilization_
 `~` - Inverse casing of selected text/character under cursor.  
 `g~w` - change case of word (until whitespace)  
 `g~~` - change case of entire line  
-`:MarkdownPreview` - View MarkdownPreview in browser [🔌 Markdown-Preview]  
 
 <br />
 
@@ -499,13 +453,6 @@ _Sorting_
 `:sort!` Sort all lines in reverse  
 `:sort u` Sort all lines and remove duplicates  
 `:sort`/`:sort!` - When lines are selected, this will sort in ASC/DESC order respectively.  
-
-<br />
-
-_Surrounding_  
-`faiw"` - Surround inner word with " (press fa fast) [🔌 mini-surround]   
-`fd"` - Remove surrounding quotes (press fd fast) [🔌 mini-surround]  
-`fr"'` = replace surrounding double quotes with single-quotes (press fr fast) [🔌 mini-surround]  
 
 <br />
 
@@ -547,12 +494,6 @@ __Best Practices when recording macros__
 <br />
 
 ---
-### Commenting/Uncommenting  
-`gcc` - comment out current line [🔌 vim-commentary]  
-`gc` - comment out a select range of lines [🔌 vim-commentary]  
-`gcgc` - uncomment adjacent lines [🔌 vim-commentary]  
-
-<br />
 
 __Uncommenting__
 - Put your cursor on the first comment character (like #), and enter Visual-Block mode (Ctrl+b for me)
@@ -572,5 +513,79 @@ _Option 2_
 <br />
 
 Note: `C-` should be taken to mean `Ctrl+`. All other keys are to be entered in succession (not simultaneously).
+
+<br />
+
+## LazyVim
+
+https://www.lazyvim.org/keymaps
+
+<br />
+
+`<leader>/` - grep (from cwd) [🔌]  
+`<leader> <space>` - file search (from cwd)  [🔌telescope]  
+`<leader> f t` - Open terminal (root) [🔌]   
+`Ctrl  /` - Show/Hide terminal [🔌]    
+`<leader> e` - opens explorer in PWD  [🔌]  
+`:Masoninstall <lanuage_server>` - Use mason to install a language server [🔌 Mason]   
+`:LazyExtras` - Manage LazyExtra plugins  [🔌]  
+`:LspInfo` - Get info on current LSP  [🔌]  
+`:source $MYVIMRC` - Reload config (and plugins) without restarting nvim  
+`:MarkdownPreview` - View MarkdownPreview in browser [🔌 Markdown-Preview]  
+`<leader> p` - View Yank history [🔌 Yanky]  
+`<leader> f b` - View open buffers [🔌]   
+`L` - Cycle through all open buffers [🔌]  
+`<leader>`` ` or `C-^` (which is `Ctrl+6`) - swap back and forth between current (`#`) and alternate (`a%`) buffers. [🔌]  
+
+<br />
+
+### Commenting/Uncommenting  
+`gcc` - comment out current line [🔌 vim-commentary]  
+`gc` - comment out a select range of lines [🔌 vim-commentary]  
+`gcgc` - uncomment adjacent lines [🔌 vim-commentary]  
+
+<br />
+
+### Surrounding  
+`faiw"` - Surround inner word with " (press fa fast) [🔌 mini-surround]   
+`fd"` - Remove surrounding quotes (press fd fast) [🔌 mini-surround]  
+`fr"'` = replace surrounding double quotes with single-quotes (press fr fast) [🔌 mini-surround]  
+
+
+### LSP-related stuff  
+`K` - get pop-up with code info [🔌]   
+`gd` - 'Go to Definition' -> Find where a function/sub is defined when highlighting one [🔌]   
+`gr` - 'Go to References' -> Find where a functions/sub is referenced when highlighting one [🔌]   
+
+
+### Searching  
+`s {first_char}{second_char}` - search forward to matches and show labels + enter the label of the match you want to go to [🔌leap]  
+`S {first_char}{second_char}` - search backward to matches and show labels + enter the label of the match you want to go to [🔌leap]  
+`gs {first_char}{second_char}` - search _forward_ to matches and show labels + enter the label of the match you want to go to [🔌leap]. _Global search (across windows splits)_  
+`gS {first_char}{second_char}` - search  _backward_ to matches and show labels enter the label of the match you want to go to [🔌leap]. _Global search (across windows splits)_  
+
+
+### Harpoon  
+`:wall` - Write to all open buffers  
+`<leader> H` - Add file to harpoon list [🔌]   
+`<leader>  h` - View harpoon quick menu [🔌]   
+`<leader>  {1..5}` - Harpoon to (open) specific file [🔌]  
+
+`[[` - Go to top of file [🔌]  
+`]]` - Go to bottom of file  [🔌]  
+`[i` - Go to the top of code block (via mini-indentscope) [🔌 Identscope]  
+`]i`- Go to the bottom of code block (via mini-indentscope) [🔌 Identscope]  
+
+<br />
+
+### Windows  
+`<leader> w w` - switch windows [Lazyvim]  
+`<leader> w q` - close window [Lazyvim]  
+`<leader> w v` - verical split window [Lazyvim]  
+`<leader> w o` - close all other windows [Lazyvim]  
+`<space> w |` - max width of current window [Lazyvim]  
+`<leader> w =` - equal width of current windows [Lazyvim]  
+(in NeoTree) `s` - to open in new window in vertical split [Lazyvim]  
+
 
 
