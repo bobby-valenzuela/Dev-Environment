@@ -30,6 +30,7 @@ cp -v ./config/.vimrc  $HOME/
 cp -v ./config/.zshrc   $HOME/
 cp -v ./config/.tmux_init.sh  $HOME/
 cp -v -r ./config/.config/nvim  $HOME/
+cp -v -r ./config/.config/lazygit  $HOME/
 
 cp -v ./config/usr_local_bin/* /usr/local/bin/
 
