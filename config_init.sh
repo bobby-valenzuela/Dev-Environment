@@ -37,7 +37,7 @@ cp -v ./config/usr_local_bin/* /usr/local/bin/
 
 if [[ "$1" == "install" ]];then
     printf "[+] Installing packages...\n\n"
-    sudo apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locate sshpass xsel cmake libstdc++6 -y
+    sudo apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locate sshpass xsel cmake nodejs npm libstdc++6 -y
 
     printf "[+] Installing latest neovim stable release...\n\n"
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
