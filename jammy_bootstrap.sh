@@ -7,8 +7,8 @@ fi
 
 
 # Define the container name or ID
-IMAGE_NAME="ubuntu-nvim"
-CONTAINER_NAME="ubuntu-nvim-container"  # Replace with your container name or ID
+IMAGE_NAME="ubuntu-jammy"
+CONTAINER_NAME="ubuntu-jammy-container"  # Replace with your container name or ID
 LOCAL_BIND_MOUNT_DIR=/home/control-io/
 CONTAINER_BIND_MOUNT_DIR=/app
 
