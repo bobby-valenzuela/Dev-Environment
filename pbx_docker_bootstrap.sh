@@ -34,19 +34,10 @@ FROM ubuntu:22.04
 WORKDIR /app
 
 # Copy application files
-COPY ./home/control-io/www-core/ .
+# COPY ./home/control-io/www-core/ .
 
 # Update apt cache and install neovim
-RUN apt-get update && apt-get install -y python3
-RUN  apt-get install neovim -y
-RUN  apt install git -y
-RUN  apt install fzf -y
-RUN  apt install ripgrep -y
-RUN  apt install gcc curl tar -y
-RUN  apt install lua5.4 -y
-RUN  apt install zsh -y
-RUN  apt install wget -y
-RUN  apt install make gcc unzip git-all xclip build-essential p7zip-full jq locatesshpass xsel cmake libstdc++6 -y
+RUN apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locatesshpass xsel cmake libstdc++6 -y
 
 # Here, we use a specific version; replace with desired version or use the dynamic method below
 ARG LAZYGIT_VERSION=0.40.2
