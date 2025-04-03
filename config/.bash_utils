@@ -22,6 +22,9 @@ function config_sync(){
     LOCAL_REPO=~/my_repos/Dev-Environment
 
     # Sync local config files with cloned repo so i can push up my changes
+    if [[ ! -d $LOCAL_REPO/config/ ]]; then
+        mkdir -p $LOCAL_REPO/config/
+    fi
     DEST=$LOCAL_REPO/config/
     cp -v ~/.bash_aliases  $DEST
     cp -v ~/.bash_git  $DEST
@@ -36,8 +39,7 @@ function config_sync(){
     cp -v ~/.tmux_init.sh  $DEST
     cp -v -r ~/.config/  $DEST
 
-    DEST=$LOCAL_REPO/home_dir/.local/share/nvim/
-    cp -v -r ~/.local/share/nvim/dadbod_ui/  $DEST
+    #    cp -v -r ~/.local/share/nvim/dadbod_ui/  $DEST
 
     DEST=$LOCAL_REPO/
     cp -v -r ~/posting/  $DEST
