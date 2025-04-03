@@ -37,7 +37,7 @@ WORKDIR /app
 # COPY ./home/control-io/www-core/ .
 
 # Update apt cache and install neovim
-RUN apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locatesshpass xsel cmake libstdc++6 -y
+RUN apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locatesshpass xsel cmake nodejs npm libstdc++6 -y
 
 # Here, we use a specific version; replace with desired version or use the dynamic method below
 ARG LAZYGIT_VERSION=0.40.2
