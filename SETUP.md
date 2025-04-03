@@ -33,7 +33,7 @@ sudo apt install make gcc ripgrep unzip git git-all xclip zsh build-essential p7
 - [Install ZSH with OhMyZsh](https://ohmyz.sh/) 
   - ⚠️Replace ~/.zshrc with one saved.
 - [ZSH Syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
-  - ⚠️ This can be skipped if you're copying my ~/.zshrc and ~/.oh-my-zsh. (I already have bit in zshrc that checks and clones repo)  
+  - ⚠️ This can be skipped if you're copying my ~/.zshrc (I already have bit in zshrc that checks and clones repo)  
   - Just run this (Ubuntu) .zsrhc already has needed snippet (checks for /usr/share/zsh-syntax-highlighting)
   - ```bash
       sudo apt install zsh-syntax-highlighting -y
