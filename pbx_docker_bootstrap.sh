@@ -1,5 +1,9 @@
 #!/bin/bash
-
+# Check if user is root (UID 0) or using sudo
+if [ "$EUID" -ne 0 ]; then
+    echo "This script must be run as root or with sudo."
+    exit 1
+fi
 
 
 # Define the container name or ID
