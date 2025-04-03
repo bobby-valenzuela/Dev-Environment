@@ -49,6 +49,28 @@ function config_sync(){
 }
 
 
+function config_sync_alpha(){
+
+    # Sync local config files with cloned repo so i can push up my changes
+    scp ~/.bash_aliases  alpha:/home/ubuntu/
+    scp ~/.bash_git  alpha:/home/ubuntu/
+    scp ~/.bash_pbx  alpha:/home/ubuntu/
+    scp ~/.bash_utils  alpha:/home/ubuntu/
+    scp ~/.bashrc  alpha:/home/ubuntu/
+    #scp -r ~/.oh-my-zsh  alpha:/home/ubuntu/
+    scp ~/.p10k.zsh  alpha:/home/ubuntu/
+    scp ~/.tmux.conf  alpha:/home/ubuntu/
+    scp ~/.vimrc  alpha:/home/ubuntu/
+    scp ~/.zshrc   alpha:/home/ubuntu/
+    scp ~/.tmux_init.sh  alpha:/home/ubuntu/
+
+    scp /usr/local/bin/* alpha:/usr/local/bin
+
+    echo "Done!"
+}
+
+
+
 # cd + ls
 tere() {
 
@@ -61,6 +83,8 @@ tere() {
 export POSTING_ROOT=/home/bobby/posting/
 export POSTING_EDITOR=vim
 
-function cpp(){
+function cw(){
     cp -r -v $1 /mnt/c/Users/BobbyValenzuela/Downloads/WSL/
 }
+
+

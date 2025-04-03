@@ -25,3 +25,7 @@ vim.keymap.set('n', '<leader><up><up>', '20<C-y>', { desc= 'Move down 20 steps',
 
 
 vim.keymap.set('n', '<leader>rr', 'vip<Plug>(DBUI_ExecuteQuery)', { desc= 'Execute query under cursor (DBUI)', noremap = true, silent = true })
+
+-- Quickfix nav shortcuts
+vim.keymap.set('n', '<F12>', ':cn<CR>', { desc= 'Next item in quickfix list', noremap = true, silent = true })
+vim.keymap.set('n', '<F11>', ':cp<CR>', { desc= 'Previous item in quickfix list', noremap = true, silent = true })
