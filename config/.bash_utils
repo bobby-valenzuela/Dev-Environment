@@ -22,13 +22,13 @@ function config_sync(){
     LOCAL_REPO=~/my_repos/Dev-Environment
 
     # Sync local config files with cloned repo so i can push up my changes
-    DEST=$LOCAL_REPO/home_dir/
+    DEST=$LOCAL_REPO/config/
     cp -v ~/.bash_aliases  $DEST
     cp -v ~/.bash_git  $DEST
     cp -v ~/.bash_pbx  $DEST
     cp -v ~/.bash_utils  $DEST
     cp -v ~/.bashrc  $DEST
-    cp -v -r ~/.oh-my-zsh  $DEST
+    # cp -v -r ~/.oh-my-zsh  $DEST
     cp -v ~/.p10k.zsh  $DEST
     cp -v ~/.tmux.conf  $DEST
     cp -v ~/.vimrc  $DEST
@@ -42,7 +42,7 @@ function config_sync(){
     DEST=$LOCAL_REPO/
     cp -v -r ~/posting/  $DEST
 
-    DEST=$LOCAL_REPO/usr_local_bin/
+    DEST=$LOCAL_REPO/config/usr_local_bin/
     cp /usr/local/bin/* $DEST
 
     echo "Done!"
@@ -83,6 +83,7 @@ tere() {
 export POSTING_ROOT=/home/bobby/posting/
 export POSTING_EDITOR=vim
 
+# Copy from WSL to Windows host
 function cw(){
     cp -r -v $1 /mnt/c/Users/BobbyValenzuela/Downloads/WSL/
 }
