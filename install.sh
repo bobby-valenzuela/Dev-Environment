@@ -51,6 +51,14 @@ if [ "$1" = "install" ]; then
     printf "[+] Installing powerlevel10k...\n\n"
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 
+    # Download and install lazygit
+    printf "[+] Installing lazygit...\n\n"
+    LAZYGIT_VERSION='0.40.2'
+    curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
+    && tar xf lazygit.tar.gz lazygit \
+    && mv lazygit /usr/local/bin/ \
+    && rm lazygit.tar.gz
+
     printf "[+] Sourcing .zshrc ...\n\n"
     source $HOME/.zshrc
 
