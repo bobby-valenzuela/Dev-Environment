@@ -39,15 +39,6 @@ RUN apt-get update && apt install wget curl -y
 # Run install script
 RUN sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"
 
-# Here, we use a specific version; replace with desired version or use the dynamic method below
-ARG LAZYGIT_VERSION=0.40.2
-
-# Download and install lazygit
-RUN curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
-    && tar xf lazygit.tar.gz lazygit \
-    && mv lazygit /usr/local/bin/ \
-    && rm lazygit.tar.gz
-
 
 EOF
 
