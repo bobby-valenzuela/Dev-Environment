@@ -51,12 +51,6 @@ if [ "$1" = "install" ]; then
     printf "[+] Installing nvm...\n\n"
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
 
-    printf "[+] Installing oh-my-zsh...\n\n"
-    sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-
-    printf "[+] Installing powerlevel10k...\n\n"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-
     # Download and install lazygit
     printf "[+] Installing lazygit...\n\n"
     LAZYGIT_VERSION='0.40.2'
@@ -64,6 +58,12 @@ if [ "$1" = "install" ]; then
     && tar xf lazygit.tar.gz lazygit \
     && mv lazygit /usr/local/bin/ \
     && rm lazygit.tar.gz
+    
+    printf "[+] Installing oh-my-zsh...\n\n"
+    sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+
+    printf "[+] Installing powerlevel10k...\n\n"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
 
     printf "[+] Sourcing .zshrc ...\n\n"
     source $HOME/.zshrc
