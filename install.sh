@@ -18,10 +18,14 @@ cp -v ./config/.bash_utils  $HOME/
 cp -v ./config/.bashrc  $HOME/
 cp -v ./config/.p10k.zsh  $HOME/
 cp -v ./config/.tmux.conf  $HOME/
-cp -v ./config/.config/nvim  $HOME/
 cp -v ./config/.vimrc  $HOME/
 cp -v ./config/.zshrc   $HOME/
 cp -v ./config/.tmux_init.sh  $HOME/
+
+if [ ! -d $HOME/.config/ ]; then
+    mkdir -p $HOME/.config/
+fi
+
 cp -v -r ./config/.config/nvim  $HOME/
 cp -v -r ./config/.config/lazygit  $HOME/
 
