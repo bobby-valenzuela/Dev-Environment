@@ -1,12 +1,6 @@
 #!/bin/sh
 # Copy config file to new machine
 
-# Check if user is root (UID 0) or using sudo
-if [ "$(id -u)" -ne 0 ]; then
-    echo "[-] This script must be run as root or with sudo."
-    exit 1
-fi
-
 # Maintain user's home if calling with sudo
 if [ -n "$SUDO_USER" ]; then
     HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
