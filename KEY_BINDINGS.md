@@ -287,6 +287,7 @@ Note: Lowercase markers are local to a file and uppercase markers are global acr
 `/` - Search (grep): type text and enter then `n/N` to iterate through matches  
 `Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)   
 `cn`/`cp` - Next/Previous item in quickfix list. Mapped to `F11`/`F12`.  
+`Ctrl-r + "` - Yanks the unamed register into the search box. This will paste in anything yanked.  
 
 <br />
 
