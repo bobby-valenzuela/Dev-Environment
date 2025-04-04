@@ -6,6 +6,12 @@ if [ -n "$SUDO_USER" ]; then
     HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
 fi
 
+SUDO=""
+
+# if not root, run as sudo
+if [ "$EUID" -ne 0 ]; then
+    SUDO="sudo"
+fi
 
 # Execute from the dir the script is in
 cd "$(dirname "$0")" || exit
@@ -34,12 +40,12 @@ cp -v ./config/usr_local_bin/* /usr/local/bin/
 
 if [ "$1" = "install" ]; then
     printf "[+] Installing packages...\n\n"
-    sudo apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locate sshpass xsel cmake nodejs npm libstdc++6 -y
+    $SUDO apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locate sshpass xsel cmake nodejs npm libstdc++6 -y
 
     printf "[+] Installing latest neovim stable release...\n\n"
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
-    sudo rm -rf /opt/nvim
-    sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+    $SUDO rm -rf /opt/nvim
+    $SUDO tar -C /opt -xzf nvim-linux-x86_64.tar.gz
     echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
 
     printf "[+] Installing nvm...\n\n"
