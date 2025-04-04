@@ -71,11 +71,11 @@ fi
 
 
 # Check if the container is running
-if [ -n "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
+if [ -n "$(sudo docker ps -q -f name=$CONTAINER_NAME)" ]; then
 
     echo "Container '$CONTAINER_NAME' is running. Connecting to it..."
 
-    docker exec -it $CONTAINER_NAME /usr/bin/zsh
+    sudo docker exec -it $CONTAINER_NAME /usr/bin/zsh
 
 else
 
@@ -84,14 +84,14 @@ else
 
 
     # Check if the container exists (stopped)
-    if [ -n "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
+    if [ -n "$(sudo docker ps -aq -f name=$CONTAINER_NAME)" ]; then
 
         echo "Found Container. Starting container '$CONTAINER_NAME'..."
-        docker start $CONTAINER_NAME
+        sudo docker start $CONTAINER_NAME
 
         # Connect to the container after starting it
         echo "Connecting to '$CONTAINER_NAME'..."
-        docker exec -it $CONTAINER_NAME /usr/bin/zsh
+        sudo docker exec -it $CONTAINER_NAME /usr/bin/zsh
 
 
     else
@@ -100,7 +100,7 @@ else
 
         # Replace the following line with your container creation command
         # docker run -d --name $CONTAINER_NAME ubuntu /bin/bash
-        docker run -it -v "${LOCAL_BIND_MOUNT_DIR}:${CONTAINER_BIND_MOUNT_DIR}" --name "${CONTAINER_NAME}" "${IMAGE_ID}"
+        sudo docker run -it -v "${LOCAL_BIND_MOUNT_DIR}:${CONTAINER_BIND_MOUNT_DIR}" --name "${CONTAINER_NAME}" "${IMAGE_ID}"
 
     fi
 
