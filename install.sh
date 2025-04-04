@@ -2,16 +2,21 @@
 # Copy config file to new machine
 
 # Maintain user's home if calling with sudo
-if [ -n "$SUDO_USER" ]; then
-    HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
-fi
+# if [ -n "$SUDO_USER" ]; then
+#    HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+# fi
 
 SUDO=""
 
 # if not root, run as sudo
-if [ "$EUID" -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     SUDO="sudo"
+    printf "[+] Not running as root - adding sudo\n"
+else
+    printf "[+] Running as root\n"
 fi
+
+printf "[+] Home: $HOME\n"
 
 # Execute from the dir the script is in
 cd "$(dirname "$0")" || exit
