@@ -48,7 +48,7 @@ RUN sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environ
 EOF
 
     # Build the image from Dockerfile
-    BUILD_OUTPUT=$(docker build -t "$FULL_IMAGE" .)
+    BUILD_OUTPUT=$(sudo docker build -t "$FULL_IMAGE" .)
 
     # Check if build succeeded
     if [ $? -eq 0 ]; then
