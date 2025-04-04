@@ -1,8 +1,10 @@
 #!/bin/sh
 # Copy config file to new machine
 
+CALLING_USER=$(whoami)
+
 # Maintain user's home (even if calling with sudo)
-HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+HOME=$(getent passwd "$CALLING_USER" | cut -d: -f6)
 
 SUDO=""
 
