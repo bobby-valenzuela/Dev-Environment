@@ -2,9 +2,9 @@
 # Copy config file to new machine
 
 # Maintain user's home if calling with sudo
-# if [ -n "$SUDO_USER" ]; then
-#    HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
-# fi
+if [ -n "$SUDO_USER" ]; then
+   HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+fi
 
 SUDO=""
 
