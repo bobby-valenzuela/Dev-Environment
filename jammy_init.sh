@@ -89,7 +89,13 @@ else
 
         # Replace the following line with your container creation command
         # docker run -d --name $CONTAINER_NAME ubuntu /bin/bash
-        sudo docker run -it -v "${LOCAL_BIND_MOUNT_DIR}:${CONTAINER_BIND_MOUNT_DIR}" --name "${CONTAINER_NAME}" "${IMAGE_ID}"
+
+        if [ -z "$LOCAL_BIND_MOUNT_DIR" ]; then
+            sudo docker run -it --name "$CONTAINER_NAME" "$IMAGE_ID"
+        else
+            sudo docker run -it -v "$LOCAL_BIND_MOUNT_DIR:$CONTAINER_BIND_MOUNT_DIR" --name "$CONTAINER_NAME" "$IMAGE_ID"
+        fi
+
 
     fi
 
