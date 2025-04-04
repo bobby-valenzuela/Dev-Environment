@@ -37,8 +37,8 @@ if [ ! -d $HOME/.config/ ]; then
     mkdir -p $HOME/.config/
 fi
 
-cp -v -r ./config/.config/nvim  $HOME/
-cp -v -r ./config/.config/lazygit  $HOME/
+cp -v -r ./config/.config/nvim  $HOME/.config/
+cp -v -r ./config/.config/lazygit  $HOME/.config/
 
 $SUDO cp -v ./config/usr_local_bin/* /usr/local/bin/
 
@@ -73,7 +73,7 @@ if [ "$1" = "install" ]; then
     printf "[+] Sourcing .zshrc ...\n\n"
     cp -v ./config/.zshrc   $HOME/
     echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
-    source $HOME/.zshrc
+    zsh
 
 fi
 
