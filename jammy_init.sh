@@ -34,6 +34,8 @@ WORKDIR /app
 # Update apt cache and install neovim
 # RUN apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locatesshpass xsel cmake nodejs npm libstdc++6 -y
 
+RUN apt-get update && apt install wget curl -y
+
 # Run install script
 RUN sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"
 
