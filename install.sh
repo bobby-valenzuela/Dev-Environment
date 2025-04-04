@@ -40,7 +40,7 @@ fi
 cp -v -r ./config/.config/nvim  $HOME/
 cp -v -r ./config/.config/lazygit  $HOME/
 
-cp -v ./config/usr_local_bin/* /usr/local/bin/
+$SUDO cp -v ./config/usr_local_bin/* /usr/local/bin/
 
 
 if [ "$1" = "install" ]; then
