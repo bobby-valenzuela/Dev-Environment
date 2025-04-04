@@ -51,7 +51,7 @@ if [ "$1" = "install" ]; then
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
     $SUDO rm -rf /opt/nvim
     $SUDO tar -C /opt -xzf nvim-linux-x86_64.tar.gz
-    echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
+    # echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
 
     printf "[+] Installing nvm...\n\n"
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
@@ -72,6 +72,7 @@ if [ "$1" = "install" ]; then
 
     printf "[+] Sourcing .zshrc ...\n\n"
     cp -v ./config/.zshrc   $HOME/
+    echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
     source $HOME/.zshrc
 
 fi
