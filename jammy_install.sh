@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/sh
+
 # Check if user is root (UID 0) or using sudo
-if [ "$EUID" -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     echo "This script must be run as root or with sudo."
     exit 1
 fi
@@ -9,7 +10,7 @@ fi
 # Define the container name or ID
 IMAGE_NAME="ubuntu-jammy"
 CONTAINER_NAME="ubuntu-jammy-container"  # Replace with your container name or ID
-LOCAL_BIND_MOUNT_DIR=/home/control-io/
+LOCAL_BIND_MOUNT_DIR="$1"
 CONTAINER_BIND_MOUNT_DIR=/app
 
 # Define the image name and tag
@@ -37,7 +38,7 @@ WORKDIR /app
 # COPY ./home/control-io/www-core/ .
 
 # Update apt cache and install neovim
-RUN apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locatesshpass xsel cmake nodejs npm libstdc++6 -y
+# RUN apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locatesshpass xsel cmake nodejs npm libstdc++6 -y
 
 # Here, we use a specific version; replace with desired version or use the dynamic method below
 ARG LAZYGIT_VERSION=0.40.2
@@ -47,6 +48,9 @@ RUN curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/d
     && tar xf lazygit.tar.gz lazygit \
     && mv lazygit /usr/local/bin/ \
     && rm lazygit.tar.gz
+
+RUN sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"
+
 EOF
 
     # Build the image from Dockerfile
@@ -67,8 +71,7 @@ fi
 
 
 # Check if the container is running
-
-if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
+if [ -n "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
 
     echo "Container '$CONTAINER_NAME' is running. Connecting to it..."
 
@@ -81,8 +84,7 @@ else
 
 
     # Check if the container exists (stopped)
-
-    if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
+    if [ -n "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
 
         echo "Found Container. Starting container '$CONTAINER_NAME'..."
         docker start $CONTAINER_NAME
@@ -98,7 +100,7 @@ else
 
         # Replace the following line with your container creation command
         # docker run -d --name $CONTAINER_NAME ubuntu /bin/bash
-        docker run -it -v ${LOCAL_BIND_MOUNT_DIR}:${CONTAINER_BIND_MOUNT_DIR} --name ${CONTAINER_NAME} ${IMAGE_ID}
+        docker run -it -v "${LOCAL_BIND_MOUNT_DIR}:${CONTAINER_BIND_MOUNT_DIR}" --name "${CONTAINER_NAME}" "${IMAGE_ID}"
 
     fi
 

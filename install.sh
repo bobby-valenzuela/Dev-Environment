@@ -1,6 +1,4 @@
 #!/bin/sh
-
-
 # Copy config file to new machine
 
 # Check if user is root (UID 0) or using sudo
