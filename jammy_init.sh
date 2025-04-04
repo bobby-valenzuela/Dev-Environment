@@ -1,5 +1,11 @@
 #!/bin/sh
 
+SUDO=""
+
+# if not root, run as sudo
+if [ "$EUID" -ne 0 ]; then
+    SUDO="sudo"
+fi
 
 # Define the container name or ID
 IMAGE_NAME="ubuntu-jammy"
@@ -48,7 +54,7 @@ EOF
     # Check if build succeeded
     if [ $? -eq 0 ]; then
         # Get the new image ID
-        IMAGE_ID=$(sudo docker images -q "$FULL_IMAGE")
+        IMAGE_ID=$($SUDO docker images -q "$FULL_IMAGE")
         echo "Image '$FULL_IMAGE' built successfully with ID: $IMAGE_ID"
     else
         echo "Failed to build image '$FULL_IMAGE'."
@@ -60,7 +66,7 @@ fi
 
 
 # Check if the container is running
-if [ -n "$(sudo docker ps -q -f name=$CONTAINER_NAME)" ]; then
+if [ -n "$($SUDO docker ps -q -f name=$CONTAINER_NAME)" ]; then
 
     echo "Container '$CONTAINER_NAME' is running. Connecting to it..."
 
@@ -73,7 +79,7 @@ else
 
 
     # Check if the container exists (stopped)
-    if [ -n "$(sudo docker ps -aq -f name=$CONTAINER_NAME)" ]; then
+    if [ -n "$($SUDO docker ps -aq -f name=$CONTAINER_NAME)" ]; then
 
         echo "Found Container. Starting container '$CONTAINER_NAME'..."
         sudo docker start $CONTAINER_NAME
@@ -91,9 +97,9 @@ else
         # docker run -d --name $CONTAINER_NAME ubuntu /bin/bash
 
         if [ -z "$LOCAL_BIND_MOUNT_DIR" ]; then
-            sudo docker run -it --name "$CONTAINER_NAME" "$IMAGE_ID"
+            $SUDO docker run -it --name "$CONTAINER_NAME" "$IMAGE_ID"
         else
-            sudo docker run -it -v "$LOCAL_BIND_MOUNT_DIR:$CONTAINER_BIND_MOUNT_DIR" --name "$CONTAINER_NAME" "$IMAGE_ID"
+            $SUDO docker run -it -v "$LOCAL_BIND_MOUNT_DIR:$CONTAINER_BIND_MOUNT_DIR" --name "$CONTAINER_NAME" "$IMAGE_ID"
         fi
 
 
