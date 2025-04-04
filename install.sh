@@ -68,7 +68,7 @@ if [ "$1" = "install" ]; then
     sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 
     printf "[+] Installing powerlevel10k...\n\n"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
 
     printf "[+] Sourcing .zshrc ...\n\n"
     cp -v ./config/.zshrc   $HOME/
