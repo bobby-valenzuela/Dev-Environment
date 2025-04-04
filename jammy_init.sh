@@ -53,7 +53,7 @@ EOF
     # Check if build succeeded
     if [ $? -eq 0 ]; then
         # Get the new image ID
-        IMAGE_ID=$(docker images -q "$FULL_IMAGE")
+        IMAGE_ID=$(sudo docker images -q "$FULL_IMAGE")
         echo "Image '$FULL_IMAGE' built successfully with ID: $IMAGE_ID"
     else
         echo "Failed to build image '$FULL_IMAGE'."
