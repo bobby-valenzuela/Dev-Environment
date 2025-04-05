@@ -44,7 +44,7 @@ WORKDIR /app
 RUN apt-get update && apt install wget curl git sudo -y
 
 # Run install script
-RUN sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"
+CMD sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"
 
 
 EOF
