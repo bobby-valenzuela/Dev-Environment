@@ -98,7 +98,7 @@ else
         # docker run -d --name $CONTAINER_NAME ubuntu /bin/bash
 
         if [ -z "$LOCAL_BIND_MOUNT_DIR" ]; then
-            $SUDO docker run -it --name "$CONTAINER_NAME" "$IMAGE_ID" 'sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"'
+            $SUDO docker run -it --name "$CONTAINER_NAME" "$IMAGE_ID" sh -c 'wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O - | sh'
         else
             $SUDO docker run -it -v "$LOCAL_BIND_MOUNT_DIR:$CONTAINER_BIND_MOUNT_DIR" --name "$CONTAINER_NAME" "$IMAGE_ID"
         fi
