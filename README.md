@@ -16,6 +16,8 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 
 <br />
 
+<br />
+
 If you already have the repo cloned you can copy the config files to your home directory
 ```bash
 sh ./install.sh
