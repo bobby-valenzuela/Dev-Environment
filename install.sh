@@ -44,6 +44,10 @@ $SUDO cp -f -v ./config/usr_local_bin/* /usr/local/bin/
 
 
 if [ "$1" = "install" ]; then
+    printf "[+] Removing stale lockfiles...\n\n"
+    $SUDO rm -f /var/lib/dpkg/lock-frontend
+    $SUDO rm -f /var/lib/dpkg/lock
+
     printf "[+] Installing packages...\n\n"
     $SUDO apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locate sshpass xsel cmake nodejs npm libstdc++6 -y
 
@@ -61,7 +65,7 @@ if [ "$1" = "install" ]; then
     LAZYGIT_VERSION='0.40.2'
     curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
     && tar xf lazygit.tar.gz lazygit \
-    && mv lazygit /usr/local/bin/ \
+    && mv -f lazygit /usr/local/bin/ \
     && rm lazygit.tar.gz
     
     printf "[+] Installing oh-my-zsh...\n\n"
@@ -77,8 +81,9 @@ if [ "$1" = "install" ]; then
     zsh
 
     printf "[+] Setting default shell...\n\n"
-    chsh -s $(which zsh)
-
+    if which zsh >/dev/null 2>&1; then
+        chsh -s $(which zsh)
+    fi
 fi
 
 echo "Done!"
