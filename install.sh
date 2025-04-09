@@ -22,25 +22,25 @@ printf "[+] Home: $HOME\n"
 cd "$(dirname "$0")" || exit
 
 # Sync local config files with cloned repo so i can push up my changes
-cp -v ./config/.bash_aliases  $HOME/
-cp -v ./config/.bash_git  $HOME/
-cp -v ./config/.bash_pbx  $HOME/
-cp -v ./config/.bash_utils  $HOME/
-cp -v ./config/.bashrc  $HOME/
-cp -v ./config/.p10k.zsh  $HOME/
-cp -v ./config/.tmux.conf  $HOME/
-cp -v ./config/.vimrc  $HOME/
-cp -v ./config/.zshrc   $HOME/
-cp -v ./config/.tmux_init.sh  $HOME/
+cp -f -v ./config/.bash_aliases  $HOME/
+cp -f -v ./config/.bash_git  $HOME/
+cp -f -v ./config/.bash_pbx  $HOME/
+cp -f -v ./config/.bash_utils  $HOME/
+cp -f -v ./config/.bashrc  $HOME/
+cp -f -v ./config/.p10k.zsh  $HOME/
+cp -f -v ./config/.tmux.conf  $HOME/
+cp -f -v ./config/.vimrc  $HOME/
+cp -f -v ./config/.zshrc   $HOME/
+cp -f -v ./config/.tmux_init.sh  $HOME/
 
 if [ ! -d $HOME/.config/ ]; then
     mkdir -p $HOME/.config/
 fi
 
 cp -v -r ./config/.config/nvim  $HOME/.config/
-cp -v -r ./config/.config/lazygit  $HOME/.config/
+cp -v -f -r ./config/.config/lazygit  $HOME/.config/
 
-$SUDO cp -v ./config/usr_local_bin/* /usr/local/bin/
+$SUDO cp -f -v ./config/usr_local_bin/* /usr/local/bin/
 
 
 if [ "$1" = "install" ]; then
@@ -77,7 +77,7 @@ if [ "$1" = "install" ]; then
     zsh
 
     printf "[+] Setting default shell...\n\n"
-    chsh -s /bin/zsh
+    chsh -s $(which zsh)
 
 fi
 
