@@ -76,6 +76,9 @@ if [ "$1" = "install" ]; then
     echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
     zsh
 
+    printf "[+] Setting default shell...\n\n"
+    chsh -s /bin/zsh
+
 fi
 
 echo "Done!"
