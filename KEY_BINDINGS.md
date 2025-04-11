@@ -220,6 +220,7 @@ _Managing Windows_
 `:vert ba` - edit all buffers as vertical windows  
 `:tab ba` - edit all buffers as tabs  
 `gf` - Find and open the file by filename under cursor  
+`C-^` (which is Ctrl+6) - swap back and forth between current (#) and alternate (a%) buffers.  
  
  <br /> 
  
