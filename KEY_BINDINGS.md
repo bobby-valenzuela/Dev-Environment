@@ -177,6 +177,7 @@ set wrap! (toggle on of off)
 `:tabnew` or `:tabnew {file}` - open a file in a new tab  
 `Ctrl+w T` - move the current split window into its own tab  
 `gt` - move to the next tab  
+`gT` - move to the previous tab  
 `2gt` - switch to tab #2  
 `:tabc` - close the current tab and all its windows  
 `:tabo` - Tabonly - close all tabs except for the current one  
