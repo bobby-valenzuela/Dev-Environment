@@ -306,6 +306,19 @@ _RegEx_
 
 <br />
 
+_Quickfix list commands_  
+`:cope` - open quickfix list  
+`:cclose` - close quickfix list  
+`:cnext` / `:cn` - go to next quickfix list item  
+`:cprevious` / `:cp` - go to previous quickfix list item  
+`:s/foo/bar/g` - replace text on a highlighted quickfix line  
+`:cdo s/foo/bar/g` - replace text on all quickfix list items (globally - every occurence in each line)  
+`:cdo s/foo/bar/gc` - replace text on all quickfix list items (globally - every occurence in each line)  - with confirmation
+
+__
+
+<br />
+
 __Finding Multiple Occurrences__  
 1. Select text (in visual mode)
 2. `#` to highlight all occurences (can use `*` but that begins at next occurence)
