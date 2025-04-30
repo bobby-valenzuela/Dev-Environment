@@ -303,6 +303,9 @@ _RegEx_
 `vim /function/ **/*.pl` - Grep all matches of `function` in every '.pl. file in current dir (recursively). Then `:cope` to create a QuickFix list  
 `vim /\Vfunction/ /home/ubuntu/**/*.pl` - Grep all matches of `function` in every '.pl. file in current dir (recursively). Then `:cope` to create a QuickFix list  
 `g&` - Apply previous replace action to the entire file  
+`:grep '^sub run_powershell' -g \*.pl`  - Regex search using grep on perl files  
+`:grep '^sub run_powershell' -g '{*.pl,*.pm}'`  - Regex search using grep on perl files  
+
 
 <br />
 
