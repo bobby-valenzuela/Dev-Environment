@@ -260,6 +260,11 @@ _Lazyvim buffer controls_
 
 <br />
 
+_Moving along line_ 
+`t{` - Move to next `{` and use `;` to see sebsequent match (and  `,` for previous match)  
+
+<br />
+
 _Moving along file_  
 `gg` - Go to top of file  
 `G` - go to bottom of file  
@@ -440,6 +445,7 @@ _Folding_
 `: norrm A;` - Append a ';' to the end of each highlited line  
 `:norm I/* A */` - Insert '/*' at the start of each selected line and append '*/' at the end of each selected line  
 `:g/error/norm I#` - Insert a '#' at the start of each line that matches the pattern /errorr/  
+`ct{` - Change everything from cursor position to next `{` occurence  
 
 <br />
 
