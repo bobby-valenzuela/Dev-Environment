@@ -96,6 +96,16 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `ter[minal]` - Open terminal (may need to hit `i` to beging typing)  
 `exit` / `Ctrl+d` then `Ctrl-w + q` - to close terminal window  
 `:verbose map Q` - see what is mapped to the `Q` key  
+ `Ctrl-\ Ctrl-n` - Exit "terminal mode".  
+
+<br />  
+
+_On "Ctrl-\ Ctrl-n"_  
+This key combination switches the terminal buffer from terminal-insert mode (where you interact with the shell) to Vim’s normal mode. In normal mode, you can use Vim commands like :hide, navigate windows, or edit other buffers. In terminal-insert mode, Vim passes most keystrokes directly to the shell, so you can’t use Vim commands like :hide until you enter normal mode.  
+`Ctrl-\` is a special prefix in Vim’s terminal mode to signal a command to Vim itself rather than the shell.  
+`Ctrl-n` (or Ctrl-N) tells Vim to switch to normal mode.  
+You’ll notice the cursor behavior changes, and Vim’s command line becomes available (e.g., you can type : to enter commands).  
+Visual cue: In normal mode, the terminal buffer becomes “read-only” from Vim’s perspective, and you can’t type into the shell until you return to insert mode (e.g., by pressing i).  
 
 <br />
 
