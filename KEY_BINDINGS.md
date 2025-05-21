@@ -232,6 +232,7 @@ _Managing Windows_
 `:tab ba` - edit all buffers as tabs  
 `gf` - Find and open the file by filename under cursor  
 `C-^` (which is Ctrl+6) - swap back and forth between current (#) and alternate (a%) buffers.  
+`:b6` - Go to buffer 6  
  
  <br /> 
  
