@@ -1,11 +1,11 @@
 #!/bin/sh
 
-# Check if user is root (UID 0) or using sudo
-if [ "$(id -u)" -ne 0 ]; then
-    echo "This script must be run as root or with sudo."
-    exit 1
-fi
+SUDO=""
 
+# if not root, run as sudo
+if [ "$(id -u)" -ne 0 ]; then
+    SUDO="sudo"
+fi
 
 # Define the container name or ID
 IMAGE_NAME="ubuntu-jammy"
@@ -37,29 +37,29 @@ WORKDIR /app
 # Copy application files
 # COPY ./home/control-io/www-core/ .
 
+# Set timezone:
+RUN ln -snf /usr/share/zoneinfo/$CONTAINER_TIMEZONE /etc/localtime && echo $CONTAINER_TIMEZONE > /etc/timezone
+
 # Update apt cache and install neovim
 # RUN apt-get update && apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all xclip build-essential p7zip-full jq locatesshpass xsel cmake nodejs npm libstdc++6 -y
 
-# Here, we use a specific version; replace with desired version or use the dynamic method below
-ARG LAZYGIT_VERSION=0.40.2
+# Install essentials programs
+RUN apt-get update && apt install wget curl git sudo -y
 
-# Download and install lazygit
-RUN curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
-    && tar xf lazygit.tar.gz lazygit \
-    && mv lazygit /usr/local/bin/ \
-    && rm lazygit.tar.gz
+# Run install script
+# CMD sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"
+# CMD sh -c "wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O - | sh"
 
-RUN sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"
 
 EOF
 
     # Build the image from Dockerfile
-    BUILD_OUTPUT=$(docker build -t "$FULL_IMAGE" .)
+    BUILD_OUTPUT=$(sudo docker build -t "$FULL_IMAGE" .)
 
     # Check if build succeeded
     if [ $? -eq 0 ]; then
         # Get the new image ID
-        IMAGE_ID=$(docker images -q "$FULL_IMAGE")
+        IMAGE_ID=$($SUDO docker images -q "$FULL_IMAGE")
         echo "Image '$FULL_IMAGE' built successfully with ID: $IMAGE_ID"
     else
         echo "Failed to build image '$FULL_IMAGE'."
@@ -71,7 +71,7 @@ fi
 
 
 # Check if the container is running
-if [ -n "$(sudo docker ps -q -f name=$CONTAINER_NAME)" ]; then
+if [ -n "$($SUDO docker ps -q -f name=$CONTAINER_NAME)" ]; then
 
     echo "Container '$CONTAINER_NAME' is running. Connecting to it..."
 
@@ -84,7 +84,7 @@ else
 
 
     # Check if the container exists (stopped)
-    if [ -n "$(sudo docker ps -aq -f name=$CONTAINER_NAME)" ]; then
+    if [ -n "$($SUDO docker ps -aq -f name=$CONTAINER_NAME)" ]; then
 
         echo "Found Container. Starting container '$CONTAINER_NAME'..."
         sudo docker start $CONTAINER_NAME
@@ -100,7 +100,15 @@ else
 
         # Replace the following line with your container creation command
         # docker run -d --name $CONTAINER_NAME ubuntu /bin/bash
-        sudo docker run -it -v "${LOCAL_BIND_MOUNT_DIR}:${CONTAINER_BIND_MOUNT_DIR}" --name "${CONTAINER_NAME}" "${IMAGE_ID}"
+
+        if [ -z "$LOCAL_BIND_MOUNT_DIR" ]; then
+            $SUDO docker run -it --name "$CONTAINER_NAME" "$IMAGE_ID"
+
+            # $SUDO docker run -it --name "$CONTAINER_NAME" "$IMAGE_ID" sh -c 'wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O - | sh'
+        else
+            $SUDO docker run -it -v "$LOCAL_BIND_MOUNT_DIR:$CONTAINER_BIND_MOUNT_DIR" --name "$CONTAINER_NAME" "$IMAGE_ID"
+        fi
+
 
     fi
 

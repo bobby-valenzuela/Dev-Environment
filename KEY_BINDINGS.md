@@ -96,6 +96,16 @@ There are loads of good vim cheat sheets out there and this isn't a substitution
 `ter[minal]` - Open terminal (may need to hit `i` to beging typing)  
 `exit` / `Ctrl+d` then `Ctrl-w + q` - to close terminal window  
 `:verbose map Q` - see what is mapped to the `Q` key  
+ `Ctrl-\ Ctrl-n` - Exit "terminal mode".  
+
+<br />  
+
+_On "Ctrl-\ Ctrl-n"_  
+This key combination switches the terminal buffer from terminal-insert mode (where you interact with the shell) to Vim’s normal mode. In normal mode, you can use Vim commands like :hide, navigate windows, or edit other buffers. In terminal-insert mode, Vim passes most keystrokes directly to the shell, so you can’t use Vim commands like :hide until you enter normal mode.  
+`Ctrl-\` is a special prefix in Vim’s terminal mode to signal a command to Vim itself rather than the shell.  
+`Ctrl-n` (or Ctrl-N) tells Vim to switch to normal mode.  
+You’ll notice the cursor behavior changes, and Vim’s command line becomes available (e.g., you can type : to enter commands).  
+Visual cue: In normal mode, the terminal buffer becomes “read-only” from Vim’s perspective, and you can’t type into the shell until you return to insert mode (e.g., by pressing i).  
 
 <br />
 
@@ -177,6 +187,7 @@ set wrap! (toggle on of off)
 `:tabnew` or `:tabnew {file}` - open a file in a new tab  
 `Ctrl+w T` - move the current split window into its own tab  
 `gt` - move to the next tab  
+`gT` - move to the previous tab  
 `2gt` - switch to tab #2  
 `:tabc` - close the current tab and all its windows  
 `:tabo` - Tabonly - close all tabs except for the current one  
@@ -220,6 +231,8 @@ _Managing Windows_
 `:vert ba` - edit all buffers as vertical windows  
 `:tab ba` - edit all buffers as tabs  
 `gf` - Find and open the file by filename under cursor  
+`C-^` (which is Ctrl+6) - swap back and forth between current (#) and alternate (a%) buffers.  
+`:b6` - Go to buffer 6  
  
  <br /> 
  
@@ -258,6 +271,11 @@ _Lazyvim buffer controls_
 
 <br />
 
+_Moving along line_ 
+`t{` - Move to next `{` and use `;` to see sebsequent match (and  `,` for previous match)  
+
+<br />
+
 _Moving along file_  
 `gg` - Go to top of file  
 `G` - go to bottom of file  
@@ -287,6 +305,7 @@ Note: Lowercase markers are local to a file and uppercase markers are global acr
 `/` - Search (grep): type text and enter then `n/N` to iterate through matches  
 `Crtl-q` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)   
 `cn`/`cp` - Next/Previous item in quickfix list. Mapped to `F11`/`F12`.  
+`Ctrl-r + "` - Yanks the unamed register into the search box. This will paste in anything yanked.  
 
 <br />
 
@@ -300,6 +319,22 @@ _RegEx_
 `vim /function/ **/*.pl` - Grep all matches of `function` in every '.pl. file in current dir (recursively). Then `:cope` to create a QuickFix list  
 `vim /\Vfunction/ /home/ubuntu/**/*.pl` - Grep all matches of `function` in every '.pl. file in current dir (recursively). Then `:cope` to create a QuickFix list  
 `g&` - Apply previous replace action to the entire file  
+`:grep '^sub run_powershell' -g \*.pl`  - Regex search using grep on perl files  
+`:grep '^sub run_powershell' -g '{*.pl,*.pm}'`  - Regex search using grep on perl files (ripgrep)  
+`:grep -E '^sub run_powershell' *.pl`  - Regex search using grep on perl files  (posix grep)  
+
+<br />
+
+_Quickfix list commands_  
+`:cope` - open quickfix list  
+`:cclose` - close quickfix list  
+`:cnext` / `:cn` - go to next quickfix list item  
+`:cprevious` / `:cp` - go to previous quickfix list item  
+`:s/foo/bar/g` - replace text on a highlighted quickfix line  
+`:cdo s/foo/bar/g` - replace text on all quickfix list items (globally - every occurence in each line)  
+`:cdo s/foo/bar/gc` - replace text on all quickfix list items (globally - every occurence in each line)  - with confirmation
+
+__
 
 <br />
 
@@ -421,6 +456,7 @@ _Folding_
 `: norrm A;` - Append a ';' to the end of each highlited line  
 `:norm I/* A */` - Insert '/*' at the start of each selected line and append '*/' at the end of each selected line  
 `:g/error/norm I#` - Insert a '#' at the start of each line that matches the pattern /errorr/  
+`ct{` - Change everything from cursor position to next `{` occurence  
 
 <br />
 
