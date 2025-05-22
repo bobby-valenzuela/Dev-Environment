@@ -30,18 +30,18 @@ else
     # WINDOW 2 (nvim)
     WINDOW="nvim"
     tmux new-window -t ${SESH} -n ${WINDOW}
-    # tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nvim ." ENTER
-    tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh alpha" ENTER
-    tmux send-keys -t ${SESH}:${WINDOW}.1 "sudo jammy" ENTER
-    tmux send-keys -t ${SESH}:${WINDOW}.1 "nvim ." ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nvim ." ENTER
+    #tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh alpha" ENTER
+    #tmux send-keys -t ${SESH}:${WINDOW}.1 "sudo jammy" ENTER
+    #tmux send-keys -t ${SESH}:${WINDOW}.1 "nvim ." ENTER
 
     # WINDOW 3 (alpha)
     WINDOW="alpha"
     tmux new-window -t ${SESH} -n ${WINDOW}
     tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh alpha" ENTER
-    #tmux split-window -h -p 50
-    #tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR}www" ENTER
-    #tmux send-keys -t ${SESH}:${WINDOW}.2 "cd ${PBX_DIR}" ENTER
+    tmux split-window -h -p 50
+    tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR}www" ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.2 "cd ${PBX_DIR}" ENTER
 
     
     # WINDOW 4 (sql)
@@ -61,8 +61,8 @@ else
     tmux send-keys -t ${SESH}:${WINDOW}.1 "posting" ENTER
 
 
-    # WINDOW 6 (servers)
-    WINDOW="servers"
+    # WINDOW 6 (ssh)
+    WINDOW="ssh"
     tmux new-window -t ${SESH} -n ${WINDOW}
     # tmux split-window -h
     # tmux split-window -h

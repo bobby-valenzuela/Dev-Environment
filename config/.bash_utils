@@ -90,4 +90,11 @@ function cw(){
     cp -r -v $1 /mnt/c/Users/BobbyValenzuela/Downloads/WSL/
 }
 
+function tt(){
+   cd ~/my_repos/Tomahawk/
+   ~/my_repos/Tomahawk/tomahawk 
+}
 
+function clear_nvim_swaps(){
+    find ~/.local/state/nvim/swap -iname "*.swp" -exec rm -v '{}' \;
+}

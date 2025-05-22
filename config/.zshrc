@@ -183,6 +183,11 @@ source $ZSH/oh-my-zsh.sh
 [[ -s ~/.oh-my-zsh/oh-my-zsh.sh ]] && source ~/.oh-my-zsh/oh-my-zsh.sh
 
 
+# Custom neovim setup
+alias nv='NVIM_APPNAME=nvim-minimal nvim'
+
+
+
 
 
 # =========================================

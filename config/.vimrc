@@ -1,51 +1,35 @@
 set nocompatible    " Set compatibility to Vim-Only (not vi)
-set smarttab
-set mouse=a
 set number
+set relativenumber  " Set relative numbering with absolute line number for cursor line
 set autoindent
 set shiftwidth=4    " Set shift width to 4 spaces.
 set tabstop=4       " Set tab width to 4 columns.
-set relativenumber  " Set relative numbering with absolute line number for cursor line
 set expandtab       " Use space characters instead of tabs.
+set smarttab
 set showmode        " Show the mode you are on the last line.
 set showmatch       " Show matching words during a search.
 set hlsearch        " Use highlighting when doing a search.
 set history=1000    " Set the commands to save in history default number is 20.
-syntax on           " Turn syntax highlighting on.
 set laststatus=2    " Status Bar
+set mouse=a
 set wrap            " Text-Wrap
-" colorscheme desert
-
-" encoding
+set ignorecase
 set encoding=utf-8  
-" set softtabstop
-
 set splitright
 set splitbelow
+" set softtabstop
+syntax on           " Turn syntax highlighting on.
 
-" Configure file exlplorer
-" set netrw_browse_split=3
-" let g:netrw_winsize = 20
-" let g:netrw_banner = 0
-
-
-
-"
-"
-"
-"
-
-" copy (write) highlighted text to .vimbuffer
-
-" paste from buffer
-
-
+" Next 3 lines set proper colors
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Use ':Diff' to see a diff between your current unsaved version and what's on the hard disk.
-command Diff execute 'w !git diff --no-index % -'
+" command Diff execute 'w !git diff --no-index % -'
 
-
-
+" Set grep program details
+set grepprg=grep\ -nH\ -r\ -i\ --include='*.pl'\ --include='*.pm'\ --include='*.py'\ --include='*.js'\ --include='*.c'\ --include='*.cpp'\ --include='*.sh'\ --include='*.ps1'\ --include='*.css'\ --include='*.lua'
 
 " ============ vim-plug plugins =================
 
@@ -83,23 +67,30 @@ call plug#begin()
 " Catppuccin syntax highlighting [https://github.com/catppuccin/vim/tree/main]
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
-" Next 3 lines set proper colors
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-
+" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Get themes:https://github.com/vim-airline/vim-airline-themes/tree/master/autoload/airline/themesI
-" let g:airline_theme = 'catppuccin_mocha'
-let g:airline_theme='luna'
 
+" Configure file exlplorer
+" set netrw_browse_split=3
+" let g:netrw_winsize = 20
+" let g:netrw_banner = 0
+
+" File Nav Explorer
 Plug 'scrooloose/nerdtree'
 nnoremap <C-t> :NERDTreeToggle<CR>
 
+" Colorschemes
+" Plug 'vimcolorschemes/vimcolorschemes'
+Plug 'thedenisnikulin/vim-cyberpunk'
+" Plug 'artanikin/vim-synthwave84'
+" Plug 'ronwoch/hotline-vim'
+Plug 'metalelf0/base16-black-metal-scheme'
 
-Plug 'vimcolorschemes/vimcolorschemes'
+
+
+
 
 " vim-visual-multi (equiv. to Ctrl+d in vscode)
 " Allows one to use Ctrl+n to highlight next identical occurences (once text is highlighted)
@@ -108,7 +99,9 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " [+] Bufferline
 Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
 " Plug 'ryanoasis/vim-devicons' Icons without colours
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+" Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+Plug 'bling/vim-bufferline'
+
 
 
 
@@ -116,7 +109,10 @@ call plug#end()
 " END PLUGINS
 
 " =================================================================================="
-" ============================================================================="
+" =================================================================================="
+
+
+
 
 
 " copy (write) highlighted text to .vimbuffer
@@ -140,8 +136,23 @@ call plug#end()
 
 " # Colorscheme - catppuccin #
 " Uncomment following 1 line for this colorscheme
-colorscheme catppuccin_mocha
+" colorscheme catppuccin_mocha
+"colorscheme synthwave84
+" colorscheme ir_dark
+
+
+" # Colorscheme - cyberpunk #
+set cursorline
+set background=dark
+colorscheme cyberpunk
+let g:cyberpunk_cursorline="black"
+let g:airline_theme='monochrome'
 
 
 
+
+
+" colorscheme desert
+"let g:airline_theme='luna'
+" let g:airline_theme = 'catppuccin_mocha'
 

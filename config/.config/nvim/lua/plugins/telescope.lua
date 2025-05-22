@@ -166,6 +166,24 @@ return {
           find_command = find_command,
           hidden = true,
         },
+        live_grep = {
+          mappings = {
+            i = {
+              ["<C-p>"] = function(prompt_bufnr)
+                local state = require("telescope.state")
+                local picker = state.get_status(prompt_bufnr).picker
+                -- Toggle searching only Python files
+                if picker.additional_args and vim.tbl_contains(picker.additional_args, "--type=perl") then
+                  picker.additional_args = vim.tbl_filter(function(arg) return arg ~= "--type=perl" end, picker.additional_args)
+                else
+                  picker.additional_args = picker.additional_args or {}
+                  table.insert(picker.additional_args, "--type=perl")
+                end
+                require("telescope.actions")._refresh_picker(prompt_bufnr)
+              end,
+            },
+          },
+        },
       },
     }
   end,
