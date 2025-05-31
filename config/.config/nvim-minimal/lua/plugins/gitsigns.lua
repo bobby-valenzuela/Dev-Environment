@@ -1,6 +1,13 @@
 return {
-  "lewis6991/gitsigns.nvim",
-  event = "LazyFile",
+    "lewis6991/gitsigns.nvim",
+    -- event = "LazyFile",
+    -- Increase max file length to handle larger files
+    max_file_length = 100000, -- Default is 40000; adjust as needed (e.g., 100,000 lines)
+    -- Optimize background loading and updates
+    watch_gitdir = {
+      follow_files = true, -- Follow file renames/moves
+    },
+  update_debounce = 100, -- Delay in ms for async updates; tweak for performance (e.g., 200 for slower systems)
   opts = {
     signs = {
       add = { text = "▎" },

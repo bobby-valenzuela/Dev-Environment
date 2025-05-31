@@ -1,6 +1,6 @@
 return {
 
-
+    {'thedenisnikulin/vim-cyberpunk'},
     {
         'maxmx03/fluoromachine.nvim',
         lazy = false,
@@ -44,7 +44,7 @@ return {
             end,
          }
 
-         vim.cmd.colorscheme 'fluoromachine'
+         -- vim.cmd.colorscheme 'fluoromachine'
         end
     }
 

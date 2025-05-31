@@ -30,8 +30,14 @@ else
     # WINDOW 2 (nvim)
     WINDOW="nvim"
     tmux new-window -t ${SESH} -n ${WINDOW}
-    tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nvim ." ENTER
-    #tmux send-keys -t ${SESH}:${WINDOW}.1 "ssh alpha" ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.1 "cd ${PBX_DIR} && nv ." ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.1 ":set nonumber" ENTER
+    tmux send-keys -t ${SESH}:${WINDOW}.1 ":set norelativenumber" ENTER
+    #tmux send-keys -t ${SESH}:${WINDOW}.1 ":tabnew ${PBX_DIR}/www/" ENTER
+    #tmux send-keys -t ${SESH}:${WINDOW}.1 "1gt" ENTER
+    #tmux send-keys -t ${SESH}:${WINDOW}.1 ":Neotree toggle" ENTER
+    # tmux send-keys -t ${SESH}:${WINDOW}.1 ":ter" ENTER
+    # tmux send-keys -t ${SESH}:${WINDOW}.1 ":gt" ENTER
     #tmux send-keys -t ${SESH}:${WINDOW}.1 "sudo jammy" ENTER
     #tmux send-keys -t ${SESH}:${WINDOW}.1 "nvim ." ENTER
 
