@@ -375,6 +375,8 @@ _(Can also use dgn to delete multiple references)_
 `C` - 	Cut to end of line  
 `:m 5` - Move line under cursor (or selected lines) to line 5  
 `:2,7m 5` - Move lines 2-7  to line 5  
+`vib` - Select inside next `()` occurrence (works with `y`/`d`)  
+`viB` - Select inside current `{}` (works with `y`/`d`)  
 
 
 <br />
