@@ -266,6 +266,10 @@ _Lazyvim buffer controls_
 
 <br />
 
+_Commandline mode_
+`<C-r>"` - Paste from unamed register (anything yanked)  
+`<C-f>` - View command history   
+
 ---
 ### Moving  
 
