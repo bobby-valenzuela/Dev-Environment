@@ -325,6 +325,7 @@ _RegEx_
 `g&` - Apply previous replace action to the entire file  
 `:grep '^sub run_powershell' -g \*.pl`  - Regex search using grep on perl files  
 `:grep '^sub run_powershell' -g '{*.pl,*.pm}'`  - Regex search using grep on perl files (ripgrep)  
+`:grep '^sub run_powershell' -g '{*.pl,*.pm}'`  - Regex search using grep on perl files (ripgrep)  
 `:grep -E '^sub run_powershell' *.pl`  - Regex search using grep on perl files  (posix grep) Use `:grep text %` to search current buffer  
 
 <br />
