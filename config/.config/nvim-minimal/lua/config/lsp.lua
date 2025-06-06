@@ -1,30 +1,31 @@
+--
 -- THIS FORMAT WORKS WITH NEOVIM 0.10
-local lspconfig = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-local servers = {
-  pyright = {},
-  ts_ls = {},
-  bashls = {},
-  clangd = {},
-  perlnavigator = {},
-  lua_ls = {
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" },
-        },
-      },
-    },
-  },
-  html = {},
-  cssls = {},
-}
-
-for name, opts in pairs(servers) do
-  opts.capabilities = capabilities
-  lspconfig[name].setup(opts)
-end
+-- local lspconfig = require("lspconfig")
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+--
+-- local servers = {
+--   pyright = {},
+--   ts_ls = {},
+--   bashls = {},
+--   clangd = {},
+--   perlnavigator = {},
+--   lua_ls = {
+--     settings = {
+--       Lua = {
+--         diagnostics = {
+--           globals = { "vim" },
+--         },
+--       },
+--     },
+--   },
+--   html = {},
+--   cssls = {},
+-- }
+--
+-- for name, opts in pairs(servers) do
+--   opts.capabilities = capabilities
+--   lspconfig[name].setup(opts)
+-- end
 
 
 -- REQUIRES NEOVIM 0.11+

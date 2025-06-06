@@ -1,14 +1,91 @@
+-- ------------------ SUMMARY -------------------
+-- `<C-_>`: Open terminal in split windo
+-- `<esc>`: Clear search highlights
+-- `<C-b>`: Enter visual-block mode
+-- `<leader>rm`: Remove all markers
+-- `<leader><down><down>`: Move down 20 lines
+-- `<leader><up><up>`: Move up 20 lines
+-- `<F12>`: Next item in quickfix list
+-- `<F11>`: Previous item in quickfix list
+-- `<C-n>`: Toggle Neo-tree file explorer
+-- `>`: Indent and keep visual selection
+-- `<`: Unindent and keep visual selection
+-- `<leader>ff`: Telescope find files
+-- `<leader>fg`: Telescope live grep
+-- `<leader>fb`: Telescope buffers
+-- `<leader>fh`: Telescope help tags
+-- `<leader>gu`: Undo last Git commit
+-- `<leader>ga`: Stash current Git changes
+-- `<leader>gg`: Open LazyGit for current file
+-- `<leader>gt`: Toggle Git signs
+-- `<leader>gs`: Open Git status
+-- `<leader>gc`: Git commit
+-- `<leader>gb`: Git blame
+-- `<leader>gd`: Git diff
+-- `<leader>go`: Open file in remote (e.g., GitHub)
+-- `<leader>gl`: Git commit log
+-- `<leader>ie`: Enable Snacks indent
+-- `<leader>id`: Disable Snacks indent
+-- `gd`: Go to definition
+-- `gD`: Go to declaration
+-- `gr`: Find references
+-- `K`: Show hover documentation
+-- `<C-k>`: Show function signature help
+-- `<leader>rn`: Rename symbol
+-- `<leader>ca`: Apply code actions
+-- `<leader>f`: Format code
+-- `]d`: Next diagnostic
+-- `[d`: Previous diagnostic
+-- `<leader>e`: Open diagnostic float
+-- `<leader>ws`: Search workspace symbols
+-- `gi`: Go to implementation
+-- `<leader>q`: List diagnostics in quickfix
+-- `<leader>lr`: Restart LSP
+-- `<leader>li`: Show LSP info
+-- `<leader>dd`: Disable diagnostics for buffer
+-- `<leader>de`: Enable diagnostics for buffer
+-- `<leader>dl`: Disable diagnostics for current line
+-- `<leader>dL`: Enable diagnostics for current line
 -- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
--- -- ~/.config/nvim/lua/keymaps.lua or wherever your keymaps are configured
 
+-- Add :args results to Quickfix list
+-- vim.keymap.set('n', '<C-q>', ':call setqflist([], "r") | argdo if expand("%:t") !~# "\\.swp$" | caddexpr expand("%:p") . ":1:1" | endif | copen<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-q>', function()
+    vim.fn.setqflist({}, 'r') -- Clear quickfix list
+    local args = vim.fn.argv() -- Get argument list
+    local qflist = {}
+    for _, file in ipairs(args) do
+        if not file:match('%.swp$') then -- Skip .swp files
+            table.insert(qflist, { filename = vim.fn.expand(file, ':p'), lnum = 1, col = 1 })
+        end
+    end
+    vim.fn.setqflist(qflist, 'a') -- Add entries to quickfix list
+    vim.cmd('copen') -- Open quickfix window
+end, { noremap = true, silent = true })
+
+
+-- :args - but assumes recursive
+vim.keymap.set('n', '<leader>ra', function()
+    -- Prompt for a file pattern
+    local pattern = vim.fn.input('File pattern: ')
+    if pattern ~= '' then
+        -- Prepend **/ and execute :args
+        vim.cmd('args **/' .. vim.fn.escape(pattern, ' '))
+    end
+end, { noremap = true, silent = true })
+
+
+
+
+-- Toggle line numbering
+vim.keymap.set('n', '<Leader>ll', 'set nonumber norelativenumber', { noremap = true, silent = true })
 
 -- Integrated Terminal 
-vim.keymap.set('n', '<C-_>', ':split | resize 15 | terminal<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-_>', ':split | resize 15 | set nonumber norelativenumber | terminal<CR> | i', { noremap = true, silent = true })
 
--- Escape key impled :nohl
+-- Escape key impled :nohl (as well as leader+h to unhighlight)
 vim.keymap.set('n', '<esc>', ':nohlsearch<CR><esc>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>h', ':nohlsearch<CR><esc>', { noremap = true, silent = true })
 
 -- Map Ctrl+b to enter visual-block mode
 vim.keymap.set('n', '<C-b>', '<C-v>', { noremap = true, silent = true })
@@ -25,8 +102,13 @@ vim.keymap.set('n', '<F12>', ':cn<CR>', { desc= 'Next item in quickfix list', no
 vim.keymap.set('n', '<F11>', ':cp<CR>', { desc= 'Previous item in quickfix list', noremap = true, silent = true })
 
 -- Neotree
-vim.keymap.set('n', '<C-n>', ':Neotree toggle<CR>', { desc = 'Toggle Neo-tree file explorer', noremap = true, silent = true })
+vim.keymap.set('n', '<leader><leader>', ':Neotree toggle<CR>', { desc = 'Toggle Neo-tree file explorer', noremap = true, silent = true })
 
+-- Remap > to indent and keep visual selection
+vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
+
+-- Remap < to unindent and keep visual selection
+vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
 
 -- _______________________ Telescope __________________________
 local builtin = require('telescope.builtin')
@@ -81,6 +163,10 @@ vim.keymap.set("n", "<leader>gl", ":Gclog<CR>", { desc = "Git commit log" })
 --vim.keymap.set("n", "<leader>gp", ":Git pull<CR>", { desc = "Git pull" })
 
 
+-- _______________________ Indent __________________________
+-- local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ie', ':lua Snacks.indent.enable()<CR>', { desc = 'Enable Snacks indent' })
+vim.keymap.set('n', '<leader>id', ':lua Snacks.indent.disable()<CR>', { desc = 'Disable Snacks indent' })
 
 
 -- _______________________ LSP __________________________
@@ -128,7 +214,7 @@ vim.keymap.set('n', '<leader>ws', vim.lsp.buf.workspace_symbol, opts)
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
 
 -- Type definition: Jump to the type definition of a symbol (e.g., class or type alias)
-vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
+-- vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
 
 -- List diagnostics: Show all diagnostics for the project in the quickfix list
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
@@ -150,3 +236,7 @@ vim.keymap.set('n', '<leader>dl', function() vim.diagnostic.disable(0, vim.api.n
 
 -- Enable diagnostics for current line: Re-enable diagnostics for the line under the cursor
 vim.keymap.set('n', '<leader>dL', function() vim.diagnostic.enable(0, vim.api.nvim_win_get_cursor(0)[1] - 1) end, opts)
+
+
+
+

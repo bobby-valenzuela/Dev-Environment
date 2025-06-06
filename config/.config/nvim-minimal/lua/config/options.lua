@@ -28,6 +28,8 @@ vim.opt.splitright     = true                                  -- Vertical split
 vim.opt.termguicolors = true
 vim.opt.tabstop        = 4                                     -- Number of spaces per tab
 vim.opt.wrap           = true                                  -- Wrap long lines
+-- Case
+vim.opt.wildignorecase = true                                   -- Ignore case when globbing in files/cmdline
 
 -- vim.opt.cmdheight = 2                           -- more space in the neovim command line for displaying messages
 -- vim.opt.completeopt = { "menuone" "noselect" }  -- mostly just for cmp
@@ -50,8 +52,14 @@ vim.opt.termguicolors = true
 vim.cmd([[let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"]])
 vim.cmd([[let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"]])
 
--- Grep program setup
-vim.opt.grepprg = "grep -nH -r -i --include='*.pl' --include='*.pm' --include='*.py' --include='*.js' --include='*.c' --include='*.cpp' --include='*.sh' --include='*.ps1' --include='*.css' --include='*.lua'"
+-- Grep program setup (for vim - neovim uses ripgrep => rg --vimgrep -uu )
+-- [GREP] vim.opt.grepprg = "grep -nH -r -i --include='*.pl' --include='*.pm' --include='*.py' --include='*.js' --include='*.c' --include='*.cpp' --include='*.sh' --include='*.ps1' --include='*.css' --include='*.lua'"
+-- [RIPGREP] vim.opt.grepprg rg --vimgrep -uu
+vim.opt.grepprg = "rg --vimgrep -uu -i --glob '!*.min.js'"
+
+-- Include/exclude file types 
+-- [RIPGREP]  -g '{*.pl,*.pm}'
+-- [GREP] *.pl or --include='*.pl' or --exclude='*.js'
 
 -- Optional: Custom command (can go in a Lua command block or separate `commands.lua` file)
 vim.api.nvim_create_user_command('Diff', "w !git diff --no-index % -", {})

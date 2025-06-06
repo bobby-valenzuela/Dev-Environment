@@ -19,6 +19,7 @@ return {
       telescope.setup {
         defaults = {
           -- Global settings for all pickers
+          sorting_strategy = "ascending", -- This moves the selected match to the top
           layout_strategy = 'horizontal',
           layout_config = {
             horizontal = { prompt_position = 'top', preview_width = 0.65 },

@@ -43,8 +43,8 @@ return {
             hijack_netrw_behavior = "open_default",   -- Replace netrw
             use_libuv_file_watcher = true,            -- Fast file system watching
             filtered_items = {
-            visible = false,        -- Set to true to show hidden files by default
-            hide_dotfiles = true,
+            visible = true,        -- Set to true to show hidden files by default
+            hide_dotfiles = false,
             hide_gitignored = true,
             },
         },

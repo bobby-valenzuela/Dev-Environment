@@ -105,6 +105,8 @@ DISABLE_AUTO_TITLE="true"
 # Enforce color scheme
 alias tmux="tmux -2"
 export TERM=screen-256color
+# Works better with vim
+export TERM=xterm-256color
 
 # NODE VERSION MANAGER
 export NVM_DIR="$HOME/.nvm"
