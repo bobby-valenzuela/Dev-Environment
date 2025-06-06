@@ -266,8 +266,8 @@ _Lazyvim buffer controls_
 
 <br />
 
-_Commandline mode_
-`<C-r>"` - Paste from unamed register (anything yanked)  
+_Commandline mode_  
+`<C-r>"` - Paste from unamed register (anything yanked). Also works in insert mode  
 `<C-f>` - View command history   
 
 ---
