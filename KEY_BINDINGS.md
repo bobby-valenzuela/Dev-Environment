@@ -118,6 +118,12 @@ _File Explorer (netrw)_
 `
 <br />
 
+_Finding Files_  
+`:args **/*filename*.pl` - Search for file by partial name and file type recursively  
+`<C-q>`  Adds :args results to Quickfix list (keybinding)  
+
+<br />
+
 _Working with vim cmd/shell_  
 `C-r3`  - Paste from 3 register (in insert mode or into vim command line). Useful for pasting into a search regex  
 `read !<shell_command>` - Paste shell output into buffer.  
@@ -266,6 +272,10 @@ _Lazyvim buffer controls_
 
 <br />
 
+_Commandline mode_  
+`<C-r>"` - Paste from unamed register (anything yanked). Also works in insert mode  
+`<C-f>` - View command history   
+
 ---
 ### Moving  
 
@@ -321,7 +331,8 @@ _RegEx_
 `g&` - Apply previous replace action to the entire file  
 `:grep '^sub run_powershell' -g \*.pl`  - Regex search using grep on perl files  
 `:grep '^sub run_powershell' -g '{*.pl,*.pm}'`  - Regex search using grep on perl files (ripgrep)  
-`:grep -E '^sub run_powershell' *.pl`  - Regex search using grep on perl files  (posix grep)  
+`:grep '^sub run_powershell' -g '{*.pl,*.pm}'`  - Regex search using grep on perl files (ripgrep)  
+`:grep -E '^sub run_powershell' *.pl`  - Regex search using grep on perl files  (posix grep) Use `:grep text %` to search current buffer  
 
 <br />
 
@@ -375,6 +386,8 @@ _(Can also use dgn to delete multiple references)_
 `C` - 	Cut to end of line  
 `:m 5` - Move line under cursor (or selected lines) to line 5  
 `:2,7m 5` - Move lines 2-7  to line 5  
+`vib` - Select inside next `()` occurrence (works with `y`/`d`)  
+`viB` - Select inside current `{}` (works with `y`/`d`)  
 
 
 <br />
