@@ -118,6 +118,12 @@ _File Explorer (netrw)_
 `
 <br />
 
+_Finding Files_  
+`:args **/*filename*.pl` - Search for file by partial name and file type recursively  
+`<C-q>`  Adds :args results to Quickfix list (keybinding)  
+
+<br />
+
 _Working with vim cmd/shell_  
 `C-r3`  - Paste from 3 register (in insert mode or into vim command line). Useful for pasting into a search regex  
 `read !<shell_command>` - Paste shell output into buffer.  
