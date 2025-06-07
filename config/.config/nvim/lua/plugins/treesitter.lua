@@ -1,59 +1,27 @@
 return {
-
-  -- other plugins here
-
-
-
-  -- Add Treesitter plugin
-
   {
-
     "nvim-treesitter/nvim-treesitter",
-
     build = ":TSUpdate",
-
     config = function()
-
       require("nvim-treesitter.configs").setup({
-
-        ensure_installed = { "lua", "python", "javascript", "html", "css" , "c", "bash", "asm", "dockerfile", "json", "nginx","objdump","sql", "svelte", "ssh_config", "tmux", "perl", "markdown", "markdown_inline"}, -- Languages you need
-
+        ensure_installed = { "lua", "python", "javascript", "c", "cpp", "java", "html", "css", "perl" },
+        sync_install = false,
+        auto_install = true,
         highlight = {
-
-          enable = true, -- enable treesitter for syntax highlighting
-
+          enable = true,
+          additional_vim_regex_highlighting = false,
         },
-
+        indent = { enable = true },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+          },
+        },
       })
-
     end,
-
   },
-
-
-
-  -- Optionally, add Treesitter playground (for debugging and exploring)
-
---  {
---
---    "nvim-treesitter/playground",
---
---    config = function()
---
---      require("nvim-treesitter.configs").setup({
---
---        playground = {
---
---          enable = true,
---
---        },
---
---      })
---
---    end,
---
---  },
---
 }
-
-

@@ -1,0 +1,11 @@
+[mgr]
+ratio = [1, 2, 5]
+sort_by = "alphabetical"
+sort_sensitive = false
+sort_dir_first = true
+linemode = "size"
+show_hidden = true
+wrap = "yes
+
+[opener]
+

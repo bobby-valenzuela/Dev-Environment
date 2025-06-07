@@ -1,27 +1,20 @@
 return {
-    "lewis6991/gitsigns.nvim",
-    -- event = "LazyFile",
-    -- Increase max file length to handle larger files
-    max_file_length = 100000, -- Default is 40000; adjust as needed (e.g., 100,000 lines)
-    -- Optimize background loading and updates
-    watch_gitdir = {
-      follow_files = true, -- Follow file renames/moves
-    },
-  update_debounce = 100, -- Delay in ms for async updates; tweak for performance (e.g., 200 for slower systems)
+  "lewis6991/gitsigns.nvim",
+  event = "LazyFile",
   opts = {
     signs = {
       add = { text = "▎" },
       change = { text = "▎" },
-      delete = { text = "▎" },
-      topdelete = { text = "▎" },
+      delete = { text = "" },
+      topdelete = { text = "" },
       changedelete = { text = "▎" },
       untracked = { text = "▎" },
     },
     signs_staged = {
       add = { text = "▎" },
       change = { text = "▎" },
-      delete = { text = "▎" },
-      topdelete = { text = "▎" },
+      delete = { text = "" },
+      topdelete = { text = "" },
       changedelete = { text = "▎" },
     },
     on_attach = function(buffer)

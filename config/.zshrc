@@ -77,12 +77,6 @@ DISABLE_AUTO_TITLE="true"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -130,6 +124,27 @@ if [ -f '/home/bobby_vz/sandbox/google-cloud-sdk/completion.zsh.inc' ]; then . '
 if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
     alias nvim="/opt/nvim-linux64/bin/nvim"
 fi
+
+# Set ogvim -> vim
+if [[ vim ]]; then
+    alias ogvim="$(which vim)"
+fi
+
+# Set vim -> nvim
+if [[ nvim ]]; then
+    alias vim="nvim"
+fi
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='vim'
+fi
+
+# Lazyvim setup
+alias nv='NVIM_APPNAME=nvim-lazy nvim'
+
 
 
 # =========================================================
@@ -184,9 +199,6 @@ source $ZSH/oh-my-zsh.sh
 [[ -s ~/.bash_utils ]] && source ~/.bash_utils
 [[ -s ~/.oh-my-zsh/oh-my-zsh.sh ]] && source ~/.oh-my-zsh/oh-my-zsh.sh
 
-
-# Custom neovim setup
-alias nv='NVIM_APPNAME=nvim-minimal nvim'
 
 
 
