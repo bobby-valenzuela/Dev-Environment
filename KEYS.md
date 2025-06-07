@@ -599,6 +599,7 @@ https://www.lazyvim.org/keymaps
 
 
 ### LSP-related stuff  
+`C-Space>` - (in insert mode) see possible parameters.  
 `K` - get pop-up with code info [🔌]   
 `gd` - 'Go to Definition' -> Find where a function/sub is defined when highlighting one [🔌]   
 `gr` - 'Go to References' -> Find where a functions/sub is referenced when highlighting one [🔌]   
