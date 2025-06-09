@@ -24,6 +24,8 @@ let s:whitest = "#FFFFFF"
 let s:vibrant_teal = "#00FFC8"
 let s:neon_magenta = "#FF0055"
 let s:neon_lavender = "#8533ff"
+let s:dark_teal = "#07a180"
+let s:dark_magenta = "#960032"
 
 " For terminal support
 let s:cterm_vibrant_teal = "51"  " Approx teal in 256-color
@@ -50,8 +52,8 @@ endfunction
 
 
 " Diff
-call HighlightFor("DiffAdd",    s:blackest,           s:vibrant_teal,   "NONE")
-call HighlightFor("DiffDelete", s:blackest,           s:neon_magenta,   "NONE")
+call HighlightFor("DiffAdd",    s:blackest,           s:dark_teal,   "NONE")
+call HighlightFor("DiffDelete", s:blackest,           s:dark_magenta,   "NONE")
 call HighlightFor("DiffText",   s:whitest,         s:dark_gray,    "NONE")
 call HighlightFor("DiffChange", s:blackest,           s:whitest,    "NONE")
 
@@ -213,9 +215,3 @@ call HighlightFor("GitGutterChange",      "#FFA500",      s:blackest,    "NONE")
 call HighlightFor("GitGutterDelete",      s:neon_magenta,      s:blackest,    "NONE")
 " call HighlightFor("GitGutterChangeDeleteLine ", "#FFA500", s:blackest,    "NONE")
 "call HighlightFor("GitGutterChangeLineNr  ", "#FFA500", s:blackest,    "NONE")
-
-
-
-
-
-

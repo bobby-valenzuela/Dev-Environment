@@ -48,29 +48,23 @@
 -- `<leader>dL`: Enable diagnostics for current line
 -- Keymaps are automatically loaded on the VeryLazy event
 
--- Add :args results to Quickfix list
--- vim.keymap.set('n', '<C-q>', ':call setqflist([], "r") | argdo if expand("%:t") !~# "\\.swp$" | caddexpr expand("%:p") . ":1:1" | endif | copen<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-q>', function()
-    vim.fn.setqflist({}, 'r') -- Clear quickfix list
-    local args = vim.fn.argv() -- Get argument list
-    local qflist = {}
-    for _, file in ipairs(args) do
-        if not file:match('%.swp$') then -- Skip .swp files
-            table.insert(qflist, { filename = vim.fn.expand(file, ':p'), lnum = 1, col = 1 })
-        end
-    end
-    vim.fn.setqflist(qflist, 'a') -- Add entries to quickfix list
-    vim.cmd('copen') -- Open quickfix window
-end, { noremap = true, silent = true })
-
-
 -- :args - but assumes recursive
-vim.keymap.set('n', '<leader>ra', function()
+vim.keymap.set('n', '<leader>FF', function()
     -- Prompt for a file pattern
-    local pattern = vim.fn.input('File pattern: ')
+    local pattern = vim.fn.input('rargs: ')
     if pattern ~= '' then
         -- Prepend **/ and execute :args
         vim.cmd('args **/' .. vim.fn.escape(pattern, ' '))
+        vim.fn.setqflist({}, 'r') -- Clear quickfix list
+        local args = vim.fn.argv() -- Get argument list
+        local qflist = {}
+        for _, file in ipairs(args) do
+            if not file:match('%.swp$') then -- Skip .swp files
+                table.insert(qflist, { filename = vim.fn.expand(file, ':p'), lnum = 1, col = 1 })
+            end
+        end
+        vim.fn.setqflist(qflist, 'a') -- Add entries to quickfix list
+        vim.cmd('copen') -- Open quickfix window
     end
 end, { noremap = true, silent = true })
 

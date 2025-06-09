@@ -16,7 +16,7 @@ set mouse=a
 set wrap            " Text-Wrap
 set ignorecase
 set wildignorecase  " Ignore case when search using wildcards
-set encoding=utf-8  
+set encoding=utf-8
 set splitright
 set splitbelow
 set clipboard=unnamedplus " Yank to system clipboard
@@ -37,6 +37,42 @@ set grepprg=grep\ -nH\ -r\ -i\ --include='*.pl'\ --include='*.pm'\ --include='*.
 
 
 
+" ============ Key-bindings ================
+"
+" Set leader key
+let mapleader = " "
+
+" Integrated Terminal
+noremap <silent> <C-_> :terminal <CR>
+
+" Clear search highlights with Esc
+" noremap <silent> <Esc> :nohlsearch<CR><Esc>
+nnoremap <silent> <Leader>h :nohlsearch<CR>
+
+" Enter visual-block mode with Ctrl+b
+noremap <silent> <C-b> <C-v>
+
+" Yanking yanks to unamed register (default) as well as system clipboard
+nnoremap <leader>y ""y"+y
+vnoremap <leader>y ""y"+y</leader></leader>
+
+" Remove all markers with <Leader>rm
+" noremap <silent> <Leader>rm :delm a-zA-Z0-9<CR>
+
+" Move down/up 20 lines with <Leader>j/k
+noremap <silent> <leader>j 20<C-e>
+noremap <silent> <Leader>k 20<C-y>
+
+" Quickfix navigation with F12/F11
+noremap <silent> <F12> :cn<CR>
+noremap <silent> <F11> :cp<CR>
+
+" Indent/unindent in visual mode and keep selection
+vnoremap <silent> > >gv
+vnoremap <silent> < <gv
+
+" Force close window
+noremap <silent> <C-w>q :q!<CR>
 
 
 
@@ -58,7 +94,6 @@ endif
 "   - Avoid using standard Vim directory names like 'plugin'
 
 " Make sure you use single quotes
-
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 
 " Initialize plugin system
@@ -71,68 +106,193 @@ endif
 call plug#begin()
 
 
-" Catppuccin syntax highlighting [https://github.com/catppuccin/vim/tree/main]
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+" _______________________ COLORSCHEME __________________________
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }       " Catppuccin syntax highlighting [https://github.com/catppuccin/vim/tree/main]
+Plug 'thedenisnikulin/vim-cyberpunk'
+Plug 'metalelf0/base16-black-metal-scheme'
+" Plug 'vimcolorschemes/vimcolorschemes'
+" Plug 'artanikin/vim-synthwave84'
+" Plug 'ronwoch/hotline-vim'
 
-" Airline
-" Plug 'vim-airline/vim-airline'
+" _______________________ AIRLINE __________________________
 Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
 " Get themes:https://github.com/vim-airline/vim-airline-themes/tree/master/autoload/airline/themesI
 
+
+" _______________________ FILE EXPLORER __________________________
+Plug 'scrooloose/nerdtree'
+nnoremap <Leader><Space> :NERDTreeToggle<CR>
 " Configure file exlplorer
 " set netrw_browse_split=3
 " let g:netrw_winsize = 20
 " let g:netrw_banner = 0
 
-" File Nav Explorer
-Plug 'scrooloose/nerdtree'
-
-" Vim-sneak (like flash in nvim)
-Plug 'justinmk/vim-sneak'
-
-" Colorschemes
-" Plug 'vimcolorschemes/vimcolorschemes'
-Plug 'thedenisnikulin/vim-cyberpunk'
-" Plug 'artanikin/vim-synthwave84'
-" Plug 'ronwoch/hotline-vim'
-Plug 'metalelf0/base16-black-metal-scheme'
-
-" Git Gutter (signs)
+" _______________________ Git Gutter (signs) __________________________
 Plug 'airblade/vim-gitgutter'
-" Enable vim-gitgutter by default
-let g:gitgutter_enabled = 1
-" Update signs in real-time
-let g:gitgutter_realtime = 1
-" Set updatetime to 100ms for faster updates
-set updatetime=100
+let g:gitgutter_enabled = 1         " Enable vim-gitgutter by default
+let g:gitgutter_realtime = 1        " Update signs in real-time
+set updatetime=100                  " Set updatetime to 100ms for faster updates
 let g:gitgutter_max_signs = 500  " default value (Vim < 8.1.0614, Neovim < 0.4.0)
+" vim-gitgutter icons
+let g:gitgutter_sign_added = "▎"
+let g:gitgutter_sign_modified = "▎"
+let g:gitgutter_sign_removed = "▎"
+let g:gitgutter_sign_removed_first_line = "▎"
+let g:gitgutter_sign_removed_above_and_below = "▎"
+let g:gitgutter_sign_modified_removed = "▎"
 
-" Vim-fugitive
+noremap <silent> <Leader>gt :GitGutterToggle<CR>        " Git signs toggle (requires vim-gitgutter plugin)
+noremap <silent> <Leader>gs :Git<CR>
+" noremap <silent> <Leader>gd :GitGutterDiffOrig<CR>
+
+
+" _______________________ Vim-fugitive __________________________
 Plug 'tpope/vim-fugitive'
+noremap <silent> <Leader>gu :!git reset --hard HEAD~1<CR>
+noremap <silent> <Leader>ga :!git stash save<CR>
+noremap <silent> <Leader>gg :Git<CR>
+noremap <silent> <Leader>gd :Gdiffsplit<CR>
+noremap <silent> <Leader>gb :Git blame<CR>
+noremap <silent> <Leader>go :GBrowse<CR>
+noremap <silent> <Leader>gl :Gclog<CR>
+"noremap <silent> <Leader>gc :Git commit<CR>
 
-" indentline
+
+" _______________________ Indentline __________________________
 Plug 'Yggdroot/indentLine'
 let g:indentLine_defaultGroup = 'SpecialKey'
 let g:indentLine_char = '|'
+noremap <silent> <Leader>ie :IndentLinesEnable<CR>
+noremap <silent> <Leader>id :IndentLinesDisable<CR>
+" File Nav Explorer
+Plug 'scrooloose/nerdtree'
+nnoremap <Leader><Space> :NERDTreeToggle<CR>
+" Configure file exlplorer
+" set netrw_browse_split=3
+" let g:netrw_winsize = 20
+" let g:netrw_banner = 0
+
+" _______________________ Git Gutter (signs) __________________________
+Plug 'airblade/vim-gitgutter'
+let g:gitgutter_enabled = 1         " Enable vim-gitgutter by default
+let g:gitgutter_realtime = 1        " Update signs in real-time
+set updatetime=100                  " Set updatetime to 100ms for faster updates
+let g:gitgutter_max_signs = 500  " default value (Vim < 8.1.0614, Neovim < 0.4.0)
+" vim-gitgutter icons
+let g:gitgutter_sign_added = "▎"
+let g:gitgutter_sign_modified = "▎"
+let g:gitgutter_sign_removed = "▎"
+let g:gitgutter_sign_removed_first_line = "▎"
+let g:gitgutter_sign_removed_above_and_below = "▎"
+let g:gitgutter_sign_modified_removed = "▎"
+
+noremap <silent> <Leader>gt :GitGutterToggle<CR>        " Git signs toggle (requires vim-gitgutter plugin)
+noremap <silent> <Leader>gs :Git<CR>
+" noremap <silent> <Leader>gd :GitGutterDiffOrig<CR>
+
+
+" _______________________ Vim-fugitive __________________________
+Plug 'tpope/vim-fugitive'
+noremap <silent> <Leader>gu :!git reset --hard HEAD~1<CR>
+noremap <silent> <Leader>ga :!git stash save<CR>
+noremap <silent> <Leader>gg :Git<CR>
+noremap <silent> <Leader>gd :Gdiffsplit<CR>
+noremap <silent> <Leader>gb :Git blame<CR>
+noremap <silent> <Leader>go :GBrowse<CR>
+noremap <silent> <Leader>gl :Gclog<CR>
+"noremap <silent> <Leader>gc :Git commit<CR>
+
+
+" _______________________ Indentline __________________________
+Plug 'Yggdroot/indentLine'
+let g:indentLine_defaultGroup = 'SpecialKey'
+let g:indentLine_char = '|'
+noremap <silent> <Leader>ie :IndentLinesEnable<CR>
+noremap <silent> <Leader>id :IndentLinesDisable<CR>
+noremap <silent> <Leader>ii :IndentLinesToggle<CR>
+let g:indentLine_enabled = 0                " Disable by default
+
+" _______________________ Vim-Sneak __________________________
+" Vim-sneak (like flash in nvim)
+Plug 'justinmk/vim-sneak'
+
+" _______________________ Bufferline __________________________
+Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+Plug 'bling/vim-bufferline'
+" Plug 'ryanoasis/vim-devicons' Icons without colours
+" Plug 'akinsho/bufferline.nvim', { 'tag': '*' }pEºJ
+
+
+" _______________________ LSP __________________________
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
+" List of servers: https://github.com/mattn/vim-lsp-settings
+" :LspInstallServer server-name
+" :LspUninstallServer server-name
+
+" Lsp + stuc
+Plug 'dense-analysis/ale'
+
+" Enable ALE
+let g:ale_enabled = 1
+
+" Enable LSP features
+let g:ale_lsp_suggestions = 1  " Show LSP suggestions
+let g:ale_completion_enabled = 1  " Enable autocompletion (optional)
+let g:ale_hover_cursor = 1  " Show hover information on cursor
+let g:ale_go_to_definition_in_tab = 0  " Open definitions in the same window
+
+" Configure linters (optional: restrict to specific LSP servers)
+let g:ale_linters = {
+\   'javascript': ['tsserver'],
+\   'python': ['pylsp'],
+\   'go': ['gopls'],
+\}
+
+" Configure fixers (optional: for automatic fixing)
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'python': ['black', 'isort'],
+\}
+
+" Enable fixing on save (optional)
+let g:ale_fix_on_save = 1
+
+" Customize linting behavior
+let g:ale_lint_on_text_changed = 'always'  " Lint while typing
+let g:ale_lint_on_insert_leave = 1  " Lint when leaving insert mode
+let g:ale_lint_on_save = 1  " Lint on save
+let g:ale_lint_on_enter = 1  " Lint when opening a file
+
+" Customize signs for errors and warnings
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+
+" Keep the sign gutter always open
+let g:ale_sign_column_always = 1
+
+" Python virtual env to use ALE
+let g:ale_python_auto_pipenv = 1
+let g:ale_python_auto_poetry = 1
+let g:ale_python_auto_uv = 1
+
+let g:airline#extensions#ale#enabled = 1
+
+
+" Key-Bindings
+nmap <silent> gd :ALEGoToDefinition<CR>
+nmap <silent> K :ALEHover<CR>
+nmap <silent> <leader>gf :ALEFix<CR>
+
+
+
 
 
 " vim-visual-multi (equiv. to Ctrl+d in vscode)
 " Allows one to use Ctrl+n to highlight next identical occurences (once text is highlighted)
 " Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-
-" [+] Bufferline
-Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
-" Plug 'ryanoasis/vim-devicons' Icons without colours
-" Plug 'akinsho/bufferline.nvim', { 'tag': '*' }pEºJ
-Plug 'bling/vim-bufferline'
-
-" Vim-lsp
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-" List of servers: https://github.com/mattn/vim-lsp-settings
-" :LspInstallServer server-name
-" :LspUninstallServer server-name
-
 
 
 call plug#end()
@@ -145,31 +305,24 @@ call plug#end()
 
 
 
-" copy (write) highlighted text to .vimbuffer
-"
-" -vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \|
-" clip.exe <CR><CR>
-"
-" paste from buffer
-
 " =============== COLOR SCHEMES ============== "
 " Defining custome color schemes needs to be here - after all plugins have loaded
 
+" colorscheme desert
+"let g:airline_theme='luna'
+" let g:airline_theme = 'catppuccin_mocha'
 
-" # Colorscheme - monakai # 
+" # Colorscheme - monakai #
 " [requires above: Plug 'vimcolorschemes/vimcolorschemes']
 " Uncomment following 2 lines for this colorscheme
 " set background=dark
 " colorscheme monokai
-
-
 
 " # Colorscheme - catppuccin #
 " Uncomment following 1 line for this colorscheme
 " colorscheme catppuccin_mocha
 "colorscheme synthwave84
 " colorscheme ir_dark
-
 
 " # Colorscheme - cyberpunk #
 set cursorline
@@ -181,97 +334,18 @@ let g:airline_theme='monochrome'
 let g:airline_theme='lucian'
 
 
-
-
-
-" colorscheme desert
-"let g:airline_theme='luna'
-" let g:airline_theme = 'catppuccin_mocha'
-
-
-
-" ============ Key-bindings ================
-"
-" Set leader key
-let mapleader = " "
-
-" Neotree
-nnoremap <Leader><Space> :NERDTreeToggle<CR>
-
-" Integrated Terminal 
-noremap <silent> <C-_> :terminal <CR>
-
-" Clear search highlights with Esc
-" noremap <silent> <Esc> :nohlsearch<CR><Esc>
-nnoremap <silent> <Leader>h :nohlsearch<CR>
-
-" Enter visual-block mode with Ctrl+b
-noremap <silent> <C-b> <C-v>
-
-" Remove all markers with <Leader>rm
-" noremap <silent> <Leader>rm :delm a-zA-Z0-9<CR>
-
-" Move down/up 20 lines with <Leader>j/k
-noremap <silent> <leader>j 20<C-e>
-noremap <silent> <Leader>k 20<C-y>
-
-" Quickfix navigation with F12/F11
-noremap <silent> <F12> :cn<CR>
-noremap <silent> <F11> :cp<CR>
-
-" Indent/unindent in visual mode and keep selection
-vnoremap <silent> > >gv
-vnoremap <silent> < <gv
-
-" Git commands (requires vim-fugitive)
-noremap <silent> <Leader>gu :!git reset --hard HEAD~1<CR>
-noremap <silent> <Leader>ga :!git stash save<CR>
-noremap <silent> <Leader>gg :Git<CR>
-
-" Git signs toggle (requires vim-gitgutter plugin)
-noremap <silent> <Leader>gt :GitGutterToggle<CR>
-" noremap <silent> <Leader>gd :GitGutterDiffOrig<CR>
-noremap <silent> <Leader>gs :Git<CR>
-
-" Git-fugitive commands (requires vim-fugitive and vim-rhubarb for GBrowse)
-" "noremap <silent> <Leader>gc :Git commit<CR>
-noremap <silent> <Leader>gd :Gdiffsplit<CR>
-noremap <silent> <Leader>gb :Git blame<CR>
-noremap <silent> <Leader>go :GBrowse<CR>
-noremap <silent> <Leader>gl :Gclog<CR>
-
-
-" _______________________ Indent __________________________
-noremap <silent> <Leader>ie :IndentLinesEnable<CR>
-noremap <silent> <Leader>id :IndentLinesDisable<CR>
-noremap <silent> <Leader>ii :IndentLinesToggle<CR>
-" Disable by default
-let g:indentLine_enabled = 0
-
-
-
-" vim-gitgutter icons
-let g:gitgutter_sign_added = "▎"
-let g:gitgutter_sign_modified = "▎"
-let g:gitgutter_sign_removed = "▎"
-let g:gitgutter_sign_removed_first_line = "▎"
-let g:gitgutter_sign_removed_above_and_below = "▎"
-let g:gitgutter_sign_modified_removed = "▎"
-
-
-
-
-" Force close window
-noremap <silent> <C-w>q :q!<CR>
-
-" Call :args - but assume recusrive (rargs)
-nnoremap <silent> <leader>ra :call SetArgsWithPattern()<CR>
+" =============== CUSTOM FUNCS ============== "
+" [FindFiles] Call :args - but assume recusrive and add to Quickfix list
+nnoremap <silent> <leader>ff :call SetArgsWithPattern()<CR>
 function! SetArgsWithPattern()
-  let pattern = input('File pattern: ')
+  let pattern = input('Rargs: ')
   if pattern != ''
     " Prepend **/ and escape the pattern properly
     let escaped_pattern = escape(pattern, ' ')
     execute 'args **/' . escaped_pattern
+    cexpr []
+    argdo caddexpr expand('%:p') . ':1:1'
+    copen
   endif
 endfunction
 

@@ -43,6 +43,9 @@ alias er="watch egrep -i 'DBD::' /var/log/apache2/error.log"        # Tail error
 ## Git
 alias showmerges="git log --oneline --merges -E --grep 'DEV-[0-9]+' -n 15" # Shows last 15 merges
 
+## Lazygit
+alias lg="lazygit" 
+
 # SSH/SCP
 alias cc='quickconnect'
 alias scpdownloads='cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads'

@@ -125,21 +125,11 @@ if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
     alias nvim="/opt/nvim-linux64/bin/nvim"
 fi
 
-# Set ogvim -> vim
-if [[ vim ]]; then
-    alias ogvim="$(which vim)"
-fi
-
-# Set vim -> nvim
-if [[ nvim ]]; then
-    alias vim="nvim"
-fi
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Lazyvim setup
