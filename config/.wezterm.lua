@@ -30,14 +30,30 @@ local config = wezterm.config_builder()
 --config.color_scheme = 'Batman'
 
 config.color_scheme = 'Tokyo Night Storm (Gogh)'
-config.color_scheme = 'cyberpunk'
 config.color_scheme = 'catppuccin-macchiato'
 config.color_scheme = 'catppuccin-frappe'
 config.color_scheme = 'cyberpunk'
 config.color_scheme = 'Calamity'
-config.color_scheme = 'Rebecca (base16)'
-config.color_scheme = 'tokyonight-storm'
+
 config.color_scheme = 'catppuccin-mocha'
+
+config.color_scheme = 'tokyonight-storm'
+config.color_scheme = 'Rebecca (base16)'
+config.color_scheme = 'cyberpunk'
+config.color_scheme = 'Rebecca (base16)'
+
+-- Get the base color scheme
+local scheme = wezterm.color.get_builtin_schemes()['cyberpunk']
+-- Override the background color
+scheme.background = '#000000' -- Set to pure black, for example
+
+-- Define the modified scheme
+config.color_schemes = {
+  ['Custom Mocha'] = scheme,
+}
+
+-- Apply the modified scheme
+config.color_scheme = 'Custom Mocha'
 
 config.font = wezterm.font 'JetBrains Mono'
 config.font_rules = {
@@ -51,7 +67,8 @@ config.font_rules = {
     font = wezterm.font("JetBrainsMono Nerd Font", { bold = true }),
   }
 }
-
+canonicalize_pasted_newlines = 'LineFeed'
+term = 'xterm-256color'
 config.keys = {
 
         -- Turn off the default ctrl+v "input the next character literally",
@@ -86,7 +103,7 @@ config.wsl_domains = {
 }
 
 config.default_domain = 'WSL:Ubuntu'
-config.window_background_opacity = 1
+config.window_background_opacity = 0.7
 -- config.win32_system_backdrop = 'Mica'
 -- config.win32_system_backdrop = 'Acrylic'
 
@@ -107,6 +124,8 @@ config.window_background_opacity = 1
   -- Specifies a Linear gradient starting in the top left corner.
   -- orientation = { Linear = { angle = -270.0 } },
 -- }
+
+
 
 -- The following options affect the fancy tab bar:
 config.window_frame = {
@@ -132,8 +151,6 @@ config.window_frame = {
   -- the window is not focused
   inactive_titlebar_bg = '#333333',
 }
-
-
 
 config.colors = {
   tab_bar = {
