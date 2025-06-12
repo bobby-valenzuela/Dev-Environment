@@ -1,4 +1,4 @@
-
+# Installing
 
 Install on a debian-based system
 ```bash
@@ -29,3 +29,10 @@ If you wish to also install any necessary packages
 ```bash
 sh ./install.sh install
 ```
+
+<br />
+
+## Notes
+`install.sh` - Assumes the repo is cloned and copies the config files into the proper dirs. Run with "install" to install needed packages from apt.  
+`init.sh` - Clones repo and runs `install.sh install`  
+`jammy_init.sh` - Sets up Docker container and runs `init.sh`  
