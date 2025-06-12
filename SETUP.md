@@ -20,7 +20,8 @@ sudo apt install make gcc ripgrep unzip git git-all xclip zsh build-essential p7
 - [Install node version manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
 - [Install Node using nvm](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04)
 - [Install powerline fonts](https://github.com/powerline/fonts)
-- [Install yazi](https://yazi-rs.github.io/docs/installation/#debian)  
+- [Install yazi](https://yazi-rs.github.io/docs/installation/#debian)
+- [Install fzf](https://github.com/junegunn/fzf)
  - ```bash
     nvm list-remote       # avaiable versions
     nvm install v14.10.0  # install a version
