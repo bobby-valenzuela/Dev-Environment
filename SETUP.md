@@ -13,7 +13,7 @@ Preliminaries
   - If on WSL then you will need to copy your ~/.wezterm.lua file to your windows home dir: `cp ~/.wezterm.lua /mnt/c/Users/<username>`
 - Common Generals
 ```bash
-sudo apt install make gcc ripgrep unzip git git-all xclip zsh build-essential p7zip-full jq curl locate sshfs sshpass xsel lua5.3 cmake xse libstdc++6 vim-gtk3 libc6-dev -y 
+sudo apt install make gcc ripgrep unzip git git-all xclip zsh build-essential p7zip-full jq curl locate sshfs sshpass xsel lua5.3 cmake xse libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm -y 
 ```
 - [Install Python](https://www.python.org/downloads/source/) => Download source and compile  
 - [Install Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)  => Download binary from tar and just extract into /opt/nvim-linux64  
