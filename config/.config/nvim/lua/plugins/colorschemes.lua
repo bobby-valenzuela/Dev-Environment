@@ -1,5 +1,7 @@
 return {
-
+    {'olivercederborg/poimandres.nvim'},
+    { "ntk148v/komau.vim"},
+    {'shaunsingh/nord.nvim'},
     {'thedenisnikulin/vim-cyberpunk'},
     {
         'maxmx03/fluoromachine.nvim',

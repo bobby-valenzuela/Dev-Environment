@@ -56,3 +56,12 @@ alias reposync_thisdir_to_alpha="reposync . alpha ongoing"
 
 # My Main nvim install is a lazyvim dist - adding an alias to my custom install (~/.config/nvim-custom/)
 alias nvim-custom='NVIM_APPNAME="nvim-custom" nvim'
+
+# Fuzzy-vim
+alias fv='nvim $(fzf --height 40% --layout reverse --border)'
+alias ff='fzf --height 40% --layout reverse --border'
+
+# Lazyvim setup
+alias nv='NVIM_APPNAME=nvim-lazy nvim'
+
+

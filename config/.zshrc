@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -72,7 +69,6 @@ DISABLE_AUTO_TITLE="true"
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -98,7 +94,7 @@ DISABLE_AUTO_TITLE="true"
 
 # Enforce color scheme
 alias tmux="tmux -2"
-export TERM=screen-256color
+# export TERM=screen-256color
 # Works better with vim
 export TERM=xterm-256color
 
@@ -107,10 +103,30 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# _________ PATH UPDATES ___________
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+
+# Add /usr/local/go/bin to PATH in case you have a later version here
+export PATH=/usr/local/go/bin:$PATH
 
 # Add .local/bin to PATH
 export PATH="$HOME/.local/bin":$PATH
 export PATH="$HOME/.local/lib":$PATH
+
+# NVIM to use binary PATH in /opt if it exists there
+if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
+    export PATH="/opt/nvim-linux64/bin":$PATH
+fi
+
+# Go to use binary PATH in /usr/local/bin if it exists there
+if [[ -s /usr/local/bin/go ]]; then
+    alias go="/usr/local/bin/go"
+fi
 
 ##### Google Cloud SDK
 # The next line updates PATH for the Google Cloud SDK.
@@ -120,10 +136,13 @@ if [ -f '/home/bobby_vz/sandbox/google-cloud-sdk/path.zsh.inc' ]; then . '/home/
 if [ -f '/home/bobby_vz/sandbox/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/bobby_vz/sandbox/google-cloud-sdk/completion.zsh.inc'; fi
 
 
-# NVIM to use binary in /opt if it exists there
-if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
-    alias nvim="/opt/nvim-linux64/bin/nvim"
-fi
+
+
+
+
+
+
+
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -132,10 +151,8 @@ else
   export EDITOR='nvim'
 fi
 
-# Lazyvim setup
-alias nv='NVIM_APPNAME=nvim-lazy nvim'
-
-
+# SET CUSTOM MANPAGER APP
+export MANPAGER='vim +MANPAGER -'
 
 # =========================================================
 # ============== [START] OH-MY-ZSH-PLUGINS ================
@@ -150,7 +167,7 @@ alias nv='NVIM_APPNAME=nvim-lazy nvim'
 # Add wisely, as too many plugins slow down shell startup.
 
 # MUST BE AT THE BOTTOM!!! (last plugin)
-# Command Line Syntax Highlighting - 
+# Command Line Syntax Highlighting -
 # Set path to zsh highlighting (must have already instead => sudo apt install zsh-syntax-highlighting -y)
 #source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -171,7 +188,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 
-# Mount SSHFS dirs as needed 
+# Mount SSHFS dirs as needed
 # SSHFS_MOUNT_COUNT=$(ps aux | grep -i sftp | grep -v grep | wc -l )
 # [[ ${SSHFS_MOUNT_COUNT} -eq 0 ]] && sudo sshfs alpha:/home/control-io/ /home/bobby/alpha -oIdentityFile=/home/bobby/.ssh/pbx-pems/<key>.pem
 

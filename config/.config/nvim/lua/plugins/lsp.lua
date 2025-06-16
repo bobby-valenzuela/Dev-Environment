@@ -182,6 +182,28 @@ return {
 
 
 
+-- Some Language Servers (manual install without mason)
+-- [PYTHON]
+-- npm install -g pyright
+    -- pyright --version # verify
+-- 
+-- [PERL]
+-- npm install -g @perlnavigator/server
+    -- perlnavigator --version # verify
+-- 
+-- [JAVASCRIPT/TYPESCRIPT]
+-- npm install -g typescript typescript-language-server
+    -- tsserver --version # verify
+-- 
+-- [C]
+-- sudo apt install clangd 
+    -- clangd --version # verify
+-- 
+-- [BASH]
+-- npm install -g bash-language-server
+    -- bash-language-server --version # verify
+
+
 
 -- return {
 --   "williamboman/mason.nvim",

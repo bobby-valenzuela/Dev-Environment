@@ -37,8 +37,15 @@ function config_sync(){
     cp -v ~/.vimrc  $DEST
     cp -v ~/.zshrc   $DEST
     cp -v ~/.tmux_init.sh  $DEST
-    cp -v -r ~/.config/  $DEST
+    cp -v -r ~/.config/lazydocker/  $DEST/.config/
+    cp -v -r ~/.config/lazygit/  $DEST/.config/
+    cp -v -r ~/.config/nvim/  $DEST/.config/
+    cp -v -r ~/.config/nvim-lazy/  $DEST/.config/
+    cp -v -r ~/.config/posting/  $DEST/.config/
+    cp -v -r ~/.config/warp-terminal/  $DEST/.config/
+    cp -v -r ~/.config/yazi/  $DEST/.config/
 
+    # cp -v -r ~/.config/  $DEST
     #    cp -v -r ~/.local/share/nvim/dadbod_ui/  $DEST
 
     DEST=$LOCAL_REPO/
@@ -86,13 +93,48 @@ export POSTING_ROOT=/home/bobby/posting/
 export POSTING_EDITOR=vim
 
 # Copy from WSL to Windows host
-function cw(){
-    cp -r -v $1 /mnt/c/Users/BobbyValenzuela/Downloads/WSL/
+function wcp(){
+
+    WIN_FOLDER=/mnt/c/Users/BobbyValenzuela/Downloads/WSL/
+    WSL_FOLDER=~/WIN/
+
+    [ ! -d $WIN_FOLDER ] && mkdir -p $WIN_FOLDER
+    [ ! -d $WSL_FOLDER ] && mkdir -p $WSL_FOLDER
+
+    # Get the full path of the file
+    full_path=$(realpath "$$1" 2>/dev/null || readlink -f "$$1" 2>/dev/null)
+
+    DEST=
+
+
+
+    # Check if full_path is not empty
+    if [ -n "$full_path" ]; then
+    
+        # if there's a path, use that 
+        if [[ ! -z "$2" ]]; then
+            DEST=$2
+        else
+
+            # If this is a windows file, send to WSL folder
+            if [[ "$full_path" == /mnt/c/* ]]; then
+                DEST=$WSL_FOLDER
+            else
+                DEST=$WIN_FOLDER
+            fi
+
+        fi
+            # Now that we have a destination set, copy to DEST
+            cp -r -v $1 $DEST
+
+    else
+        echo "Error: File '$file' does not exist or cannot be resolved."
+    fi
 }
 
 function tt(){
    cd ~/my_repos/Tomahawk/
-   ~/my_repos/Tomahawk/tomahawk 
+   ~/my_repos/Tomahawk/tomahawk
 }
 
 function clear_nvim_swaps(){
@@ -101,8 +143,8 @@ function clear_nvim_swaps(){
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	# yazi "$@" --cwd-file="$tmp"
-	yz "$@" --cwd-file="$tmp" # Using local yazi in /usr/local/bin/yz
+	yazi "$@" --cwd-file="$tmp"
+	# yz "$@" --cwd-file="$tmp" # Using local yazi in /usr/local/bin/yz
 	IFS= read -r -d '' cwd < "$tmp"
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"

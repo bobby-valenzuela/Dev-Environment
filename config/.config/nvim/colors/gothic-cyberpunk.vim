@@ -26,6 +26,8 @@ let s:neon_magenta = "#FF0055"
 let s:neon_lavender = "#8533ff"
 let s:dark_teal = "#07a180"
 let s:dark_magenta = "#960032"
+let s:light_lavender = "#ccbcff"
+let s:pale_cyan = "#8aadf4"
 
 " For terminal support
 let s:cterm_vibrant_teal = "51"  " Approx teal in 256-color
@@ -58,10 +60,12 @@ call HighlightFor("DiffText",   s:whitest,         s:dark_gray,    "NONE")
 call HighlightFor("DiffChange", s:blackest,           s:whitest,    "NONE")
 
 " Cursor
-call HighlightFor("Cursor",       s:vibrant_teal,    "NONE",           "NONE")
+call HighlightFor("Cursor",       s:vibrant_teal,    s:blackest,           "NONE")
 call HighlightFor("CursorLineNr", s:blackest,       s:vibrant_teal,   "NONE")
-call HighlightFor("CursorLine",   s:blackest,       s:neon_magenta,   "NONE")
-call HighlightFor("CursorColumn", "NONE",            "NONE",           "NONE")
+"call HighlightFor("CursorColumn", "NONE",            "NONE",           "NONE")
+"call HighlightFor("CursorLine",   s:whitest,       s:neon_magenta,   "NONE")
+"call HighlightFor("CursorLine",   s:blackest,       s:pale_cyan,   "NONE")
+call HighlightFor("CursorLine",   s:whitest,       s:light_gray,   "NONE")
 
 " Folds
 call HighlightFor("Folded",      s:vibrant_teal,     s:blacker, "italic")
@@ -74,14 +78,13 @@ call HighlightFor("PmenuSbar",   s:neon_magenta,     s:whitest,   "NONE")
 call HighlightFor("PmenuThumb",  s:neon_magenta,     s:blackest,     "NONE")
 
 " General
-call HighlightFor("Normal",      s:whitest,      s:black,    "NONE")
+call HighlightFor("Normal",      s:white,      s:black,    "italic")
 call HighlightFor("Visual",      s:whitest,             s:lightest_gray,  "NONE")
 call HighlightFor("LineNr",      s:vibrant_teal,     s:blackest,     "NONE")
 call HighlightFor("SignColumn",  s:vibrant_teal,     "NONE",          "NONE")
 call HighlightFor("VertSplit",   s:blackest,        s:whitest,   "NONE")
-call HighlightFor("IncSearch",    s:vibrant_teal,    s:neon_lavender,      "NONE")          " Special chars in strings (e.g., \n)
-call HighlightFor("Search",    s:vibrant_teal,    s:neon_lavender,      "NONE")          " Special chars in strings (e.g., \n)
-call HighlightFor("SpecialChar",    s:vibrant_teal,    "#8533ff",      "NONE")          " Special chars in strings (e.g., \n)
+call HighlightFor("IncSearch",    s:blackest,    s:whitest,      "NONE")          " Special chars in strings (e.g., \n)
+call HighlightFor("Search",    s:whitest,    s:neon_magenta,      "bold")          " Special chars in strings (e.g., \n)
 call HighlightFor("Substitute",  s:blackest,        s:vibrant_teal,  "NONE")
 call HighlightFor("MatchParen",  s:blackest,        s:vibrant_teal,  "NONE")
 call HighlightFor("NonText",     s:white,       "NONE",          "NONE")
@@ -91,33 +94,36 @@ call HighlightFor("Directory",   s:vibrant_teal,     s:blacker, "NONE")
 " Code - data types
 call HighlightFor("Comment",     s:lightest_gray,     "NONE",          "italic")
 call HighlightFor("String",      s:lightest_gray,      s:blacker,     "italic")
-call HighlightFor("Number",      s:vibrant_teal,     s:blackest,     "NONE")
+call HighlightFor("Number",      s:whitest,     s:blackest,     "bold,italic")
 call HighlightFor("Float",       s:whitest,      s:blackest,     "NONE")
 call HighlightFor("Boolean",     s:whitest,      s:blackest,     "NONE")
 call HighlightFor("Character",   s:whitest,      s:blackest,     "NONE")
 
 " Code - general
-call HighlightFor("Identifier",  s:whitest,      s:lighter_gray,  "bold")
-call HighlightFor("Function",    s:blackest,        s:whiter,   "italic,bold")
-call HighlightFor("Statement",   s:whitest,      s:blacker, "bold")
-call HighlightFor("StorageClass",s:whiter,       "NONE",          "NONE")
-call HighlightFor("Structure",   s:whiter,       "NONE",          "NONE")
-call HighlightFor("Repeat",      s:whiter,       s:dark_gray,   "bold")
-call HighlightFor("Conditional", s:blackest, s:vibrant_teal,   "bold")
-call HighlightFor("Operator",    s:whitest,      s:blackest,     "bold")
+call HighlightFor("Statement",   s:pale_cyan,      s:med_gray, "bold,italic")
+call HighlightFor("perlStatement",   s:pale_cyan,      s:med_gray, "bold,italic")
+call HighlightFor("perlBraces",   s:pale_cyan,      s:med_gray, "bold,italic")
+call HighlightFor("perlStatementFiledesc",   s:pale_cyan,      s:med_gray, "bold,italic")
+call HighlightFor("Function",  s:whiter,      s:med_gray,  "bold,italic")
+call HighlightFor("Identifier",      s:whitest,      s:med_gray,    "italic")
+call HighlightFor("StorageClass",s:whiter,       "NONE",          "italic")
+call HighlightFor("Structure",   s:whiter,       "NONE",          "italic")
+call HighlightFor("Repeat",      s:lightest_gray,       s:light_gray,   "bold")
+call HighlightFor("Conditional", s:lightest_gray, s:med_gray,   "bold")
+call HighlightFor("Operator",    s:vibrant_teal,      s:blacker,     "bold,italic")
 call HighlightFor("Type",        s:whitest,      s:light_gray,   "italic")
-call HighlightFor("Typedef",     s:whitest,      s:light_gray,   "NONE")
+call HighlightFor("Typedef",     s:whitest,      s:light_gray,   "italic")
 call HighlightFor("PreProc",     s:whitest,      s:lightest_gray,  "italic")
-call HighlightFor("Underlined",  s:whitest,      s:lightest_gray,  "NONE")
-call HighlightFor("Special",     s:vibrant_teal,     s:blackest,     "NONE")
-call HighlightFor("Keyword",  s:vibrant_teal,        s:blackest,  "NONE")
+call HighlightFor("Underlined",  s:whitest,      s:lightest_gray,  "italic")
+"call HighlightFor("Keyword",  s:lightest_gray,        s:blackest,  "italic")
+call HighlightFor("Keyword",  s:whiter,      s:lighter_gray,  "bold,italic")
 
-call HighlightFor("Label",       s:blacker,      s:neon_magenta,  "NONE")
-call HighlightFor("Exception",       s:blacker,      s:neon_magenta,  "NONE")
-call HighlightFor("Todo",        s:blackest,        s:vibrant_teal,  "NONE")
-call HighlightFor("Error",       s:blackest,        s:neon_magenta,  "NONE")
-call HighlightFor("WarningMsg",  s:blackest,        s:vibrant_teal,  "NONE")
-call HighlightFor("Tag",         s:blackest,        s:vibrant_teal,  "NONE")
+call HighlightFor("Label",       s:blacker,      s:vibrant_teal,  "italic")
+call HighlightFor("Exception",       s:blacker,      s:neon_magenta,  "italic")
+call HighlightFor("Todo",        s:blackest,        s:vibrant_teal,  "italic")
+call HighlightFor("Error",       s:blackest,        s:neon_magenta,  "italic")
+call HighlightFor("WarningMsg",  s:blackest,        s:vibrant_teal,  "italic")
+call HighlightFor("Tag",         s:blackest,        s:vibrant_teal,  "italic")
 
 " Status line
 call HighlightFor("StatusLine",  s:vibrant_teal,      s:blackest,   "NONE")
@@ -164,16 +170,17 @@ call HighlightFor("Tooltip",        s:whitest,      s:dark_gray,    "NONE")     
 call HighlightFor("markdownIalic",        s:whitest,      s:dark_gray,    "italic")          " GUI Vim tooltips
 
 " Additional Syntax Highlights
+call HighlightFor("Delimiter",      s:vibrant_teal,       s:med_gray,      "NONE")          " Delimiters (e.g., commas, parentheses)
+call HighlightFor("Special",    s:whitest,        s:blackest,   "bold")
 call HighlightFor("SpecialChar",    s:vibrant_teal,    s:blackest,      "NONE")          " Special chars in strings (e.g., \n)
-call HighlightFor("Delimiter",      s:whitest,       s:med_gray,      "NONE")          " Delimiters (e.g., commas, parentheses)
+call HighlightFor("SpecialComment", s:blackest,     s:vibrant_teal,  "italic")        " Special comments (e.g., TODO, FIXME)
 call HighlightFor("SpecialKey",     s:vibrant_teal,     "NONE",           "NONE")          " Special chars when :set list (e.g., tabs)
 call HighlightFor("Constant",       s:whitest,      s:blackest,      "italic")          " General constants (parent group)
 call HighlightFor("Debug",          s:whiter,       s:dark_gray,    "italic")        " Debugging-related elements
 call HighlightFor("Define",         s:whitest,      s:lightest_gray,   "NONE")          " Preprocessor definitions (e.g., #define)
 call HighlightFor("Macro",          s:whitest,      s:lightest_gray,   "NONE")          " Macro definitions/invocations
 call HighlightFor("PreCondit",      s:whitest,      s:lightest_gray,   "NONE")          " Preprocessor conditionals (e.g., #ifdef)
-call HighlightFor("Include",        s:whitest,      s:lightest_gray,   "NONE")          " Include/import statements
-call HighlightFor("SpecialComment", s:blackest,     s:vibrant_teal,  "italic")        " Special comments (e.g., TODO, FIXME)
+call HighlightFor("Include",        s:whitest,      s:pale_cyan,   "NONE")          " Include/import statements
 
 " Spell Checking Highlights
 call HighlightFor("SpellBad",       s:neon_magenta,     s:blackest,      "undercurl")     " Misspelled words
@@ -200,6 +207,10 @@ call HighlightFor("TSTag",                            s:blackest,        s:vibra
 call HighlightFor("SnacksIndentScope",      s:vibrant_teal,      "NONE",    "NONE")
 call HighlightFor("SnacksIndent",      s:lighter_gray,      "NONE",    "NONE")
 
+" Neotree
+call HighlightFor("NeoTreeFileIcon",      s:vibrant_teal,      "NONE",    "NONE")
+call HighlightFor("NeoTreeExpander",      s:vibrant_teal,      "NONE",    "NONE")
+
 
 " Telescope neon_lavender
 call HighlightFor("TelescopeSelection",      s:blackest,      s:vibrant_teal,    "bold,italic")
@@ -215,3 +226,13 @@ call HighlightFor("GitGutterChange",      "#FFA500",      s:blackest,    "NONE")
 call HighlightFor("GitGutterDelete",      s:neon_magenta,      s:blackest,    "NONE")
 " call HighlightFor("GitGutterChangeDeleteLine ", "#FFA500", s:blackest,    "NONE")
 "call HighlightFor("GitGutterChangeLineNr  ", "#FFA500", s:blackest,    "NONE")
+
+
+" Coc
+call HighlightFor("CocErrorHighlight",      s:neon_magenta,      s:blackest,    "NONE")
+call HighlightFor("CocWarningHighlight",      s:vibrant_teal,      s:blackest,    "NONE")
+call HighlightFor("CocInfoHighlight",      s:dark_teal,      s:blackest,    "NONE")
+call HighlightFor("CocHintHighlight",      s:neon_magenta,      s:blackest,    "NONE")
+call HighlightFor("CocErrorVirtualText",      s:neon_magenta,      s:blackest,    "NONE")
+call HighlightFor("CocWarningVirtualText",      s:vibrant_teal,      s:blackest,    "NONE")
+call HighlightFor("CocInfoVirtualText",      s:neon_magenta,      s:blackest,    "NONE")

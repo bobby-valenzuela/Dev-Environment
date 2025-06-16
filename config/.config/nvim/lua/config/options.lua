@@ -103,13 +103,13 @@ vim.g.airline_left_sep = ''
 vim.g.airline_left_alt_sep = ''
 vim.g.airline_right_sep = ''
 vim.g.airline_right_alt_sep = ''
---vim.g.airline_symbols = {
-  --branch = '',
-  --readonly = '',
-  --linenr = '☰',
-  --maxlinenr = '',
-  --dirty = '⚡'
---}
+-- vim.g.airline_symbols = {
+--     branch = '',
+--     readonly = '',
+--     linenr = '☰',
+--     maxlinenr = '',
+--     dirty = '⚡'
+-- }
 
 -- vim.cmd('syntax on')
 -- vim.opt.syntax = "on"
