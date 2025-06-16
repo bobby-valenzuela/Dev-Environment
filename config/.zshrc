@@ -1,6 +1,6 @@
 
 # First thing, load zsh theme customizations
-[[ -s ~/.zsh_customizations.sh ]] && source ~/.zsh_customizations.sh
+[[ -s ~/.zsh_customizations ]] && source ~/.zsh_customizations
 
 
 # Enforce color scheme
