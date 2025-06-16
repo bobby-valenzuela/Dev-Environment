@@ -9,6 +9,10 @@ wrap = "yes"
 show_symlink = true
 
 [opener]
+play = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+	{ run = '"C:\Program Files\mpv.exe" %*', orphan = true, for = "windows" }
+]
 edit = [
     # I think yazi checks for the $EDITOR value before why shell scripts have loaded - so $EDITOR it won't be set by my .zshr/bashrc
 	{ run = '$EDITOR "$@"', block = true, for = "unix" },
