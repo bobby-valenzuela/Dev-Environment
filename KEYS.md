@@ -81,6 +81,14 @@ Close pane: `exit` or `Ctrl+B+Z`
 
 <br />
 
+# Oh-my-ZSH Plugins  
+`ccat/cless` - colorized cat+less  
+`copyfile` - copy file contents to system clipboard  
+`ctrl-o` - copy cmdline contents to system clipboard  
+Allows pressing Ctrl-Z again to switch back to a background job.  
+
+<br />
+
 
 <br />
 
