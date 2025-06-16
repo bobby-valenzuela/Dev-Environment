@@ -36,13 +36,13 @@ function config_sync(){
     cp -v ~/.tmux.conf  $DEST
     cp -v ~/.vimrc  $DEST
     cp -v ~/.zshrc   $DEST
+    cp -v ~/.zsh_customizations   $DEST
     cp -v ~/.tmux_init.sh  $DEST
     cp -v -r ~/.config/lazydocker/  $DEST/.config/
     cp -v -r ~/.config/lazygit/  $DEST/.config/
     cp -v -r ~/.config/nvim/  $DEST/.config/
     cp -v -r ~/.config/nvim-lazy/  $DEST/.config/
     cp -v -r ~/.config/posting/  $DEST/.config/
-    cp -v -r ~/.config/warp-terminal/  $DEST/.config/
     cp -v -r ~/.config/yazi/  $DEST/.config/
 
     # cp -v -r ~/.config/  $DEST
