@@ -1,6 +1,0 @@
-
-
-SELECT TOP 30 * FROM VO365Restores ORDER BY id DESC
-
-
-
