@@ -64,4 +64,6 @@ alias ff='fzf --height 40% --layout reverse --border'
 # Lazyvim setup
 alias nv='NVIM_APPNAME=nvim-lazy nvim'
 
+# thefuck alias
+# eval $(thefuck --alias redo)
 

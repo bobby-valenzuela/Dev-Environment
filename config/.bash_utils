@@ -72,6 +72,7 @@ function config_sync_alpha(){
     scp ~/.vimrc  alpha:/home/ubuntu/
     scp ~/.zshrc   alpha:/home/ubuntu/
     scp ~/.tmux_init.sh  alpha:/home/ubuntu/
+    scp ~/.zsh_customizations   alpha:/home/ubuntu/
 
     scp /usr/local/bin/* alpha:/usr/local/bin
 
@@ -148,4 +149,9 @@ function y() {
 	IFS= read -r -d '' cwd < "$tmp"
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
+}
+
+function docx_to_md(){
+    [[ ! "$1" =~ .docx$ ]] && echo "File must be in .docx format" && exit
+    pandoc -s $1 -f docx -t commonmark --extract-media=. -o output.md
 }

@@ -129,9 +129,49 @@ vim.keymap.set('n', '<leader>gg', ':LazyGitCurrentFile<CR>', { desc = 'Open Lazy
 -- _______________________ Git-Signs __________________________
 vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_signs<CR>", { desc = "Toggle gitsigns" })
 
+-- These below are located in plugins/gitsigns.lua - they are there so they are buffer-local (loaded on buffer-attach)
+-- vim.keymap.set('n', ']H', function() gs.nav_hunk('last') end, { buffer = buffer, desc = 'Last Hunk' })
+--
+-- -- First Hunk
+-- vim.keymap.set('n', '[H', function() gs.nav_hunk('first') end,
+--
+-- -- Stage Hunk
+-- vim.keymap.set({'n', 'v'}, '<leader>ghs', ':Gitsigns stage_hunk<CR>',
+--
+-- -- Reset Hunk
+-- vim.keymap.set({'n', 'v'}, '<leader>ghr', ':Gitsigns reset_hunk<CR>',
+--
+-- -- Stage Buffer
+-- vim.keymap.set('n', '<leader>ghS', gs.stage_buffer,
+--
+-- -- Undo Stage Hunk
+-- vim.keymap.set('n', '<leader>ghu', gs.undo_stage_hunk,
+--
+-- -- Reset Buffer
+-- vim.keymap.set('n', '<leader>ghR', gs.reset_buffer,
+--
+-- -- Preview Hunk Inline
+-- vim.keymap.set('n', '<leader>ghp', gs.preview_hunk_inline,
+--
+-- -- Blame Line
+-- vim.keymap.set('n', '<leader>ghb', function() gs.blame_line({ full = true }) end,
+--
+-- -- Blame Buffer
+-- vim.keymap.set('n', '<leader>ghB', function() gs.blame() end,
+--
+-- -- Diff This
+-- vim.keymap.set('n', '<leader>ghd', gs.diffthis,
+--
+-- -- Diff This ~
+-- vim.keymap.set('n', '<leader>ghD', function() gs.diffthis('~') end,
+--
+-- -- GitSigns Select Hunk
+-- vim.keymap.set({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>',
 
 
--- _______________________ Git-fugitive __________________________
+
+
+-- _______________________ Vim-fugitive __________________________
 -- Open Git status
 vim.keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Open Git status" })
 
