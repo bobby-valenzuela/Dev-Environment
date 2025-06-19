@@ -333,12 +333,13 @@ Note: Lowercase markers are local to a file and uppercase markers are global acr
 
 <br />
 
-_RegEx_  
+_Searching, replacing, and RegEx_  
 `\r`                - This represents newline  
-`%s/(foo)/\1\r`     - Replaces matches with itself followed by a newline   
+`%s/(foo)/\1\r`     - Replaces matches with itself followed by a newline ('%' represents every occurence in the buffer)   
 `s/old/new/g` - When text is selected you can use a replace (without the %) to replace text within the selected range (use `gc` to replace with confirmation first)    
 `s/\VTEXTOMATCH/REPLACEWITHTHIS/` - The `\V` (very no magic mode treats all characters literaly except the `\`  
 `s/\v\w+/` - The `\v` (very magic mode treats most special cahrs as special - as in regular regex    
+`s/old/new/g22` - Replace 'old' with 'new' every every occurence in a line (g) including the next 22 lines.     
 `noh` - "No Highlighting" - remove highlited matches  
 `vim /function/ **/*.pl` - Grep all matches of `function` in every '.pl. file in current dir (recursively). Then `:cope` to create a QuickFix list  
 `vim /\Vfunction/ /home/ubuntu/**/*.pl` - Grep all matches of `function` in every '.pl. file in current dir (recursively). Then `:cope` to create a QuickFix list  
