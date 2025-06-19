@@ -31,7 +31,10 @@ cp -f -v ./config/.p10k.zsh  $HOME/
 cp -f -v ./config/.tmux.conf  $HOME/
 cp -f -v ./config/.vimrc  $HOME/
 cp -f -v ./config/.zshrc   $HOME/
+cp -f -v ./config/.zsh_customizations  $HOME/
 cp -f -v ./config/.tmux_init.sh  $HOME/
+
+
 
 if [ ! -d $HOME/.config/ ]; then
     mkdir -p $HOME/.config/
