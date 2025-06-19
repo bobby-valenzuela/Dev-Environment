@@ -29,6 +29,15 @@ sudo apt install make gcc ripgrep unzip git git-all xclip zsh build-essential p7
     nvm use v14.10.0      # Use specific version
    ```
 
+   <br/>
+   Install llvm and related tools  
+```bash
+wget https://apt.llvm.org/llvm.sh
+chmod +x llvm.sh
+sudo ./llvm.sh 20 all
+# or for latest stable release...
+# sudo ./llvm.sh all
+```
 
 <br />
 
