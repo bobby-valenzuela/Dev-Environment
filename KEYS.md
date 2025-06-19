@@ -351,6 +351,13 @@ _Searching, replacing, and RegEx_
 
 <br />
 
+Notes  
+`:s/foo/barr/` - replace 1st occurrence on current line  
+`:%s?foo/bar/` - replace 1st occurrence on every line  
+`:.,$s?foo/bar/` - replace 1st occurrence on every line until end of buffer    
+
+<br />
+
 _Quickfix list commands_  
 `:cope` - open quickfix list  
 `:cclose` - close quickfix list  
