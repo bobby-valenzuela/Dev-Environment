@@ -204,6 +204,8 @@ sudo apt install sshpass -y
 ### Other  
 
 __Harlequin SQL__
+
+[Harlequin](https://github.com/tconbeer/harlequin)  
 - `F2` - focus on query editor  
 - `F5` Focus on the Results Viewer.  
 - `F6` Focus on the Data Catalog.  
@@ -226,7 +228,7 @@ Initialize project, Install harlequin, and add adapters
 uv init
 uv tool install harlequin
 uv tool install 'harlequin[postgres,mysql,s3,odbc]'
-
+sudo apt install unixodbc -y # ODBC
 ```
 
 <br />
@@ -249,7 +251,30 @@ Executing query under cursor with `<leader>rr`, add this custom key binding (lua
 ```lua
 vim.keymap.set('n', '<leader>rr', '<Plug>(DBUI_ExecuteQuery)', { desc= 'Execute query under cursor (DBUI)', noremap = true, silent = true })
 ```
+<rbr />
 
+Config File:  
+```toml
+[profiles.sscore-dev]
+#adapter = "odbc"
+# server = "X"
+# port = 1433
+#database = "X"
+# uid = "X"
+#pwd = "X"
+# driver = "ODBC Driver 18 for SQL Server"
+# Optional parameters
+#trusted_connection = "yes"
+#encrypt = "yes"
+
+connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:{SERVER},{PORT};Database={DB};Uid={USER};Pwd={PASS};Encrypt=yes;TrustServerCertificate=yes;Connection Timeout=30;"
+keymap_name = ["vscode"]
+theme = "tokyo-night"
+
+# DEFAULT PROFILE
+[harlequin.adapters.odbc]
+connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:{SERVER},{PORT};Database={DB};Uid={USER};Pwd={PASS};Encrypt=yes;TrustServerCertificate=yes;Connection Timeout=30;"
+```
 
 <br />
 
