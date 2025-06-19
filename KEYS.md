@@ -137,7 +137,10 @@ _Working with vim cmd/shell_
 `read !<shell_command>` - Paste shell output into buffer.  
 `:g/function/d` - Delete all lines matching the pattern 'function'  
 `q:` - Opens a buffer of previous commands to execute (with enter key)  
+`q/` - Opens a buffer of previous searches to execute (with enter key)  
 `C-L` -  Move window to far left  
+`<C-W>` - delete previous word  
+
 
 
 <br />
@@ -440,7 +443,14 @@ _Registers: Viewing/Yanking/Pasting_
 `ayy` - Yank line to "a" register (overwriting register a).  
 `Ayy` - Yank line to "a" register (appending to register a)  
 `"+y` - Yank text into system clipboard  
+`<C-r> * ` - put the clipboard contents (X11: primary selection)  
+`<C-r> + ` - put the clipboard contents  
+`<C-r> / ` - put the last search pattern  
+`<C-r> : ` - put the last command-line  
+`<C-r> " ` - Paste from unamed register (anything yanked). Works in insert mode and command mode  
+
 _Note: '^J' in a register will be changed to a newline when pasting._
+
 
 <br />
 
@@ -569,6 +579,15 @@ _Option 2_
 Note: `C-` should be taken to mean `Ctrl+`. All other keys are to be entered in succession (not simultaneously).
 
 <br />
+
+__Troubleshooting__  
+`:highlight Delimiter` - See what styles apply to the "Delimiter" highlightgroup  
+`:highlight Delimiter` - See what styles apply to the "Delimiter" highlightgroup (verbose)  
+`:echo synIDattr(synID(line("."), col("."), 1), "name")` - See highlight group applying to item under cursor  
+`:echo map(synstack(line("."), col(".")), 'synIDattr(v:val, "name")')` - See all highlight groups that could apply to item under cursor  
+
+
+
 
 ## LazyVim
 
