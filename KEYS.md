@@ -296,6 +296,7 @@ _Moving along line_
 `t{` - Move to next `{` and use `;` to see sebsequent match (and  `,` for previous match)  
 `e` - end of word  
 `E` - end of word (punctuation included)  
+`{` / `}` - Move up/down in paragraphs  
 
 
 <br />
