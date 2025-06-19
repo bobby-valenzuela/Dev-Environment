@@ -398,7 +398,7 @@ _(Can also use dgn to delete multiple references)_
 `viw` - selects just the word.  
 `vaw` - selects the word plus any surrounding whitespace.  
 `C-rw`  - Copy whatever word is under cursor and paste into vim command line. (Useful for pasting into a search regex)  
-`o`    - Reverse order while continuing to select  
+`o`    - Reverse order while continuing to select (switches cursor between start/end of selected text)  
 `/<term>` - While in visual mode, select lines based on RegEx  
 `C-v` - enter visual block mode. Once text is selected enter insert mode (`a/A`,`i/I`,`c/C`,`p/P`,`o/O` etc) and make changes. They will appear on the first line, but once you hit Esc those changes will be made to all selected lines.  
 `gs{char}` - Global surround. Example: Select text then `gs"`  
