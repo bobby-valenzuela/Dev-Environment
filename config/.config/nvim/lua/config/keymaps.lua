@@ -69,7 +69,12 @@ vim.keymap.set('n', '<leader>FF', function()
 end, { noremap = true, silent = true })
 
 
+-- Smaller movements up/down buffer
+vim.keymap.set('n', '<C-d>', '22<C-e>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-u>', '22<C-y>', { noremap = true, silent = true })
 
+-- Clear all buffers' unsaved changes
+vim.keymap.set('n', 'E!', ':bufdo e!<CR>', { noremap = true, silent = true })
 
 -- Toggle line numbering
 vim.keymap.set('n', '<Leader>ll', 'set nonumber norelativenumber', { noremap = true, silent = true })

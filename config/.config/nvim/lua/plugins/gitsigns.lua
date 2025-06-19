@@ -1,6 +1,6 @@
 return {
     "lewis6991/gitsigns.nvim",
-    -- event = "LazyFile",
+    event = "BufReadPost",
     -- Increase max file length to handle larger files
     max_file_length = 100000, -- Default is 40000; adjust as needed (e.g., 100,000 lines)
     auto_attach = true,
@@ -8,7 +8,7 @@ return {
     watch_gitdir = {
       follow_files = true, -- Follow file renames/moves
     },
-  update_debounce = 100, -- Delay in ms for async updates; tweak for performance (e.g., 200 for slower systems)
+  update_debounce = 800, -- Delay in ms for async updates; tweak for performance (e.g., 200 for slower systems)
   opts = {
     signs = {
       add = { text = "▎" },
@@ -95,35 +95,3 @@ return {
 }
 
 
--- Alternative - not as good as gitsigns, but sometimes works on very large files when gitsigns (50,000 lines+)
--- Configuration for vim-gitgutter with lazy.nvim
-
--- return {
---   "airblade/vim-gitgutter",
---   -- Load the plugin immediately (adjust event if you want lazy loading)
---   event = "BufReadPost",
---   config = function()
---     -- Enable vim-gitgutter by default
---     vim.g.gitgutter_enabled = 1
---     -- Update signs in real-time
---     vim.g.gitgutter_realtime = 1
---     -- Set updatetime to 100ms for faster updates
---     vim.opt.updatetime = 100
---     -- Set max signs to 100,000
---     vim.g.gitgutter_max_signs = 100000
---     -- Define gitgutter icons
---     vim.g.gitgutter_sign_added = "XX"
---     vim.g.gitgutter_sign_modified = "~"
---     vim.g.gitgutter_sign_removed = "-"
---     vim.g.gitgutter_sign_removed_first_line = "^"
---     vim.g.gitgutter_sign_removed_above_and_below = "_"
---     vim.g.gitgutter_sign_modified_removed = "~-"
---
---     -- Keybindings
---     local map = vim.keymap.set
---     -- Toggle git signs
---     map("n", "<Leader>gt", ":GitGutterToggle<CR>", { desc = "Toggle GitGutter signs", silent = true })
---     -- Open fugitive's :Git (assuming vim-fugitive is installed)
---     map("n", "<Leader>gs", ":Git<CR>", { desc = "Open :Git", silent = true })
---   end,
--- }

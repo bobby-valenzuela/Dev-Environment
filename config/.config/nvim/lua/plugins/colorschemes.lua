@@ -3,6 +3,7 @@ return {
     { "ntk148v/komau.vim"},
     {'shaunsingh/nord.nvim'},
     {'thedenisnikulin/vim-cyberpunk'},
+    {'nyoom-engineering/oxocarbon.nvim'},
     {
         'maxmx03/fluoromachine.nvim',
         lazy = false,
