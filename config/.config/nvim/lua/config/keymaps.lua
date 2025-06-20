@@ -171,6 +171,24 @@ vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 -- Remap < to unindent and keep visual selection
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
 
+
+
+-- Find and [c]hange [w]ord under cursor - <Esc> to apply and . to repeat
+vim.keymap.set('n', '<leader>cW', '*Ncgn', { noremap = true, silent = true })
+
+-- Find and [c]hange [W]ord under cursor - replace all in doc
+vim.keymap.set('n', '<leader>cw', '* | :%s::', { noremap = true, silent = true })
+
+-- Find and [a]ppend [w] word under cursor - replace all in the doc
+vim.keymap.set('n', '<leader>aw', 'yiw | :%s:\\V<C-r>":<C-r>"', { noremap = true, silent = true })
+
+-- Find and [c]hange [Y]anked text - replace all in doc
+vim.keymap.set('n', '<leader>cy', ':%s:\\V<C-r>":', { noremap = true, silent = true })
+
+-- Find and [a]ppend [y]anked text- replace all in doc
+vim.keymap.set('n', '<leader>ay', ':%s:\\V<C-r>":<C-r>"', { noremap = true, silent = true })
+
+
 -- _______________________ Telescope __________________________
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Fuzzy File search - Telescope find files' })
@@ -181,8 +199,29 @@ vim.keymap.set('n', '<leader>fc', require('telescope.builtin').command_history, 
 
 -- _______________________ Harpoon __________________________
 local harpoon = require("harpoon")
-vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon: Add file" })
+
+-- ==> (optional) basic telescope UI configuration
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+    }):find()
+end
+-- ==> end optional telescope menu
+
 vim.keymap.set("n", "<leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: Toggle quick menu" })
+vim.keymap.set("n", "<leader>M", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon: Add file" })
 vim.keymap.set("n", "<leader>N", function() harpoon:list():prev() end, { desc = "Harpoon: Previous file" })
 vim.keymap.set("n", "<leader>n", function() harpoon:list():next() end, { desc = "Harpoon: Next file" })
 vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "Harpoon: Go to file 1" })
@@ -191,6 +230,10 @@ vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end, { desc
 vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end, { desc = "Harpoon: Go to file 4" })
 vim.keymap.set("n", "<leader>5", function() harpoon:list():select(5) end, { desc = "Harpoon: Go to file 5" })
 vim.keymap.set("n", "<leader>6", function() harpoon:list():select(6) end, { desc = "Harpoon: Go to file 6" })
+vim.keymap.set("n", "<leader>7", function() harpoon:list():select(7) end, { desc = "Harpoon: Go to file 7" })
+vim.keymap.set("n", "<leader>8", function() harpoon:list():select(8) end, { desc = "Harpoon: Go to file 8" })
+vim.keymap.set("n", "<leader>9", function() harpoon:list():select(9) end, { desc = "Harpoon: Go to file 9" })
+
 
 -- _______________________ Git (General) __________________________
 -- 'Git Undo' | Undo last commit and set changes as staged and unsaved

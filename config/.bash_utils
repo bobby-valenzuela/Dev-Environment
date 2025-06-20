@@ -2,22 +2,113 @@
 
 UTILS_LOADED=1
 
+# ____________________ GENERAL ______________________
+
 # Get side-by-side diff only showing diffs
 diffy(){
     diff $1 $2 -y --color --suppress-common-lines
 }
 
-# 'gs' aliased to gitsync
-function gs(){
-    gitsync "$1" "$2"
+# cd + ls
+tere() {
+    local result=$(command tere "$@")
+    [ -n "$result" ] && cd -- "$result"
 }
 
-function tmux_init(){
+clear_nvim_swaps(){
+    find ~/.local/state/nvim/swap -iname "*.swp" -exec rm -v '{}' \;
+}
+
+y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	# yz "$@" --cwd-file="$tmp" # Using local yazi in /usr/local/bin/yz
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+docx_to_md(){
+    [[ ! "$1" =~ .docx$ ]] && echo "File must be in .docx format" && exit
+    pandoc -s $1 -f docx -t commonmark --extract-media=. -o output.md
+}
+
+update_lazy(){
+    sudo apt install ninja-build gettext cmake unzip curl git
+    git clone https://github.com/neovim/neovim
+    cd neovim
+    git checkout stable
+    make CMAKE_BUILD_TYPE=Release
+    sudo make install
+}
+
+create_and_assume_user(){
+    [[ ! -z "$1" ]] && echo "[!] Requires username as an argument" && exit
+    sudo useradd -m $1 && sudo usermod -aG sudo $1 && sudo passwd $1 && sudo -i -u $1
+}
+
+edit_nvim_conf(){
+    nvim ~/.config/nvim/lua/
+}
+
+# Download MP3 audio from youtube URL
+mp3_dl(){
+    youtube-dl -x --audio-format mp3 $1
+}
+
+# Copy from WSL to Windows host
+wcp(){
+
+    WIN_FOLDER=/mnt/c/Users/BobbyValenzuela/Downloads/WSL/
+    WSL_FOLDER=~/WIN/
+
+    [ ! -d $WIN_FOLDER ] && mkdir -p $WIN_FOLDER
+    [ ! -d $WSL_FOLDER ] && mkdir -p $WSL_FOLDER
+
+    # Get the full path of the file
+    full_path=$(realpath "$$1" 2>/dev/null || readlink -f "$$1" 2>/dev/null)
+
+    DEST=
+
+
+
+    # Check if full_path is not empty
+    if [ -n "$full_path" ]; then
+    
+        # if there's a path, use that 
+        if [[ ! -z "$2" ]]; then
+            DEST=$2
+        else
+
+            # If this is a windows file, send to WSL folder
+            if [[ "$full_path" == /mnt/c/* ]]; then
+                DEST=$WSL_FOLDER
+            else
+                DEST=$WIN_FOLDER
+            fi
+
+        fi
+            # Now that we have a destination set, copy to DEST
+            cp -r -v $1 $DEST
+
+    else
+        echo "Error: File '$file' does not exist or cannot be resolved."
+    fi
+}
+
+
+# ____________________ WORKFLOW-SPECIFIC ______________________
+tmux_init(){
     bash ~/.tmux_init.sh 2>/dev/null
     tmux attach-session -t Main 2>/dev/null
 }
 
-function config_sync(){
+tt(){
+   cd ~/my_repos/Tomahawk/
+   ~/my_repos/Tomahawk/tomahawk
+}
+
+config_sync(){
 
     LOCAL_REPO=~/my_repos/Dev-Environment
 
@@ -84,14 +175,11 @@ function config_sync(){
           echo "Skipping $file (size: $((file_size / 1024 / 1024)) MB, exceeds 100 MB)"
         fi
     done
-    
-
 
     echo "Done!"
 }
 
-
-function config_sync_alpha(){
+config_sync_alpha(){
 
     # Sync local config files with cloned repo so i can push up my changes
     scp ~/.bash_aliases  alpha:/home/ubuntu/
@@ -112,93 +200,9 @@ function config_sync_alpha(){
     echo "Done!"
 }
 
-
-
-# cd + ls
-tere() {
-
-    local result=$(command tere "$@")
-    [ -n "$result" ] && cd -- "$result"
-
+gs(){
+    gitsync "$1" "$2"
 }
 
-# Set base for posting
-export POSTING_ROOT=/home/bobby/posting/
-export POSTING_EDITOR=vim
-
-# Copy from WSL to Windows host
-function wcp(){
-
-    WIN_FOLDER=/mnt/c/Users/BobbyValenzuela/Downloads/WSL/
-    WSL_FOLDER=~/WIN/
-
-    [ ! -d $WIN_FOLDER ] && mkdir -p $WIN_FOLDER
-    [ ! -d $WSL_FOLDER ] && mkdir -p $WSL_FOLDER
-
-    # Get the full path of the file
-    full_path=$(realpath "$$1" 2>/dev/null || readlink -f "$$1" 2>/dev/null)
-
-    DEST=
 
 
-
-    # Check if full_path is not empty
-    if [ -n "$full_path" ]; then
-    
-        # if there's a path, use that 
-        if [[ ! -z "$2" ]]; then
-            DEST=$2
-        else
-
-            # If this is a windows file, send to WSL folder
-            if [[ "$full_path" == /mnt/c/* ]]; then
-                DEST=$WSL_FOLDER
-            else
-                DEST=$WIN_FOLDER
-            fi
-
-        fi
-            # Now that we have a destination set, copy to DEST
-            cp -r -v $1 $DEST
-
-    else
-        echo "Error: File '$file' does not exist or cannot be resolved."
-    fi
-}
-
-function tt(){
-   cd ~/my_repos/Tomahawk/
-   ~/my_repos/Tomahawk/tomahawk
-}
-
-function clear_nvim_swaps(){
-    find ~/.local/state/nvim/swap -iname "*.swp" -exec rm -v '{}' \;
-}
-
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	# yz "$@" --cwd-file="$tmp" # Using local yazi in /usr/local/bin/yz
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}
-
-function docx_to_md(){
-    [[ ! "$1" =~ .docx$ ]] && echo "File must be in .docx format" && exit
-    pandoc -s $1 -f docx -t commonmark --extract-media=. -o output.md
-}
-
-function update_lazy(){
-    sudo apt install ninja-build gettext cmake unzip curl git
-    git clone https://github.com/neovim/neovim
-    cd neovim
-    git checkout stable
-    make CMAKE_BUILD_TYPE=Release
-    sudo make install
-}
-
-function create_and_assume_user(){
-    [[ ! -z "$1" ]] && echo "[!] Requires username as an argument" && exit
-    sudo useradd -m $1 && sudo usermod -aG sudo $1 && sudo passwd $1 && sudo -i -u $1
-}

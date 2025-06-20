@@ -12,6 +12,12 @@ alias gc="git stash save && git stash drop && git checkout master && git pull &&
 # Add ssh key to agent and push
 alias git_force_push="eval \$(ssh-agent -s) && ssh-add ~/.ssh/id_rsa && git push && echo 'Pushed to GitHub!'"
 
+# Shows last 15 merges
+alias showmerges="git log --oneline --merges -E --grep 'DEV-[0-9]+' -n 15" 
+
+# Lazygit
+alias lg="lazygit" 
+
 git_discard_old_stashes(){
     current=10
 
@@ -96,13 +102,5 @@ git_apply_stash_by_name(){
     git stash apply --index $stash_num
 }
 
-
-
-## RANDOM
-
-# Download MP3 audio from youtube URL
-mp3_dl(){
-    youtube-dl -x --audio-format mp3 $1
-}
 
 

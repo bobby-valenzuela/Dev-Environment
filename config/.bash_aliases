@@ -2,6 +2,8 @@
 
 export ALIASES_LOADED=1
 
+# ____________________ GENERAL ______________________
+
 ## a quick way to get out of current directory ##
 alias ..='cd ..'
 alias ...='cd ../../../'
@@ -17,6 +19,10 @@ alias fgrep='fgrep --color=auto'
 
 alias mkdir='mkdir -pv'
 
+# If we have colorized versions of cat and less use those by default
+[[ ccless ]] && alias less='cless'
+[[ ccat ]] && alias cat='ccat'
+
 ## get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
@@ -27,7 +33,6 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 
 ## Update cache and upgrade binaries
 alias upandup='sudo apt update && sudo apt upgrade'
-
 
 ## Apache
 alias apachelogerr='tail -n15 -f /var/log/apache2/error.log'
@@ -40,29 +45,26 @@ alias re="rr && ee"     # Restart Apache and tail error log
 alias er="watch egrep -i 'DBD::' /var/log/apache2/error.log"        # Tail error log for SQL errors
 
 
-## Git
-alias showmerges="git log --oneline --merges -E --grep 'DEV-[0-9]+' -n 15" # Shows last 15 merges
-
-## Lazygit
-alias lg="lazygit" 
-
-# SSH/SCP
-alias cc='quickconnect'
-alias scpdownloads='cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads'
-alias ssh-keyupdate="{ eval $(ssh-agent -s) ; } && ssh-add ~/.ssh/id_rsa"
-
-# General/Misc.
-alias reposync_thisdir_to_alpha="reposync . alpha ongoing"
-
-# My Main nvim install is a lazyvim dist - adding an alias to my custom install (~/.config/nvim-custom/)
-alias nvim-custom='NVIM_APPNAME="nvim-custom" nvim'
-
 # Fuzzy-vim
 alias fv='nvim $(fzf --height 40% --layout reverse --border)'
 alias ff='fzf --height 40% --layout reverse --border'
 
+
+
+# ____________________ WORKFLOW-SPECIFIC ______________________
+
 # Lazyvim setup
 alias nv='NVIM_APPNAME=nvim-lazy nvim'
+
+# SSH/SCP
+alias qc='quickconnect'
+alias scpdownloads='cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads'
+alias ssh_keyupdate="{ eval $(ssh-agent -s) ; } && ssh-add ~/.ssh/id_rsa"
+
+alias reposync_thisdir_to_alpha="reposync . alpha ongoing"
+
+# My Main nvim install is a lazyvim dist - adding an alias to my custom install (~/.config/nvim-custom/)
+alias nvim-custom='NVIM_APPNAME="nvim-custom" nvim'
 
 # thefuck alias
 # eval $(thefuck --alias redo)
