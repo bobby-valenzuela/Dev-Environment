@@ -3,7 +3,7 @@
 return {
 
 
-    -- 1. Mason for managing LSP servers
+    -- A. Mason for managing LSP servers
   {
     'williamboman/mason.nvim',
     config = function()
@@ -12,7 +12,7 @@ return {
   },
 
 
-    -- 2. Bridge between Mason and nvim-lspconfig
+    -- B. Bridge between Mason and nvim-lspconfig
   {
     'mason-org/mason-lspconfig.nvim',
      version = "1.29.0", -- last version that supports Neovim 0.10
@@ -32,13 +32,14 @@ return {
             "lua_ls",         -- Lua
             "html",
             "cssls",
-            "rust_analyzer"
+            "rust_analyzer",
+            "zls"
         },
       }
     end,
   },
 
-  -- 3. nvim-cmp for autocompletion
+  -- C. nvim-cmp for autocompletion
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
@@ -75,7 +76,7 @@ return {
     end,
   },
 
-   -- 4. nvim-lspconfig for configuring LSP servers
+   -- D. nvim-lspconfig for configuring LSP servers
 -- nvim-lspconfig for configuring LSP servers
   {
     'neovim/nvim-lspconfig',
@@ -160,6 +161,11 @@ return {
         capabilities = capabilities,
       }
 
+      -- Zig
+      lspconfig.zls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
     end,
   },
 
@@ -169,15 +175,17 @@ return {
 
 
 -- To install a new LSP
--- 
--- 1. [MASON] Install a new language server 
+
+-- 1. [MASON] (Section B) Install a new language server 
 	-- a) via Mason manually :Mason
 	-- b) via this file => mason-lspconfig.nvim => "ensure_installed"
 	-- c) using npm
     -- SERVER NAME => :Mason or :lua print(vim.inspect(require('mason-lspconfig').get_available_servers()))
--- 2: [LSPCONFIG] Configure new language server
+
+-- 2: [LSPCONFIG] (Section D) Configure new language server
     -- In this file, add new setup entry to lspconfig.xxx
     -- SERVER NAME => :help lspconfig-all or https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+
 -- 3: Run Lazy Sync or restart neovim
 
 

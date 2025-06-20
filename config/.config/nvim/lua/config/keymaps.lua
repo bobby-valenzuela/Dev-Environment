@@ -55,7 +55,7 @@ vim.keymap.set('n', '<leader>FF', function()
     if pattern ~= '' then
         -- Prepend **/ and execute :args
         vim.cmd('args **/' .. vim.fn.escape(pattern, ' '))
-        vim.fn.setqflist({}, 'r') -- Clear quickfix list
+        vim.fn.setqflist({}, 'r')  -- Clear quickfix list
         local args = vim.fn.argv() -- Get argument list
         local qflist = {}
         for _, file in ipairs(args) do
@@ -64,7 +64,7 @@ vim.keymap.set('n', '<leader>FF', function()
             end
         end
         vim.fn.setqflist(qflist, 'a') -- Add entries to quickfix list
-        vim.cmd('copen') -- Open quickfix window
+        vim.cmd('copen')              -- Open quickfix window
     end
 end, { noremap = true, silent = true })
 
@@ -79,8 +79,9 @@ vim.keymap.set('n', 'E!', ':bufdo e!<CR>', { noremap = true, silent = true })
 -- Toggle line numbering
 vim.keymap.set('n', '<Leader>ll', 'set nonumber norelativenumber', { noremap = true, silent = true })
 
--- Integrated Terminal 
-vim.keymap.set('n', '<C-_>', ':split | resize 15 | set nonumber norelativenumber | terminal<CR> | i', { noremap = true, silent = true })
+-- Integrated Terminal
+vim.keymap.set('n', '<C-_>', ':split | resize 15 | set nonumber norelativenumber | terminal<CR> | i',
+    { noremap = true, silent = true })
 
 -- Escape key impled :nohl (as well as leader+h to unhighlight)
 vim.keymap.set('n', '<esc>', ':nohlsearch<CR><esc>', { noremap = true, silent = true })
@@ -90,18 +91,19 @@ vim.keymap.set('n', '<leader>h', ':nohlsearch<CR><esc>', { noremap = true, silen
 vim.keymap.set('n', '<C-b>', '<C-v>', { noremap = true, silent = true })
 
 -- 'Remove Markers' | Remove all markers
-vim.keymap.set('n', '<leader>rm', ':delm a-zA-Z0-9<CR>', { desc= 'Remove All Markers', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>rm', ':delm a-zA-Z0-9<CR>', { desc = 'Remove All Markers', noremap = true, silent = true })
 
 -- move up/down in 20-step jumps
-vim.keymap.set('n', '<leader><down><down>', '20<C-e>', { desc= 'Move down 20 steps', noremap = true, silent = true })
-vim.keymap.set('n', '<leader><up><up>', '20<C-y>', { desc= 'Move down 20 steps', noremap = true, silent = true })
+vim.keymap.set('n', '<leader><down><down>', '20<C-e>', { desc = 'Move down 20 steps', noremap = true, silent = true })
+vim.keymap.set('n', '<leader><up><up>', '20<C-y>', { desc = 'Move down 20 steps', noremap = true, silent = true })
 
 -- Quickfix nav shortcuts
-vim.keymap.set('n', '<F12>', ':cn<CR>', { desc= 'Next item in quickfix list', noremap = true, silent = true })
-vim.keymap.set('n', '<F11>', ':cp<CR>', { desc= 'Previous item in quickfix list', noremap = true, silent = true })
+vim.keymap.set('n', '<F12>', ':cn<CR>', { desc = 'Next item in quickfix list', noremap = true, silent = true })
+vim.keymap.set('n', '<F11>', ':cp<CR>', { desc = 'Previous item in quickfix list', noremap = true, silent = true })
 
 -- Neotree
-vim.keymap.set('n', '<leader><leader>', ':Neotree toggle<CR>', { desc = 'Toggle Neo-tree file explorer', noremap = true, silent = true })
+vim.keymap.set('n', '<leader><leader>', ':Neotree toggle<CR>',
+    { desc = 'Toggle Neo-tree file explorer', noremap = true, silent = true })
 
 -- Remap > to indent and keep visual selection
 vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
@@ -111,19 +113,32 @@ vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
 
 -- _______________________ Telescope __________________________
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Fuzzy File search - Telescope find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Fuzzy grep - Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Fuzzy buffer search - Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Fuzzy tags - Telescope help tags' })
+vim.keymap.set('n', '<leader>fc', require('telescope.builtin').command_history, { desc = 'Fuzzy command find - Search command history' })
 
-
+-- _______________________ Harpoon __________________________
+local harpoon = require("harpoon")
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon: Add file" })
+vim.keymap.set("n", "<leader>m", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: Toggle quick menu" })
+vim.keymap.set("n", "<leader>N", function() harpoon:list():prev() end, { desc = "Harpoon: Previous file" })
+vim.keymap.set("n", "<leader>n", function() harpoon:list():next() end, { desc = "Harpoon: Next file" })
+vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "Harpoon: Go to file 1" })
+vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "Harpoon: Go to file 2" })
+vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "Harpoon: Go to file 3" })
+vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end, { desc = "Harpoon: Go to file 4" })
+vim.keymap.set("n", "<leader>5", function() harpoon:list():select(5) end, { desc = "Harpoon: Go to file 5" })
+vim.keymap.set("n", "<leader>6", function() harpoon:list():select(6) end, { desc = "Harpoon: Go to file 6" })
 
 -- _______________________ Git (General) __________________________
 -- 'Git Undo' | Undo last commit and set changes as staged and unsaved
-vim.keymap.set('n', '<leader>gu', '<cmd>git reset --hard HEAD~1<CR>', { desc= 'Undo last commit', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gu', '<cmd>git reset --hard HEAD~1<CR>',
+    { desc = 'Undo last commit', noremap = true, silent = true })
 
 -- 'Git stash' | Stash current changes using no custom stash name
-vim.keymap.set('n', '<leader>ga', '<cmd>git stash save<CR>', { desc= 'Git stash (Add)', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>ga', '<cmd>git stash save<CR>', { desc = 'Git stash (Add)', noremap = true, silent = true })
 
 
 -- Open lazyGit on the repo of the current buffer
@@ -275,7 +290,3 @@ vim.keymap.set('n', '<leader>dl', function() vim.diagnostic.disable(0, vim.api.n
 
 -- Enable diagnostics for current line: Re-enable diagnostics for the line under the cursor
 vim.keymap.set('n', '<leader>dL', function() vim.diagnostic.enable(0, vim.api.nvim_win_get_cursor(0)[1] - 1) end, opts)
-
-
-
-

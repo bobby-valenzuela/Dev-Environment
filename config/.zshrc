@@ -30,8 +30,10 @@ export PATH="$HOME/.local/bin":$PATH
 export PATH="$HOME/.local/lib":$PATH
 
 # NVIM to use binary PATH in /opt if it exists there
-if [[ -s /opt/nvim-linux64/bin/nvim ]]; then
+if [[ -s /opt/nvim-linux64/bin/nvim && ! -s /usr/local/bin/nvim ]]; then
     export PATH="/opt/nvim-linux64/bin":$PATH
+elif [[ -s /usr/local/bin/nvim ]]; then
+    export PATH="/usr/local/bin":$PATH
 fi
 
 # Go to use binary PATH in /usr/local/bin if it exists there

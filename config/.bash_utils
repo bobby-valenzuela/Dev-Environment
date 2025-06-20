@@ -155,3 +155,17 @@ function docx_to_md(){
     [[ ! "$1" =~ .docx$ ]] && echo "File must be in .docx format" && exit
     pandoc -s $1 -f docx -t commonmark --extract-media=. -o output.md
 }
+
+function update_lazy(){
+    sudo apt install ninja-build gettext cmake unzip curl git
+    git clone https://github.com/neovim/neovim
+    cd neovim
+    git checkout stable
+    make CMAKE_BUILD_TYPE=Release
+    sudo make install
+}
+
+function create_and_assume_user(){
+    [[ ! -z "$1" ]] && echo "[!] Requires username as an argument" && exit
+    sudo useradd -m $1 && sudo usermod -aG sudo $1 && sudo passwd $1 && sudo -i -u $1
+}
