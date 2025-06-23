@@ -349,6 +349,8 @@ _Brackets && Braces_
 - `di{` - Delete text inside brackets (inclusively)  
 - `da{` - Delete text inside brackets (exclusively)  
 - `{action}ab` - (y)ank/ (d)elete, (v)isual select entire block of code including lines where curly braces are on. Or, `zcdd` (zc to fold the block and dd to cut).
+- `[{` - Go to opening containing curly brace (can use repeatedly)
+- `]}` - Go to closing containing curly brace (can use repeatedly)   
 
 _Folding_  
 - `zf` - Create a fold from selected lines  
