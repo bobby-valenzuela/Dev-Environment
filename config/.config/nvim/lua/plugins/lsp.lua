@@ -6,8 +6,29 @@ return {
     -- A. Mason for managing LSP servers
   {
     'williamboman/mason.nvim',
+    -- dependencies = {
+    --     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    --     "neovim/nvim-lspconfig", -- Add lspconfig to ensure compatibility
+    --  },
     config = function()
-      require('mason').setup()
+        require('mason').setup()
+    --     -- INSTALL LINTERs
+    --     require("mason-tool-installer").setup({
+    --       ensure_installed = {
+    --         -- Linters for nvim-lint
+    --         "pylint",        -- Python
+    --         "ruff",          -- Python
+    --         "eslint_d",      -- JavaScript/TypeScript
+    --         "vale",          -- Markdown
+    --         "cppcheck",      -- C
+    --         "perlcritic",    -- Perl
+    --         "shellcheck",    -- Bash/Zsh
+    --         "luacheck",      -- Lua
+    --       },
+    --       auto_update = true,
+    --       run_on_start = true,
+    --     })
+    --
     end,
   },
 
@@ -18,11 +39,12 @@ return {
      version = "1.29.0", -- last version that supports Neovim 0.10
     dependencies = {
         'williamboman/mason.nvim',
-      'neovim/nvim-lspconfig', -- Ensure nvim-lspconfig is a dependency
+        'neovim/nvim-lspconfig',                    -- Ensure nvim-lspconfig is a dependency
     },
     config = function()
+
+      -- INSTALL LSPs
       require('mason-lspconfig').setup {
-        -- List of LSP servers to install
         ensure_installed = {
             "pyright",        -- Python
             "tsserver",       -- JavaScript/TypeScript
@@ -36,6 +58,7 @@ return {
             "zls"
         },
       }
+
     end,
   },
 
@@ -169,6 +192,49 @@ return {
     end,
   },
 
+
+
+  -- E Linters
+    {
+        "mfussenegger/nvim-lint",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            local lint = require("lint")
+
+            -- Configure linters by filetype
+            lint.linters_by_ft = {
+              python = { "pylint", "ruff" },
+              javascript = { "eslint_d" },
+              typescript = { "eslint_d" },
+              -- markdown = { "vale" },
+              c = { "cpplint" },
+              perl = { "perlcritic" },
+              sh = { "shellcheck" },
+              zsh = { "shellcheck" },
+              lua = { "luacheck" },
+            }
+
+            -- :MasonInstall pylint ruff eslint_d vale cpplint  shellcheck luacheck
+            -- Autocommand group for linting
+            -- local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+            -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+            --   group = lint_augroup,
+            --   callback = function()
+            --     lint.try_lint()
+            --   end,
+            -- })
+
+            -- Keymap for manual linting
+            vim.keymap.set("n", "<leader>l", function()
+              lint.try_lint()
+            end, { desc = "Trigger linting for current file" })
+
+      end,
+    }
+
+
+
+
 }
 
 
@@ -187,6 +253,14 @@ return {
     -- SERVER NAME => :help lspconfig-all or https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 
 -- 3: Run Lazy Sync or restart neovim
+
+
+
+-- Installing Linters
+-- Can be done through this config file, but tricky, easier just to run this
+-- :MasonInstall pylint ruff eslint_d vale cpplint  shellcheck luacheck
+
+
 
 
 
@@ -213,12 +287,4 @@ return {
 
 
 
--- return {
---   "williamboman/mason.nvim",
---   build = ":MasonUpdate",
---   config = true,
---   dependencies = {
---     "williamboman/mason-lspconfig.nvim",
---     version = "1.29.0", -- last version that supports Neovim 0.10
---   },
--- }
+

@@ -1,6 +1,11 @@
 return {
+    {'cesaralvarod/tokyogogh.nvim'},
+    {'shrikecode/kyotonight.vim'},
+    {'miikanissi/modus-themes.nvim'},
+    {'lunacookies/vim-substrata'},
+    {'diegoulloao/neofusion.nvim'},
     {'olivercederborg/poimandres.nvim'},
-    { "ntk148v/komau.vim"},
+    {"ntk148v/komau.vim"},
     {'shaunsingh/nord.nvim'},
     {'thedenisnikulin/vim-cyberpunk'},
     {'nyoom-engineering/oxocarbon.nvim'},
