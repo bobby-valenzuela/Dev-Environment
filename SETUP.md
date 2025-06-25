@@ -24,7 +24,7 @@ I already have the JetBrains fonts I prefer zipped up in this repo.
 ## Common Programs
 
 ```bash
-sudo apt update && sudo apt install make gcc ripgrep unzip git git-all xclip zsh tmux build-essential p7zip-full jq python3-pygments curl locate sshfs sshpass xsel lua5.3 cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 fonts-powerline -y 
+sudo apt update && sudo apt install python3 wget tar fzf make gcc ripgrep unzip git git-all xclip zsh tmux build-essential p7zip-full jq python3-pygments curl locate sshfs sshpass xsel lua5.3 cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 fonts-powerline nodejs npm -y 
 ```
 
 <br />
