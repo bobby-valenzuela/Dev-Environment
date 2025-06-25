@@ -40,6 +40,11 @@ if [ ! -d $HOME/.config/ ]; then
     mkdir -p $HOME/.config/
 fi
 
+# Save old neovim config
+if [ -d $HOME/.config/nvim/ ]; then
+    mv -p $HOME/.config/nvim $HOME/.config/nvim-backup
+fi
+
 cp -v -r ./config/.config/nvim  $HOME/.config/
 cp -v -f -r ./config/.config/lazygit  $HOME/.config/
 
