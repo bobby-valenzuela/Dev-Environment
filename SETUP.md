@@ -68,14 +68,6 @@ __Utils__
 - uv https://docs.astral.sh/
 
 
- <br />  
-
-__General Must haves__
-```bash
-sudo apt install curl -y
-sudo apt install sshfs -y
-sudo apt install sshpass -y
-```
 
 <br />
 
