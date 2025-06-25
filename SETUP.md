@@ -13,17 +13,22 @@ Preliminaries
   - If on WSL then you will need to copy your ~/.wezterm.lua file to your windows home dir: `cp ~/.wezterm.lua /mnt/c/Users/<username>`
 - Common Generals
 ```bash
-sudo apt install make gcc ripgrep unzip git git-all xclip zsh build-essential p7zip-full jq python3-pygments curl locate sshfs sshpass xsel lua5.3 cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils -y 
+sudo apt update && sudo apt install make gcc ripgrep unzip git git-all xclip zsh build-essential p7zip-full jq python3-pygments curl locate sshfs sshpass xsel lua5.3 cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 -y 
 ```
+
+<br />
+
+## Download and Compile
+Some packages are best to download from source and compile to make sure we get the latest version:  
 - [Install Python](https://www.python.org/downloads/source/) => Download source and compile  
 - [Install Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)  => Download binary from tar and just extract into /opt/nvim-linux64  
-- [Install node version manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
-- [Install Node using nvm](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04)
 - [Install powerline fonts](https://github.com/powerline/fonts)
 - [Install yazi](https://yazi-rs.github.io/docs/installation/#debian)
 - [Install fzf](https://github.com/junegunn/fzf)
-- [Install latest GLIBC](https://ftp.gnu.org/gnu/glibc/)  
- - ```bash
+- [Install latest GLIBC](https://ftp.gnu.org/gnu/glibc/)
+- [Install node version manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)  ([Alternate installation methods](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04))
+- ```bash
+    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash # Install nvm version 0.40.3
     nvm list-remote       # avaiable versions
     nvm install v14.10.0  # install a version
     nvm list              # View installed versions
@@ -40,9 +45,59 @@ sudo ./llvm.sh 20 all
 # sudo ./llvm.sh all
 ```
 
-Update WSL tp pre-lease version  
+
+<br />
+
+## Updating WSL, Ubuntu distro, and GLIC
+Updating your ubuntu distro in WSL (in case its like < 24.0) and GLIBC  
+If you're on an older version of ubuntu, it may use an older version of GLIBC like 2.31. Programs like yazi (ya package manager) and Neovim (particularly it's LSP features) require a newer GLIBC. Since manually updating GLIBC isn't recomended we need to update the distro to get the latest GLIBC for our system.  
+
+<br />
+
+Check GLIBC version
 ```bash
+ldd --version
+```
+
+Check distro  
+```bash
+lsb_release -r
+# OR
+cat /etc/os-release
+```
+
+
+__GLIBC compatibility on recent versions__  
+
+```
+Ubuntu 20.04 (Focal): glibc 2.31
+Ubuntu 22.04 (Jammy): glibc 2.35
+Ubuntu 24.04 (Noble): glibc 2.39
+Ubuntu 24.10 (Oracular): glibc 2.40
+Ubuntu 25.04 (Plucky): glibc 2.41
+```
+
+<br />
+
+Update WSL to pre-release version (windows)  
+```cmd
 wsl --update --pre-release
+```
+
+Check latest compatible GLIBC for our system and the one installed  
+```bash
+sudo apt-cache policy libc6
+# ---------------------------
+# libc6:
+#  Installed: 2.35-0ubuntu3.1
+#  Candidate: 2.35-0ubuntu3.9
+```
+
+<br />
+
+If there's a newer version available then whats installed, install the latest version  
+```bash
+sudo apt update && sudo apt install libc6 -y
 ```
 
 <br />
