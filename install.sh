@@ -61,7 +61,7 @@ if [ "$1" = "install" ]; then
     # echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
 
     printf "[+] Installing nvm...\n\n"
-    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
     # Download and install lazygit
     printf "[+] Installing lazygit...\n\n"
