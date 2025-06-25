@@ -45,8 +45,12 @@ if [ -d $HOME/.config/nvim/ ]; then
     mv -p $HOME/.config/nvim $HOME/.config/nvim-backup
 fi
 
+# Remove local nvim cache
+rm -rf ~/.local/share/nvim/
+
+# Copy nvim
 cp -v -r ./config/.config/nvim  $HOME/.config/
-cp -v -f -r ./config/.config/lazygit  $HOME/.config/
+cp -v -f -r ./config/lazygit  $HOME/.config/
 
 $SUDO cp -f -v ./config/usr_local_bin/* /usr/local/bin/
 
