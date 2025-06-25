@@ -24,14 +24,13 @@ I already have the JetBrains fonts I prefer zipped up in this repo.
 ## Common Programs
 
 ```bash
-sudo apt update && sudo apt install make gcc ripgrep unzip git git-all xclip zsh tmux build-essential p7zip-full jq python3-pygments curl locate sshfs sshpass xsel lua5.3 cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 -y 
+sudo apt update && sudo apt install make gcc ripgrep unzip git git-all xclip zsh tmux build-essential p7zip-full jq python3-pygments curl locate sshfs sshpass xsel lua5.3 cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 fonts-powerline -y 
 ```
 
 <br />
 
 ## Not included in Common Programs list (need to install)
 Can work on automating this..
-- [Install powerline fonts](https://github.com/powerline/fonts)
 - [Install yazi](https://yazi-rs.github.io/docs/installation/#debian)
 - [Lazygit](https://github.com/jesseduffield/lazygit)  
 - Install llvm and related tools (clangd, cmake, etc)  
@@ -85,6 +84,7 @@ Some packages are best to download from source and compile to make sure we get t
 - [Install Python](https://www.python.org/downloads/source/)  
 - [Install Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)    
 - [Install fzf](https://github.com/junegunn/fzf)
+- [Install powerline fonts](https://github.com/powerline/fonts)
 - [Install node version manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)  ([Alternate installation methods](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04))
   ```bash
     # NVM
