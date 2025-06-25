@@ -22,6 +22,7 @@ sudo apt install make gcc ripgrep unzip git git-all xclip zsh build-essential p7
 - [Install powerline fonts](https://github.com/powerline/fonts)
 - [Install yazi](https://yazi-rs.github.io/docs/installation/#debian)
 - [Install fzf](https://github.com/junegunn/fzf)
+- [Install latest GLIBC](https://ftp.gnu.org/gnu/glibc/)  
  - ```bash
     nvm list-remote       # avaiable versions
     nvm install v14.10.0  # install a version
