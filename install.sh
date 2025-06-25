@@ -52,7 +52,7 @@ if [ "$1" = "install" ]; then
     $SUDO rm -f /var/lib/dpkg/lock
 
     printf "[+] Installing packages...\n\n"
-    $SUDO apt-get update && $SUDO apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all python3-pygments xclip build-essential p7zip-full jq locate sshpass xsel cmake nodejs npm libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils -y
+    $SUDO apt-get update && $SUDO apt install python3 wget zsh lua5.4 curl tar ripgrep fzf make gcc unzip git git-all python3-pygments xclip build-essential p7zip-full jq locate sshpass xsel cmake nodejs npm libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils lic6 -y
 
     printf "[+] Installing latest neovim stable release...\n\n"
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
