@@ -8,26 +8,86 @@
 
 # Setup
 
-Preliminaries
+<br />
+
+## Prerequisites  
+
 - [Install Wezterm Editor](https://wezfurlong.org/wezterm/install/linux.html)  
-  - If on WSL then you will need to copy your ~/.wezterm.lua file to your windows home dir: `cp ~/.wezterm.lua /mnt/c/Users/<username>`
-- Common Generals
+If on WSL then you will need to copy your ~/.wezterm.lua file to your windows home dir: `cp ~/.wezterm.lua /mnt/c/Users/<username>`  
+- [Download and Install a NerdFont](https://www.nerdfonts.com/)
+I already have the JetBrains fonts I prefer zipped up in this repo.  
+~~[OLD] For WSL I used to install "MesloLGS NF" and "DroidSansM Nerd Font" and set the "DroidSansM" in terminal. DroidSansM: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/DroidSansMono.zip~~  
+
+
+<br />
+
+## Common Programs
+
 ```bash
-sudo apt update && sudo apt install make gcc ripgrep unzip git git-all xclip zsh build-essential p7zip-full jq python3-pygments curl locate sshfs sshpass xsel lua5.3 cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 -y 
+sudo apt update && sudo apt install make gcc ripgrep unzip git git-all xclip zsh tmux build-essential p7zip-full jq python3-pygments curl locate sshfs sshpass xsel lua5.3 cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 -y 
 ```
 
 <br />
 
-## Download and Compile
-Some packages are best to download from source and compile to make sure we get the latest version:  
-- [Install Python](https://www.python.org/downloads/source/) => Download source and compile  
-- [Install Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)  => Download binary from tar and just extract into /opt/nvim-linux64  
+## Not included in Common Programs list (need to install)
+Can work on automating this..
 - [Install powerline fonts](https://github.com/powerline/fonts)
 - [Install yazi](https://yazi-rs.github.io/docs/installation/#debian)
+- [Lazygit](https://github.com/jesseduffield/lazygit)  
+- Install llvm and related tools (clangd, cmake, etc)  
+  ```bash
+   wget https://apt.llvm.org/llvm.sh
+   chmod +x llvm.sh
+   sudo ./llvm.sh 20 all
+   # or for latest stable release...
+   # sudo ./llvm.sh all
+  ```
+
+
+__Installing vulkan drivers (Graphics card drivers)__
+
+```bash
+sudo apt update
+sudo apt install mesa-utils vulkan-tools
+```
+
+<br />
+
+__Utils__
+- Posting https://github.com/darrenburns/posting
+- Lazydocker https://github.com/jesseduffield/lazydocker
+- ggh https://github.com/byawitz/ggh
+- Yazi file manager https://github.com/sxyazi/yazi
+- Tere (cd | ls) https://github.com/mgunyho/tere
+- csvlens https://github.com/YS-L/csvlens
+- tufw https://github.com/peltho/tufw
+- Eget https://github.com/zyedidia/eget  
+- Dust https://github.com/bootandy/dust
+- Youtube Downloader https://github.com/yt-dlp/yt-dlp
+- mpv https://mpv.io/
+- go https://go.dev/doc/install
+- uv https://docs.astral.sh/
+
+
+ <br />  
+
+__General Must haves__
+```bash
+sudo apt install curl -y
+sudo apt install sshfs -y
+sudo apt install sshpass -y
+```
+
+<br />
+
+## Included in Common Programs list but could benefit from a later version
+Some packages are best to download from source and compile to make sure we get the latest version:  
+- [Install Python](https://www.python.org/downloads/source/)  
+- [Install Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)    
 - [Install fzf](https://github.com/junegunn/fzf)
-- [Install latest GLIBC](https://ftp.gnu.org/gnu/glibc/)
 - [Install node version manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)  ([Alternate installation methods](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04))
-- ```bash
+  ```bash
+    # NVM
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash # Install nvm version 0.40.3
     nvm list-remote       # avaiable versions
     nvm install v14.10.0  # install a version
@@ -35,22 +95,61 @@ Some packages are best to download from source and compile to make sure we get t
     nvm use v14.10.0      # Use specific version
    ```
 
-   <br/>
-   Install llvm and related tools  
-```bash
-wget https://apt.llvm.org/llvm.sh
-chmod +x llvm.sh
-sudo ./llvm.sh 20 all
-# or for latest stable release...
-# sudo ./llvm.sh all
-```
+<br />
+
+## Included in Common Programs list but adding here for reference
+__TMUX__
+- [Install tmux: Terminal MultiPlexer](https://github.com/tmux/tmux/wiki/Installing)
+- [Install tmux plugin manager](https://github.com/tmux-plugins/tpm)
+  - One cmd: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` 
+- [Install Catppuccin Theme](https://github.com/catppuccin/tmux)
+  - Already installed if tpm is installed. 
+- Install all plugins loaded with `<prefix>+I` in a tmux session.
+- Replace ~/.tmux.conf with saved one and source with `tmux source-file ~/.tmux.conf`
+
+<br />
 
 
 <br />
 
+## Handled by install.sh script and/or config files
+
+### ZSH 
+- [Install ZSH with OhMyZsh](https://ohmyz.sh/) 
+  - ⚠️Replace ~/.zshrc with one saved.
+- [ZSH Syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+  - ⚠️ This can be skipped if you're copying my ~/.zshrc (I already have bit in zshrc that checks and clones repo)  
+  - Just run this (Ubuntu) .zsrhc already has needed snippet (checks for /usr/share/zsh-syntax-highlighting)
+  - ```bash
+      sudo apt install zsh-syntax-highlighting -y
+    ```  
+- [Install Powerline10k Theme](https://github.com/romkatv/powerlevel10k)
+  - ⚠️ _(use ohmyzsh installation)_
+  - Be sure to install the fonts mentioned and select those fonts for your terminal.
+  - Replace ~/.p10k.zshrc with one saved and source.
+  - [Font glyphs from Nerdfont](https://www.nerdfonts.com/cheat-sheet)
+- [Install ZSH syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+  - One cmd: `mkdir ~/zsh_utils/ && cd ~/zsh_utils && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
+
+
+<br />
+
+### VIM
+- [Install Vim-Plug plugin manager](https://github.com/junegunn/vim-plug)
+- - Actually, this is more of a backup as I've added the auto-install snippet for vim-plug into the .vimrc file
+- Replace ~/.vimrc with saved one (source with :so % or just close/re-open)
+- If you have ~/.vimrc.plug, replace that with saved ones
+- Load plugins by opening .vimrc or vimrc.plug file (whichever has plugins loaded) and running `:PlugInstall`
+- Make sure to do both the Linux and Neovim install
+
+<br />
+
+
 ## Updating WSL, Ubuntu distro, and GLIC
 Updating your ubuntu distro in WSL (in case its like < 24.0) and GLIBC  
 If you're on an older version of ubuntu, it may use an older version of GLIBC like 2.31. Programs like yazi (ya package manager) and Neovim (particularly it's LSP features) require a newer GLIBC. Since manually updating GLIBC isn't recomended we need to update the distro to get the latest GLIBC for our system.  
+
+Not recomended, but you can manually download+install glibc [here](https://ftp.gnu.org/gnu/glibc/)  
 
 <br />
 
@@ -66,6 +165,7 @@ lsb_release -r
 cat /etc/os-release
 ```
 
+<br />
 
 __GLIBC compatibility on recent versions__  
 
@@ -76,6 +176,7 @@ Ubuntu 24.04 (Noble): glibc 2.39
 Ubuntu 24.10 (Oracular): glibc 2.40
 Ubuntu 25.04 (Plucky): glibc 2.41
 ```
+
 
 <br />
 
@@ -102,62 +203,49 @@ sudo apt update && sudo apt install libc6 -y
 
 <br />
 
-## ZSH
-- [Install ZSH with OhMyZsh](https://ohmyz.sh/) 
-  - ⚠️Replace ~/.zshrc with one saved.
-- [ZSH Syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
-  - ⚠️ This can be skipped if you're copying my ~/.zshrc (I already have bit in zshrc that checks and clones repo)  
-  - Just run this (Ubuntu) .zsrhc already has needed snippet (checks for /usr/share/zsh-syntax-highlighting)
-  - ```bash
-      sudo apt install zsh-syntax-highlighting -y
-    ```  
-- [Install Powerline10k Theme](https://github.com/romkatv/powerlevel10k)
-  - ⚠️ _(use ohmyzsh installation)_
-  - Be sure to install the fonts mentioned and select those fonts for your terminal.
-  - [Down and Install a NerdFont](https://www.nerdfonts.com/)
-    - I already have the JetBrains fonts I prefer zipped up in this repo.  
-    - [OLD] For WSL I used to install "MesloLGS NF" and "DroidSansM Nerd Font" and set the "DroidSansM" in terminal. DroidSansM: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/DroidSansMono.zip 
-  - Replace ~/.p10k.zshrc with one saved and source.
-  - [Font glyphs from Nerdfont](https://www.nerdfonts.com/cheat-sheet)
-- [Install ZSH syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
-  - One cmd: `mkdir ~/zsh_utils/ && cd ~/zsh_utils && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
+Optionally, you can perform a full distribution and release upgrade  
+```bash
+sudo apt update
+sudo apt full-upgrade -y   # full distribution upgrade
+sudo do-release-upgrade    # full release upgrade
+```
 
-
-<br />
-
-## TMUX
-- [Install tmux: Terminal MultiPlexer](https://github.com/tmux/tmux/wiki/Installing)
-- [Install tmux plugin manager](https://github.com/tmux-plugins/tpm)
-  - One cmd: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` 
-- [Install Catppuccin Theme](https://github.com/catppuccin/tmux)
-  - Already installed is tpm is installed. 
-- Install all plugins loaded with `<prefix>+I` in a tmux session.
-- Replace ~/.tmux.conf with saved one and source with `tmux source-file ~/.tmux.conf`
-
-<br />
-
-## VIM
-- [Install Vim-Plug plugin manager](https://github.com/junegunn/vim-plug)
-- - Actually, this is more of a backup as I've added the auto-install snippet for vim-plug into the .vimrc file
-- Replace ~/.vimrc with saved one (source with :so % or just close/re-open)
-- If you have ~/.vimrc.plug, replace that with saved ones
-- Load plugins by opening .vimrc or vimrc.plug file (whichever has plugins loaded) and running `:PlugInstall`
-- Make sure to do both the Linux and Neovim install
-
-<br />
+Then shutdown and start wsl back up again  
+```cmd
+wsl --shutdown
+```
 
 ---
-## Neovim (via lazy vim)
-- [Install Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md)
-- [Install LazyVim](https://www.lazyvim.org/installation)  
+
+<br />
+
+<br />
+
+<br />
 
 
-LazyGit tutorial: https://www.youtube.com/watch?v=Ihg37znaiBo  
 
-Use `:LazyExtras` to enable some extra plugins
-- Harpoon
-- mini.indentscope
-Check `nvim/lazy-lock.json` for full current list in use.
+
+## Trouble Shooting (WSL)
+
+I've been using this without issue in WSL, butin case you're having issues, it could be to do with your `DISPLAY1 environment variable.
+If you still get the “cannot open display” error, set the DISPLAY variable as shown below.
+```bash
+echo "export DISPLAY=localhost:0.0" >> ~/.bashrc
+```
+Note: IP is the local workstation’s IP where you want the GUI application to be displayed.  
+
+__Helpful Related Links (WSL + GUI)__
+- [Link 0](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
+- [Link 1](https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj)
+- [Link 2](https://wiki.ubuntu.com/WSL#Running_Graphical_Applications)
+- [Link 3](https://wiki.iihe.ac.be/Use_X11_forwarding_with_WSL)
+
+<br />
+
+
+
+# OTHER & MISC.
 
 <br />
 
@@ -172,7 +260,7 @@ perl -MCPAN -e shell
 install PLS
 ```
 
-add this into `init.lua` OR `~/.config/nvim/lua/config/lazy.lua`  
+add this into `init.lua` OR `~/.config/nvim/lua/config/.lua`  
 
 ```
 local lspconfig = require("lspconfig")
@@ -211,67 +299,7 @@ return {
 <br />
 
 ---
-## Trouble Shooting (WSL)
 
-I've been using this without issue in WSL, butin case you're having issues, it could be to do with your `DISPLAY1 environment variable.
-If you still get the “cannot open display” error, set the DISPLAY variable as shown below.
-```bash
-echo "export DISPLAY=localhost:0.0" >> ~/.bashrc
-```
-Note: IP is the local workstation’s IP where you want the GUI application to be displayed.  
-
-__Helpful Related Links (WSL + GUI)__
-- [Link 0](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
-- [Link 1](https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj)
-- [Link 2](https://wiki.ubuntu.com/WSL#Running_Graphical_Applications)
-- [Link 3](https://wiki.iihe.ac.be/Use_X11_forwarding_with_WSL)
-
-<br />
-
-<br />
-
-__Installing vulkan drivers__
-
-```bash
-sudo apt update
-sudo apt install mesa-utils vulkan-tools
-```
-
-<br />
-
----
-# Utils
-- Lazygit https://github.com/jesseduffield/lazygit
-- Posting https://github.com/darrenburns/posting
-- Lazydocker https://github.com/jesseduffield/lazydocker
-- ggh https://github.com/byawitz/ggh
-- Yazi file manager https://github.com/sxyazi/yazi
-- Tere (cd | ls) https://github.com/mgunyho/tere
-- csvlens https://github.com/YS-L/csvlens
-- tufw https://github.com/peltho/tufw
-- Eget https://github.com/zyedidia/eget  
-- Dust https://github.com/bootandy/dust
-- Youtube Downloader https://github.com/yt-dlp/yt-dlp
-- mpv https://mpv.io/
-- go https://go.dev/doc/install
-- uv https://docs.astral.sh/
-
-
- <br />  
-
-General Must haves
-```bash
-sudo apt install curl -y
-sudo apt install sshfs -y
-sudo apt install sshpass -y
-```
-
-
-
-
-
----
-### Other  
 
 __Harlequin SQL__
 
