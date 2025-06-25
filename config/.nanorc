@@ -1,5 +1,0 @@
-set tabsize 4
-set tabstospaces
-
-# Update existing files with tabs that should be converted to 4 spaces (run command below)
-# expand -4 input.py > output.py

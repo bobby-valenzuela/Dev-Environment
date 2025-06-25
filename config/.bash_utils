@@ -121,8 +121,10 @@ config_sync(){
     # Ensure $DEST is set and is a valid directory
     if [ -z "$DEST" ] || [ ! -d "$DEST" ]; then
       echo "Error: Directory $DEST is not set or is not a valid directory."
-      exit 1
+      return 1
     fi
+
+    printf "Running...\n"
 
     cp -v ~/.bash_aliases  $DEST
     cp -v ~/.bash_git  $DEST
@@ -136,12 +138,12 @@ config_sync(){
     cp -v ~/.zshrc   $DEST
     cp -v ~/.zsh_customizations   $DEST
     cp -v ~/.tmux_init.sh  $DEST
-    cp -v -r ~/.config/lazydocker/  $DEST/.config/
-    cp -v -r ~/.config/lazygit/  $DEST/.config/
-    cp -v -r ~/.config/nvim/  $DEST/.config/
-    cp -v -r ~/.config/nvim-lazy/  $DEST/.config/
-    cp -v -r ~/.config/posting/  $DEST/.config/
-    cp -v -r ~/.config/yazi/  $DEST/.config/
+    cp -v -r ~/.config/lazydocker/  $DEST.config/
+    cp -v -r ~/.config/lazygit/  $DEST.config/
+    cp -v -r ~/.config/nvim/  $DEST.config/
+    cp -v -r ~/.config/nvim-lazy/  $DEST.config/
+    cp -v -r ~/.config/posting/  $DEST.config/
+    sudo cp -v -r ~/.config/yazi/  $DEST.config/
 
     # cp -v -r ~/.config/  $DEST
     #    cp -v -r ~/.local/share/nvim/dadbod_ui/  $DEST
@@ -151,6 +153,10 @@ config_sync(){
 
     DEST=$LOCAL_REPO/config/usr_local_bin/
     # cp /usr/local/bin/* $DEST
+
+    if [[ ! -d $LOCAL_REPO/config/usr_local_bin/ ]]; then
+        mkdir -p $LOCAL_REPO/config/usr_local_bin/
+    fi
 
     # Maximum file size in bytes (100 MB = 100 * 1024 * 1024 bytes)
     max_size=$((100 * 1024 * 1024))
@@ -166,10 +172,10 @@ config_sync(){
         # Check if file size is less than 100 MB
         if [ $file_size -lt $max_size ]; then
           echo "Copying $file (size: $((file_size / 1024 / 1024)) MB)"
-          cp -r "$file" "$DEST"
+          sudo cp -r "$file" "$DEST"
           if [ $? -ne 0 ]; then
             echo "Error: Failed to copy $file."
-            exit 1
+            # exit 1
           fi
         else
           echo "Skipping $file (size: $((file_size / 1024 / 1024)) MB, exceeds 100 MB)"
