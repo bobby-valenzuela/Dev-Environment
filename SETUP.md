@@ -39,6 +39,11 @@ sudo ./llvm.sh 20 all
 # sudo ./llvm.sh all
 ```
 
+Update WSL tp pre-lease version  
+```bash
+wsl --update --pre-release
+```
+
 <br />
 
 ## ZSH
