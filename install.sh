@@ -172,7 +172,7 @@ if [ "$1" = "config" -o "$1" = "configonly" ]; then
     $SUDO rm -f /var/lib/dpkg/lock-frontend
     $SUDO rm -f /var/lib/dpkg/lock
 
-    if ! command -v nvim >/dev/null 2>&1; ; then
+    if ! command -v nvim >/dev/null 2>&1; then
         printf "[+] Installing latest neovim stable release...\n\n"
         curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
         $SUDO rm -rf /opt/nvim
@@ -182,7 +182,7 @@ if [ "$1" = "config" -o "$1" = "configonly" ]; then
     fi
 
     # Download and install lazygit
-    if ! command -v lazygit >/dev/null 2>&1; ; then
+    if ! command -v lazygit >/dev/null 2>&1; then
         printf "[+] Installing lazygit...\n\n"
         LAZYGIT_VERSION='0.40.2'
         curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
