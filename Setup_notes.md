@@ -16,6 +16,7 @@ If on WSL then you will need to copy your ~/.wezterm.lua file to your windows ho
 - [Download and Install a NerdFont](https://www.nerdfonts.com/)
 I already have the JetBrains fonts I prefer zipped up in this repo.  
 ~~[OLD] For WSL I used to install "MesloLGS NF" and "DroidSansM Nerd Font" and set the "DroidSansM" in terminal. DroidSansM: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/DroidSansMono.zip~~  
+Another font thats worth installing as it comes up in some packages [Noto Font](https://fonts.google.com/noto/specimen/Noto+Sans)
 
 
 <br />
@@ -32,7 +33,7 @@ sudo apt update && sudo apt install python3 perl wget tar make gcc  unzip git gi
 __Extras__  
 Not essential per se, but essentials for my workflow,enchancements, and customizations    
 ```bash
-sudo apt update && sudo apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config -y
+sudo apt update && sudo apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config mesa-utils vulkan-tools -y
 ```
 
 <br />
