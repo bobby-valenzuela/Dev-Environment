@@ -1,11 +1,26 @@
 # Installing
 
-Install on a debian-based system
+Install all in ubuntu system _(installs packages and copies config files)_
 ```bash
 sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"
 ```
 
 <br />
+
+Install programs in ubuntu system _(installs packages only)_
+```bash
+sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_installonly.sh -O -)"
+```
+
+<br />
+
+Install config files in ubuntu system _(config files only)_
+```bash
+sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
+```
+
+<br />
+
 
 Create a Docker container running Ubuntu Jammy jellyfish (v22) and execute install script
 ```bash
@@ -18,21 +33,7 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 
 <br />
 
-If you already have the repo cloned you can copy the config files to your home directory
-```bash
-sh ./install.sh
-```
-
-<br />
-
-If you wish to also install any necessary packages
-```bash
-sh ./install.sh install
-```
-
-<br />
-
 ## Notes
-`install.sh` - Assumes the repo is cloned and copies the config files into the proper dirs. Run with "install" to install needed packages from apt.  
-`init.sh` - Clones repo and runs `install.sh install`  
+`install.sh` - Assumes the repo is cloned and installs packages. Run with "config" to copy the config files into the proper dirs or "configonly" to skill packages installation step.  
+`init.sh` - Clones repo and runs `install.sh` (installing both packages and config files)  
 `jammy_init.sh` - Sets up Docker container and runs `init.sh`  
