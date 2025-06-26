@@ -52,8 +52,13 @@ edit_nvim_conf(){
 }
 
 # Download MP3 audio from youtube URL
-mp3_dl(){
-    youtube-dl -x --audio-format mp3 $1
+mp3_dl () {
+        if [[ -s /usr/local/bin/yt-dlp ]]
+        then
+                sudo yt-dlp -t mp3 $1
+        else
+                youtube-dl -x --audio-format mp3 $1
+        fi
 }
 
 # Copy from WSL to Windows host
