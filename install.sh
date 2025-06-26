@@ -199,16 +199,19 @@ if [ "$1" = "config" -o "$1" = "configonly" ]; then
     printf "[+] Installing powerlevel10k...\n\n"
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
 
-    printf "[+] Sourcing .zshrc ...\n\n"
-    cp -v ./config/.zshrc   $HOME/
-    echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
-    zsh
-
     printf "[+] Setting default shell...\n\n"
     
     if which zsh >/dev/null 2>&1; then
         chsh -s $(which zsh)
     fi
+    
+    printf "[+] Sourcing .zshrc ...\n\n"
+    cd "$(dirname "$0")"
+    cp -v ./config/.zshrc   $HOME/
+    echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
+    zsh
+
+
 fi
 
 echo "Done!"
