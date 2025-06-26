@@ -43,7 +43,7 @@ update_lazy(){
 }
 
 create_and_assume_user(){
-    [[ ! -z "$1" ]] && echo "[!] Requires username as an argument" && exit
+    [[ -z "$1" ]] && echo "[!] Requires username as an argument" && exit
     sudo useradd -m $1 && sudo usermod -aG sudo $1 && sudo passwd $1 && sudo -i -u $1
 }
 
