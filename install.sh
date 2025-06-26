@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copy config file to new machine
+# Installation of packages and copying of config files
 
 CALLING_USER=$(whoami)
 
@@ -16,75 +16,185 @@ else
     printf "[+] Running as root\n"
 fi
 
-printf "[+] Home: $HOME\n"
+# Unless we're explicitly calling to only copy the configs, then let's start installing
+if [ "$1" != "configonly" ]; then
+    
+    echo "[+] Installing essential core packages..."    # Not essential per se, but essentials for my workflow,enchancements, and customizations
+    $SUDO  apt update && $SUDO  apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc coreutils cargo pandoc docker.io docker-compose-plugin nodejs npm -y
+    
+    echo "[+] Installing extras..."
+    $SUDO  apt update && $SUDO  apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config -y
+    
+    echo "[+] Installing manual installs..."            # Software that isn't installed via a distro's package manager (may contain fixed versions). The order below is important.
+    
+    # PRE-REQUISITES
+    echo "[+] Enabling docker service..."
+    $SUDO  systemctl enable docker
+    $SUDO  systemctl start docker
+    
+    echo "[+] Installing Rust/Rustup..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    rustup update
+    
+    echo "[+] Installing uv python package manager..."
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+      
+    echo "[+] Installing Go..."
+    rm -rf /usr/local/go
+    wget https://go.dev/dl/go1.24.4.linux-amd64.tar.gz -O go1.24.4.linux-amd64.tar.gz
+    tar -xvf go1.24.4.linux-amd64.tar.gz
+    $SUDO  mv go /usr/local/
+    rm -rf go1.24.4.linux-amd64.tar.gz
+    
+    echo "[+] Installing nvm..."
+    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash # Install nvm version 0.40.3
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+    echo "[?] Available nvm versions:"
+    nvm list-remote       # avaiable versions
+    echo "[+] Installing node v22..."
+    nvm install v22.17.0  # install a version
+    echo "[+] Installed versions:"
+    nvm list              # View installed versions
+    echo "[+] Selecting v22.17"
+    nvm use v22.17.0 
+    
+    echo "[+] Done installing prerequisites!"
+    
+    printf "\n\n---------------------------------------------------\n\n"
+    
+    # MAIN INSTALLATIONS
+    echo "[+] Installing ggh ssh manager..."
+    curl https://raw.githubusercontent.com/byawitz/ggh/master/install/unix.sh | sh
+    
+    echo "[+] Installing tere..."
+    cargo install tere
+    
+    echo "[+] Installing csvlens"
+    cargo install csvlens
+    
+    echo "[+] Installing Dust..."
+    cargo install du-dust
+    
+    echo "[+] Installing YouTube-downloader..."
+    $SUDO  wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -O /usr/local/bin/yt-dlp; $SUDO chmod +x /usr/local/bin/yt-dlp
+    
+    echo "[+] Installing Tufw (UFW GUI)..."
+    $SUDO  wget https://github.com/peltho/tufw/releases/download/v0.2.4/tufw_0.2.4_linux_amd64.deb -O ./tufw_0.2.4_linux_amd64.deb
+    $SUDO  apt install ./tufw_0.2.4_linux_amd64.deb -y
+    $SUDO  rm ./tufw_0.2.4_linux_amd64.deb
+    
+    echo "[+] Installing eget..."
+    go install github.com/zyedidia/eget@latest
+    
+    echo "[+] Installing lazygit..."
+    go install github.com/jesseduffield/lazygit@latest
+    
+    echo "[+] Installing lazydocker..."
+    curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+    
+    echo "[+] Installing Posting via uv..."
+    uv tool install --python 3.13 posting
+    
+    echo "[+] Installing mpv..."
+    $SUDO  curl --output-dir /etc/apt/trusted.gpg.d -O https://apt.fruit.je/fruit.gpg
+    ADDITION="deb http://apt.fruit.je/ubuntu $(cat /etc/os-release | grep 'VERSION_CODENAME' | awk -F= '{print $2}' | xargs) mpv"
+    echo $ADDITION | $SUDO  tee -a /etc/apt/sources.list.d/fruit.list
+    $SUDO  apt update
+    $SUDO  apt install mpv -y
+    
+    echo "[+] Installing llvm and related tools (clangd, cmake, etc)..."
+    wget https://apt.llvm.org/llvm.sh
+    chmod +x llvm.sh
+    $SUDO  ./llvm.sh 20 all
+    # or for latest stable release...
+    # sudo ./llvm.sh all
+    
+    echo "[+] Installing Yazi..."
+    $SUDO  apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
+    
+    git clone https://github.com/sxyazi/yazi.git
+    cd yazi
+    cargo build --release --locked
+    $SUDO  mv target/release/yazi target/release/ya /usr/local/bin/
 
-# Execute from the dir the script is in
-cd "$(dirname "$0")" || exit
-
-# Sync local config files with cloned repo so i can push up my changes
-cp -f -v ./config/.bash_aliases  $HOME/
-cp -f -v ./config/.bash_git  $HOME/
-cp -f -v ./config/.bash_pbx  $HOME/
-cp -f -v ./config/.bash_utils  $HOME/
-cp -f -v ./config/.bashrc  $HOME/
-cp -f -v ./config/.p10k.zsh  $HOME/
-cp -f -v ./config/.tmux.conf  $HOME/
-cp -f -v ./config/.vimrc  $HOME/
-cp -f -v ./config/.zshrc   $HOME/
-cp -f -v ./config/.zsh_customizations  $HOME/
-cp -f -v ./config/.tmux_init.sh  $HOME/
-
-
-
-if [ ! -d $HOME/.config/ ]; then
-    mkdir -p $HOME/.config/
 fi
 
-# Save old neovim config
-if [ -d $HOME/.config/nvim/ ]; then
-    mv -p $HOME/.config/nvim $HOME/.config/nvim-backup
-fi
 
-# Remove local nvim cache
-rm -rf ~/.local/share/nvim/
+# ------------------------------------------------------------------------
+if [ "$1" = "config" -o "$1" = "configonly" ]; then
+    
+    printf "[+] Home: $HOME\n"
+    
+    # Execute from the dir the script is in
+    cd "$(dirname "$0")" || exit
+    
+    # Sync local config files with cloned repo so i can push up my changes
+    cp -f -v ./config/.bash_aliases  $HOME/
+    cp -f -v ./config/.bash_git  $HOME/
+    cp -f -v ./config/.bash_pbx  $HOME/
+    cp -f -v ./config/.bash_utils  $HOME/
+    cp -f -v ./config/.bashrc  $HOME/
+    cp -f -v ./config/.p10k.zsh  $HOME/
+    cp -f -v ./config/.tmux.conf  $HOME/
+    cp -f -v ./config/.vimrc  $HOME/
+    cp -f -v ./config/.zshrc   $HOME/
+    cp -f -v ./config/.zsh_customizations  $HOME/
+    cp -f -v ./config/.tmux_init.sh  $HOME/
+    
+    
+    
+    if [ ! -d $HOME/.config/ ]; then
+        mkdir -p $HOME/.config/
+    fi
+    
+    # Save old neovim config
+    if [ -d $HOME/.config/nvim/ ]; then
+        mv -p $HOME/.config/nvim $HOME/.config/nvim-backup
+    fi
+    
+    # Remove local nvim cache
+    rm -rf ~/.local/share/nvim/
+    
+    # Copy nvim
+    cp -v -r ./config/.config/nvim  $HOME/.config/
+    cp -v -f -r ./config/lazygit  $HOME/.config/
+    
+    $SUDO cp -f -v ./config/usr_local_bin/* /usr/local/bin/
+    
+    # Copy Yazi config
+    cp -v -f -r ./config/.config/yazi  $HOME/.config/
 
-# Copy nvim
-cp -v -r ./config/.config/nvim  $HOME/.config/
-cp -v -f -r ./config/lazygit  $HOME/.config/
-
-$SUDO cp -f -v ./config/usr_local_bin/* /usr/local/bin/
-
-# Copy Yazi config
-cp -v -f -r ./config/.config/yazi  $HOME/.config/
-
-if [ "$1" = "install" ]; then
+    # ---------------------------------------------------------------------
+    echo "[+] Installing any missing packages..."
+    
     printf "[+] Removing stale lockfiles...\n\n"
     $SUDO rm -f /var/lib/dpkg/lock-frontend
     $SUDO rm -f /var/lib/dpkg/lock
 
-    printf "[+] Installing packages...\n\n"
-    $SUDO apt-get update && $SUDO apt install python3 wget tar fzf make gcc ripgrep unzip git git-all xclip zsh tmux build-essential p7zip-full jq python3-pygments curl locate sshfs sshpass xsel lua5.3 cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 fonts-powerline nodejs npm -y 
-
-    printf "[+] Installing latest neovim stable release...\n\n"
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
-    $SUDO rm -rf /opt/nvim
-    $SUDO tar -C /opt -xzf nvim-linux-x86_64.tar.gz
-    # echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
-
-    printf "[+] Installing nvm...\n\n"
-    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    if ! command -v nvim >/dev/null 2>&1; ; then
+        printf "[+] Installing latest neovim stable release...\n\n"
+        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+        $SUDO rm -rf /opt/nvim
+        $SUDO tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+        # echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
+        export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
+    fi
 
     # Download and install lazygit
-    printf "[+] Installing lazygit...\n\n"
-    LAZYGIT_VERSION='0.40.2'
-    curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
-    && tar xf lazygit.tar.gz lazygit \
-    && mv -f lazygit /usr/local/bin/ \
-    && rm lazygit.tar.gz
+    if ! command -v lazygit >/dev/null 2>&1; ; then
+        printf "[+] Installing lazygit...\n\n"
+        LAZYGIT_VERSION='0.40.2'
+        curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
+        && tar xf lazygit.tar.gz lazygit \
+        && mv -f lazygit /usr/local/bin/ \
+        && rm lazygit.tar.gz
+    fi
     
     printf "[+] Installing oh-my-zsh...\n\n"
     # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    omz update
 
     printf "[+] Installing powerlevel10k...\n\n"
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
@@ -95,6 +205,7 @@ if [ "$1" = "install" ]; then
     zsh
 
     printf "[+] Setting default shell...\n\n"
+    
     if which zsh >/dev/null 2>&1; then
         chsh -s $(which zsh)
     fi
