@@ -198,7 +198,7 @@ __TMUX__
   - [Font glyphs from Nerdfont](https://www.nerdfonts.com/cheat-sheet)
 - [Install ZSH syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
   - One cmd: `mkdir ~/zsh_utils/ && cd ~/zsh_utils && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git`
-
+- [Tmux goodies](https://github.com/rothgar/awesome-tmux?tab=readme-ov-file)
 
 <br />
 
