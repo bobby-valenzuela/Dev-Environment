@@ -55,7 +55,7 @@ cp -v -f -r ./config/lazygit  $HOME/.config/
 $SUDO cp -f -v ./config/usr_local_bin/* /usr/local/bin/
 
 # Copy Yazi config
-cp -v -f -r ./config/yazi  $HOME/.config/
+cp -v -f -r ./config/.config/yazi  $HOME/.config/
 
 if [ "$1" = "install" ]; then
     printf "[+] Removing stale lockfiles...\n\n"
