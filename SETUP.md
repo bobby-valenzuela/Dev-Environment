@@ -23,9 +23,20 @@ I already have the JetBrains fonts I prefer zipped up in this repo.
 
 ## Common Programs
 
+__Essential__  
 ```bash
-sudo apt update && sudo apt install python3 wget tar fzf make gcc ripgrep unzip git git-all xclip zsh tmux build-essential p7zip-full jq python3-pygments curl locate sshfs sshpass xsel lua5.3 cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 fonts-powerline bash bc coreutils gawk git playerctl nodejs npm -y
+sudo apt update && sudo apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc coreutils pandoc nodejs npm -y
 ```
+
+<br />
+
+__Extras__  
+Not essential per se, but essentials for my workflow,enchancements, and customizations    
+```bash
+sudo apt update && sudo apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl -y
+```
+
+
 
 <br />
 
@@ -96,8 +107,10 @@ __TMUX__
   - One cmd: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` 
 - [Install Catppuccin Theme](https://github.com/catppuccin/tmux)
   - Already installed if tpm is installed. 
-- Install all plugins loaded with `<prefix>+I` in a tmux session.
-- Replace ~/.tmux.conf with saved one and source with `tmux source-file ~/.tmux.conf`
+  - Install all plugins loaded with `<prefix>+I` in a tmux session.
+  - Replace ~/.tmux.conf with saved one and source with `tmux source-file ~/.tmux.conf`
+- [Playerctl](https://github.com/altdesktop/playerctl)
+- [Pandoc](https://github.com/jgm/pandoc)
 
 <br />
 
