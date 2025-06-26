@@ -197,7 +197,6 @@ if [ "$1" = "config" -o "$1" = "configonly" ]; then
     printf "[+] Installing oh-my-zsh...\n\n"
     # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    omz update
 
     printf "[+] Installing powerlevel10k...\n\n"
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
