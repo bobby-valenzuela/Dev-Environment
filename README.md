@@ -22,7 +22,7 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 <br />
 
 
-Create a Docker container running Ubuntu Jammy jellyfish (v22) and execute install script
+Create a Docker container running Ubuntu Jammy jellyfish (v22)  
 ```bash
 sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/jammy_init.sh -O -)"
 ```
