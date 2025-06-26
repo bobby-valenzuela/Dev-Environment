@@ -3,8 +3,7 @@
 - [Setup](#setup)
 - [Trouble Shooting (WSL)](#trouble-shooting-wsl)
 
----
-
+<br />
 
 # Setup
 
@@ -25,7 +24,7 @@ I already have the JetBrains fonts I prefer zipped up in this repo.
 
 __Essential__  
 ```bash
-sudo apt update && sudo apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc coreutils pandoc nodejs npm -y
+sudo apt update && sudo apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc coreutils cargo pandoc docker.io docker-compose-plugin nodejs npm -y
 ```
 
 <br />
@@ -33,25 +32,107 @@ sudo apt update && sudo apt install python3 perl wget tar make gcc  unzip git gi
 __Extras__  
 Not essential per se, but essentials for my workflow,enchancements, and customizations    
 ```bash
-sudo apt update && sudo apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl -y
+sudo apt update && sudo apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config -y
 ```
 
+<br />
+
+__Non-repo installs__  
+Software that isn't installed via a distro's package manager (may contain fixed versions). The order below is important.  
+```bash
+echo "[+] Enabling docker service..."
+sudo systemctl enable docker
+sudo systemctl start docker
+
+echo "[+] Installing Rust/Rustup..."
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup update
+
+echo "[+] Installing uv python package manager..."
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+echo "[+] Installing Go..."
+rm -rf /usr/local/go
+wget https://go.dev/dl/go1.24.4.linux-amd64.tar.gz -O go1.24.4.linux-amd64.tar.gz
+tar -xvf go1.24.4.linux-amd64.tar.gz
+sudo mv go /usr/local/
+rm -rf go1.24.4.linux-amd64.tar.gz
+
+echo "[+] Installing ggh ssh manager..."
+curl https://raw.githubusercontent.com/byawitz/ggh/master/install/unix.sh | sh
+
+echo "[+] Installing tere..."
+cargo install tere
+
+echo "[+] Installing csvlens"
+cargo install csvlens
+
+echo "[+] Installing Dust..."
+cargo install du-dust
+
+echo "[+] Installing YouTube-downloader..."
+sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -O /usr/local/bin/yt-dlp; sudo chmod +x /usr/local/bin/yt-dlp
+
+echo "[+] Installing Tufw (UFW GUI)..."
+sudo wget https://github.com/peltho/tufw/releases/download/v0.2.4/tufw_0.2.4_linux_amd64.deb -O ./tufw_0.2.4_linux_amd64.deb
+sudo apt install ./tufw_0.2.4_linux_amd64.deb -y
+sudo rm ./tufw_0.2.4_linux_amd64.deb
+
+echo "[+] Installing eget..."
+go install github.com/zyedidia/eget@latest
+
+echo "[+] Installing lazygit..."
+go install github.com/jesseduffield/lazygit@latest
+
+echo "[+] Installing lazydocker..."
+curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+
+echo "[+] Installing Posting via uv..."
+uv tool install --python 3.13 posting
+
+echo "[+] Installing mpv..."
+sudo curl --output-dir /etc/apt/trusted.gpg.d -O https://apt.fruit.je/fruit.gpg
+ADDITION="deb http://apt.fruit.je/ubuntu $(cat /etc/os-release | grep 'VERSION_CODENAME' | awk -F= '{print $2}' | xargs) mpv"
+echo $ADDITION | sudo tee -a /etc/apt/sources.list.d/fruit.list
+sudo apt update
+sudo apt install mpv -y
+
+echo "[+] Installing llvm and related tools (clangd, cmake, etc)..."
+wget https://apt.llvm.org/llvm.sh
+chmod +x llvm.sh
+sudo ./llvm.sh 20 all
+# or for latest stable release...
+# sudo ./llvm.sh all
+
+echo "[+] Installing Yazi..."
+sudo apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
+
+git clone https://github.com/sxyazi/yazi.git
+cd yazi
+cargo build --release --locked
+sudo mv target/release/yazi target/release/ya /usr/local/bin/
+
+```
+
+Info on these installs  
+- [uv](https://docs.astral.sh/)
+- [go](https://go.dev/doc/install)
+- [ggh](https://github.com/byawitz/ggh)
+- [Tere (cd + ls)](https://github.com/mgunyho/tere)
+- [Dust](https://github.com/bootandy/dust)
+- [Youtube Downloader](https://github.com/yt-dlp/yt-dlp)
+- [tufw](https://github.com/peltho/tufw)
+- [csvlens](https://github.com/YS-L/csvlens)
+- [Eget](https://github.com/zyedidia/eget)  
+- [Lazygit](https://github.com/jesseduffield/lazygit)
+- [Lazydocker](https://github.com/jesseduffield/lazydocker)
+- [Posting](https://github.com/darrenburns/posting)
+- [mpv](https://mpv.io/)
+- [Yazi file manager](https://yazi-rs.github.io/docs/installation/#debian)
 
 
 <br />
 
-## Not included in Common Programs list (need to install)
-Can work on automating this..
-- [Install yazi](https://yazi-rs.github.io/docs/installation/#debian)
-- [Lazygit](https://github.com/jesseduffield/lazygit)  
-- Install llvm and related tools (clangd, cmake, etc)  
-  ```bash
-   wget https://apt.llvm.org/llvm.sh
-   chmod +x llvm.sh
-   sudo ./llvm.sh 20 all
-   # or for latest stable release...
-   # sudo ./llvm.sh all
-  ```
 
 
 __Installing vulkan drivers (Graphics card drivers)__
@@ -60,25 +141,6 @@ __Installing vulkan drivers (Graphics card drivers)__
 sudo apt update
 sudo apt install mesa-utils vulkan-tools
 ```
-
-<br />
-
-__Utils__
-- Posting https://github.com/darrenburns/posting
-- Lazydocker https://github.com/jesseduffield/lazydocker
-- ggh https://github.com/byawitz/ggh
-- Yazi file manager https://github.com/sxyazi/yazi
-- Tere (cd | ls) https://github.com/mgunyho/tere
-- csvlens https://github.com/YS-L/csvlens
-- tufw https://github.com/peltho/tufw
-- Eget https://github.com/zyedidia/eget  
-- Dust https://github.com/bootandy/dust
-- Youtube Downloader https://github.com/yt-dlp/yt-dlp
-- mpv https://mpv.io/
-- go https://go.dev/doc/install
-- uv https://docs.astral.sh/
-
-
 
 <br />
 
