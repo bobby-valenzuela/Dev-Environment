@@ -28,6 +28,9 @@ if [ "$1" != "configonly" ]; then
     echo "[+] Installing manual installs..."            # Software that isn't installed via a distro's package manager (may contain fixed versions). The order below is important.
     
     # PRE-REQUISITES
+    echo "[+] (optional) installing vulkan graphics drivers..."
+    $SUDO apt install mesa-utils vulkan-tools -y
+
     echo "[+] Enabling docker service..."
     $SUDO  systemctl enable docker
     $SUDO  systemctl start docker
