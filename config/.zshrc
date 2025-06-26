@@ -26,6 +26,8 @@ export POSTING_EDITOR=vim
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Add path for go installs
+export PATH="$PATH:$HOME/go/bin"
 
 # Add /usr/local/go/bin to PATH in case you have a later version here
 export PATH=/usr/local/go/bin:$PATH
