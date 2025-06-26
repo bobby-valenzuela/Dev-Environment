@@ -128,7 +128,10 @@ if [ "$1" = "config" -o "$1" = "configonly" ]; then
     
     # Execute from the dir the script is in
     cd "$(dirname "$0")" || exit
-    
+
+    PWD=$(pwd)
+    printf "[+] PWD: $PWD\n"
+ 
     # Sync local config files with cloned repo so i can push up my changes
     cp -f -v ./config/.bash_aliases  $HOME/
     cp -f -v ./config/.bash_git  $HOME/
