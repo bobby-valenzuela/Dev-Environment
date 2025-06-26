@@ -20,7 +20,7 @@ fi
 if [ "$1" != "configonly" ]; then
     
     echo "[+] Installing essential core packages..."    # Not essential per se, but essentials for my workflow,enchancements, and customizations
-    $SUDO  apt update && $SUDO  apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc coreutils cargo pandoc docker.io docker-compose-plugin nodejs npm -y
+    $SUDO  apt update && $SUDO  apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc docker.io docker-compose-plugin nodejs npm -y
     
     echo "[+] Installing extras..."
     $SUDO  apt update && $SUDO  apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config -y
