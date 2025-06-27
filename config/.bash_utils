@@ -131,6 +131,7 @@ config_sync(){
 
     printf "Running...\n"
 
+    # FILES
     cp -v ~/.bash_aliases  $DEST
     cp -v ~/.bash_git  $DEST
     cp -v ~/.bash_pbx  $DEST
@@ -143,6 +144,8 @@ config_sync(){
     cp -v ~/.zshrc   $DEST
     cp -v ~/.zsh_customizations   $DEST
     cp -v ~/.tmux_init.sh  $DEST
+    # DIRS
+    cp -v -r ~/.config/spotify-player/  $DEST.config/
     cp -v -r ~/.config/lazydocker/  $DEST.config/
     cp -v -r ~/.config/lazygit/  $DEST.config/
     cp -v -r ~/.config/nvim/  $DEST.config/
