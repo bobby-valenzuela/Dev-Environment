@@ -3,7 +3,7 @@
 [[ -s ~/.zsh_customizations ]] && source ~/.zsh_customizations
 
 
-# Enforce color scheme
+# This ensures that tmux always starts with 256-color support - good for vim/neovim
 alias tmux="tmux -2"
 # export TERM=screen-256color
 # Works better with vim
@@ -46,6 +46,11 @@ fi
 # Go to use binary PATH in /usr/local/bin if it exists there
 if [[ -s /usr/local/bin/go ]]; then
     alias go="/usr/local/bin/go"
+fi
+
+# Tmux to use binary PATH in /usr/local/bin if it exists there
+if [[ -s /usr/local/bin/tmux ]]; then
+    alias tmux="/usr/local/bin/tmux -2"
 fi
 
 ##### Google Cloud SDK
