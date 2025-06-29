@@ -164,57 +164,11 @@ if [ "$1" != "configonly" ]; then
     cargo install spotify_player --no-default-features --features pulseaudio-backend,media-control,sixel
 
 
-fi
-
-
-# ------------------------------------------------------------------------
-if [ "$1" = "config" -o "$1" = "configonly" ]; then
-    
-    printf "[+] Home: $HOME\n"
-    
-    # Execute from the dir the script is in
-    cd "$(dirname "$0")" || exit
-
-    PWD=$(pwd)
-    printf "[+] PWD: $PWD\n"
- 
-    # Sync local config files with cloned repo so i can push up my changes
-    cp -f -v ./config/.bash_aliases  $HOME/
-    cp -f -v ./config/.bash_git  $HOME/
-    cp -f -v ./config/.bash_pbx  $HOME/
-    cp -f -v ./config/.bash_utils  $HOME/
-    cp -f -v ./config/.bashrc  $HOME/
-    cp -f -v ./config/.p10k.zsh  $HOME/
-    cp -f -v ./config/.tmux.conf  $HOME/
-    cp -f -v ./config/.vimrc  $HOME/
-    cp -f -v ./config/.zshrc   $HOME/
-    cp -f -v ./config/.zsh_customizations  $HOME/
-    cp -f -v ./config/.tmux_init.sh  $HOME/
-    
-    
-    
-    if [ ! -d $HOME/.config/ ]; then
-        mkdir -p $HOME/.config/
-    fi
-    
-    # Save old neovim config
-    if [ -d $HOME/.config/nvim/ ]; then
-        mv -p $HOME/.config/nvim $HOME/.config/nvim-backup
-    fi
-    
-    # Remove local nvim cache
-    rm -rf ~/.local/share/nvim/
-    
-    # Copy nvim
-    cp -v -r ./config/.config/nvim  $HOME/.config/
-    cp -v -f -r ./config/lazygit  $HOME/.config/
-    
+    # __________________ WORKFLOW ___________
+    echo -e "\n\n\n[+] ______ Finished main packages ______\n\n\n"
+    echo "[+] Installing workflow-specific programs"
     $SUDO cp -f -v ./config/usr_local_bin/* /usr/local/bin/
     
-    # Copy Yazi config
-    cp -v -f -r ./config/.config/yazi  $HOME/.config/
-
-    # ---------------------------------------------------------------------
     echo "[+] Installing any missing packages..."
     
     printf "[+] Removing stale lockfiles...\n\n"
@@ -248,16 +202,64 @@ if [ "$1" = "config" -o "$1" = "configonly" ]; then
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
 
     printf "[+] Setting default shell...\n\n"
-    
     if which zsh >/dev/null 2>&1; then
         chsh -s $(which zsh)
+        echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
+        zsh
     fi
     
+fi
+
+
+# ------------------------------------------------------------------------
+if [ "$1" = "config" -o "$1" = "configonly" ]; then
+    
+    printf "[+] Home: $HOME\n"
+    
+    # Execute from the dir the script is in
+    cd "$(dirname "$0")" || exit
+
+    PWD=$(pwd)
+    printf "[+] PWD: $PWD\n"
+ 
+    if [ ! -d $HOME/.config/ ]; then
+        mkdir -p $HOME/.config/
+    fi
+    
+    # Sync local config files with cloned repo so i can push up my changes
+    cp -f -v ./config/.bash_aliases  $HOME/
+    cp -f -v ./config/.bash_git  $HOME/
+    cp -f -v ./config/.bash_pbx  $HOME/
+    cp -f -v ./config/.bash_utils  $HOME/
+    cp -f -v ./config/.bashrc  $HOME/
+    cp -f -v ./config/.p10k.zsh  $HOME/
+    cp -f -v ./config/.tmux.conf  $HOME/
+    cp -f -v ./config/.vimrc  $HOME/
+    cp -f -v ./config/.zshrc   $HOME/
+    cp -f -v ./config/.zsh_customizations  $HOME/
+    cp -f -v ./config/.tmux_init.sh  $HOME/
+    
+    # Save old neovim config
+    if [ -d $HOME/.config/nvim/ ]; then
+        mv -p $HOME/.config/nvim $HOME/.config/nvim-backup
+    fi
+    
+    # Remove local nvim cache
+    rm -rf ~/.local/share/nvim/
+    
+    # Copy nvim
+    cp -v -r ./config/.config/nvim  $HOME/.config/
+    cp -v -f -r ./config/lazygit  $HOME/.config/
+    
+    # Copy Yazi config
+    cp -v -f -r ./config/.config/yazi  $HOME/.config/
+
+    # 
+    # ---------------------------------------------------------------------
     printf "[+] Sourcing .zshrc ...\n\n"
     cd "$(dirname "$0")"
     cp -v ./config/.zshrc   $HOME/
-    echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
-    zsh
+    source ~/.zshrc
 
 
 fi
