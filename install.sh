@@ -18,14 +18,32 @@ fi
 
 # Unless we're explicitly calling to only copy the configs, then let's start installing
 if [ "$1" != "configonly" ]; then
+
+    if ! command -v apt >/dev/null || ! grep -qi ubuntu /etc/os-release; then
+        echo "This script requires an Ubuntu-based system"
+        exit 1
+    fi
+    
+    $SUDO apt update || { echo "Failed to update package lists"; exit 1; }
     
     echo "[+] Installing essential core packages..."    # Not essential per se, but essentials for my workflow,enchancements, and customizations
-    $SUDO  apt update && $SUDO  apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc docker.io docker-compose-plugin nodejs npm -y
+    $SUDO  apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc docker.io docker-compose-plugin nodejs npm -y
     
     echo "[+] Installing extras..."
-    $SUDO  apt update && $SUDO  apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config -y
+    $SUDO  apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config -y
+
+    echo "[+] Installing various dependencies..."
+    y$SUDO  apt install pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libssl-dev libasound2-dev libdbus-1-dev crossbuild-essential-arm64 clang -y
     
-    echo "[+] Installing manual installs..."            # Software that isn't installed via a distro's package manager (may contain fixed versions). The order below is important.
+    echo "[+] Installing various sound-related dependencies..."
+    $SUDO add-apt-repository ppa:ubuntuhandbook1/ffmpeg6
+    $SUDO apt install ffmpeg libass9 libbluray2 libcaca0 libcdio-cdda2 libcdio-paranoia2 libcdio19 librubberband2 libzimg2 libdbus-1-dev libncursesw5-dev libpulse-dev libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev -y
+    if systemctl --user is-active pipewire >/dev/null; then
+        echo "Using PipeWire, installing specific dependencies..."
+        $SUDO apt install libpipewire-0.3-0  -y
+    fi
+    
+    echo -e "\n[+] ______ Installing manual installs _______"            # Software that isn't installed via a distro's package manager (may contain fixed versions). The order below is important.
     
     # PRE-REQUISITES
     echo "[+] (optional) installing vulkan graphics drivers..."
@@ -53,14 +71,17 @@ if [ "$1" != "configonly" ]; then
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash # Install nvm version 0.40.3
     export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-    echo "[?] Available nvm versions:"
-    nvm list-remote       # avaiable versions
-    echo "[+] Installing node v22..."
-    nvm install v22.17.0  # install a version
-    echo "[+] Installed versions:"
-    nvm list              # View installed versions
-    echo "[+] Selecting v22.17"
-    nvm use v22.17.0 
+    if command -v nvm >/dev/null; then
+        echo "nvm installation suceeded. installing version."
+        echo -e "\t[!] Available nvm versions:"
+        nvm list-remote       # avaiable versions
+        echo -e "\t[+] Installing node v22..."
+        nvm install v22.17.0  # install a version
+        echo -e "\t[+] Installed versions:"
+        nvm list              # View installed versions
+        echo -e "\t[+] Selecting v22.17"
+        nvm use v22.17.0 
+    fi
     
     echo "[+] Done installing prerequisites!"
     
@@ -101,7 +122,8 @@ if [ "$1" != "configonly" ]; then
     
     echo "[+] Installing mpv..."
     $SUDO  curl --output-dir /etc/apt/trusted.gpg.d -O https://apt.fruit.je/fruit.gpg
-    ADDITION="deb http://apt.fruit.je/ubuntu $(cat /etc/os-release | grep 'VERSION_CODENAME' | awk -F= '{print $2}' | xargs) mpv"
+    # ADDITION="deb http://apt.fruit.je/ubuntu $(cat /etc/os-release | grep 'VERSION_CODENAME' | awk -F= '{print $2}' | xargs) mpv"
+    ADDITION="deb http://apt.fruit.je/ubuntu $(lsb_release -cs) mpv"
     echo $ADDITION | $SUDO  tee -a /etc/apt/sources.list.d/fruit.list
     $SUDO  apt update
     $SUDO  apt install mpv -y
@@ -120,6 +142,27 @@ if [ "$1" != "configonly" ]; then
     cd yazi
     cargo build --release --locked
     $SUDO  mv target/release/yazi target/release/ya /usr/local/bin/
+    cd ..
+    rm -rf yazi
+
+    echo "[+] Installing Latest Tmux..."    
+    $SUDO apt-get install autotools-dev -y
+    $SUDO apt-get install automake -y
+    $SUDO apt install libevent-dev -y
+    $SUDO apt install bison -y
+    $SUDO apt install libncurses5-dev libncursesw5-dev -y
+    git clone https://github.com/tmux/tmux.git
+    cd tmux
+    sh autogen.sh
+    ./configure --enable-sixel || { echo "Tmux configure failed"; }
+    make && $SUDO make install || { echo "Tmux build failed"; }
+
+    echo "[+] Installing Spotify Player..."    
+    $SUDO apt-get install autotools-dev -y
+    $SUDO apt install pulseaudio pulseaudio-module-bluetooth pulseaudio-utils pavucontrol
+    $SUDO apt install libsixel-bin -y  # sixel encoder/decoder
+    cargo install spotify_player --no-default-features --features pulseaudio-backend,media-control,sixel
+
 
 fi
 
