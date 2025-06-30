@@ -15,3 +15,13 @@ hash = "7b9ff01a0070cc9176e0c683329aeb26"
 use = "PinThePenguinOne/sunset"
 rev = "64ad82e"
 hash = "ae36775ed414cad1bcd7af692422df0f"
+
+[[flavor.deps]]
+use = "gosxrgxx/flexoki-dark"
+rev = "28e1977"
+hash = "9dbbb64ea20f9f1271c31951dea55c7b"
+
+[[flavor.deps]]
+use = "sanjinso/monokai-vibrant"
+rev = "8b68223"
+hash = "f4458ebaf8961d714eba05fe5ba40166"
