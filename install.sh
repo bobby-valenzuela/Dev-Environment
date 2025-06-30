@@ -249,17 +249,14 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     
     # Copy nvim
     cp -v -r ./config/.config/nvim  $HOME/.config/
-    cp -v -f -r ./config/lazygit  $HOME/.config/
+    cp -v -f -r ./config/.config/lazygit  $HOME/.config/
     
     # Copy Yazi config
     cp -v -f -r ./config/.config/yazi  $HOME/.config/
 
-    # 
     # ---------------------------------------------------------------------
-    printf "[+] Sourcing .zshrc ...\n\n"
     cd "$(dirname "$0")"
     cp -v ./config/.zshrc   $HOME/
-    source ~/.zshrc
 
 
 fi
