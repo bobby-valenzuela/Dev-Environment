@@ -116,16 +116,16 @@ tt(){
 config_update(){
     LOCAL_REPO=~/my_repos/Dev-Environment
 
-    if [[ ! -d $LOCAL_REPO/config/ ]]; then
+    if [[ ! -d $LOCAL_REPO/ ]]; then
         echo "[!] Repo does not exist! Cloning and updating..."
+        cd $HOME/my_repos/
+        sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
+    else
 
         if [[ ! -d $LOCAL_REPO/config/ ]]; then
             mkdir -p $LOCAL_REPO/config/
         fi
 
-        cd $HOME/my_repos/
-        sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
-    else
         cd $LOCAL_REPO
         ./install.sh configonly
     fi
