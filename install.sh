@@ -241,7 +241,7 @@ if [ "$1" = "config" -o "$1" = "configonly" ]; then
     
     # Save old neovim config
     if [ -d $HOME/.config/nvim/ ]; then
-        mv -p $HOME/.config/nvim $HOME/.config/nvim-backup
+        mkdir -p $HOME/.config/nvim $HOME/.config/nvim-backup
     fi
     
     # Remove local nvim cache
