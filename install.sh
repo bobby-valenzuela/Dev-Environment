@@ -239,30 +239,27 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     cp -f -v ./config/.zsh_customizations  $HOME/
     cp -f -v ./config/.tmux_init.sh  $HOME/
     
-    # Save old neovim config
     if [ -d $HOME/.config/nvim/ ]; then
         mkdir -p $HOME/.config/nvim
     fi
 
-    # If backup folder exists remove it so we can overwrite it
+    # [.config] If backup folder exists remove it so we can overwrite it
     if [ -d $HOME/.config/nvim-backup ]; then
         rm -rf $HOME/.config/nvim-backup
     fi
-
     mv $HOME/.config/nvim $HOME/.config/nvim-backup	    
+    cp -v -r ./config/.config/nvim  $HOME/.config/
 
-    # Remove local nvim cache
-    # rm -rf ~/.local/share/nvim/:
-    # Actually, let's just back it up
+    # [.local] If backup folder exists remove it so we can overwrite it
     if [ -d ~/.local/share/nvim-backup ]; then
-        rm -rf $HOME/.config/nvim-backup
+        rm -rf ~/.local/share/nvim-backup
     fi
     mv ~/.local/share/nvim ~/.local/share/nvim-backup
-    
-    # Copy nvim
-    cp -v -r ./config/.config/nvim  $HOME/.config/
     cp -v -f -r ./config/.config/lazygit  $HOME/.config/
     
+
+
+
     # Copy Yazi config
     cp -v -f -r ./config/.config/yazi  $HOME/.config/
 
