@@ -212,6 +212,41 @@ __TMUX__
 
 <br />
 
+## WSL Troubleshooting
+
+### Display Issues
+I've been using this without issue in WSL, butin case you're having issues, it could be to do with your `DISPLAY1 environment variable.
+If you still get the “cannot open display” error, set the DISPLAY variable as shown below.
+```bash
+echo "export DISPLAY=localhost:0.0" >> ~/.bashrc
+```
+Note: IP is the local workstation’s IP where you want the GUI application to be displayed.  
+
+__Helpful Related Links (WSL + GUI)__
+- [Link 0](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
+- [Link 1](https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj)
+- [Link 2](https://wiki.ubuntu.com/WSL#Running_Graphical_Applications)
+- [Link 3](https://wiki.iihe.ac.be/Use_X11_forwarding_with_WSL)
+
+<br />
+
+<br />
+
+<br />
+
+### Enabling Systemd  
+Edit /etc/wsl.conf in your WSL distribution:
+sudo nano /etc/wsl.conf
+```bash
+[boot]
+systemd=true
+```
+
+<br />
+
+Verify systemd is running:
+`systemctl --user status dbus`
+
 
 ## Updating WSL, Ubuntu distro, and GLIC
 Updating your ubuntu distro in WSL (in case its like < 24.0) and GLIBC  
@@ -293,23 +328,6 @@ wsl --shutdown
 
 
 
-
-## Trouble Shooting (WSL)
-
-I've been using this without issue in WSL, butin case you're having issues, it could be to do with your `DISPLAY1 environment variable.
-If you still get the “cannot open display” error, set the DISPLAY variable as shown below.
-```bash
-echo "export DISPLAY=localhost:0.0" >> ~/.bashrc
-```
-Note: IP is the local workstation’s IP where you want the GUI application to be displayed.  
-
-__Helpful Related Links (WSL + GUI)__
-- [Link 0](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
-- [Link 1](https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj)
-- [Link 2](https://wiki.ubuntu.com/WSL#Running_Graphical_Applications)
-- [Link 3](https://wiki.iihe.ac.be/Use_X11_forwarding_with_WSL)
-
-<br />
 
 
 
