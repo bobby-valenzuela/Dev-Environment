@@ -265,7 +265,9 @@ if [ "$1" != "configonly" ]; then
     printf "[+] Setting default shell...\n\n"
     if which zsh >/dev/null 2>&1; then
         chsh -s $(which zsh)
-        echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
+        # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
+        cd "$(dirname "$0")"
+        cp -v ./config/.zshrc   $HOME/
         zsh
     fi
     
