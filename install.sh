@@ -212,7 +212,7 @@ fi
 
 
 # ------------------------------------------------------------------------
-if [ "$1" = "config" -o "$1" = "configonly" ]; then
+if [ "$1" = "full" -o "$1" = "configonly" ]; then
     
     printf "[+] Home: $HOME\n"
     
