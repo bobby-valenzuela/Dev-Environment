@@ -71,7 +71,7 @@ wcp(){
     [ ! -d $WSL_FOLDER ] && mkdir -p $WSL_FOLDER
 
     # Get the full path of the file
-    full_path=$(realpath "$$1" 2>/dev/null || readlink -f "$$1" 2>/dev/null)
+    full_path=$(realpath "$1" 2>/dev/null || readlink -f "$1" 2>/dev/null)
 
     DEST=
 
@@ -113,8 +113,28 @@ tt(){
    ~/my_repos/Tomahawk/tomahawk
 }
 
-config_sync(){
+config_update(){
+    LOCAL_REPO=~/my_repos/Dev-Environment
 
+    if [[ ! -d $LOCAL_REPO/config/ ]]; then
+        echo "[!] Repo does not exist! Cloning and updating..."
+
+        if [[ ! -d $LOCAL_REPO/config/ ]]; then
+            mkdir -p $LOCAL_REPO/config/
+        fi
+
+        cd $HOME/my_repos/
+        sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
+    fi
+
+    cd $LOCAL_REPO
+
+    ./install configonly
+
+}
+
+config_save(){
+    # Copies all of my main config files into my git dir so i can push them up later as needed
     LOCAL_REPO=~/my_repos/Dev-Environment
 
     # Sync local config files with cloned repo so i can push up my changes
