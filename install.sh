@@ -93,7 +93,7 @@ if [ "$1" != "configonly" ]; then
     $SUDO  apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config -y
 
     echo "[+] Installing various dependencies..."
-    y$SUDO  apt install pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libssl-dev libasound2-dev libdbus-1-dev crossbuild-essential-arm64 clang -y
+    $SUDO  apt install pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libssl-dev libasound2-dev libdbus-1-dev crossbuild-essential-arm64 clang -y
     
     echo "[+] Installing various sound-related dependencies..."
     $SUDO add-apt-repository ppa:ubuntuhandbook1/ffmpeg6
