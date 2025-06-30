@@ -37,7 +37,8 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 - Enable TMUX plugins by install TPM: `https://github.com/tmux-plugins/tpm`
 - Reload config file: `tmux source ~/.tmux.conf`
 - Reload TMUX environment: `<C-i>`  _For re-loading Theme for example_
-- Custom Bind key I've set: `<C-t> R`
+- Custom Bind key I've set: `<C-t> R`  
+- Open cheat.sh: `<bind-key> S`  
 
 ### TMUX Copy and Paste
 __Tmux search__
