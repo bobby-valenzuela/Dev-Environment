@@ -16,6 +16,65 @@ else
     printf "[+] Running as root\n"
 fi
 
+##### CONFIG
+# ------------------------------------------------------------------------
+if [ "$1" = "full" -o "$1" = "configonly" ]; then
+    
+    printf "[+] Home: $HOME\n"
+    
+    # Execute from the dir the script is in
+    cd "$(dirname "$0")" || exit
+
+    PWD=$(pwd)
+    printf "[+] PWD: $PWD\n"
+ 
+    if [ ! -d $HOME/.config/ ]; then
+        mkdir -p $HOME/.config/
+    fi
+    
+    # Sync local config files with cloned repo so i can push up my changes
+    cp -f -v ./config/.bash_aliases  $HOME/
+    cp -f -v ./config/.bash_git  $HOME/
+    cp -f -v ./config/.bash_pbx  $HOME/
+    cp -f -v ./config/.bash_utils  $HOME/
+    cp -f -v ./config/.bashrc  $HOME/
+    cp -f -v ./config/.p10k.zsh  $HOME/
+    cp -f -v ./config/.tmux.conf  $HOME/
+    cp -f -v ./config/.vimrc  $HOME/
+    cp -f -v ./config/.zshrc   $HOME/
+    cp -f -v ./config/.zsh_customizations  $HOME/
+    cp -f -v ./config/.tmux_init.sh  $HOME/
+    
+    if [ -d $HOME/.config/nvim/ ]; then
+        mkdir -p $HOME/.config/nvim
+    fi
+
+    # [.config] If backup folder exists remove it so we can overwrite it
+    if [ -d $HOME/.config/nvim-backup ]; then
+        rm -rf $HOME/.config/nvim-backup
+    fi
+    mv $HOME/.config/nvim $HOME/.config/nvim-backup	    
+    cp -v -r ./config/.config/nvim  $HOME/.config/
+
+    # [.local] If backup folder exists remove it so we can overwrite it
+    if [ -d ~/.local/share/nvim-backup ]; then
+        rm -rf ~/.local/share/nvim-backup
+    fi
+    mv ~/.local/share/nvim ~/.local/share/nvim-backup
+    cp -v -f -r ./config/.config/lazygit  $HOME/.config/
+    
+    # Copy Yazi config
+    cp -v -f -r ./config/.config/yazi  $HOME/.config/
+
+    # ---------------------------------------------------------------------
+    cd "$(dirname "$0")"
+    cp -v ./config/.zshrc   $HOME/
+
+
+fi
+
+##### PACKAGE INSTALLATION
+# ------------------------------------------------------------------------
 # Unless we're explicitly calling to only copy the configs, then let's start installing
 if [ "$1" != "configonly" ]; then
 
@@ -156,6 +215,7 @@ if [ "$1" != "configonly" ]; then
     sh autogen.sh
     ./configure --enable-sixel || { echo "Tmux configure failed"; }
     make && $SUDO make install || { echo "Tmux build failed"; }
+    cd ../
 
     echo "[+] Installing Spotify Player..."    
     $SUDO apt-get install autotools-dev -y
@@ -211,64 +271,7 @@ if [ "$1" != "configonly" ]; then
 fi
 
 
-# ------------------------------------------------------------------------
-if [ "$1" = "full" -o "$1" = "configonly" ]; then
-    
-    printf "[+] Home: $HOME\n"
-    
-    # Execute from the dir the script is in
-    cd "$(dirname "$0")" || exit
 
-    PWD=$(pwd)
-    printf "[+] PWD: $PWD\n"
- 
-    if [ ! -d $HOME/.config/ ]; then
-        mkdir -p $HOME/.config/
-    fi
-    
-    # Sync local config files with cloned repo so i can push up my changes
-    cp -f -v ./config/.bash_aliases  $HOME/
-    cp -f -v ./config/.bash_git  $HOME/
-    cp -f -v ./config/.bash_pbx  $HOME/
-    cp -f -v ./config/.bash_utils  $HOME/
-    cp -f -v ./config/.bashrc  $HOME/
-    cp -f -v ./config/.p10k.zsh  $HOME/
-    cp -f -v ./config/.tmux.conf  $HOME/
-    cp -f -v ./config/.vimrc  $HOME/
-    cp -f -v ./config/.zshrc   $HOME/
-    cp -f -v ./config/.zsh_customizations  $HOME/
-    cp -f -v ./config/.tmux_init.sh  $HOME/
-    
-    if [ -d $HOME/.config/nvim/ ]; then
-        mkdir -p $HOME/.config/nvim
-    fi
-
-    # [.config] If backup folder exists remove it so we can overwrite it
-    if [ -d $HOME/.config/nvim-backup ]; then
-        rm -rf $HOME/.config/nvim-backup
-    fi
-    mv $HOME/.config/nvim $HOME/.config/nvim-backup	    
-    cp -v -r ./config/.config/nvim  $HOME/.config/
-
-    # [.local] If backup folder exists remove it so we can overwrite it
-    if [ -d ~/.local/share/nvim-backup ]; then
-        rm -rf ~/.local/share/nvim-backup
-    fi
-    mv ~/.local/share/nvim ~/.local/share/nvim-backup
-    cp -v -f -r ./config/.config/lazygit  $HOME/.config/
-    
-
-
-
-    # Copy Yazi config
-    cp -v -f -r ./config/.config/yazi  $HOME/.config/
-
-    # ---------------------------------------------------------------------
-    cd "$(dirname "$0")"
-    cp -v ./config/.zshrc   $HOME/
-
-
-fi
 
 echo "Done!"
 
