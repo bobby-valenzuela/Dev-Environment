@@ -53,6 +53,10 @@ if [[ -s /usr/local/bin/tmux ]]; then
     alias tmux="/usr/local/bin/tmux -2"
 fi
 
+# PKG_CONFIG_PATH is an environment variable used by the pkg-config tool to locate .pc files, which contain metadata (e.g., library paths, compiler flags) for libraries installed on the system.
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+
+
 ##### Google Cloud SDK
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/bobby_vz/sandbox/google-cloud-sdk/path.zsh.inc' ]; then . '/home/bobby_vz/sandbox/google-cloud-sdk/path.zsh.inc'; fi
@@ -74,6 +78,57 @@ fi
 # SET CUSTOM MANPAGER APP
 export MANPAGER='vim +MANPAGER -'
 
+
+# _____ Settting runtime dir _____
+# Add the following to your ~/.bashrc to ensure the directory is created on login:
+# Typically, XDG_RUNTIME_DIR is automatically set and managed by the system (e.g., via systemd or pam_systemd during login). This script might be used in environments where this setup isn’t automatic (e.g., non-standard Linux configurations, embedded systems, or certain container setups).
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+if [ ! -d "$XDG_RUNTIME_DIR" ]; then
+    sudo mkdir -p $XDG_RUNTIME_DIR
+    sudo chmod 700 $XDG_RUNTIME_DIR
+    sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
+fi
+
+# _____ Audio Setup _____
+
+# pulse to use dbus (not enabled by default))
+if [[ -f /etc/pulse/default.pa ]]; then
+    
+    if [[ $(grep -q "load-module module-dbus-protocol" /etc/pulse/default.pa) ]]; then
+        echo "load-module module-dbus-protocol" | sudo tee -a /etc/pulse/default.pa
+    fi
+
+fi
+# or one-off temporary enabling of dbus
+# pactl load-module module-dbus-protocol
+
+
+# Setting DBUS
+if [[ $(uname -r | grep 'WSL' ) ]]; then
+    # echo "Detected WSL - setting audio configs..."
+    export DBUS_SESSION_BUS_ADDRESS=
+
+    if type pulseaudio >/dev/null 2>&1; then
+        export PULSE_SERVER=unix:/mnt/wslg/PulseServer
+    fi
+else
+    TROUBLESHOOTING_AUDIO=0
+
+    # Enabled these if troubleshooting (this doesn't work in WSL, don't bother)
+    if [[ $TROUBLESHOOTING_AUDIO -gt 0 ]];then
+
+        export PULSE_SERVER=tcp:127.0.0.1
+
+        # Start DBUS session and print address
+        export DBUS_SESSION_BUS_ADDRESS=$(dbus-daemon --session --fork --address=unix:path=$XDG_RUNTIME_DIR/bus --print-address)
+        echo "D-Bus session address: $DBUS_SESSION_BUS_ADDRESS"
+
+        # Same as above but saves in startup script
+        echo 'export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UID/bus' >> ~/.bashrc
+
+    fi
+
+fi
 
 # _________ OTHER ___________
 
