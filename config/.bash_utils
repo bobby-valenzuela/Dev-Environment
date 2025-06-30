@@ -125,11 +125,11 @@ config_update(){
 
         cd $HOME/my_repos/
         sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
+    exit
+        cd $LOCAL_REPO
+        ./install.sh configonly
     fi
 
-    cd $LOCAL_REPO
-
-    ./install configonly
 
 }
 
