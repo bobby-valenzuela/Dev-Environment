@@ -34,6 +34,12 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 <br />
 
 ## Notes
-`install.sh` - Assumes the repo is cloned and installs packages. Run with "config" to copy the config files into the proper dirs or "configonly" to skill packages installation step.  
+`install.sh` - Assumes the repo is cloned and installs packages. 
+- Run with no arguments to install packages
+- Run with "full" to install packages and copy the config files into the proper dirs.
+- Run with with "configonly" to skip packages installation step and only copy config files to $HOME.
+
+<br />
+
 `init.sh` - Clones repo and runs `install.sh` (installing both packages and config files)  
 `jammy_init.sh` - Sets up Docker container and runs `init.sh`  
