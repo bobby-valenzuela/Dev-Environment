@@ -113,6 +113,9 @@ tt(){
    ~/my_repos/Tomahawk/tomahawk
 }
 
+config_update_and_nvim_update(){
+    config_update 'update-nvim'
+}
 config_update(){
     LOCAL_REPO=~/my_repos/Dev-Environment
 
@@ -130,6 +133,23 @@ config_update(){
         ./install.sh configonly
     fi
 
+    # Nvim is already updated - only continue if we want to keep revert back to current nvim
+    if [[ "$1" = "update-nvim" ]]; then
+        return
+    fi
+
+    # [+] Restore main nvim profile
+    # At this point our nvim config would have been moved to nvim-backup and a fresh install would be in place
+    # Revert that if we're not interested in updated nvim
+    if [ -d ~/.config/nvim-new ]; then
+        rm -rf ~/.config/nvim-new
+    fi
+    mv ~/.config/nvim ~/.config/nvim-new
+    mv ~/.config/nvim-backup ~/.config/nvim
+
+    # Restore cache
+    rm -rf ~/.local/share/nvim/
+    mv ~/.local/share/nvim-backup ~/.local/share/nvim
 
 }
 

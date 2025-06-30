@@ -241,11 +241,23 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     
     # Save old neovim config
     if [ -d $HOME/.config/nvim/ ]; then
-        mkdir -p $HOME/.config/nvim $HOME/.config/nvim-backup
+        mkdir -p $HOME/.config/nvim
     fi
-    
+
+    # If backup folder exists remove it so we can overwrite it
+    if [ -d $HOME/.config/nvim-backup ]; then
+        rm -rf $HOME/.config/nvim-backup
+    fi
+
+    mv $HOME/.config/nvim $HOME/.config/nvim-backup	    
+
     # Remove local nvim cache
-    rm -rf ~/.local/share/nvim/
+    # rm -rf ~/.local/share/nvim/:
+    # Actually, let's just back it up
+    if [ -d ~/.local/share/nvim-backup ]; then
+        rm -rf $HOME/.config/nvim-backup
+    fi
+    mv ~/.local/share/nvim ~/.local/share/nvim-backup
     
     # Copy nvim
     cp -v -r ./config/.config/nvim  $HOME/.config/
