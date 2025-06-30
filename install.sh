@@ -44,7 +44,8 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     cp -f -v ./config/.zshrc   $HOME/
     cp -f -v ./config/.zsh_customizations  $HOME/
     cp -f -v ./config/.tmux_init.sh  $HOME/
-    
+
+    # __________ NVIM __________
     if [ -d $HOME/.config/nvim/ ]; then
         mkdir -p $HOME/.config/nvim
     fi
@@ -61,15 +62,24 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
         rm -rf ~/.local/share/nvim-backup
     fi
     mv ~/.local/share/nvim ~/.local/share/nvim-backup
-    cp -v -f -r ./config/.config/lazygit  $HOME/.config/
+
+
+    # __________ Spotify-player ___________
+    if [ -d $HOME/.config/spotify-player/ ]; then
+        mkdir -p $HOME/.config/spotify-player
+    fi
+    cp -v -r ./config/.config/spotify-player  $HOME/.config/
     
+    cp -v -f -r ./config/.config/lazygit  $HOME/.config/
+
+    
+    # ---------------------------------------------------------------------
     # Copy Yazi config
     cp -v -f -r ./config/.config/yazi  $HOME/.config/
 
-    # ---------------------------------------------------------------------
+
     cd "$(dirname "$0")"
     cp -v ./config/.zshrc   $HOME/
-
 
 fi
 
