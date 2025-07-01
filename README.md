@@ -1,4 +1,4 @@
-I have lots already set up in myy terminal:
+I have lots already set up in my terminal:
 - Ohmyzsh (zsh theming and plugins)
 - nvim
 - updates to my $PATH
