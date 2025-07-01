@@ -11,6 +11,7 @@ I have lots already set up in my terminal:
 
 Instead of re-configuring everything all over from scrath on a new system, I've created a script to install the necessary packages and copy the relevant config files so I can get my workflow up an running on any (ubuntu) system with a single command.
 
+<br />
 
 # Installing
 
