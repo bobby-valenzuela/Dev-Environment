@@ -82,13 +82,13 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
         rm -rf $HOME/.oh-my-zsh
     fi
 
+    printf "[+] Installing oh-my-zsh...\n\n"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
     printf "[+] Installing powerlevel10k...\n\n"
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
     # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     
-    printf "[+] Installing oh-my-zsh...\n\n"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-
     printf "[+] Setting default shell...\n\n"
     if which zsh >/dev/null 2>&1; then
     
