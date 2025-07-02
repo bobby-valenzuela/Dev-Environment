@@ -120,7 +120,7 @@ if [ "$1" != "configonly" ]; then
     $SUDO  apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc docker.io docker-compose-plugin nodejs npm -y
     
     echo "[+] Installing extras..."
-    $SUDO  apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config -y
+    $SUDO  apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config mssql-tools unixODBC-devel -y
 
     echo "[+] Installing various dependencies..."
     $SUDO  apt install pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libssl-dev libasound2-dev libdbus-1-dev crossbuild-essential-arm64 clang -y
@@ -192,6 +192,9 @@ if [ "$1" != "configonly" ]; then
     
     echo "[+] Installing YouTube-downloader..."
     $SUDO  wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -O /usr/local/bin/yt-dlp; $SUDO chmod +x /usr/local/bin/yt-dlp
+
+    echo "[+] Installing lazysql..."
+    go install github.com/jorgerojas26/lazysql@latest
     
     echo "[+] Installing Tufw (UFW GUI)..."
     $SUDO  wget https://github.com/peltho/tufw/releases/download/v0.2.4/tufw_0.2.4_linux_amd64.deb -O ./tufw_0.2.4_linux_amd64.deb
