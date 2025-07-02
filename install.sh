@@ -84,7 +84,7 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     
     printf "[+] Installing oh-my-zsh...\n\n"
     if [ -d $HOME/.oh-my-zsh ]; then
-        rm -rf $HOME/.oh-my-zshp
+        rm -rf $HOME/.oh-my-zsh
     fi
     # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
