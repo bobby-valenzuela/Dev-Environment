@@ -94,8 +94,8 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     
         cd "$(dirname "$0")"
         cp -v ./config/.zshrc   $HOME/
-        printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
         chsh -s $(which zsh)
+        printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
         # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
         cp -v ./config/.zshrc   $HOME/
         zsh
