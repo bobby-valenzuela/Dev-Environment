@@ -26,6 +26,14 @@ echo "Running on hive03..."
 ssh hive03 'bash -s' < /usr/local/bin/vscode-cleanup
 echo ""
 
+echo "Running on hive04..."
+ssh hive04 'bash -s' < /usr/local/bin/vscode-cleanup
+echo ""
+
+echo "Running on hive05..."
+ssh hive05 'bash -s' < /usr/local/bin/vscode-cleanup
+echo ""
+
 echo "Running on qbee..."
 ssh queenbee 'bash -s' < /usr/local/bin/vscode-cleanup
 echo ""
