@@ -65,7 +65,7 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
 
 
     # __________ Spotify-player ___________
-    if [ -d $HOME/.config/spotify-player/ ]; then
+    if [ ! -d $HOME/.config/spotify-player/ ]; then
         mkdir -p $HOME/.config/spotify-player
     fi
     cp -v -r ./config/.config/spotify-player  $HOME/.config/
@@ -77,28 +77,37 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     # Copy Yazi config
     cp -v -f -r ./config/.config/yazi  $HOME/.config/
 
+
+    # Install custom shell scripts and exes
+    sudo cp -v -f -r ./config/usr_local_bin/* /usr/local/bin/
+
     # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
     if [ -d $HOME/.oh-my-zsh ]; then
         rm -rf $HOME/.oh-my-zsh
     fi
 
-    printf "[+] Installing oh-my-zsh...\n\n"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    # If powerline isn't installed, oh-my-zsh+powerline should be installed for installed for good measure - and shell updated
+    if [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k/ ]; then
 
-    printf "[+] Installing powerlevel10k...\n\n"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
-    # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    
-    printf "[+] Setting default shell...\n\n"
-    if which zsh >/dev/null 2>&1; then
-    
-        cd "$(dirname "$0")"
-        cp -v ./config/.zshrc   $HOME/
-        chsh -s $(which zsh)
-        printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
-        # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
-        cp -v ./config/.zshrc   $HOME/
-        zsh
+        printf "[+] Installing oh-my-zsh...\n\n"
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+        printf "[+] Installing powerlevel10k...\n\n"
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+        # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+        
+        printf "[+] Setting default shell...\n\n"
+        if which zsh >/dev/null 2>&1; then
+        
+            cd "$(dirname "$0")"
+            cp -v ./config/.zshrc   $HOME/
+            chsh -s $(which zsh)
+            printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
+            # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
+            cp -v ./config/.zshrc   $HOME/
+            zsh
+        fi
+
     fi
 
 fi
