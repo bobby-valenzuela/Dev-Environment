@@ -78,8 +78,30 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     cp -v -f -r ./config/.config/yazi  $HOME/.config/
 
 
-    cd "$(dirname "$0")"
-    cp -v ./config/.zshrc   $HOME/
+
+    printf "[+] Installing powerlevel10k...\n\n"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+    
+    printf "[+] Installing oh-my-zsh...\n\n"
+    if [ -d $HOME/.oh-my-zsh ]; then
+        rm -rf $HOME/.oh-my-zshp
+    fi
+    # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+
+    printf "[+] Setting default shell...\n\n"
+    if which zsh >/dev/null 2>&1; then
+    
+        cd "$(dirname "$0")"
+        cp -v ./config/.zshrc   $HOME/
+        
+        chsh -s $(which zsh)
+        # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
+        cd "$(dirname "$0")"
+        cp -v ./config/.zshrc   $HOME/
+        zsh
+    fi
 
 fi
 
@@ -263,26 +285,6 @@ if [ "$1" != "configonly" ]; then
         && tar xf lazygit.tar.gz lazygit \
         && mv -f lazygit /usr/local/bin/ \
         && rm lazygit.tar.gz
-    fi
-    
-    printf "[+] Installing powerlevel10k...\n\n"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
-    
-    printf "[+] Installing oh-my-zsh...\n\n"
-    if [ -d $HOME/.oh-my-zsh ]; then
-        rm -rf $HOME/.oh-my-zshp
-    fi
-    # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-
-
-    printf "[+] Setting default shell...\n\n"
-    if which zsh >/dev/null 2>&1; then
-        chsh -s $(which zsh)
-        # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
-        cd "$(dirname "$0")"
-        cp -v ./config/.zshrc   $HOME/
-        zsh
     fi
     
 fi
