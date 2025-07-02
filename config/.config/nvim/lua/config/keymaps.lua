@@ -198,6 +198,9 @@ vim.keymap.set('n', '<leader>cy', ':%s:\\V<C-r>":', { noremap = true, silent = t
 -- Find and [a]ppend [y]anked text- replace all in doc
 vim.keymap.set('n', '<leader>ay', ':%s:\\V<C-r>":<C-r>"', { noremap = true, silent = true })
 
+-- Find all occurrences of word under cursor in current buffer and add to quickfix list
+vim.keymap.set('n', "<leader>faw", "yiw | :vim '<C-r>\"' % <C-r> | :cope <CR>", { noremap = true, silent = true })
+
 
 -- _______________________ Telescope __________________________
 local builtin = require('telescope.builtin')
