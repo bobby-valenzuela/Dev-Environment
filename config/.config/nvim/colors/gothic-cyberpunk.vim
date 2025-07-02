@@ -236,3 +236,11 @@ call HighlightFor("CocHintHighlight",      s:neon_magenta,      s:blackest,    "
 call HighlightFor("CocErrorVirtualText",      s:neon_magenta,      s:blackest,    "NONE")
 call HighlightFor("CocWarningVirtualText",      s:vibrant_teal,      s:blackest,    "NONE")
 call HighlightFor("CocInfoVirtualText",      s:neon_magenta,      s:blackest,    "NONE")
+
+
+
+
+
+call HighlightFor("IlluminatedWordText",      s:black,      s:vibrant_teal,    "italic,bold")
+call HighlightFor("IlluminatedWordRead",      s:black,      s:vibrant_teal,    "italic,bold")
+call HighlightFor("IlluminatedWordWrite",      s:black,      s:vibrant_teal,    "italic,bold")
