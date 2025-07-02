@@ -118,6 +118,8 @@ config_update_and_nvim_update(){
     config_update 'update-nvim'
 }
 config_update(){
+    # Gets latest config files in repo (which has been cloned) and updates local files
+
     LOCAL_REPO=~/my_repos/Dev-Environment
 
     if [[ ! -d $LOCAL_REPO/ ]]; then
@@ -131,8 +133,12 @@ config_update(){
         fi
 
         cd $LOCAL_REPO
+        # Save any unsaved changed and pull down the latest
+        git stash save
+        git pull
         ./install.sh configonly
     fi
+
 
     # Nvim is already updated - only continue if we want to keep revert back to current nvim
     if [[ "$1" = "update-nvim" ]]; then
@@ -200,6 +206,8 @@ config_save(){
     DEST=$LOCAL_REPO/
     cp -v -r ~/posting/  $DEST
 
+
+    # NEW - Copy custom files from /usr/local/bin/
     DEST=$LOCAL_REPO/config/usr_local_bin/
     # cp /usr/local/bin/* $DEST
 
@@ -207,31 +215,45 @@ config_save(){
         mkdir -p $LOCAL_REPO/config/usr_local_bin/
     fi
 
+    sudo cp -r /usr/local/bin/chatgpt $DEST
+    sudo cp -r /usr/local/bin/dirsync $DEST
+    sudo cp -r /usr/local/bin/grok $DEST
+    sudo cp -r /usr/local/bin/postboy $DEST
+    sudo cp -r /usr/local/bin/posty $DEST
+    sudo cp -r /usr/local/bin/quickconnect $DEST
+    sudo cp -r /usr/local/bin/reposync $DEST
+    sudo cp -r /usr/local/bin/restarthive.sh $DEST
+    sudo cp -r /usr/local/bin/tomahawk $DEST
+    sudo cp -r /usr/local/bin/update_aws_creds.sh $DEST
+    sudo cp -r /usr/local/bin/vscode-cleanup $DEST
+    sudo cp -r /usr/local/bin/vscode-cleanup-pbx $DEST
+
+    # OLD - Copy all files (less than 100MB) in /usr/local/bin
     # Maximum file size in bytes (100 MB = 100 * 1024 * 1024 bytes)
-    max_size=$((100 * 1024 * 1024))
+    # max_size=$((100 * 1024 * 1024))
 
-    # Loop through each file in /usr/local/bin (not directories, not recursive)
-    for file in /usr/local/bin/*; do
-        # Get file size in bytes
-        file_size=$(stat -c %s "$file" 2>/dev/null)
-        if [ -z "$file_size" ]; then
-          echo "Warning: Could not determine size of $file, skipping."
-          continue
-        fi
-        # Check if file size is less than 100 MB
-        if [ $file_size -lt $max_size ]; then
-          echo "Copying $file (size: $((file_size / 1024 / 1024)) MB)"
-          sudo cp -r "$file" "$DEST"
-          if [ $? -ne 0 ]; then
-            echo "Error: Failed to copy $file."
-            # exit 1
-          fi
-        else
-          echo "Skipping $file (size: $((file_size / 1024 / 1024)) MB, exceeds 100 MB)"
-        fi
-    done
+    # # Loop through each file in /usr/local/bin (not directories, not recursive)
+    # for file in /usr/local/bin/*; do
+    #     # Get file size in bytes
+    #     file_size=$(stat -c %s "$file" 2>/dev/null)
+    #     if [ -z "$file_size" ]; then
+    #       echo "Warning: Could not determine size of $file, skipping."
+    #       continue
+    #     fi
+    #     # Check if file size is less than 100 MB
+    #     if [ $file_size -lt $max_size ]; then
+    #       echo "Copying $file (size: $((file_size / 1024 / 1024)) MB)"
+    #       sudo cp -r "$file" "$DEST"
+    #       if [ $? -ne 0 ]; then
+    #         echo "Error: Failed to copy $file."
+    #         # exit 1
+    #       fi
+    #     else
+    #       echo "Skipping $file (size: $((file_size / 1024 / 1024)) MB, exceeds 100 MB)"
+    #     fi
+    # done
 
-    echo "Done!"
+     echo "Done!"
 }
 
 config_sync_alpha(){
