@@ -105,7 +105,7 @@
 --
 
 
--- NON-LEADER MOTIONS
+-- NON-LEADER CUSTOM MOTIONS
 
 
 -- Smaller movements up/down buffer
@@ -153,6 +153,9 @@ vim.keymap.set('n', '<leader>FF', function()
         vim.cmd('copen')              -- Open quickfix window
     end
 end, { noremap = true, silent = true })
+
+
+-- LEADER CUSTOM MOTIONS
 
 -- Toggle line numbering
 vim.keymap.set('n', '<Leader>ld', ':set nonumber norelativenumber<CR>', { noremap = true, silent = true })
