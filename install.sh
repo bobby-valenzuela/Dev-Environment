@@ -77,18 +77,17 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     # Copy Yazi config
     cp -v -f -r ./config/.config/yazi  $HOME/.config/
 
-
-
-    printf "[+] Installing powerlevel10k...\n\n"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
-    
-    printf "[+] Installing oh-my-zsh...\n\n"
+    # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
     if [ -d $HOME/.oh-my-zsh ]; then
         rm -rf $HOME/.oh-my-zsh
     fi
-    # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+    printf "[+] Installing powerlevel10k...\n\n"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+    # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+    
+    printf "[+] Installing oh-my-zsh...\n\n"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
     printf "[+] Setting default shell...\n\n"
     if which zsh >/dev/null 2>&1; then
