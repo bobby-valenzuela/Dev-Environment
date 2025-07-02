@@ -265,12 +265,16 @@ if [ "$1" != "configonly" ]; then
         && rm lazygit.tar.gz
     fi
     
+    printf "[+] Installing powerlevel10k...\n\n"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+    
     printf "[+] Installing oh-my-zsh...\n\n"
+    if [ -d $HOME/.oh-my-zsh ]; then
+        rm -rf $HOME/.oh-my-zshp
+    fi
     # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-    printf "[+] Installing powerlevel10k...\n\n"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
 
     printf "[+] Setting default shell...\n\n"
     if which zsh >/dev/null 2>&1; then
