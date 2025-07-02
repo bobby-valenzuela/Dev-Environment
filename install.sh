@@ -81,13 +81,13 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     # Install custom shell scripts and exes
     sudo cp -v -f -r ./config/usr_local_bin/* /usr/local/bin/
 
-    # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
-    if [ -d $HOME/.oh-my-zsh ]; then
-        rm -rf $HOME/.oh-my-zsh
-    fi
-
     # If powerline isn't installed, oh-my-zsh+powerline should be installed for installed for good measure - and shell updated
     if [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k/ ]; then
+
+        # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
+        if [ -d $HOME/.oh-my-zsh ]; then
+            rm -rf $HOME/.oh-my-zsh
+        fi
 
         printf "[+] Installing oh-my-zsh...\n\n"
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended

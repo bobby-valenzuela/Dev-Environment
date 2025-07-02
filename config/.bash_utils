@@ -142,12 +142,14 @@ config_update(){
 
     # Nvim is already updated - only continue if we want to keep revert back to current nvim
     if [[ "$1" = "update-nvim" ]]; then
+        echo "Nvim config updated..."
         return
     fi
 
     # [+] Restore main nvim profile
     # At this point our nvim config would have been moved to nvim-backup and a fresh install would be in place
     # Revert that if we're not interested in updated nvim
+    echo "Restoring nvim config..."
     if [ -d ~/.config/nvim-new ]; then
         rm -rf ~/.config/nvim-new
     fi
