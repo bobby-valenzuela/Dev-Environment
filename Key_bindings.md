@@ -463,6 +463,11 @@ _Modes_
 - `<S-v>` - Visual Line Mode  
 - `<S-b>` - (custom) Visual Block Mode  (default: `<C-S-v>` or `<C-q>`)  
 
+### Custom Neovim Keybinds  
+These are my current keybinds I'm using: [Keybinds](https://github.com/bobby-valenzuela/Dev-Environment/blob/main/config/.config/nvim/lua/config/keymaps.lua)  
+
+<br />
+
 ### Vim Troubleshooting  
 - `:highlight Delimiter` - See what styles apply to the "Delimiter" highlightgroup  
 - `:highlight Delimiter` - See what styles apply to the "Delimiter" highlightgroup (verbose)  
