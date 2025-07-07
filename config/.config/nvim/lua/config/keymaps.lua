@@ -1,109 +1,3 @@
--- Neovim Keymaps Cheat Sheet
--- Core Neovim
---
--- <C-d>: Scroll down 22 lines
--- <C-u>: Scroll up 22 lines
--- E!: Clear all buffers' unsaved changes
--- <Leader>ll: Toggle line numbering
--- <C-_>: Open terminal in split window
--- <esc>: Clear search highlights
--- <leader>h: Clear search highlights
--- <C-b>: Enter visual-block mode
--- <leader>rm: Remove all markers
--- <leader><down><down>: Move down 20 lines
--- <leader><up><up>: Move up 20 lines
--- <F12>: Next item in quickfix list
--- <F11>: Previous item in quickfix list
--- >: Indent and keep visual selection
--- <: Unindent and keep visual selection
--- <leader>FF: Recursive args with pattern, populate quickfix
---
--- Neotree
---
--- <leader><leader>: Toggle Neo-tree file explorer
---
--- Telescope
---
--- <leader>ff: Telescope find files
--- <leader>fg: Telescope live grep
--- <leader>fb: Telescope buffers
--- <leader>fh: Telescope help tags
--- <leader>fc: Telescope command history
---
--- Harpoon
---
--- <leader>a: Harpoon: Add file
--- <leader>m: Harpoon: Toggle quick menu
--- <leader>N: Harpoon: Previous file
--- <leader>n: Harpoon: Next file
--- <leader>1: Harpoon: Go to file 1
--- <leader>2: Harpoon: Go to file 2
--- <leader>3: Harpoon: Go to file 3
--- <leader>4: Harpoon: Go to file 4
--- <leader>5: Harpoon: Go to file 5
--- <leader>6: Harpoon: Go to file 6
---
--- Git (General)
---
--- <leader>gu: Undo last Git commit
--- <leader>ga: Stash current Git changes
--- <leader>gg: Open LazyGit for current file
---
--- Gitsigns
---
--- <leader>gt: Toggle Git signs
--- ]H: Go to last hunk
--- [H: Go to first hunk
--- <leader>ghs: Stage hunk
--- <leader>ghr: Reset hunk
--- <leader>ghS: Stage buffer
--- <leader>ghu: Undo stage hunk
--- <leader>ghR: Reset buffer
--- <leader>ghp: Preview hunk inline
--- <leader>ghb: Blame line
--- <leader>ghB: Blame buffer
--- <leader>ghd: Diff this
--- <leader>ghD: Diff this against ~
--- ih: Select hunk (operator and visual mode)
---
--- Vim-fugitive
---
--- <leader>gs: Open Git status
--- <leader>gc: Git commit
--- <leader>gb: Git blame
--- <leader>gd: Git diff
--- <leader>go: Open file in remote
--- <leader>gl: Git commit log
---
--- Snacks (Indent)
---
--- <leader>ie: Enable Snacks indent
--- <leader>id: Disable Snacks indent
---
--- LSP
---
--- gd: Go to definition
--- gD: Go to declaration
--- gr: Find references
--- K: Hover documentation
--- <C-k>: Signature help
--- <leader>rn: Rename symbol
--- <leader>ca: Code actions
--- <leader>f: Format code
--- ]d: Next diagnostic
--- [d: Previous diagnostic
--- <leader>e: Open diagnostic float
--- <leader>ws: Workspace symbols
--- gi: Go to implementation
--- <leader>q: List diagnostics in quickfix
--- <leader>lr: Restart LSP
--- <leader>li: Show LSP info
--- <leader>dd: Disable diagnostics for buffer
--- <leader>de: Enable diagnostics for buffer
--- <leader>dl: Disable diagnostics for current line
--- <leader>dL: Enable diagnostics for current line
---
-
 
 -- NON-LEADER CUSTOM MOTIONS
 
@@ -367,67 +261,10 @@ vim.keymap.set('n', '<leader>ie', ':lua Snacks.indent.enable()<CR>', { desc = 'E
 vim.keymap.set('n', '<leader>id', ':lua Snacks.indent.disable()<CR>', { desc = 'Disable Snacks indent' })
 
 
--- _______________________ Trouble __________________________
-vim.keymap.set("n", "<leader>tT", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Toggle Trouble diagnostics" })
-vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Toggle Trouble diagnostics (current buffer)" })
-vim.keymap.set("n", "<leader>tr", "<cmd>Trouble lsp_references toggle<CR>", { desc = "Toggle Trouble LSP references" })
-vim.keymap.set("n", "<leader>td", "<cmd>Trouble lsp_definitions toggle<CR>", { desc = "Toggle Trouble LSP definitions" })
-vim.keymap.set("n", "<leader>tq", "<cmd>Trouble quickfix toggle<CR>", { desc = "Toggle Trouble quickfix" })
-vim.keymap.set("n", "<leader>ts", "<cmd>Trouble symbols toggle focus=false<CR>", { desc = "Toggle Trouble symbols" })
-vim.keymap.set("n", "<leader>tc", "<cmd>Trouble close<CR>", { desc = "Close Trouble" })
-vim.keymap.set("n", "<leader>tn", ":Trouble diagnostics next<CR>", { desc = "Next Trouble item" })
-vim.keymap.set("n", "<leader>tp", ":Trouble diagnostics prev<CR>", { desc = "Prevous Trouble item" })
-
-
 -- _______________________ LSP __________________________
 -- Set up keybindings for LSP functionality in Neovim
 -- These mappings use <leader> (default: '\') and other keys for quick access
 local opts = { noremap = true, silent = true }
-
-
--- ===> GO N' SHOW
-
--- Go to definition: Jump to where a symbol (function, variable, etc.) is defined
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-
--- Go to declaration: Navigate to the declaration of a symbol (useful in C/C++ or similar)
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-
--- Find references: List all places a symbol is used in the project
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-
--- Implementation: Go to the implementation of a symbol (e.g., for interfaces or abstract methods)
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-
--- Hover documentation: Show docs or type info for the symbol under the cursor
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-
-
--- ===> DIAGNOSTICS
-
--- List diagnostics: Show all diagnostics for the project in the quickfix list
-vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, opts)
-
--- Disable diagnostics for current buffer: Turn off LSP diagnostics for the current file
-vim.keymap.set('n', '<leader>dd', function() vim.diagnostic.disable(0) end, opts)
-
--- Enable diagnostics for current buffer: Re-enable LSP diagnostics for the current file
-vim.keymap.set('n', '<leader>de', function() vim.diagnostic.enable(0) end, opts)
-
--- Disable diagnostics for current line: Suppress diagnostics for the line under the cursor
-vim.keymap.set('n', '<leader>dl', function() vim.diagnostic.disable(0, vim.api.nvim_win_get_cursor(0)[1] - 1) end, opts)
-
--- Enable diagnostics for current line: Re-enable diagnostics for the line under the cursor
-vim.keymap.set('n', '<leader>dL', function() vim.diagnostic.enable(0, vim.api.nvim_win_get_cursor(0)[1] - 1) end, opts)
-
--- Open diagnostic float: Show detailed diagnostics for the current line
-vim.keymap.set('n', '<leader>dlp', vim.diagnostic.open_float, opts)
-
--- Next diagnostic: Jump to the next error, warning, or hint in the file
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-
--- Previous diagnostic: Jump to the previous error, warning, or hint in the file
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 
 
 -- ===> LSP ACTIONS
@@ -441,6 +278,50 @@ vim.keymap.set('n', '<leader>li', ':LspInfo<CR>', opts)
 -- Format code: Auto-format the current buffer per language server rules
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, opts)
 
+
+-- ===> GO N' SHOW
+
+-- [⚡] Go to definition: Jump to where a symbol (function, variable, etc.) is defined
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+
+-- [⚡] Go to declaration: Navigate to the declaration of a symbol (useful in C/C++ or similar)
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+
+-- [⚡] Find references: List all places a symbol is used in the project
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+
+-- Implementation: Go to the implementation of a symbol (e.g., for interfaces or abstract methods)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+
+-- [⚡] Hover documentation: Show docs or type info for the symbol under the cursor
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+
+
+-- ===> DIAGNOSTICS
+
+-- [Touble-Superceded] List diagnostics: Show all diagnostics for the project in the quickfix list 
+vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, opts)
+
+-- Disable diagnostics for current buffer: Turn off LSP diagnostics for the current file
+vim.keymap.set('n', '<leader>dd', function() vim.diagnostic.disable(0) end, opts)
+
+-- Enable diagnostics for current buffer: Re-enable LSP diagnostics for the current file
+vim.keymap.set('n', '<leader>de', function() vim.diagnostic.enable(0) end, opts)
+
+-- Disable diagnostics for current line: Suppress diagnostics for the line under the cursor
+vim.keymap.set('n', '<leader>dld', function() vim.diagnostic.disable(0, vim.api.nvim_win_get_cursor(0)[1] - 1) end, opts)
+
+-- Enable diagnostics for current line: Re-enable diagnostics for the line under the cursor
+vim.keymap.set('n', '<leader>dle', function() vim.diagnostic.enable(0, vim.api.nvim_win_get_cursor(0)[1] - 1) end, opts)
+
+-- [⚡] Open diagnostic float: Show detailed diagnostics for the current line
+vim.keymap.set('n', '<leader>dl', vim.diagnostic.open_float, opts)
+
+-- [⚡] Next diagnostic: Jump to the next error, warning, or hint in the file
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+
+-- [⚡] Previous diagnostic: Jump to the previous error, warning, or hint in the file
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 
 
 -- ===> OTHER
@@ -463,6 +344,20 @@ vim.keymap.set('n', '<leader>ws', vim.lsp.buf.workspace_symbol, opts)
 
 
 
-            vim.keymap.set("n", "<leader>l", function()
-              lint.try_lint()
-            end, { desc = "Trigger linting for current file" })
+vim.keymap.set("n", "<leader>l", function()
+  lint.try_lint()
+end, { desc = "Trigger linting for current file" })
+
+
+-- _______________________ Trouble __________________________
+vim.keymap.set("n", "<leader>tT", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Toggle Trouble diagnostics" })
+vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Toggle Trouble diagnostics (current buffer)" })
+vim.keymap.set("n", "<leader>tr", "<cmd>Trouble lsp_references toggle<CR>", { desc = "Toggle Trouble LSP references" })
+vim.keymap.set("n", "<leader>td", "<cmd>Trouble lsp_definitions toggle<CR>", { desc = "Toggle Trouble LSP definitions" })
+vim.keymap.set("n", "<leader>tq", "<cmd>Trouble quickfix toggle<CR>", { desc = "Toggle Trouble quickfix" })
+vim.keymap.set("n", "<leader>ts", "<cmd>Trouble symbols toggle focus=false<CR>", { desc = "Toggle Trouble symbols" })
+vim.keymap.set("n", "<leader>tc", "<cmd>Trouble close<CR>", { desc = "Close Trouble" })
+vim.keymap.set("n", "<leader>tn", ":Trouble diagnostics next<CR>", { desc = "Next Trouble item" })
+vim.keymap.set("n", "<leader>tp", ":Trouble diagnostics prev<CR>", { desc = "Prevous Trouble item" })
+
+
