@@ -33,14 +33,23 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 
 <br />
 
-__Config installation__: Install config files in ubuntu system _(config files only)_
+__Config installation__: Install config files in ubuntu system _(config files only - includes nvim)_
 ```bash
 sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
 ```
-
 <br />
 
 <br />
+
+__Nvim-only installation__: Install config files in ubuntu system _(nvim files only)_
+```bash
+sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
+```
+<br />
+
+<br />
+
+
 
 __Docker VM__:Create a Docker container running Ubuntu Jammy jellyfish (v22)  
 ```bash
