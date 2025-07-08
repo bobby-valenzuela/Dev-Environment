@@ -16,6 +16,32 @@ else
     printf "[+] Running as root\n"
 fi
 
+
+
+##### NVIM-ONLY
+if [ "$1" = "nvimonly" ]; then
+    # __________ NVIM __________
+    if [ -d $HOME/.config/nvim/ ]; then
+        mkdir -p $HOME/.config/nvim
+    fi
+
+    # [.config] If backup folder exists remove it so we can overwrite it
+    if [ -d $HOME/.config/nvim-backup ]; then
+        rm -rf $HOME/.config/nvim-backup
+    fi
+    mv $HOME/.config/nvim $HOME/.config/nvim-backup	    
+    cp -v -r ./config/.config/nvim  $HOME/.config/
+
+    # [.local] If backup folder exists remove it so we can overwrite it
+    if [ -d ~/.local/share/nvim-backup ]; then
+        rm -rf ~/.local/share/nvim-backup
+    fi
+    mv ~/.local/share/nvim ~/.local/share/nvim-backup
+
+    echo "[+] Nvim files copied!"
+    exit
+fi
+
 ##### CONFIG
 # ------------------------------------------------------------------------
 if [ "$1" = "full" -o "$1" = "configonly" ]; then
