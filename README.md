@@ -26,7 +26,7 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 
 __Package Installation__: Install programs in ubuntu system _(installs packages only)_
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_installonly.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_only.sh -O -)"
 ```
 
 <br />
@@ -43,7 +43,7 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 
 __Nvim-only installation__: Install config files in ubuntu system _(nvim files only)_
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_nvimonly.sh -O -)"
 ```
 <br />
 
