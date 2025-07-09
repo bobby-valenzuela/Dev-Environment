@@ -16,7 +16,10 @@ else
     printf "[+] Running as root\n"
 fi
 
-
+# Remove any old clones
+if [ -d ./Dev-Environment ]; then
+    rm -rf ./Dev-Environment
+fi
 
 ##### NVIM-ONLY
 if [ "$1" = "nvimonly" ]; then
