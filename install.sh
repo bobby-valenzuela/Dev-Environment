@@ -39,6 +39,10 @@ if [ "$1" = "nvimonly" ]; then
     mv ~/.local/share/nvim ~/.local/share/nvim-backup
 
     echo "[+] Nvim files copied!"
+
+    cp -f -v ./config/.vimrc  $HOME/
+    echo "[+] Vimrc copied!"
+
     exit
 fi
 
