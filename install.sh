@@ -154,17 +154,20 @@ if [ "$1" != "configonly" ]; then
     $SUDO apt update 
     
     echo "[+] Installing essential core packages..."    # Not essential per se, but essentials for my workflow,enchancements, and customizations
-    $SUDO  apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc docker.io docker-compose-plugin nodejs npm -y
+    $SUDO  apt install python3 perl wget tar make gcc unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc nodejs npm -y
     
     echo "[+] Installing extras..."
-    $SUDO  apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config mssql-tools unixODBC-devel -y
+    $SUDO  apt install zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk pkg-config mssql-tools -y
 
     echo "[+] Installing various dependencies..."
-    $SUDO  apt install pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libssl-dev libasound2-dev libdbus-1-dev crossbuild-essential-arm64 clang -y
+    $SUDO  apt install pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libssl-dev crossbuild-essential-arm64 clang -y
+
+    echo "[+] Installing various dependencies (fragile)..." # Packages which not not be found in older package repos
+    $SUDO  apt fzf ripgrep unixODBC-devel docker.io docker-compose-plugin -y
     
     echo "[+] Installing various sound-related dependencies..."
     $SUDO add-apt-repository ppa:ubuntuhandbook1/ffmpeg6
-    $SUDO apt install ffmpeg libass9 libbluray2 libcaca0 libcdio-cdda2 libcdio-paranoia2 libcdio19 librubberband2 libzimg2 libdbus-1-dev libncursesw5-dev libpulse-dev libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev -y
+    $SUDO apt install playerctl libasound2-dev ffmpeg libass9 libbluray2 libcaca0 libcdio-cdda2 libcdio-paranoia2 libcdio19 librubberband2 libzimg2 libdbus-1-dev libncursesw5-dev libpulse-dev libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev -y
     if systemctl --user is-active pipewire >/dev/null; then
         echo "Using PipeWire, installing specific dependencies..."
         $SUDO apt install libpipewire-0.3-0  -y
