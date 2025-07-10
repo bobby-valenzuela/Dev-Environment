@@ -154,12 +154,13 @@ if [ "$1" != "configonly" ]; then
     $SUDO apt update 
     
     echo "[+] Installing essential core packages..."    # Not essential per se, but essentials for my workflow,enchancements, and customizations
-    $SUDO  apt install python3 perl wget tar make gcc unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc nodejs npm -y
+    $SUDO  apt install python3 perl wget tar make gcc unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc nodejs npm ninja-build gettext -y
     
     echo "[+] Installing extras..."
     $SUDO  apt install zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk pkg-config mssql-tools -y
 
     echo "[+] Installing various dependencies..."
+
     $SUDO  apt install pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libssl-dev crossbuild-essential-arm64 clang -y
 
     echo "[+] Installing various dependencies (fragile)..." # Packages which not not be found in older package repos
