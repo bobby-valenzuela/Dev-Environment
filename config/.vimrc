@@ -322,7 +322,7 @@ let g:ale_fixers = {
 \}
 
 " Enable fixing on save (optional)
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 
 " Customize linting behavior
 let g:ale_lint_on_text_changed = 'always'  " Lint while typing
