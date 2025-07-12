@@ -117,7 +117,7 @@ if [[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]]
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
 # activate plugin
-export plugins=( git zsh-syntax-highlighting colored-man-pages colorize copyfile copybuffer fancy-ctrl-z ssh )
+export plugins=( git zsh-syntax-highlighting colored-man-pages colorize copyfile copybuffer fancy-ctrl-z ssh docker docker-compose)
 
 
 source $ZSH/oh-my-zsh.sh
