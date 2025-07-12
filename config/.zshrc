@@ -1,5 +1,5 @@
 
-# First thing, load zsh theme customizations
+# First thing, load zsh theme customizations (oh-my-zsh)
 [[ -s ~/.zsh_customizations ]] && source ~/.zsh_customizations
 
 
