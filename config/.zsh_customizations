@@ -118,7 +118,6 @@ export plugins=( git zsh-syntax-highlighting colored-man-pages colorize copyfile
 
 
 # Powerline 10k conf
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Setting theme: This needs to before we source oh-my-zsh 
@@ -162,4 +161,5 @@ fi
 # ctrl-o - copy cmdline contents to system clipboard
 # Allows pressing Ctrl-Z again to switch back to a background job.
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 
