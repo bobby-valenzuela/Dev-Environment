@@ -1,5 +1,5 @@
 
-# First thing, load zsh theme customizations (oh-my-zsh)
+# First thing, load zsh theme customizations
 [[ -s ~/.zsh_customizations ]] && source ~/.zsh_customizations
 
 
@@ -93,7 +93,7 @@ alias ch="$PATH_DIR/cht.sh"
 [[ -s ~/.bash_pbx ]] && source ~/.bash_pbx
 [[ -s ~/.bash_git ]] && source ~/.bash_git
 [[ -s ~/.bash_utils ]] && source ~/.bash_utils
-[[ -s ~/.oh-my-zsh/oh-my-zsh.sh ]] && source ~/.oh-my-zsh/oh-my-zsh.sh
+# [[ -s ~/.oh-my-zsh/oh-my-zsh.sh ]] && source ~/.oh-my-zsh/oh-my-zsh.sh
 
 
 

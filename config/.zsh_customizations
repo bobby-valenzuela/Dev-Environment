@@ -16,7 +16,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -90,9 +90,6 @@ DISABLE_AUTO_TITLE="true"
 #source ~/powerlevel10k/powerlevel10k.zsh-theme
 # Don't need to source this anymore - adding this in ohmyzsh as a theme - just need to set ZSH_THEME to a powerline theme (whic is done above)
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 
 # =========================================================
 # ============== [START] OH-MY-ZSH-PLUGINS ================
@@ -120,7 +117,40 @@ fi
 export plugins=( git zsh-syntax-highlighting colored-man-pages colorize copyfile copybuffer fancy-ctrl-z ssh docker docker-compose)
 
 
-source $ZSH/oh-my-zsh.sh
+# Powerline 10k conf
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Setting theme: This needs to before we source oh-my-zsh 
+if [[ $BLASTOFF == 1 ]]; then
+
+    # Install starship if not installed (v1.23)
+    if [ ! -s /usr/local/bin/starship ]; then
+
+        wget https://github.com/starship/starship/releases/download/v1.23.0/starship-x86_64-unknown-linux-gnu.tar.gz
+        tar -xvf starship-x86_64-unknown-linux-gnu.tar.gz
+        sudo mv starship /usr/local/bin/starship
+
+    fi
+
+    if [ ! -d ~/.config ]; then
+        mkdir -p ~/.config
+    fi
+
+    # Create config file
+    if [ ! -s ~/.config/starship.toml ]; then
+        touch ~/.config/starship.toml 2 >&1 /dev/null
+    fi
+
+    # Install catppuccin-powerline mocha preset
+    starship preset catppuccin-powerline -o ~/.config/starship.toml
+    eval "$(starship init zsh)"
+    zsh
+
+else
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+    source $ZSH/oh-my-zsh.sh
+fi
 
 
 # ============== [END] OH-MY-ZSH-PLUGINS ================
@@ -131,4 +161,5 @@ source $ZSH/oh-my-zsh.sh
 # copyfile - copy file contents to system clipboard
 # ctrl-o - copy cmdline contents to system clipboard
 # Allows pressing Ctrl-Z again to switch back to a background job.
+
 
