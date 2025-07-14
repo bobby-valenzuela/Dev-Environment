@@ -5,6 +5,34 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# _________ SETUP FUNCTIONS ___________
+
+function install_and_configure_starship(){
+    # Install starship if not installed (v1.23)
+    if [ ! -s /usr/local/bin/starship ]; then
+
+        wget https://github.com/starship/starship/releases/download/v1.23.0/starship-x86_64-unknown-linux-gnu.tar.gz
+        tar -xvf starship-x86_64-unknown-linux-gnu.tar.gz
+        sudo mv starship /usr/local/bin/starship
+        rm -f starship-x86_64-unknown-linux-gnu.tar.gz
+
+    fi
+
+    if [ ! -d ~/.config ]; then
+        mkdir -p ~/.config
+    fi
+
+    # Create config file
+    if [ ! -s ~/.config/starship.toml ]; then
+        touch ~/.config/starship.toml 2 >&1 /dev/null
+    fi
+
+    # Install catppuccin-powerline mocha preset
+    starship preset catppuccin-powerline -o ~/.config/starship.toml
+    eval "$(starship init zsh)"
+}
+
+
 
 # _________ OH-MY-ZSH ___________
 
@@ -122,31 +150,8 @@ export plugins=( git zsh-syntax-highlighting colored-man-pages colorize copyfile
 
 # Setting theme: This needs to before we source oh-my-zsh 
 if [[ $BLASTOFF == 1 ]]; then
-
-    # Install starship if not installed (v1.23)
-    if [ ! -s /usr/local/bin/starship ]; then
-
-        wget https://github.com/starship/starship/releases/download/v1.23.0/starship-x86_64-unknown-linux-gnu.tar.gz
-        tar -xvf starship-x86_64-unknown-linux-gnu.tar.gz
-        sudo mv starship /usr/local/bin/starship
-        rm -f starship-x86_64-unknown-linux-gnu.tar.gz
-
-    fi
-
-    if [ ! -d ~/.config ]; then
-        mkdir -p ~/.config
-    fi
-
-    # Create config file
-    if [ ! -s ~/.config/starship.toml ]; then
-        touch ~/.config/starship.toml 2 >&1 /dev/null
-    fi
-
-    # Install catppuccin-powerline mocha preset
-    starship preset catppuccin-powerline -o ~/.config/starship.toml
-    eval "$(starship init zsh)"
+    install_and_configure_starship
     zsh
-
 else
     ZSH_THEME="powerlevel10k/powerlevel10k"
     source $ZSH/oh-my-zsh.sh
