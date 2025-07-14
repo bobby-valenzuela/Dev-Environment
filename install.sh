@@ -46,7 +46,7 @@ if [ "$1" = "nvimonly" ]; then
     echo "[+] Nvim files copied!"
 
     # Vim
-    cp -f -v ./config/.vimrc  $HOME/
+    cp -f -v ./config/config/.vimrc  $HOME/
     if [ -d $HOME/.vim/ ]; then
         mkdir -p $HOME/.vim
     fi
@@ -107,7 +107,7 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     if [ -d $HOME/.vim/ ]; then
         mkdir -p $HOME/.vim
     fi
-    cp -f -v -r ./config/nvim/colors  $HOME/.vim/
+    cp -f -v -r ./config/config/nvim/colors  $HOME/.vim/
 
     # __________ Spotify-player ___________
     if [ ! -d $HOME/.config/spotify-player/ ]; then
