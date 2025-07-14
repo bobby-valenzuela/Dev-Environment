@@ -19,7 +19,7 @@ fi
 # Install latest
 if [ -d ./Dev-Environment/ ]; then
     echo "Found Dev-Environment. Re-cloning..."
-    $SUDO rm -rf ./Dev-Environment/
+    $SUDO rm -rf ./Dev-Environment
 fi
 
 
