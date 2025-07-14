@@ -38,9 +38,13 @@ if [ "$1" = "nvimonly" ]; then
 
     echo "[+] Nvim files copied!"
 
+    # Vim
     cp -f -v ./config/.vimrc  $HOME/
+    if [ -d $HOME/.vim/ ]; then
+        mkdir -p $HOME/.vim
+    fi
     cp -f -v -r ./config/nvim/colors  $HOME/.vim/
-    echo "[+] Vimrc copied!"
+    echo "[+] Vim files copied!"
 
     exit
 fi
@@ -85,7 +89,6 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     fi
     mv $HOME/.config/nvim $HOME/.config/nvim-backup	    
     cp -v -r ./config/.config/nvim  $HOME/.config/
-    cp -f -v -r ./config/nvim/colors  $HOME/.vim/
 
     # [.local] If backup folder exists remove it so we can overwrite it
     if [ -d ~/.local/share/nvim-backup ]; then
@@ -93,7 +96,11 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     fi
     mv ~/.local/share/nvim ~/.local/share/nvim-backup
 
-
+    # Vim
+    if [ -d $HOME/.vim/ ]; then
+        mkdir -p $HOME/.vim
+    fi
+    cp -f -v -r ./config/nvim/colors  $HOME/.vim/
 
     # __________ Spotify-player ___________
     if [ ! -d $HOME/.config/spotify-player/ ]; then
