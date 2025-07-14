@@ -291,6 +291,7 @@ launch(){
         wget https://github.com/starship/starship/releases/download/v1.23.0/starship-x86_64-unknown-linux-gnu.tar.gz
         tar -xvf starship-x86_64-unknown-linux-gnu.tar.gz
         sudo mv starship /usr/local/bin/starship
+	rm -f starship-x86_64-unknown-linux-gnu.tar.gz
 
     fi
 
@@ -300,7 +301,7 @@ launch(){
 
     # Create config file
     if [ ! -s ~/.config/starship.toml ]; then
-        touch ~/.config/starship.toml 2 >&1 /dev/null
+        touch ~/.config/starship.toml 2>&1 /dev/null
     fi
 
     # Install catppuccin-powerline mocha preset
