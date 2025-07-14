@@ -129,6 +129,7 @@ if [[ $BLASTOFF == 1 ]]; then
         wget https://github.com/starship/starship/releases/download/v1.23.0/starship-x86_64-unknown-linux-gnu.tar.gz
         tar -xvf starship-x86_64-unknown-linux-gnu.tar.gz
         sudo mv starship /usr/local/bin/starship
+        rm -f starship-x86_64-unknown-linux-gnu.tar.gz
 
     fi
 
