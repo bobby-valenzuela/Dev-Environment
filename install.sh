@@ -16,6 +16,13 @@ else
     printf "[+] Running as root\n"
 fi
 
+# Install latest
+if [ -d ./Dev-Environment/ ]; then
+    echo "Found Dev-Environment. Re-cloning..."
+    $SUDO rm -rf ./Dev-Environment/
+fi
+
+
 ##### NVIM-ONLY
 if [ "$1" = "nvimonly" ]; then
     # __________ NVIM __________
