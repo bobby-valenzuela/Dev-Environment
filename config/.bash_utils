@@ -30,7 +30,10 @@ y() {
 
 docx_to_md(){
     [[ ! "$1" =~ .docx$ ]] && echo "File must be in .docx format" && exit
-    pandoc -s $1 -f docx -t commonmark --extract-media=. -o output.md
+    FILE=$(basename $1)
+    FILE=${FILE// /_}
+    FILE=${FILE%.docx}
+    pandoc -s $1 -f docx -t commonmark --extract-media=. -o $FILE.md
 }
 
 update_lazy(){
