@@ -20,8 +20,8 @@ alias fgrep='fgrep --color=auto'
 alias mkdir='mkdir -pv'
 
 # If we have colorized versions of cat and less use those by default
-[[ ccless ]] && alias less='cless'
-[[ ccat ]] && alias cat='ccat'
+# [[ ccless ]] && alias less='cless'
+# [[ ccat ]] && alias cat='ccat'
 
 ## get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4'

@@ -37,8 +37,8 @@ docx_to_md() {
     [[ ! -f "$1" || ! -r "$1" ]] && { echo "File does not exist or is not readable" >&2; exit 1; }
 
     # Validate second argument
-    if [[ -n "$2" && "$2" != "--no-img-dimensions" ]]; then
-        echo "Invalid argument: $2. Only --no-img-dimensions is supported" >&2
+    if [[ -n "$2" && "$2" != "--preserve-img-dimensions" ]]; then
+        echo "Invalid argument: $2. Only --preserve-img-dimensions is supported" >&2
         exit 1
     fi
 
@@ -50,8 +50,15 @@ docx_to_md() {
     # Check for existing output file
     [[ -f "$FILE.md" ]] && { echo "Output file $FILE.md already exists" >&2; exit 1; }
 
+    # Create unique media folder
+    MEDIA_DIR="_assets_${FILE}"
+    [[ -d "$MEDIA_DIR" ]] && { echo "Media directory $MEDIA_DIR already exists" >&2; exit 1; }
+
     # Convert file
-    if [[ "$2" == "--no-img-dimensions" ]]; then
+    if [[ "$2" == "--preserve-img-dimensions" ]]; then
+        pandoc -s "$1" -f docx -t gfm --extract-media="$MEDIA_DIR" -o "$FILE.md" --wrap=auto --columns=80
+        printf "Created file %s.md with media extracted\n" "$FILE"
+    else
         # Remove any fixed image dimentions. Useful as sometimes this will causes images to use html syntax as markdown since this is the only way to set specific dimensions in an  image in markdown
         printf "About to create file %s.md...\n" "$FILE"
         FILTER_FILE=$(mktemp filter.XXXXXX.lua)
@@ -62,14 +69,16 @@ function Image (img)
     return img
 end
 EOF
-        pandoc -s "$1" -f docx -t gfm --extract-media=. -o "$FILE.md" --lua-filter="$FILTER_FILE"
+        pandoc -s "$1" -f docx -t gfm --extract-media="$MEDIA_DIR" -o "$FILE.md" --wrap=auto --columns=80 --lua-filter="$FILTER_FILE"
         rm -f "$FILTER_FILE"
         printf "Created file %s.md\n" "$FILE"
-    else
-        pandoc -s "$1" -f docx -t gfm --extract-media=. -o "$FILE.md"
-        printf "Created file %s.md with media extracted\n" "$FILE"
     fi
+
+    # Remove broken image links
+    sed -i -E ':a; N; $!ba; s:(!\[([^]\n])*)(\n\s*):\1\ :g' "$FILE.md"
+
 }
+
 update_lazy(){
     sudo apt install ninja-build gettext cmake unzip curl git
     git clone https://github.com/neovim/neovim
@@ -329,3 +338,13 @@ land(){
     export BLASTOFF=0
     zsh
 }
+
+# dirsync_alpha(){
+#
+#     for dir in $( find ~/pbx/ -maxdepth 1 -type d -not -path "*/pbx/" -not -path "*/test" -not -path "*_custom_scripts"); do
+#         echo $dir
+#         DIR=$(basename $dir)
+#         $( dirsync $DIR alpha "ongoing" )
+#     done
+#
+# }
