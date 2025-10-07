@@ -328,6 +328,7 @@ _Registers: Viewing/Yanking/Pasting_
 - `"0p` - Paste from 0 register (in normal mode)  
 - `"2p` - Paste 2nd to last thing yanked (grabs from 2 register in normal mode)  
 - `"_dd` - Delete line and yank to black hole register (keeps registers the same).  
+- `"1yiw` - Yank word under cursor into register 1    
 - `ayy` - Yank line to "a" register (overwriting register a).  
 - `Ayy` - Yank line to "a" register (appending to register a)  
 - `"+y` - Yank text into system clipboard  
@@ -544,3 +545,4 @@ _Commandline mode_
 - `<space> w |` - max width of current window [Lazyvim]  
 - `<leader> w =` - equal width of current windows [Lazyvim]  
 - (in NeoTree) `s` - to open in new window in vertical split [Lazyvim]
+
