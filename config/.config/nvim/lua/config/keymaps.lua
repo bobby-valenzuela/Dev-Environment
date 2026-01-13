@@ -73,7 +73,7 @@ vim.keymap.set('n', '<leader>h', ':nohlsearch<CR><esc>', { noremap = true, silen
 vim.keymap.set('n', '<leader>rm', ':delm a-zA-Z0-9<CR>', { desc = 'Remove All Markers', noremap = true, silent = true })
 
 -- Set Transparent background
-vim.keymap.set('n', '<leader>to', ':highlight Normal guibg=NONE ctermbg=NONE<CR>', { desc = 'Set Transparent bg', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>tb', ':highlight Normal guibg=NONE ctermbg=NONE<CR>', { desc = 'Set Transparent bg', noremap = true, silent = true })
 
 -- move up/down in 20-step jumps
 vim.keymap.set('n', '<leader><down><down>', '20<C-e>', { desc = 'Move down 20 steps', noremap = true, silent = true })
