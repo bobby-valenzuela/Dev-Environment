@@ -34,6 +34,86 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 
 ### SHELL
 
+`_` - sudo  
+`ccat` - colorize_cat  
+`ch` - /home/bobby/bin/cht.sh (command-line client for cheat.sh cheat sheets). Example `ch perl/array`  
+`chatgpt` - [custom script] - CLI interface to ChatGPT/OpenAI  
+`cless` - colorize_less  
+`csvlens` - Interactive CSV file viewer (like lens for tabular data)  
+`dirsync` - [custom script] Directory synchronizer (sync files between directories)  
+`egrep` - egrep --color=auto (grep -E)  
+`eget` - Easy binary downloader from GitHub releases  
+`ff` - (fuuzzy finder) fzf --height 40% --layout reverse --border  
+`fgrep` - fgrep --color=auto  
+`fv` - nvim $(fzf --height 40% --layout reverse --border)  
+`fzf` - General-purpose command-line fuzzy finder  
+`ggh` - SSH connection manager  
+`grok` - [custom script] - xAI Grok CLI  
+`json_xs` - JSON command-line processor (Perl-based JSON tool)  
+`kubectl` - Kubernetes command-line tool (interact with K8s clusters)  
+`l` - ls -lah  
+`la` - ls -lAh  
+`lazydocker` - Simple terminal UI for managing Docker  
+`lazygit` - Simple terminal UI for git commands  
+`lazysql` - (likely lazy-based SQL viewer or editor tool)  
+`lg` - lazygit  
+`moose-outdated` - Check for outdated Moose modules (Perl tool)  
+`nv` - NVIM_APPNAME=nvim-lazy nvim  
+`nvim` - Neovim text editor  
+`nvim-custom` - NVIM_APPNAME="nvim-custom" nvim  
+`ollama` - Run and manage large language models locally (CLI for Ollama)  
+`package-stash-conflicts` - Check for Package::Stash conflicts (Perl tool)  
+`pandoc` - Universal document converter (markup to markup/PDF/etc.)  
+`perlcritic` - Critique Perl source code for best practices  
+`perltidy` - Indent and reformat Perl scripts  
+`perly` - [custom script] /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/perly.pl  
+`perlyprod` - [custom script] /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/perlyprod.pl  
+`pls` - (custom or alternative ls with pretty output)  
+`postboy` - [custom script] (custom script - possibly HTTP/posting tool)  
+`posty` - (custom script - likely API/posting helper)  
+`prod_scratch` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/prod_scratch.pl  
+`pscpu` - ps auxf | sort -nr -k 3  
+`pscpu10` - ps auxf | sort -nr -k 3 | head -10  
+`psmem` - ps auxf | sort -nr -k 4  
+`psmem10` - ps auxf | sort -nr -k 4 | head -10  
+`qc` - quickconnect  
+`quickconnect` - (custom script - likely SSH/quick connect helper)  
+`re` - rr && ee  
+`reposync` - (custom script - likely repo synchronization tool)  
+`reposync_thisdir_to_alpha` - reposync . alpha ongoing  
+`restarthive.sh` - (custom script - likely restarts a Hive service)  
+`rl` - tail -f /home/control-io/www/log/templog  
+`rl2` - tail -f /home/control-io/www/log/templog2  
+`scpdownloads` - cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads  
+`showmerges` - git log --oneline --merges -E --grep 'DEV-[0-9]+' -n 15  
+`spf` - (custom script - possibly SPF checker or sender policy framework tool)  
+`sqlcmd` - Microsoft SQL Server command-line query tool  
+`ssh_keyupdate` - (complex ssh-agent + ssh-add command)  
+`starship` - Cross-shell prompt (customizable prompt engine)  
+`tere` - (likely a fuzzy cd or directory jumper tool)  
+`timed-process` - (custom script - likely times or profiles processes)  
+`tmux` - tmux -2  
+`upandup` - sudo apt update && sudo apt upgrade  
+`update_aws_creds.sh` - (custom script - updates AWS credentials)  
+`vscode-cleanup` - (custom script - cleans VS Code cache/data)  
+`vscode-cleanup-all` - (custom script - thorough VS Code cleanup)  
+`vscode-cleanup-pbx` - (custom script - VS Code cleanup variant)  
+`which-command` - whence  
+`yt-dlp` - Feature-rich command-line audio/video downloader  
+`zig` - Zig programming language compiler/toolchain  
+
+## Apache
+`apachelogacc` - tail -n15 -f /var/log/apache2/access.log  
+`apachelogerr` - tail -n15 -f /var/log/apache2/error.log  
+`apacherestart` - sudo service apache2 restart  
+`e0` - tail -f -n 0 /var/log/apache2/error.log  
+`ee` - tail -f /var/log/apache2/error.log  
+`er` - watch egrep -i 'DBD::' /var/log/apache2/error.log  
+`rr` - sudo service apache2 restart && echo 'Apache Restarted!'  
+`tomahawk` - (custom script - possibly a music player or search tool)  
+
+
+## Dir navigation
 `...` - cd ../../../  
 `....` - cd ../../../../  
 `.....` - cd ../../../../  
@@ -51,108 +131,17 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `7` - cd -7  
 `8` - cd -8  
 `9` - cd -9  
-`_` - sudo  
-`apachelogacc` - tail -n15 -f /var/log/apache2/access.log  
-`apachelogerr` - tail -n15 -f /var/log/apache2/error.log  
-`apacherestart` - sudo service apache2 restart  
-`bcp` - Bulk copy program (Microsoft SQL Server data transfer tool)  
-`callouts_to_list` - (custom script - likely converts callouts/markdown to list format)  
-`cb` - (custom script - possibly clipboard manager or copyboard tool)  
-`ccat` - colorize_cat  
-`ch` - /home/bobby/bin/cht.sh (command-line client for cheat.sh cheat sheets)  
-`chatgpt` - (custom script - likely CLI interface to ChatGPT/OpenAI)  
-`cless` - colorize_less  
-`config_data` - (custom script - likely displays or manages configuration data)  
-`crc32` - Compute CRC-32 checksums  
-`csvlens` - Interactive CSV file viewer (like lens for tabular data)  
-`dbilogstrip` - Strip DBI logging noise (Perl DBI profiling tool)  
-`dbiprof` - DBI profiler (Perl database profiling)  
-`dbiproxy` - DBI proxy server (Perl DBI network proxy)  
-`dirsync` - Directory synchronizer (sync files between directories)  
-`durs` - Disk usage analyzer with Rust-based speed (like du but faster)  
-`e0` - tail -f -n 0 /var/log/apache2/error.log  
-`ee` - tail -f /var/log/apache2/error.log  
-`egrep` - egrep --color=auto  
-`eget` - Easy binary downloader from GitHub releases  
-`er` - watch egrep -i 'DBD::' /var/log/apache2/error.log  
-`event_rpcgen.py` - Event RPC generator (from libevent, generates RPC code)  
-`ff` - fzf --height 40% --layout reverse --border (fuzzy finder)  
-`fgrep` - fgrep --color=auto  
-`fv` - nvim $(fzf --height 40% --layout reverse --border)  
-`fzf` - General-purpose command-line fuzzy finder  
-`git_current_branch` - (oh-my-zsh deprecated function wrapper)  
-`ggh` - (custom script - likely git-related helper)  
-`grok` - (custom script - possibly log parsing or xAI Grok CLI)  
-`history` - omz_history  
-`json_xs` - JSON command-line processor (Perl-based JSON tool)  
-`kubectl` - Kubernetes command-line tool (interact with K8s clusters)  
-`l` - ls -lah  
-`la` - ls -lAh  
-`lazydocker` - Simple terminal UI for managing Docker  
-`lazygit` - Simple terminal UI for git commands  
-`lazysql` - (likely lazy-based SQL viewer or editor tool)  
-`lg` - lazygit  
-`lib` - (custom script - possibly library manager or loader)  
+`callouts_to_list` - (custom script - converts callouts/markdown to list format)  
+`cb` - clipboard manager. See `cb -h`  
 `ll` - ls -lh  
 `ls` - ls --color=tty  
 `lsa` - ls -lah  
 `md` - mkdir -p  
 `mkdir` - mkdir -pv  
-`moose-outdated` - Check for outdated Moose modules (Perl tool)  
-`nv` - NVIM_APPNAME=nvim-lazy nvim  
-`nvim` - Neovim text editor  
-`nvim-custom` - NVIM_APPNAME="nvim-custom" nvim  
-`ollama` - Run and manage large language models locally (CLI for Ollama)  
-`package-stash-conflicts` - Check for Package::Stash conflicts (Perl tool)  
-`pandoc` - Universal document converter (markup to markup/PDF/etc.)  
-`perlcritic` - Critique Perl source code for best practices  
-`perltidy` - Indent and reformat Perl scripts  
-`perly` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/perly.pl  
-`perlyprod` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/perlyprod.pl  
-`pls` - (custom or alternative ls with pretty output)  
-`pod2markdown` - Convert Perl POD to Markdown  
-`pod_cover` - Check Pod coverage in Perl modules  
-`podselect` - Extract selected sections from POD input  
-`podspell` - Check spelling in Perl POD documentation  
-`postboy` - (custom script - possibly HTTP/posting tool)  
-`posty` - (custom script - likely API/posting helper)  
-`prod_scratch` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/prod_scratch.pl  
-`pscpu` - ps auxf | sort -nr -k 3  
-`pscpu10` - ps auxf | sort -nr -k 3 | head -10  
-`psmem` - ps auxf | sort -nr -k 4  
-`psmem10` - ps auxf | sort -nr -k 4 | head -10  
-`qc` - quickconnect  
-`quickconnect` - (custom script - likely SSH/quick connect helper)  
 `rd` - rmdir  
-`re` - rr && ee  
-`reposync` - (custom script - likely repo synchronization tool)  
-`reposync_thisdir_to_alpha` - reposync . alpha ongoing  
-`restarthive.sh` - (custom script - likely restarts a Hive service)  
-`rl` - tail -f /home/control-io/www/log/templog  
-`rl2` - tail -f /home/control-io/www/log/templog2  
-`rr` - sudo service apache2 restart && echo 'Apache Restarted!'  
-`scpdownloads` - cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads  
-`showmerges` - git log --oneline --merges -E --grep 'DEV-[0-9]+' -n 15  
-`spf` - (custom script - possibly SPF checker or sender policy framework tool)  
-`sqlcmd` - Microsoft SQL Server command-line query tool  
-`ssh_keyupdate` - (complex ssh-agent + ssh-add command)  
-`starship` - Cross-shell prompt (customizable prompt engine)  
-`tere` - (likely a fuzzy cd or directory jumper tool)  
-`timed-process` - (custom script - likely times or profiles processes)  
-`tmux` - tmux -2  
-`tomahawk` - (custom script - possibly a music player or search tool)  
-`upandup` - sudo apt update && sudo apt upgrade  
-`update_aws_creds.sh` - (custom script - updates AWS credentials)  
-`vscode-cleanup` - (custom script - cleans VS Code cache/data)  
-`vscode-cleanup-all` - (custom script - thorough VS Code cleanup)  
-`vscode-cleanup-pbx` - (custom script - VS Code cleanup variant)  
-`which-command` - whence  
-`ya` - (likely alias for yazi or another tool)  
+`ya` - (alias for yazi)  
 `yazi` - Blazing fast terminal file manager (Rust-based)  
-`yt-dlp` - Feature-rich command-line audio/video downloader  
-`yz` - (likely alias/variant for yazi)  
-`zig` - Zig programming language compiler/toolchain  
-
+`yz` - (alias/variant for yazi)  
 
 ## Docker
 
@@ -309,6 +298,7 @@ Here is the alphabetized list in the requested format:
 `git-svn-dcommit-push` - git svn dcommit && git push github $(git_main_branch):svntrunk  
 `git_add` - git add -A && git reset Estimator  
 `git_force_push` - `eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa && git push && echo 'Pushed to GitHub!' ` 
+`git_current_branch` - (oh-my-zsh deprecated function wrapper)  
 `gk` - gitk --all --branches &!  
 `gke` - gitk --all $(git log --walk-reflogs --pretty=%h) &!  
 `gl` - git pull  
@@ -944,6 +934,7 @@ _Commandline mode_
 - `<space> w |` - max width of current window [Lazyvim]  
 - `<leader> w =` - equal width of current windows [Lazyvim]  
 - (in NeoTree) `s` - to open in new window in vertical split [Lazyvim]
+
 
 
 
