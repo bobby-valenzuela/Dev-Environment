@@ -34,8 +34,6 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 
 ### SHELL
 
-Here is the alphabetized list in the **exact requested format**:
-
 `...` - cd ../../../  
 `....` - cd ../../../../  
 `.....` - cd ../../../../  
@@ -57,103 +55,104 @@ Here is the alphabetized list in the **exact requested format**:
 `apachelogacc` - tail -n15 -f /var/log/apache2/access.log  
 `apachelogerr` - tail -n15 -f /var/log/apache2/error.log  
 `apacherestart` - sudo service apache2 restart  
-`bcp` - (custom command)  
-`callouts_to_list` - (custom command)  
-`cb` - (custom command)  
+`bcp` - Bulk copy program (Microsoft SQL Server data transfer tool)  
+`callouts_to_list` - (custom script - likely converts callouts/markdown to list format)  
+`cb` - (custom script - possibly clipboard manager or copyboard tool)  
 `ccat` - colorize_cat  
-`ch` - cht.sh  (ch perl/array)
-`chatgpt` - (custom command)  
+`ch` - /home/bobby/bin/cht.sh (command-line client for cheat.sh cheat sheets)  
+`chatgpt` - (custom script - likely CLI interface to ChatGPT/OpenAI)  
 `cless` - colorize_less  
-`config_data` - (custom command)  
-`crc32` - (custom command)  
-`csvlens` - (custom command)  
-`dbilogstrip` - (custom command)  
-`dbiprof` - (custom command)  
-`dbiproxy` - (custom command)  
-`dirsync` - (custom command)  
-`durs` - (custom command)  
+`config_data` - (custom script - likely displays or manages configuration data)  
+`crc32` - Compute CRC-32 checksums  
+`csvlens` - Interactive CSV file viewer (like lens for tabular data)  
+`dbilogstrip` - Strip DBI logging noise (Perl DBI profiling tool)  
+`dbiprof` - DBI profiler (Perl database profiling)  
+`dbiproxy` - DBI proxy server (Perl DBI network proxy)  
+`dirsync` - Directory synchronizer (sync files between directories)  
+`durs` - Disk usage analyzer with Rust-based speed (like du but faster)  
 `e0` - tail -f -n 0 /var/log/apache2/error.log  
 `ee` - tail -f /var/log/apache2/error.log  
 `egrep` - egrep --color=auto  
-`eget` - (custom command)  
+`eget` - Easy binary downloader from GitHub releases  
 `er` - watch egrep -i 'DBD::' /var/log/apache2/error.log  
-`event_rpcgen.py` - (custom command)  
-`ff` - fzf --height 40% --layout reverse --border  
+`event_rpcgen.py` - Event RPC generator (from libevent, generates RPC code)  
+`ff` - fzf --height 40% --layout reverse --border (fuzzy finder)  
 `fgrep` - fgrep --color=auto  
 `fv` - nvim $(fzf --height 40% --layout reverse --border)  
-`fzf` - (custom command)  
+`fzf` - General-purpose command-line fuzzy finder  
 `git_current_branch` - (oh-my-zsh deprecated function wrapper)  
-`ggh` - (custom command)  
-`grok` - (custom command)  
+`ggh` - (custom script - likely git-related helper)  
+`grok` - (custom script - possibly log parsing or xAI Grok CLI)  
 `history` - omz_history  
-`json_xs` - (custom command)  
-`kubectl` - (custom command)  
+`json_xs` - JSON command-line processor (Perl-based JSON tool)  
+`kubectl` - Kubernetes command-line tool (interact with K8s clusters)  
 `l` - ls -lah  
 `la` - ls -lAh  
-`lazydocker` - (custom command)  
-`lazygit` - (custom command)  
-`lazysql` - (custom command)  
+`lazydocker` - Simple terminal UI for managing Docker  
+`lazygit` - Simple terminal UI for git commands  
+`lazysql` - (likely lazy-based SQL viewer or editor tool)  
 `lg` - lazygit  
-`lib` - (custom command)  
+`lib` - (custom script - possibly library manager or loader)  
 `ll` - ls -lh  
 `ls` - ls --color=tty  
 `lsa` - ls -lah  
 `md` - mkdir -p  
 `mkdir` - mkdir -pv  
-`moose-outdated` - (custom command)  
+`moose-outdated` - Check for outdated Moose modules (Perl tool)  
 `nv` - NVIM_APPNAME=nvim-lazy nvim  
-`nvim` - (custom command)  
+`nvim` - Neovim text editor  
 `nvim-custom` - NVIM_APPNAME="nvim-custom" nvim  
-`ollama` - (custom command)  
-`package-stash-conflicts` - (custom command)  
-`pandoc` - (custom command)  
-`perlcritic` - (custom command)  
-`perltidy` - (custom command)  
+`ollama` - Run and manage large language models locally (CLI for Ollama)  
+`package-stash-conflicts` - Check for Package::Stash conflicts (Perl tool)  
+`pandoc` - Universal document converter (markup to markup/PDF/etc.)  
+`perlcritic` - Critique Perl source code for best practices  
+`perltidy` - Indent and reformat Perl scripts  
 `perly` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/perly.pl  
 `perlyprod` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/perlyprod.pl  
-`pls` - (custom command)  
-`pod2markdown` - (custom command)  
-`pod_cover` - (custom command)  
-`podselect` - (custom command)  
-`podspell` - (custom command)  
-`postboy` - (custom command)  
-`posty` - (custom command)  
+`pls` - (custom or alternative ls with pretty output)  
+`pod2markdown` - Convert Perl POD to Markdown  
+`pod_cover` - Check Pod coverage in Perl modules  
+`podselect` - Extract selected sections from POD input  
+`podspell` - Check spelling in Perl POD documentation  
+`postboy` - (custom script - possibly HTTP/posting tool)  
+`posty` - (custom script - likely API/posting helper)  
 `prod_scratch` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/prod_scratch.pl  
 `pscpu` - ps auxf | sort -nr -k 3  
 `pscpu10` - ps auxf | sort -nr -k 3 | head -10  
 `psmem` - ps auxf | sort -nr -k 4  
 `psmem10` - ps auxf | sort -nr -k 4 | head -10  
 `qc` - quickconnect  
-`quickconnect` - (custom command)  
+`quickconnect` - (custom script - likely SSH/quick connect helper)  
 `rd` - rmdir  
 `re` - rr && ee  
-`reposync` - (custom command)  
+`reposync` - (custom script - likely repo synchronization tool)  
 `reposync_thisdir_to_alpha` - reposync . alpha ongoing  
-`restarthive.sh` - (custom command)  
+`restarthive.sh` - (custom script - likely restarts a Hive service)  
 `rl` - tail -f /home/control-io/www/log/templog  
 `rl2` - tail -f /home/control-io/www/log/templog2  
 `rr` - sudo service apache2 restart && echo 'Apache Restarted!'  
 `scpdownloads` - cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads  
 `showmerges` - git log --oneline --merges -E --grep 'DEV-[0-9]+' -n 15  
-`spf` - (custom command)  
-`sqlcmd` - (custom command)  
+`spf` - (custom script - possibly SPF checker or sender policy framework tool)  
+`sqlcmd` - Microsoft SQL Server command-line query tool  
 `ssh_keyupdate` - (complex ssh-agent + ssh-add command)  
-`starship` - (custom command)  
-`tere` - (custom command)  
-`timed-process` - (custom command)  
+`starship` - Cross-shell prompt (customizable prompt engine)  
+`tere` - (likely a fuzzy cd or directory jumper tool)  
+`timed-process` - (custom script - likely times or profiles processes)  
 `tmux` - tmux -2  
-`tomahawk` - (custom command)  
+`tomahawk` - (custom script - possibly a music player or search tool)  
 `upandup` - sudo apt update && sudo apt upgrade  
-`update_aws_creds.sh` - (custom command)  
-`vscode-cleanup` - (custom command)  
-`vscode-cleanup-all` - (custom command)  
-`vscode-cleanup-pbx` - (custom command)  
+`update_aws_creds.sh` - (custom script - updates AWS credentials)  
+`vscode-cleanup` - (custom script - cleans VS Code cache/data)  
+`vscode-cleanup-all` - (custom script - thorough VS Code cleanup)  
+`vscode-cleanup-pbx` - (custom script - VS Code cleanup variant)  
 `which-command` - whence  
-`ya` - (custom command)  
-`yazi` - (custom command)  
-`yt-dlp` - (custom command)  
-`yz` - (custom command)  
-`zig` - (custom command)
+`ya` - (likely alias for yazi or another tool)  
+`yazi` - Blazing fast terminal file manager (Rust-based)  
+`yt-dlp` - Feature-rich command-line audio/video downloader  
+`yz` - (likely alias/variant for yazi)  
+`zig` - Zig programming language compiler/toolchain  
+
 
 ## Docker
 
@@ -945,5 +944,6 @@ _Commandline mode_
 - `<space> w |` - max width of current window [Lazyvim]  
 - `<leader> w =` - equal width of current windows [Lazyvim]  
 - (in NeoTree) `s` - to open in new window in vertical split [Lazyvim]
+
 
 
