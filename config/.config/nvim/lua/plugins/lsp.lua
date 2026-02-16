@@ -129,7 +129,8 @@ return {
       local lspconfig = require('lspconfig')
 
       -- Lua LSP
-      lspconfig.lua_ls.setup {
+      vim.lsp.config("lua_ls", {
+      -- [DEPRECATED] lspconfig.lua_ls.setup {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
@@ -139,56 +140,65 @@ return {
             },
           },
         },
-      }
+      })
 
       -- Python LSP (pyright)
-      lspconfig.pyright.setup {
+      vim.lsp.config("pyright", {
+      -- lspconfig.pyright.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-      }
+      })
 
       -- TypeScript LSP (ts_ls)
-      lspconfig.ts_ls.setup {
+      vim.lsp.config("ts_ls", {
+      -- lspconfig.ts_ls.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-      }
+      })
 
       -- Bash LSP (blashls)
-      lspconfig.bashls.setup {
+      vim.lsp.config("bashls", {
+      -- lspconfig.bashls.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-      }
+      })
 
       -- C LSP (clangd)
-      lspconfig.clangd.setup {
+      vim.lsp.config("clangd", {
+      -- lspconfig.clangd.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-      }
+      })
 
       -- Perl LSP (perlnavigator)
-      lspconfig.perlnavigator.setup {
+      vim.lsp.config("perlnavigator", {
+      -- lspconfig.perlnavigator.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-      }
-      lspconfig.html.setup {
+      })
+      vim.lsp.config("html", {
+      -- lspconfig.html.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-      }
-      lspconfig.cssls.setup {
+      })
+      vim.lsp.config("cssls", {
+      -- lspconfig.cssls.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-      }
+      })
       -- Rust LSP (rust_analyzer)
-      lspconfig.rust_analyzer.setup {
+      vim.lsp.config("rust_analyzer", {
+      -- lspconfig.rust_analyzer.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-      }
+      })
 
       -- Zig
-      lspconfig.zls.setup {
+      vim.lsp.config("zls", {
+      -- lspconfig.zls.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-      }
+      })
     end,
   },
 
