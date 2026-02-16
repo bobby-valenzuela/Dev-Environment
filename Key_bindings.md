@@ -4,7 +4,9 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
    
 ### Table of Contents
 - [SHELL](#shell)
-  - [Apache](#apache) 
+  - [Apache](#apache)
+  - [Dir Navigation](#dir_navigation)
+  - [Docker](#docker)
 - [TMUX](#tmux)
   - [Configuration and Plugins](#tmux-configuration-and-plugins)
   - [Copy and Paste](#tmux-copy-and-paste)
@@ -935,6 +937,7 @@ _Commandline mode_
 - `<space> w |` - max width of current window [Lazyvim]  
 - `<leader> w =` - equal width of current windows [Lazyvim]  
 - (in NeoTree) `s` - to open in new window in vertical split [Lazyvim]
+
 
 
 
