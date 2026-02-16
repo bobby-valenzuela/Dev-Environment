@@ -43,8 +43,14 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `ch` - /home/bobby/bin/cht.sh (command-line client for cheat.sh cheat sheets). Example `ch perl/array`  
 `chatgpt` - [custom script] - CLI interface to ChatGPT/OpenAI  
 `cless` - colorize_less  
+`clear_nvim_swaps` - self-explanatory
+`create_and_assume_user`
 `csvlens` - Interactive CSV file viewer (like lens for tabular data)  
+`diffy` - see diff between two files (side-by-side)
 `dirsync` - [custom script] Directory synchronizer (sync files between directories)  
+`docx_to_md`
+`edit_nvim_conf`
+`mp3_dl` - Download MP3 audio from youtube URL
 `egrep` - egrep --color=auto (grep -E)  
 `eget` - Easy binary downloader from GitHub releases  
 `ff` - (fuuzzy finder) fzf --height 40% --layout reverse --border  
@@ -54,19 +60,14 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `ggh` - SSH connection manager  
 `grok` - [custom script] - xAI Grok CLI  
 `json_xs` - JSON command-line processor (Perl-based JSON tool)  
-`kubectl` - Kubernetes command-line tool (interact with K8s clusters)  
-`l` - ls -lah  
-`la` - ls -lAh  
 `lazydocker` - Simple terminal UI for managing Docker  
 `lazygit` - Simple terminal UI for git commands  
 `lazysql` - (likely lazy-based SQL viewer or editor tool)  
-`lg` - lazygit  
-`moose-outdated` - Check for outdated Moose modules (Perl tool)  
+`lg` - lazygit    
 `nv` - NVIM_APPNAME=nvim-lazy nvim  
 `nvim` - Neovim text editor  
 `nvim-custom` - NVIM_APPNAME="nvim-custom" nvim  
 `ollama` - Run and manage large language models locally (CLI for Ollama)  
-`package-stash-conflicts` - Check for Package::Stash conflicts (Perl tool)  
 `pandoc` - Universal document converter (markup to markup/PDF/etc.)  
 `perlcritic` - Critique Perl source code for best practices  
 `perltidy` - Indent and reformat Perl scripts  
@@ -76,10 +77,7 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `postboy` - [custom script] (custom script - possibly HTTP/posting tool)  
 `posty` - (custom script - likely API/posting helper)  
 `prod_scratch` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/prod_scratch.pl  
-`pscpu` - ps auxf | sort -nr -k 3  
-`pscpu10` - ps auxf | sort -nr -k 3 | head -10  
-`psmem` - ps auxf | sort -nr -k 4  
-`psmem10` - ps auxf | sort -nr -k 4 | head -10  
+ 
 `qc` - quickconnect  
 `quickconnect` - (custom script - likely SSH/quick connect helper)  
 `re` - rr && ee  
@@ -94,9 +92,9 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `sqlcmd` - Microsoft SQL Server command-line query tool  
 `ssh_keyupdate` - (complex ssh-agent + ssh-add command)  
 `starship` - Cross-shell prompt (customizable prompt engine)  
-`tere` - (likely a fuzzy cd or directory jumper tool)  
 `timed-process` - (custom script - likely times or profiles processes)  
 `tmux` - tmux -2  
+`update_lazy`
 `upandup` - sudo apt update && sudo apt upgrade  
 `update_aws_creds.sh` - (custom script - updates AWS credentials)  
 `vscode-cleanup` - (custom script - cleans VS Code cache/data)  
@@ -105,6 +103,18 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `which-command` - whence  
 `yt-dlp` - Feature-rich command-line audio/video downloader  
 `zig` - Zig programming language compiler/toolchain  
+`wcp` - Copy from WSL to Windows host
+`tmux_init`
+`tt`
+`config_update_and_nvim_update`
+`config_update`
+`config_save`
+`config_sync_alpha`
+`blastoff` / `land` - Switch from current zsh theme to starship (catppuccin mocha)
+`restart_hive`
+`clear_wgets`
+`download_veeam_report`
+`perlygrep`
 
 ## Apache
 `apachelogacc` - tail -n15 -f /var/log/apache2/access.log  
@@ -116,6 +126,11 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `rr` - sudo service apache2 restart && echo 'Apache Restarted!'  
 `tomahawk` - (custom script - possibly a music player or search tool)  
 
+## Diagnostics
+`pscpu` - ps auxf | sort -nr -k 3  
+`pscpu10` - ps auxf | sort -nr -k 3 | head -10  
+`psmem` - ps auxf | sort -nr -k 4  
+`psmem10` - ps auxf | sort -nr -k 4 | head -10 
 
 ## Dir navigation
 `...` - cd ../../../  
@@ -137,12 +152,15 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `9` - cd -9  
 `callouts_to_list` - (custom script - converts callouts/markdown to list format)  
 `cb` - clipboard manager. See `cb -h`  
+`l` - ls -lah  
+`la` - ls -lAh  
 `ll` - ls -lh  
 `ls` - ls --color=tty  
 `lsa` - ls -lah  
 `md` - mkdir -p  
 `mkdir` - mkdir -pv  
 `rd` - rmdir  
+`tere` - cd + ls
 `ya` - (alias for yazi)  
 `yazi` - Blazing fast terminal file manager (Rust-based)  
 `yz` - (alias/variant for yazi)  
@@ -208,12 +226,26 @@ Here is the alphabetized list in the requested format:
 `dvprune` - docker volume prune  
 `dxc` - docker container exec  
 `dxcit` - docker container exec -it
+`kubectl` - Kubernetes command-line tool (interact with K8s clusters)  
+
 
 <br />
 
 ## Git
 
-Here is the alphabetized list in the requested format:
+__Custom__
+`git_apply_stash_by_name`
+`git_merge_changes_from_stash`
+`git_fixconflict`
+`git_addcommit` - Stage and commit
+`git_reset` - Re-track current branch to repo
+`git_discard_old_stashes` - Current stash count (keeping latest 10)
+`lg` - Lazygit
+`showmerges` - Shows last 15 merges
+`git_force_push` - Add ssh key to agent and push
+`gc` - 'Git Clean' - drop all local changes - head to master, git pull, and restart apache
+
+__Other__
 
 `g` - git  
 `ga` - git add  
@@ -938,6 +970,7 @@ _Commandline mode_
 - `<space> w |` - max width of current window [Lazyvim]  
 - `<leader> w =` - equal width of current windows [Lazyvim]  
 - (in NeoTree) `s` - to open in new window in vertical split [Lazyvim]
+
 
 
 
