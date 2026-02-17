@@ -87,8 +87,9 @@ chmod +x "$PATH_DIR/cht.sh"
 alias ch="$PATH_DIR/cht.sh"
 
 
-
 # Force other bash files to load
+[[ -s ~/.creds.env ]] && source ~/.creds.env
+source ~/.creds.env
 [[ -s ~/.bash_aliases ]] && source ~/.bash_aliases
 [[ -s ~/.bash_pbx ]] && source ~/.bash_pbx
 [[ -s ~/.bash_git ]] && source ~/.bash_git
