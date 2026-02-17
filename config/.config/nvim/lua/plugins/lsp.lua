@@ -232,6 +232,19 @@
        vim.lsp.config("pyright", {
          on_attach = on_attach,
          capabilities = capabilities,
+         settings = {
+            python = {
+              analysis = {
+                -- already have these — good
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = true,
+                autoSearchPaths = true,
+
+                -- Add these to reduce log spam / analysis chatter
+                logLevel = "Warning",   -- or "Error"
+              }
+            }
+          }
        })
 
        -- TypeScript LSP (ts_ls)
