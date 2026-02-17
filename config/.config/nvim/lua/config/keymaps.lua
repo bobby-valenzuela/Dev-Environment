@@ -147,12 +147,6 @@ vim.keymap.set("n", "<leader>7", function() harpoon:list():select(7) end, { desc
 vim.keymap.set("n", "<leader>8", function() harpoon:list():select(8) end, { desc = "Harpoon: Go to file 8" })
 vim.keymap.set("n", "<leader>9", function() harpoon:list():select(9) end, { desc = "Harpoon: Go to file 9" })
 
--- _______________________ Avante (AI) __________________________
-
--- <leader> a?    - Switch model
--- <leader>at     - Toggle sidebar
--- <leader>an     - New chat
--- <leader>ae     - Chat on selected content
 
 -- _______________________ Git (General) __________________________
 -- 'Git Undo' | Undo last commit and set changes as staged and unsaved
@@ -288,8 +282,6 @@ vim.keymap.set('n', '<leader>li', ':LspInfo<CR>', opts)
 
 -- Format code: Auto-format the current buffer per language server rules
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, opts)
-
--- <leader>l : lint current file
 
 
 -- ===> GO N' SHOW

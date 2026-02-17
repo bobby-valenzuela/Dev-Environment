@@ -15,7 +15,8 @@ return {
     instructions_file = "avante.md",
     -- for example
     -- provider = "ollama",
-    provider = "openai",
+    -- provider = "openai",
+    provider = "claude",
     providers = {
         openai = {
             endpoint = "https://api.openai.com/v1",
@@ -27,8 +28,23 @@ return {
                 temperature = 0.3,
             }
           },      
+            claude = {
+                endpoint = "https://api.anthropic.com",
+                model = "claude-sonnet-4-20250514",
+                timeout = 30000, -- Timeout in milliseconds
+                extra_request_body = {
+                    temperature = 0.5,
+                    max_tokens = 20480,
+                },
+                behaviour = {
+                    auto_suggestions = true,                 
+                    auto_apply_diff_after_generation = false, -- don't auto-apply code changes; review first (safer)
+                    auto_set_group_name = true,               -- group suggestions by file/context
+                    support_paste_from_clipboard = true,      -- enable pasting images/code into chat
+                },
+            },
         ollama = {
-            model = "llama3.2:3b",
+            model = "deepseek-coder-v2:16b",
             endpoint = "http://127.0.0.1:11434",
             -- Critical fix: defer the require
             is_env_set = function()
