@@ -262,6 +262,8 @@ vim.keymap.set("n", "<leader>gl", ":Gclog<CR>", { desc = "Git commit log" })
 -- local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ie', ':lua Snacks.indent.enable()<CR>', { desc = 'Enable Snacks indent' })
 vim.keymap.set('n', '<leader>id', ':lua Snacks.indent.disable()<CR>', { desc = 'Disable Snacks indent' })
+vim.keymap.set('n', '<leader>iee', ':IBLEnable<CR>', { desc = 'Enable Rainbow indent' })
+vim.keymap.set('n', '<leader>idd', ':IBLDisable<CR>', { desc = 'Enable Rainbow indent' })
 
 
 -- _______________________ LSP __________________________
