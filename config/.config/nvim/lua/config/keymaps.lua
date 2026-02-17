@@ -283,6 +283,8 @@ vim.keymap.set('n', '<leader>li', ':LspInfo<CR>', opts)
 -- Format code: Auto-format the current buffer per language server rules
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, opts)
 
+-- <leader>l : lint current file
+
 
 -- ===> GO N' SHOW
 
