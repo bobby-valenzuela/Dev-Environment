@@ -8,6 +8,8 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
   - [Dir Navigation](#dir-navigation)
   - [Docker](#docker)
   - [Git](#git)
+  - [PBX](#pbx)
+  - [Nvim](#nvim)
 - [TMUX](#tmux)
   - [Configuration and Plugins](#tmux-configuration-and-plugins)
   - [Copy and Paste](#tmux-copy-and-paste)
@@ -39,82 +41,64 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 ### SHELL
 
 `_` - sudo  
+`blastoff` / `land` - Switch from current zsh theme to starship (catppuccin mocha)
 `ccat` - colorize_cat  
 `ch` - /home/bobby/bin/cht.sh (command-line client for cheat.sh cheat sheets). Example `ch perl/array`  
-`chatgpt` - [custom script] - CLI interface to ChatGPT/OpenAI  
+`chatgpt` - [custom] - CLI interface to ChatGPT/OpenAI  
 `cless` - colorize_less  
-`clear_nvim_swaps` - self-explanatory
-`create_and_assume_user`
-`csvlens` - Interactive CSV file viewer (like lens for tabular data)  
-`diffy` - see diff between two files (side-by-side)
-`dirsync` - [custom script] Directory synchronizer (sync files between directories)  
-`docx_to_md`
-`edit_nvim_conf`
-`mp3_dl` - Download MP3 audio from youtube URL
+`clear_nvim_swaps` - [custom] self-explanatory
+`create_and_assume_user` - [custom] self-explanatory
+`csvlens` - Interactive CSV file viewer  
+`diffy` - [custom] see diff between two files (side-by-side)
+`dirsync` - [custom] Directory synchronizer (sync files between directories)  
+`docx_to_md` - [custom] self-explanatory
+`edit_nvim_conf` [custom] - open nvim in ~/.config/nvim/
+`mp3_dl` - [custom] Download MP3 audio from youtube URL
 `egrep` - egrep --color=auto (grep -E)  
 `eget` - Easy binary downloader from GitHub releases  
 `ff` - (fuuzzy finder) fzf --height 40% --layout reverse --border  
 `fgrep` - fgrep --color=auto  
-`fv` - nvim $(fzf --height 40% --layout reverse --border)  
+`fv` - 'fuzzy-vim' fuzzy-find a file in the pwd to open with nvim. `nvim $(fzf --height 40% --layout reverse --border)`  
 `fzf` - General-purpose command-line fuzzy finder  
 `ggh` - SSH connection manager  
-`grok` - [custom script] - xAI Grok CLI  
-`json_xs` - JSON command-line processor (Perl-based JSON tool)  
+`grok` - [custom] - xAI Grok CLI  
 `lazydocker` - Simple terminal UI for managing Docker  
-`lazygit` - Simple terminal UI for git commands  
-`lazysql` - (likely lazy-based SQL viewer or editor tool)  
-`lg` - lazygit    
-`nv` - NVIM_APPNAME=nvim-lazy nvim  
-`nvim` - Neovim text editor  
-`nvim-custom` - NVIM_APPNAME="nvim-custom" nvim  
+`lazygit` / `lg` - Simple terminal UI for git commands  
+`lazysql` - lazy-based SQL tool  
 `ollama` - Run and manage large language models locally (CLI for Ollama)  
 `pandoc` - Universal document converter (markup to markup/PDF/etc.)  
-`perlcritic` - Critique Perl source code for best practices  
 `perltidy` - Indent and reformat Perl scripts  
-`perly` - [custom script] /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/perly.pl  
-`perlyprod` - [custom script] /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/perlyprod.pl  
-`pls` - (custom or alternative ls with pretty output)  
-`postboy` - [custom script] (custom script - possibly HTTP/posting tool)  
-`posty` - (custom script - likely API/posting helper)  
-`prod_scratch` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/prod_scratch.pl  
- 
-`qc` - quickconnect  
-`quickconnect` - (custom script - likely SSH/quick connect helper)  
-`re` - rr && ee  
-`reposync` - (custom script - likely repo synchronization tool)  
-`reposync_thisdir_to_alpha` - reposync . alpha ongoing  
-`restarthive.sh` - (custom script - likely restarts a Hive service)  
-`rl` - tail -f /home/control-io/www/log/templog  
-`rl2` - tail -f /home/control-io/www/log/templog2  
-`scpdownloads` - cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads  
-`showmerges` - git log --oneline --merges -E --grep 'DEV-[0-9]+' -n 15  
+`postboy` - [custom] Simple CLI-based API tool  
+`posting` - Postman in CLI
+`posty` - [custom] Wrapper for posting with saved collections
+`qc` / `quickconnect` - [custom] quickconnect - ssh and rdp in cli  
+`reposync` - [custom] -  repo synchronization tool  
+`scpdownloads` - [custom] cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads  
 `spf` - (custom script - possibly SPF checker or sender policy framework tool)  
 `sqlcmd` - Microsoft SQL Server command-line query tool  
-`ssh_keyupdate` - (complex ssh-agent + ssh-add command)  
+`ssh_keyupdate` - [custom] (complex ssh-agent + ssh-add command)  
 `starship` - Cross-shell prompt (customizable prompt engine)  
-`timed-process` - (custom script - likely times or profiles processes)  
 `tmux` - tmux -2  
-`update_lazy`
-`upandup` - sudo apt update && sudo apt upgrade  
+`update_lazy` - [custom] self-explanatory
+`upandup` - [custom] sudo apt update && sudo apt upgrade  
 `update_aws_creds.sh` - (custom script - updates AWS credentials)  
-`vscode-cleanup` - (custom script - cleans VS Code cache/data)  
-`vscode-cleanup-all` - (custom script - thorough VS Code cleanup)  
-`vscode-cleanup-pbx` - (custom script - VS Code cleanup variant)  
-`which-command` - whence  
+`vscode-cleanup` - [custom] cleans VS Code cache/data  
+`vscode-cleanup-all` - [custom] cleans VS Code cache/data - all  
+`vscode-cleanup-pbx` - [custom] cleans VS Code cache/data - pbx
+`which-command` - whence  (?)
 `yt-dlp` - Feature-rich command-line audio/video downloader  
-`zig` - Zig programming language compiler/toolchain  
-`wcp` - Copy from WSL to Windows host
-`tmux_init`
-`tt`
-`config_update_and_nvim_update`
-`config_update`
-`config_save`
-`config_sync_alpha`
-`blastoff` / `land` - Switch from current zsh theme to starship (catppuccin mocha)
-`restart_hive`
-`clear_wgets`
-`download_veeam_report`
-`perlygrep`
+`wcp` - [custom] Copy from WSL to Windows host
+`tmux_init` [custom] - starts up predefined tmux windows/panes
+
+
+## Nvim
+`config_save` - Save local nvim config changes and copy to local cloned repo to be pushed up to repo
+`config_sync_alpha` - Push local nvim config changes up to alpha machine
+`config_update` - Update local nvim config with latest from repo
+`config_update_and_nvim_update` - Update local nvim config with latest from repo (replaces ~/.config/nvim and removes cache)
+`nv` - NVIM_APPNAME=nvim-lazy nvim  
+`nvim` - Neovim text editor  
+`nvim-custom` - [custom] NVIM_APPNAME="nvim-custom" nvim  
 
 ## Apache
 `apachelogacc` - tail -n15 -f /var/log/apache2/access.log  
@@ -124,7 +108,8 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `ee` - tail -f /var/log/apache2/error.log  
 `er` - watch egrep -i 'DBD::' /var/log/apache2/error.log  
 `rr` - sudo service apache2 restart && echo 'Apache Restarted!'  
-`tomahawk` - (custom script - possibly a music player or search tool)  
+`re` - rr && ee  
+`tomahawk` / `tt` - (custom script - possibly a music player or search tool)  
 
 ## Diagnostics
 `pscpu` - ps auxf | sort -nr -k 3  
@@ -159,6 +144,7 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `lsa` - ls -lah  
 `md` - mkdir -p  
 `mkdir` - mkdir -pv  
+`pls` - ls with pretty output
 `rd` - rmdir  
 `tere` - cd + ls
 `ya` - (alias for yazi)  
@@ -244,6 +230,8 @@ __Custom__
 `showmerges` - Shows last 15 merges
 `git_force_push` - Add ssh key to agent and push
 `gc` - 'Git Clean' - drop all local changes - head to master, git pull, and restart apache
+`showmerges` - git log --oneline --merges -E --grep 'DEV-[0-9]+' -n 15  
+
 
 __Other__
 
@@ -453,6 +441,22 @@ __Other__
 `gwtls` - git worktree list  
 `gwtmv` - git worktree move  
 `gwtrm` - git worktree remove  
+
+<br />
+
+## PBX [custom]
+`clear_wgets`
+`download_veeam_report` - 
+`perly` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/perly.pl  
+`perlyprod` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/perlyprod.pl  
+`prod_scratch` - /usr/bin/perl /home/control-io/www/DevSandbox/Sandbox/_templates/prod_scratch.pl  
+`rl` - tail -f /home/control-io/www/log/templog  
+`rl2` - tail -f /home/control-io/www/log/templog2  
+`reposync_thisdir_to_alpha` - reposync . alpha ongoing  
+`restarthive.sh` - (custom script - likely restarts a Hive service)  
+`restart_hive`
+
+`perlygrep`
 
 ---
 
@@ -970,6 +974,7 @@ _Commandline mode_
 - `<space> w |` - max width of current window [Lazyvim]  
 - `<leader> w =` - equal width of current windows [Lazyvim]  
 - (in NeoTree) `s` - to open in new window in vertical split [Lazyvim]
+
 
 
 
