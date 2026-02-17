@@ -24,17 +24,30 @@ return {
             max_tokens = 4096,
             ["local"] = false,
             extra_request_body = {
-                temperature = 0.0,
+                temperature = 0.3,
             }
           },      
         ollama = {
-            model = "llama3.1:8b",
+            model = "llama3.2:3b",
             endpoint = "http://127.0.0.1:11434",
             -- Critical fix: defer the require
             is_env_set = function()
               return require("avante.providers.ollama").check_endpoint_alive()
             end,
             -- is_env_set = require("avante.providers.ollama").check_endpoint_alive
+            extra_request_body = {
+                temperature = 0.8,
+            }
+
+
+
+            -- model = "llama3.1:8b",
+            -- endpoint = "http://127.0.0.1:11434",
+            -- -- Critical fix: defer the require
+            -- is_env_set = function()
+            --   return require("avante.providers.ollama").check_endpoint_alive()
+            -- end,
+            -- -- is_env_set = require("avante.providers.ollama").check_endpoint_alive
       },
 
     },
