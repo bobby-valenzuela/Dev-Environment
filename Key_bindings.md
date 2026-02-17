@@ -147,9 +147,28 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `pls` - ls with pretty output
 `rd` - rmdir  
 `tere` - cd + ls
+
+___YAZI__ 
+[Docs](https://yazi-rs.github.io/docs/quick-start/)  
 `ya` - (alias for yazi)  
 `yazi` - Blazing fast terminal file manager (Rust-based)  
 `yz` - (alias/variant for yazi)  
+
+<br />
+
+`.` - toggle hidden filevisibility  
+`:` - run shell command  
+`[` / `]` - tab switch  
+`<C-c>` - close tab  
+`a` - create a file (end with `/` for dir)  
+`f` - filter files  
+`space` - select file(s)  
+`t` - create new tab and 1/2/3/... to switch to specific tab  
+`Tab` - show file info  
+`z` - fuzzy find file  
+standard vim commands for movement/searching
+
+<br />
 
 ## Docker
 
@@ -974,6 +993,7 @@ _Commandline mode_
 - `<space> w |` - max width of current window [Lazyvim]  
 - `<leader> w =` - equal width of current windows [Lazyvim]  
 - (in NeoTree) `s` - to open in new window in vertical split [Lazyvim]
+
 
 
 
