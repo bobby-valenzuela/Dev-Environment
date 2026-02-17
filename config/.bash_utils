@@ -348,3 +348,7 @@ land(){
 #     done
 #
 # }
+#
+colorme() {
+    pygmentize -f terminal "$@"
+}
