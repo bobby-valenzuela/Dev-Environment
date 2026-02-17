@@ -26,7 +26,7 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 
 __Package Installation__: Install programs in ubuntu system _(installs packages only)_
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_only.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_installonly.sh -O -)"
 ```
 
 <br />
@@ -72,3 +72,4 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 
 `init.sh` - Clones repo and runs `install.sh` (installing both packages and config files)  
 `jammy_init.sh` - Sets up Docker container and runs `init.sh`  
+
