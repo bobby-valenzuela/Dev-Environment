@@ -176,7 +176,10 @@
          -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
          --
          -- See the fuzzy documentation for more information
-         fuzzy = { implementation = "prefer_rust_with_warning" }
+         fuzzy = { implementation = "prefer_rust_with_warning" },
+         selector = {
+                 provider = "fzf"
+         }
        },
        opts_extend = { "sources.default" }
  },

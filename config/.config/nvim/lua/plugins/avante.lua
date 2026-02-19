@@ -26,7 +26,7 @@ return {
         auto_set_highlight_group = true,
         auto_set_keymaps = true,
         -- confirmation_ui_style = "popup",
-        minimize_diff = true,
+        minimize_diff = false,
         enable_fastapply = false,  -- ← key one; prevents skipping preview
 
     },   
