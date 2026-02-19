@@ -17,6 +17,19 @@ return {
     -- provider = "ollama",
     -- provider = "openai",
     provider = "claude",
+    behaviour = {
+        auto_suggestions = false,
+        auto_apply_diff_after_generation = false, -- don't auto-apply code changes; review first (safer)
+        auto_approve_tool_permissions = false,
+        auto_set_group_name = true,               -- group suggestions by file/context
+        -- support_paste_from_clipboard = true,      -- enable pasting images/code into chat
+        auto_set_highlight_group = true,
+        auto_set_keymaps = true,
+        -- confirmation_ui_style = "popup",
+        minimize_diff = true,
+        enable_fastapply = false,  -- ← key one; prevents skipping preview
+
+    },   
     providers = {
         openai = {
             endpoint = "https://api.openai.com/v1",
@@ -28,21 +41,18 @@ return {
                 temperature = 0.3,
             }
           },      
-            claude = {
+        claude = {
                 endpoint = "https://api.anthropic.com",
-                model = "claude-sonnet-4-20250514",
+                -- model = "claude-sonnet-4-20250514",
+                model = "claude-haiku-4-5-20251001",  -- or "claude-haiku-4-5"
                 timeout = 30000, -- Timeout in milliseconds
                 extra_request_body = {
-                    temperature = 0.5,
-                    max_tokens = 20480,
+                    temperature = 0.2,
+                    max_tokens = 4096,
                 },
-                behaviour = {
-                    auto_suggestions = true,                 
-                    auto_apply_diff_after_generation = false, -- don't auto-apply code changes; review first (safer)
-                    auto_set_group_name = true,               -- group suggestions by file/context
-                    support_paste_from_clipboard = true,      -- enable pasting images/code into chat
-                },
-            },
+                -- disable_tools = { "write_to_file", "edit_file", "replace_in_file" },
+
+        },
         ollama = {
             model = "deepseek-coder-v2:16b",
             endpoint = "http://127.0.0.1:11434",
@@ -54,9 +64,6 @@ return {
             extra_request_body = {
                 temperature = 0.8,
             }
-
-
-
             -- model = "llama3.1:8b",
             -- endpoint = "http://127.0.0.1:11434",
             -- -- Critical fix: defer the require
@@ -64,8 +71,7 @@ return {
             --   return require("avante.providers.ollama").check_endpoint_alive()
             -- end,
             -- -- is_env_set = require("avante.providers.ollama").check_endpoint_alive
-      },
-
+          },
     },
     web_search_engine = {
       provider = "brave", -- tavily, serpapi, google, kagi, brave, or searxng
