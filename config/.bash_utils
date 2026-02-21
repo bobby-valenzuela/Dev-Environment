@@ -161,9 +161,9 @@ tt(){
 }
 
 config_update_and_nvim_update(){
-    config_update 'update-nvim'
+    local_config_update 'update-nvim'
 }
-config_update(){
+local_config_update(){
     # Gets latest config files in repo (which has been cloned) and updates local files
 
     LOCAL_REPO=~/my_repos/Dev-Environment
@@ -208,7 +208,7 @@ config_update(){
 
 }
 
-config_save(){
+local_config_save(){
     # Copies all of my main config files into my git dir so i can push them up later as needed
     LOCAL_REPO=~/my_repos/Dev-Environment
 
@@ -303,6 +303,8 @@ config_save(){
 
      echo "Done!"
 }
+alias lcu="local_config_update"
+alias lcs="local_config_save"
 
 config_sync_alpha(){
 
