@@ -177,9 +177,7 @@
          --
          -- See the fuzzy documentation for more information
          fuzzy = { implementation = "prefer_rust_with_warning" },
-         selector = {
-                 provider = "fzf"
-         }
+
        },
        opts_extend = { "sources.default" }
  },

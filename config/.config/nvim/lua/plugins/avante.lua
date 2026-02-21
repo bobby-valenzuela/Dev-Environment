@@ -16,7 +16,7 @@ return {
     -- for example
     -- provider = "ollama",
     -- provider = "openai",
-    provider = "claude",
+    provider = "grok",
     behaviour = {
         auto_suggestions = false,
         auto_apply_diff_after_generation = false, -- don't auto-apply code changes; review first (safer)
@@ -31,17 +31,29 @@ return {
 
     },   
     providers = {
-        openai = {
-            endpoint = "https://api.openai.com/v1",
-            model = "gpt-4.1-mini",            -- or "gpt-4o-mini", "o1-mini", "o1-preview", etc.
-            timeout = 30000,             -- 30 seconds
-            max_tokens = 4096,
-            ["local"] = false,
-            extra_request_body = {
-                temperature = 0.3,
-            }
-          },      
-        claude = {
+            grok = {
+                __inherited_from = "openai",
+                endpoint = "https://api.x.ai/v1",          -- xAI's base URL
+                api_key_name = "XAI_API_KEY",              -- env var name you'll set
+                model = "grok-code-fast-1",                       -- or "grok-2", check current models at https://docs.x.ai
+                -- model = "grok-beta",                       -- or "grok-2", check current models at https://docs.x.ai
+                -- Optional: temperature, max_tokens, etc.
+                max_tokens = 8192,
+                extra_request_body = {
+                    temperature = 0.3,
+                }
+            },
+            openai = {
+                endpoint = "https://api.openai.com/v1",
+                model = "gpt-4.1-mini",            -- or "gpt-4o-mini", "o1-mini", "o1-preview", etc.
+                timeout = 30000,             -- 30 seconds
+                max_tokens = 4096,
+                ["local"] = false,
+                extra_request_body = {
+                    temperature = 0.3,
+                }
+            },      
+            claude = {
                 endpoint = "https://api.anthropic.com",
                 -- model = "claude-sonnet-4-20250514",
                 model = "claude-haiku-4-5-20251001",  -- or "claude-haiku-4-5"
@@ -52,26 +64,26 @@ return {
                 },
                 -- disable_tools = { "write_to_file", "edit_file", "replace_in_file" },
 
-        },
-        ollama = {
-            model = "deepseek-coder-v2:16b",
-            endpoint = "http://127.0.0.1:11434",
-            -- Critical fix: defer the require
-            is_env_set = function()
-              return require("avante.providers.ollama").check_endpoint_alive()
-            end,
-            -- is_env_set = require("avante.providers.ollama").check_endpoint_alive
-            extra_request_body = {
-                temperature = 0.8,
-            }
-            -- model = "llama3.1:8b",
-            -- endpoint = "http://127.0.0.1:11434",
-            -- -- Critical fix: defer the require
-            -- is_env_set = function()
-            --   return require("avante.providers.ollama").check_endpoint_alive()
-            -- end,
-            -- -- is_env_set = require("avante.providers.ollama").check_endpoint_alive
-          },
+            },
+            ollama = {
+                model = "deepseek-coder-v2:16b",
+                endpoint = "http://127.0.0.1:11434",
+                -- Critical fix: defer the require
+                is_env_set = function()
+                    return require("avante.providers.ollama").check_endpoint_alive()
+                end,
+                -- is_env_set = require("avante.providers.ollama").check_endpoint_alive
+                extra_request_body = {
+                    temperature = 0.8,
+                }
+                -- model = "llama3.1:8b",
+                -- endpoint = "http://127.0.0.1:11434",
+                -- -- Critical fix: defer the require
+                -- is_env_set = function()
+                --   return require("avante.providers.ollama").check_endpoint_alive()
+                -- end,
+                -- -- is_env_set = require("avante.providers.ollama").check_endpoint_alive
+            },
     },
     web_search_engine = {
       provider = "brave", -- tavily, serpapi, google, kagi, brave, or searxng
