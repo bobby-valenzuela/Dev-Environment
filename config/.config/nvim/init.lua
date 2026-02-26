@@ -25,6 +25,7 @@ require('lazy').setup('plugins')
 
 -- Now that lazy.lua is loaded and everything in plugins/ we need to load everything else in config/
 -- Keymaps/options should usually be loaded after all plugins, so lets add these now
+require('config.autocmds')      -- Load key mappings
 require('config.keymaps')      -- Load key mappings
 require('config.options')      -- Load Neovim options
 

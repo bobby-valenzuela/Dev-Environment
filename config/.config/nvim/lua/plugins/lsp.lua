@@ -252,6 +252,45 @@
        vim.lsp.config("ts_ls", {
          on_attach = on_attach,
          capabilities = capabilities,
+         settings = {
+             perlnavigator = {
+                 -- Path to your perl executable (usually auto-detected, but explicit helps)
+                 perlPath = "perl",   -- or full path e.g. "/usr/bin/perl" or "/opt/homebrew/bin/perl"
+
+                 -- Enable Perl::Critic integration (optional, but very useful for Perl code quality)
+                 perlcriticEnabled = true,
+                 perlcriticProfile = "",   -- "" = use default ~/.perlcriticrc or project .perlcriticrc
+                 -- or set to full path e.g. "~/.perlcriticrc" or "perlcriticrc" (project-local)
+
+                 -- Perl::Tidy for formatting (optional – :lua vim.lsp.buf.format() will use it)
+                 perltidyProfile = "",     -- same as above: "" for default or project .perltidyrc
+
+                 -- Warnings & linting
+                 enableWarnings = true,
+
+                 -- Very important for cross-file / external module navigation
+                 -- Add any custom lib paths your project uses (e.g. local::lib, cpanm --local-lib, or project dirs)
+                 -- These get added to @INC for the language server
+                 includePaths = {
+                     -- Examples – uncomment/add your own:
+                     -- vim.fn.expand("~/.perl5/lib/perl5"),          -- if using local::lib
+                     -- vim.fn.expand("./lib"),                       -- project-local lib/
+                     -- "/path/to/shared/perl/modules",
+                     "$workspaceFolder",          -- ← this adds the folder you opened Neovim in
+                 },
+
+                 -- Optional: disable if Perl::Critic is too noisy/slow on large codebases
+                 -- perlcriticEnabled = false,
+
+                 -- Optional: extra args passed to perl when indexing/analyzing
+                 -- perlInc = { "-I/path/extra" },  -- rarely needed if includePaths works
+
+                 -- Logging (set higher for debugging gd issues)
+                 trace = {
+                     server = "off",   -- "off" | "messages" | "verbose"
+                 },
+             },
+         },
        })
 
        -- Bash LSP (blashls)

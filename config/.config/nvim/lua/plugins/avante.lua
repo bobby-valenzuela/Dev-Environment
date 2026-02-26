@@ -20,7 +20,7 @@ return {
     behaviour = {
         auto_suggestions = false,
         auto_apply_diff_after_generation = false, -- don't auto-apply code changes; review first (safer)
-        auto_approve_tool_permissions = false,
+        auto_approve_tool_permissions = true,
         auto_set_group_name = true,               -- group suggestions by file/context
         -- support_paste_from_clipboard = true,      -- enable pasting images/code into chat
         auto_set_highlight_group = true,

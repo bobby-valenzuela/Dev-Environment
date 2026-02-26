@@ -6,6 +6,10 @@
 vim.keymap.set('n', '<C-d>', '22<C-e>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-u>', '22<C-y>', { noremap = true, silent = true })
 
+-- Larher movements up/down buffer with Ctrl e/y
+vim.keymap.set('n', '<C-e>', '4<C-e>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-y>', '4<C-y>', { noremap = true, silent = true })
+
 -- Clear all buffers' unsaved changes
 vim.keymap.set('n', 'E!', ':bufdo e!<CR>', { noremap = true, silent = true })
 
@@ -99,7 +103,14 @@ vim.keymap.set('n', '<leader>cy', ':%s:\\V<C-r>":', { noremap = true, silent = t
 vim.keymap.set('n', '<leader>ay', ':%s:\\V<C-r>":<C-r>"', { noremap = true, silent = true })
 
 -- Find all occurrences of word under cursor in current buffer and add to quickfix list
-vim.keymap.set('n', "<leader>faw", "yiw | :vim '<C-r>\"' % <C-r> | :cope <CR>", { noremap = true, silent = true })
+vim.keymap.set('n', "<leader>fw", "yiw | :vim '<C-r>\"' % <C-r> | :cope <CR>", { noremap = true, silent = true })
+-- vim.keymap.set('n', "<leader>fW", "yiw | <leader>fg | :vim '<C-r>\"' % <C-r> <CR>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fW', function()
+  require('telescope.builtin').grep_string({
+    search =  vim.fn.expand("<cword>"),   -- word under cursor
+    -- Alternative: just the word: search = vim.fn.expand("<cword>")
+  })
+end, { desc = "Search for word" })
 
 
 -- _______________________ Telescope __________________________
@@ -109,7 +120,13 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Fuzzy grep - Tele
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Fuzzy buffer search - Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Fuzzy tags - Telescope help tags' })
 vim.keymap.set('n', '<leader>fc', require('telescope.builtin').command_history, { desc = 'Fuzzy command find - Search command history' })
-
+-- vim.keymap.set('n', '<leader>fs', ':Telescope grep_string<CR>', { desc = "Search for sub def" })
+vim.keymap.set('n', '<leader>fs', function()
+  require('telescope.builtin').grep_string({
+    search = "sub " .. vim.fn.expand("<cword>"),   -- "sub " + word under cursor
+    -- Alternative: just the word: search = vim.fn.expand("<cword>")
+  })
+end, { desc = "Search for 'sub <word>' or sub definition" })
 -- _______________________ Harpoon __________________________
 local harpoon = require("harpoon")
 
