@@ -84,10 +84,10 @@ vim.keymap.set('n', '<leader><leader>', ':Neotree toggle<CR>',
     { desc = 'Toggle Neo-tree file explorer', noremap = true, silent = true })
 
 -- Find and [c]hange [w]ord under cursor - <Esc> to apply and . to repeat
-vim.keymap.set('n', '<leader>cW', '*Ncgn', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>cw', '*Ncgn', { noremap = true, silent = true })
 
 -- Find and [c]hange [W]ord under cursor - replace all in doc
-vim.keymap.set('n', '<leader>cw', '* | :%s::', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>cW', '* | :%s::', { noremap = true, silent = true })
 
 -- Find and [a]ppend [w] word under cursor - replace all in the doc
 vim.keymap.set('n', '<leader>aw', 'yiw | :%s:\\V<C-r>":<C-r>"', { noremap = true, silent = true })
