@@ -147,3 +147,8 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 })
 
 
+-- Override colors for Diffs
+vim.api.nvim_set_hl(0, "DiffAdd",    { bg = "#004d00", fg = "#d7ffaf" })
+vim.api.nvim_set_hl(0, "DiffChange", { bg = "#4d3d00" })
+vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#4d0000", fg = "#ff5f5f", bold = true })
+vim.api.nvim_set_hl(0, "DiffText",   { bg = "#870000", fg = "#ffffff", bold = true })

@@ -1,7 +1,6 @@
 
 -- NON-LEADER CUSTOM MOTIONS
 
-
 -- Smaller movements up/down buffer
 vim.keymap.set('n', '<C-d>', '22<C-e>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-u>', '22<C-y>', { noremap = true, silent = true })
