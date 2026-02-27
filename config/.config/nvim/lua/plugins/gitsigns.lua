@@ -86,10 +86,10 @@ return {
         vim.keymap.set('n', '<leader>ghB', function() gs.blame() end, { buffer = buffer, desc = 'Blame Buffer' })
 
         -- Diff This
-        vim.keymap.set('n', '<leader>ghd', gs.diffthis, { buffer = buffer, desc = 'Diff This' })
+        vim.keymap.set('n', '<leader>ghD', gs.diffthis, { buffer = buffer, desc = 'Diff This' })
 
-        -- Diff This ~
-        vim.keymap.set('n', '<leader>ghD', function() gs.diffthis('~') end, { buffer = buffer, desc = 'Diff This ~' })
+        -- Diff This hunk
+        vim.keymap.set('n', '<leader>ghd', function() gs.diffthis('~') end, { buffer = buffer, desc = 'Diff This ~' })
     end,
   },
 }
