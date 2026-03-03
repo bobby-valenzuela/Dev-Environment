@@ -94,119 +94,6 @@ if [ "$1" = "nvimonly" ]; then
 fi
 
 # ────────────────────────────────────────────────
-#             CONFIG COPY (distro agnostic)
-# ────────────────────────────────────────────────
-
-if [ "$1" = "full" -o "$1" = "configonly" ]; then
-    
-    printf "[+] Home: $HOME\n"
-    
-    # Execute from the dir the script is in
-    cd "$(dirname "$0")" || exit
-
-    PWD=$(pwd)
-    printf "[+] PWD: $PWD\n"
- 
-    if [ ! -d $HOME/.config/ ]; then
-        mkdir -p $HOME/.config/
-    fi
-    
-    # Sync local config files with cloned repo so i can push up my changes
-    cp -f -v ./config/.bash_aliases  $HOME/
-    cp -f -v ./config/.bash_git  $HOME/
-    cp -f -v ./config/.bash_pbx  $HOME/
-    cp -f -v ./config/.bash_utils  $HOME/
-    cp -f -v ./config/.bashrc  $HOME/
-    cp -f -v ./config/.p10k.zsh  $HOME/
-    cp -f -v ./config/.tmux.conf  $HOME/
-    cp -f -v ./config/.vimrc  $HOME/
-    cp -f -v ./config/.zshrc   $HOME/
-    cp -f -v ./config/.zsh_customizations  $HOME/
-    cp -f -v ./config/.tmux_init.sh  $HOME/
-
-    # __________ NVIM __________
-    if [ -d $HOME/.config/nvim/ ]; then
-        mkdir -p $HOME/.config/nvim
-    fi
-
-    # [.config] If backup folder exists remove it so we can overwrite it
-    if [ -d $HOME/.config/nvim-backup ]; then
-        rm -rf $HOME/.config/nvim-backup
-    fi
-    mv $HOME/.config/nvim $HOME/.config/nvim-backup	    
-    cp -v -r ./config/.config/nvim  $HOME/.config/
-
-    # [.local] If backup folder exists remove it so we can overwrite it
-    if [ -d ~/.local/share/nvim-backup ]; then
-        rm -rf ~/.local/share/nvim-backup
-    fi
-    mv ~/.local/share/nvim ~/.local/share/nvim-backup
-
-    # Vim
-    if [ -d $HOME/.vim/ ]; then
-        mkdir -p $HOME/.vim
-    fi
-    cp -f -v -r ./config/.config/nvim/colors  $HOME/.vim/
-
-    # __________ Spotify-player ___________
-    if [ ! -d $HOME/.config/spotify-player/ ]; then
-        mkdir -p $HOME/.config/spotify-player
-    fi
-    cp -v -r ./config/.config/spotify-player  $HOME/.config/
-    
-    cp -v -f -r ./config/.config/lazygit  $HOME/.config/
-
-    
-    # ---------------------------------------------------------------------
-    # Copy Yazi config
-    cp -v -f -r ./config/.config/yazi  $HOME/.config/
-
-
-    # Install custom shell scripts and exes
-    sudo cp -v -f -r ./config/usr_local_bin/* /usr/local/bin/
-
-    # If powerline isn't installed, oh-my-zsh+powerline should be installed for installed for good measure - and shell updated
-    # if [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k/ ]; then
-
-    # fi
-
-    ### FORCE IT TO REINSTALL ALWAYS NOW
-
-    # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
-    if [ -d $HOME/.oh-my-zsh ]; then
-        rm -rf $HOME/.oh-my-zsh
-    fi
-
-    printf "[+] Installing oh-my-zsh...\n\n"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-
-    printf "[+] Installing powerlevel10k...\n\n"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
-    # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    
-    if [ "$1" = "configonly" ]; then
-
-        printf "[+] Setting default shell...\n\n"
-
-        if which zsh >/dev/null 2>&1; then
-        
-            cd "$(dirname "$0")"
-            cp -v ./config/.zshrc   $HOME/
-            chsh -s $(which zsh)
-            printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
-            # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
-            cp -v ./config/.zshrc   $HOME/
-            zsh
-        fi
-
-    fi
-
-
-    echo "[+] Configuration files copied!"
-
-fi
-
-# ────────────────────────────────────────────────
 #        PACKAGE INSTALLATION (skip if configonly)
 # ────────────────────────────────────────────────
 
@@ -439,7 +326,7 @@ if [ "$1" != "configonly" ]; then
         # $SUDO  curl --output-dir /etc/apt/trusted.gpg.d -O https://apt.fruit.je/fruit.gpg
         # ADDITION="deb http://apt.fruit.je/ubuntu $(cat /etc/os-release | grep 'VERSION_CODENAME' | awk -F= '{print $2}' | xargs) mpv"
         # ADDITION="deb http://apt.fruit.je/ubuntu $(lsb_release -cs) mpv"
-        # echo $ADDITION | $SUDO  tee -a /etc/apt/sources.list.d/fruit.list
+# echo $ADDITION | $SUDO  tee -a /etc/apt/sources.list.d/fruit.list
         # $SUDO  apt update
         # $SUDO  apt install mpv -y
         
@@ -451,7 +338,15 @@ if [ "$1" != "configonly" ]; then
         # sudo ./llvm.sh all
         
         echo "[+] Installing Yazi..."
-        $SUDO  apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
+        $SUDO  apt install ffmpeg -y 
+        $SUDO  apt instal 7zip  -y
+        $SUDO  apt instal jq  -y
+        $SUDO  apt instal poppler-utils  -y
+        $SUDO  apt instal fd-find  -y
+        $SUDO  apt instal ripgrep  -y
+        $SUDO  apt instal fzf  -y
+        $SUDO  apt instal zoxide  -y
+        $SUDO  apt instal imagemagick -y
         
         git clone https://github.com/sxyazi/yazi.git
         cd yazi
@@ -475,7 +370,7 @@ if [ "$1" != "configonly" ]; then
 
         echo "[+] Installing Spotify Player..."    
         $SUDO apt-get install autotools-dev -y
-        $SUDO apt install pulseaudio pulseaudio-module-bluetooth pulseaudio-utils pavucontrol
+        $SUDO apt install pulseaudio pulseaudio-module-bluetooth pulseaudio-utils pavucontrol -y
         $SUDO apt install libsixel-bin -y  # sixel encoder/decoder
         cargo install spotify_player --no-default-features --features pulseaudio-backend,media-control,sixel
 
@@ -525,27 +420,120 @@ if [ "$1" != "configonly" ]; then
         && rm lazygit.tar.gz
     fi
     
-    if [ "$1" = "configonly" ] || [ "$1" = "full" ]; then
-
-        printf "[+] Setting default shell...\n\n"
-
-        if which zsh >/dev/null 2>&1; then
-
-            cd "$(dirname "$0")"
-            cp -v ./config/.zshrc   $HOME/
-            chsh -s $(which zsh)
-            printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
-            # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
-            cp -v ./config/.zshrc   $HOME/
-            zsh
-        fi
-
-    fi
-
 
 fi
 
 
+
+# ────────────────────────────────────────────────
+#             CONFIG COPY (distro agnostic)
+# ────────────────────────────────────────────────
+
+if [ "$1" = "full" -o "$1" = "configonly" ]; then
+    
+    printf "[+] Home: $HOME\n"
+    
+    # Execute from the dir the script is in
+    cd "$(dirname "$0")" || exit
+
+    PWD=$(pwd)
+    printf "[+] PWD: $PWD\n"
+ 
+    if [ ! -d $HOME/.config/ ]; then
+        mkdir -p $HOME/.config/
+    fi
+    
+    # Sync local config files with cloned repo so i can push up my changes
+    cp -f -v ./config/.bash_aliases  $HOME/
+    cp -f -v ./config/.bash_git  $HOME/
+    cp -f -v ./config/.bash_pbx  $HOME/
+    cp -f -v ./config/.bash_utils  $HOME/
+    cp -f -v ./config/.bashrc  $HOME/
+    cp -f -v ./config/.p10k.zsh  $HOME/
+    cp -f -v ./config/.tmux.conf  $HOME/
+    cp -f -v ./config/.vimrc  $HOME/
+    cp -f -v ./config/.zshrc   $HOME/
+    cp -f -v ./config/.zsh_customizations  $HOME/
+    cp -f -v ./config/.tmux_init.sh  $HOME/
+
+    # __________ NVIM __________
+    if [ -d $HOME/.config/nvim/ ]; then
+        mkdir -p $HOME/.config/nvim
+    fi
+
+    # [.config] If backup folder exists remove it so we can overwrite it
+    if [ -d $HOME/.config/nvim-backup ]; then
+        rm -rf $HOME/.config/nvim-backup
+    fi
+    mv $HOME/.config/nvim $HOME/.config/nvim-backup	    
+    cp -v -r ./config/.config/nvim  $HOME/.config/
+
+    # [.local] If backup folder exists remove it so we can overwrite it
+    if [ -d ~/.local/share/nvim-backup ]; then
+        rm -rf ~/.local/share/nvim-backup
+    fi
+    mv ~/.local/share/nvim ~/.local/share/nvim-backup
+
+    # Vim
+    if [ -d $HOME/.vim/ ]; then
+        mkdir -p $HOME/.vim
+    fi
+    cp -f -v -r ./config/.config/nvim/colors  $HOME/.vim/
+
+    # __________ Spotify-player ___________
+    if [ ! -d $HOME/.config/spotify-player/ ]; then
+        mkdir -p $HOME/.config/spotify-player
+    fi
+    cp -v -r ./config/.config/spotify-player  $HOME/.config/
+    
+    cp -v -f -r ./config/.config/lazygit  $HOME/.config/
+
+    
+    # ---------------------------------------------------------------------
+    # Copy Yazi config
+    cp -v -f -r ./config/.config/yazi  $HOME/.config/
+
+
+    # Install custom shell scripts and exes
+    sudo cp -v -f -r ./config/usr_local_bin/* /usr/local/bin/
+
+
+    # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
+    if [ -d $HOME/.oh-my-zsh ]; then
+        rm -rf $HOME/.oh-my-zsh
+    fi
+
+    printf "[+] Installing oh-my-zsh...\n\n"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+    # If powerline isn't installed, oh-my-zsh+powerline should be installed for installed for good measure - and shell updated
+    if [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k/ ]; then
+
+        printf "[+] Installing powerlevel10k...\n\n"
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+        # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+    
+    fi
+
+
+    printf "[+] Setting default shell...\n\n"
+
+    if which zsh >/dev/null 2>&1; then
+    
+        # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
+        cd "$(dirname "$0")"
+        cp -v ./config/.zshrc   $HOME/
+        chsh -s $(which zsh)
+        printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
+        cp -v ./config/.zshrc   $HOME/
+        zsh
+    fi
+
+
+
+    echo "[+] Configuration files copied!"
+
+fi
 
 
 echo "Done!"
