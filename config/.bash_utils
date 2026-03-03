@@ -354,3 +354,7 @@ land(){
 colorme() {
     pygmentize -f terminal "$@"
 }
+
+ubuntu_container(){
+    docker run -it --rm ubuntu:24.04 bash
+}

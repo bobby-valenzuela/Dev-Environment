@@ -1,6 +1,8 @@
 #!/bin/sh
 # Installation of packages and copying of config files
 
+# set -euo pipefail  # safer bash scripting
+
 CALLING_USER=$(whoami)
 
 # Maintain user's home (even if calling with sudo)
@@ -23,7 +25,42 @@ if [ -d ./Dev-Environment/ ]; then
 fi
 
 
-##### NVIM-ONLY
+# ────────────────────────────────────────────────
+#             Distro Detection
+# ────────────────────────────────────────────────
+
+if [ -f /etc/os-release ]; then
+    # shellcheck disable=SC1091
+    . /etc/os-release
+else
+    echo "Error: /etc/os-release not found — cannot reliably detect distribution"
+    exit 1
+fi
+
+# Normalize to lower case and check family
+ID_LIKE="${ID_LIKE:-$ID}"
+ID_LIKE=$(echo "$ID_LIKE" | tr '[:upper:]' '[:lower:]')
+
+if echo "$ID_LIKE" | grep -q -E 'debian|ubuntu|pop|linuxmint|zorin'; then
+    DISTRO_FAMILY="debian"
+    PKG_MANAGER="apt"
+    echo "[+] Detected Debian-based system (using apt)"
+elif echo "$ID" "$ID_LIKE" | grep -q -E 'fedora|nobara|rhel|centos|rocky|almalinux'; then
+    DISTRO_FAMILY="fedora"
+    PKG_MANAGER="dnf"
+    echo "[+] Detected Fedora-based / RPM-based system (using dnf)"
+else
+    echo "Error: Unsupported distribution."
+    echo "       Detected ID=$ID  ID_LIKE=$ID_LIKE"
+    echo "       This script currently supports only Debian-family and Fedora-family systems."
+    exit 1
+fi
+
+
+# ────────────────────────────────────────────────
+#             NVIM-ONLY MODE (distro agnostic)
+# ────────────────────────────────────────────────
+
 if [ "$1" = "nvimonly" ]; then
     # __________ NVIM __________
     if [ -d $HOME/.config/nvim/ ]; then
@@ -34,14 +71,12 @@ if [ "$1" = "nvimonly" ]; then
     if [ -d $HOME/.config/nvim-backup ]; then
         rm -rf $HOME/.config/nvim-backup
     fi
-    mv $HOME/.config/nvim $HOME/.config/nvim-backup	    
+    [ -d "$HOME/.config/nvim" ] && mv "$HOME/.config/nvim" "$HOME/.config/nvim-backup"
     cp -v -r ./config/.config/nvim  $HOME/.config/
 
     # [.local] If backup folder exists remove it so we can overwrite it
-    if [ -d ~/.local/share/nvim-backup ]; then
-        rm -rf ~/.local/share/nvim-backup
-    fi
-    mv ~/.local/share/nvim ~/.local/share/nvim-backup
+    [ -d "$HOME/.local/share/nvim-backup" ] && rm -rf "$HOME/.local/share/nvim-backup"
+    [ -d "$HOME/.local/share/nvim" ] && mv "$HOME/.local/share/nvim" "$HOME/.local/share/nvim-backup"
 
     echo "[+] Nvim files copied!"
 
@@ -53,11 +88,13 @@ if [ "$1" = "nvimonly" ]; then
     cp -f -v -r ./config/nvim/colors  $HOME/.vim/
     echo "[+] Vim files copied!"
 
-    exit
+    exit 0
 fi
 
-##### CONFIG
-# ------------------------------------------------------------------------
+# ────────────────────────────────────────────────
+#             CONFIG COPY (distro agnostic)
+# ────────────────────────────────────────────────
+
 if [ "$1" = "full" -o "$1" = "configonly" ]; then
     
     printf "[+] Home: $HOME\n"
@@ -155,65 +192,102 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
 
     fi
 
+    echo "[+] Configuration files copied!"
+
 fi
 
-##### PACKAGE INSTALLATION
+# ────────────────────────────────────────────────
+#        PACKAGE INSTALLATION (skip if configonly)
+# ────────────────────────────────────────────────
+
 # ------------------------------------------------------------------------
 # Unless we're explicitly calling to only copy the configs, then let's start installing
 if [ "$1" != "configonly" ]; then
 
-    if ! command -v apt >/dev/null || ! grep -qi ubuntu /etc/os-release; then
-        echo "This script requires an Ubuntu-based system"
-        exit 1
+    echo "# ────────────────────────────────────────────────"
+    echo "#        PACKAGE INSTALLATION (Part I: Core install from package manager)"
+    echo "# ────────────────────────────────────────────────"
+
+    if [ "$DISTRO_FAMILY" = "debian" ]; then
+
+
+        if ! command -v apt >/dev/null || ! grep -qi ubuntu /etc/os-release; then
+            echo "This script requires an Ubuntu-based system"
+            exit 1
+        fi
+        
+        echo "[+] Updating package lists (Debian/Ubuntu)..."
+        # $SUDO apt update || { echo "Failed to update package lists"; exit 1; }
+        $SUDO apt update 
+        
+        echo "[+] Installing essential core packages..."    # Not essential per se, but essentials for my workflow,enchancements, and customizations
+        $SUDO  apt install python3 perl wget tar make gcc unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc nodejs npm ninja-build gettext -y
+        
+        echo "[+] Installing extras..."
+        $SUDO  apt install zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk pkg-config mssql-tools -y
+
+        echo "[+] Installing various dependencies..."
+
+        $SUDO  apt install pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libssl-dev crossbuild-essential-arm64 clang -y
+
+        echo "[+] Installing various dependencies (fragile)..." # Packages which not not be found in older package repos
+        $SUDO  apt fzf ripgrep unixODBC-devel docker.io docker-compose-plugin -y
+        
+        echo "[+] Installing various sound-related dependencies..."
+        $SUDO add-apt-repository ppa:ubuntuhandbook1/ffmpeg6
+        $SUDO apt install playerctl libasound2-dev ffmpeg libass9 libbluray2 libcaca0 libcdio-cdda2 libcdio-paranoia2 libcdio19 librubberband2 libzimg2 libdbus-1-dev libncursesw5-dev libpulse-dev libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev -y
+        if systemctl --user is-active pipewire >/dev/null; then
+            echo "Using PipeWire, installing specific dependencies..."
+            $SUDO apt install libpipewire-0.3-0  -y
+        fi
+
+        echo "[+] (optional) installing vulkan graphics drivers..."
+        $SUDO apt install mesa-utils vulkan-tools -y
+
+
+    elif [ "$DISTRO_FAMILY" = "fedora" ]; then
+
+        echo "TBD"
+
     fi
-    
-    # $SUDO apt update || { echo "Failed to update package lists"; exit 1; }
-    $SUDO apt update 
-    
-    echo "[+] Installing essential core packages..."    # Not essential per se, but essentials for my workflow,enchancements, and customizations
-    $SUDO  apt install python3 perl wget tar make gcc unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc nodejs npm ninja-build gettext -y
-    
-    echo "[+] Installing extras..."
-    $SUDO  apt install zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk pkg-config mssql-tools -y
 
-    echo "[+] Installing various dependencies..."
 
-    $SUDO  apt install pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libssl-dev crossbuild-essential-arm64 clang -y
+    echo "# ────────────────────────────────────────────────"
+    echo "#        PACKAGE INSTALLATION (Part II: Distro-agnostic Tools not via package manager)"
+    echo "# ────────────────────────────────────────────────"
 
-    echo "[+] Installing various dependencies (fragile)..." # Packages which not not be found in older package repos
-    $SUDO  apt fzf ripgrep unixODBC-devel docker.io docker-compose-plugin -y
+
+    # ────────────────────────────────────────────────
+    #         Distro-agnostic tool installs
+    # ──────────────────────────────────────────────── 
+    echo -e "\n[+] ______ Installing Distro-agnostic tool installs _______"            # Software that isn't installed via a distro's package manager (may contain fixed versions). The order below is important.
     
-    echo "[+] Installing various sound-related dependencies..."
-    $SUDO add-apt-repository ppa:ubuntuhandbook1/ffmpeg6
-    $SUDO apt install playerctl libasound2-dev ffmpeg libass9 libbluray2 libcaca0 libcdio-cdda2 libcdio-paranoia2 libcdio19 librubberband2 libzimg2 libdbus-1-dev libncursesw5-dev libpulse-dev libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev -y
-    if systemctl --user is-active pipewire >/dev/null; then
-        echo "Using PipeWire, installing specific dependencies..."
-        $SUDO apt install libpipewire-0.3-0  -y
-    fi
-    
-    echo -e "\n[+] ______ Installing manual installs _______"            # Software that isn't installed via a distro's package manager (may contain fixed versions). The order below is important.
-    
-    # PRE-REQUISITES
-    echo "[+] (optional) installing vulkan graphics drivers..."
-    $SUDO apt install mesa-utils vulkan-tools -y
+
+    echo "[+] Installing prerequisites!"
 
     echo "[+] Enabling docker service..."
     $SUDO  systemctl enable docker
     $SUDO  systemctl start docker
     
-    echo "[+] Installing Rust/Rustup..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    echo "[+] Installing Rust (rustup)..."
+    if ! command -v rustup >/dev/null 2>&1; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        # shellcheck disable=SC1091
+        . "$HOME/.cargo/env"
+    fi
     rustup update
     
     echo "[+] Installing uv python package manager..."
     curl -LsSf https://astral.sh/uv/install.sh | sh
       
-    echo "[+] Installing Go..."
-    rm -rf /usr/local/go
-    wget https://go.dev/dl/go1.24.4.linux-amd64.tar.gz -O go1.24.4.linux-amd64.tar.gz
-    tar -xvf go1.24.4.linux-amd64.tar.gz
-    $SUDO  mv go /usr/local/
-    rm -rf go1.24.4.linux-amd64.tar.gz
+    echo "[+] Installing Go (if needed)..."
+    if ! command -v go >/dev/null 2>&1 || ! go version | grep -qE 'go1.2[2-9]'; then
+        $SUDO rm -rf /usr/local/go
+        wget https://go.dev/dl/go1.24.4.linux-amd64.tar.gz
+        tar -xvf go1.24.4.linux-amd64.tar.gz
+        $SUDO mv go /usr/local/
+        rm -f go*.tar.gz
+    fi
     
     echo "[+] Installing nvm..."
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash # Install nvm version 0.40.3
@@ -270,69 +344,96 @@ if [ "$1" != "configonly" ]; then
     
     echo "[+] Installing Posting via uv..."
     uv tool install --python 3.13 posting
-    
-    echo "[+] Installing mpv..."
-    $SUDO  curl --output-dir /etc/apt/trusted.gpg.d -O https://apt.fruit.je/fruit.gpg
-    # ADDITION="deb http://apt.fruit.je/ubuntu $(cat /etc/os-release | grep 'VERSION_CODENAME' | awk -F= '{print $2}' | xargs) mpv"
-    ADDITION="deb http://apt.fruit.je/ubuntu $(lsb_release -cs) mpv"
-    echo $ADDITION | $SUDO  tee -a /etc/apt/sources.list.d/fruit.list
-    $SUDO  apt update
-    $SUDO  apt install mpv -y
-    
-    echo "[+] Installing llvm and related tools (clangd, cmake, etc)..."
-    wget https://apt.llvm.org/llvm.sh
-    chmod +x llvm.sh
-    $SUDO  ./llvm.sh 20 all
-    # or for latest stable release...
-    # sudo ./llvm.sh all
-    
-    echo "[+] Installing Yazi..."
-    $SUDO  apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
-    
-    git clone https://github.com/sxyazi/yazi.git
-    cd yazi
-    cargo build --release --locked
-    $SUDO  mv target/release/yazi target/release/ya /usr/local/bin/
-    cd ..
-    rm -rf yazi
-
-    echo "[+] Installing Latest Tmux..."    
-    $SUDO apt-get install autotools-dev -y
-    $SUDO apt-get install automake -y
-    $SUDO apt install libevent-dev -y
-    $SUDO apt install bison -y
-    $SUDO apt install libncurses5-dev libncursesw5-dev -y
-    git clone https://github.com/tmux/tmux.git
-    cd tmux
-    sh autogen.sh
-    ./configure --enable-sixel || { echo "Tmux configure failed"; }
-    make && $SUDO make install || { echo "Tmux build failed"; }
-    cd ../
-
-    echo "[+] Installing Spotify Player..."    
-    $SUDO apt-get install autotools-dev -y
-    $SUDO apt install pulseaudio pulseaudio-module-bluetooth pulseaudio-utils pavucontrol
-    $SUDO apt install libsixel-bin -y  # sixel encoder/decoder
-    cargo install spotify_player --no-default-features --features pulseaudio-backend,media-control,sixel
 
 
-    # __________________ WORKFLOW ___________
+
+
+    echo "# ────────────────────────────────────────────────"
+    echo "#        PACKAGE INSTALLATION (Part III: Additional install from package manager)"
+    echo "# ────────────────────────────────────────────────"
+    # This third step must remain here as some of the programs in step 2 are required for this step
+
+
+    if [ "$DISTRO_FAMILY" = "debian" ]; then
+
+
+        echo "[+] Installing mpv..."
+        $SUDO  curl --output-dir /etc/apt/trusted.gpg.d -O https://apt.fruit.je/fruit.gpg
+        # ADDITION="deb http://apt.fruit.je/ubuntu $(cat /etc/os-release | grep 'VERSION_CODENAME' | awk -F= '{print $2}' | xargs) mpv"
+        ADDITION="deb http://apt.fruit.je/ubuntu $(lsb_release -cs) mpv"
+        echo $ADDITION | $SUDO  tee -a /etc/apt/sources.list.d/fruit.list
+        $SUDO  apt update
+        $SUDO  apt install mpv -y
+        
+        echo "[+] Installing llvm and related tools (clangd, cmake, etc)..."
+        wget https://apt.llvm.org/llvm.sh
+        chmod +x llvm.sh
+        $SUDO  ./llvm.sh 20 all
+        # or for latest stable release...
+        # sudo ./llvm.sh all
+        
+        echo "[+] Installing Yazi..."
+        $SUDO  apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
+        
+        git clone https://github.com/sxyazi/yazi.git
+        cd yazi
+        cargo build --release --locked
+        $SUDO  mv target/release/yazi target/release/ya /usr/local/bin/
+        cd ..
+        rm -rf yazi
+
+        echo "[+] Installing Latest Tmux..."    
+        $SUDO apt-get install autotools-dev -y
+        $SUDO apt-get install automake -y
+        $SUDO apt install libevent-dev -y
+        $SUDO apt install bison -y
+        $SUDO apt install libncurses5-dev libncursesw5-dev -y
+        git clone https://github.com/tmux/tmux.git
+        cd tmux
+        sh autogen.sh
+        ./configure --enable-sixel || { echo "Tmux configure failed"; }
+        make && $SUDO make install || { echo "Tmux build failed"; }
+        cd ../
+
+        echo "[+] Installing Spotify Player..."    
+        $SUDO apt-get install autotools-dev -y
+        $SUDO apt install pulseaudio pulseaudio-module-bluetooth pulseaudio-utils pavucontrol
+        $SUDO apt install libsixel-bin -y  # sixel encoder/decoder
+        cargo install spotify_player --no-default-features --features pulseaudio-backend,media-control,sixel
+
+
+        # Keep at end
+        printf "[+] Removing stale lockfiles...\n\n"
+        $SUDO rm -f /var/lib/dpkg/lock-frontend
+        $SUDO rm -f /var/lib/dpkg/lock
+
+
+    elif [ "$DISTRO_FAMILY" = "fedora" ]; then
+
+        echo "TBD"
+    fi
+
     echo -e "\n\n\n[+] ______ Finished main packages ______\n\n\n"
+
+
+    echo "# ────────────────────────────────────────────────"
+    echo "#        PACKAGE INSTALLATION (Part IV: Workflow setup)"
+    echo "# ────────────────────────────────────────────────"
+
     echo "[+] Installing workflow-specific programs"
     $SUDO cp -f -v ./config/usr_local_bin/* /usr/local/bin/
     
     echo "[+] Installing any missing packages..."
     
-    printf "[+] Removing stale lockfiles...\n\n"
-    $SUDO rm -f /var/lib/dpkg/lock-frontend
-    $SUDO rm -f /var/lib/dpkg/lock
-
     if ! command -v nvim >/dev/null 2>&1; then
         printf "[+] Installing latest neovim stable release...\n\n"
         curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
         $SUDO rm -rf /opt/nvim
         $SUDO tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+        # echo "→ Consider adding /opt/nvim-linux-x86_64/bin to your PATH"
         # echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> $HOME/.zshrc
+        # rm nvim-linux-x86_64.tar.gz
+        # Already aadded to PTH in .zshrc - just export for now so we can use it now
         export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
     fi
 
@@ -352,4 +453,8 @@ fi
 
 
 echo "Done!"
+echo "→ You may need to log out/in or run: source ~/.zshrc (or ~/.bashrc)"
+echo "→ Some tools require fonts (Nerd Fonts) or extra setup"
+
+
 
