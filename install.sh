@@ -525,7 +525,7 @@ if [ "$1" != "configonly" ]; then
         && rm lazygit.tar.gz
     fi
     
-    if [ "$1" = "configonly" || "$1" = "full" ]; then
+    if [ "$1" = "configonly" ] || [ "$1" = "full" ]; then
 
         printf "[+] Setting default shell...\n\n"
 
