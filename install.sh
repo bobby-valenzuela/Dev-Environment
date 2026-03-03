@@ -24,7 +24,6 @@ if [ -d ./Dev-Environment/ ]; then
     $SUDO rm -rf ./Dev-Environment
 fi
 
-
 # ────────────────────────────────────────────────
 #             Distro Detection
 # ────────────────────────────────────────────────
@@ -55,6 +54,9 @@ else
     echo "       This script currently supports only Debian-family and Fedora-family systems."
     exit 1
 fi
+
+
+
 
 
 # ────────────────────────────────────────────────
@@ -228,16 +230,13 @@ if [ "$1" != "configonly" ]; then
         echo "[+] Installing essential core packages..."    # Not essential per se, but essentials for my workflow,enchancements, and customizations
         $SUDO apt install python3 -y
         $SUDO apt install perl -y
-        $SUDO apt install wget -y
         $SUDO apt install tar -y
         $SUDO apt install make -y
         $SUDO apt install gcc -y
         $SUDO apt install unzip -y
-        $SUDO apt install git -y
         $SUDO apt install git-all -y
         $SUDO apt install xclip -y
         $SUDO apt install build-essential -y
-        $SUDO apt install curl -y
         $SUDO apt install locate -y
         $SUDO apt install cmake -y
         $SUDO apt install libstdc++6 -y
@@ -319,23 +318,6 @@ if [ "$1" != "configonly" ]; then
 
         echo "[+] (optional) installing vulkan graphics drivers..."
         $SUDO apt install mesa-utils vulkan-tools -y
-
-        if [ "$1" = "configonly" || "$1" = "" ]; then
-
-            printf "[+] Setting default shell...\n\n"
-
-            if which zsh >/dev/null 2>&1; then
-            
-                cd "$(dirname "$0")"
-                cp -v ./config/.zshrc   $HOME/
-                chsh -s $(which zsh)
-                printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
-                # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
-                cp -v ./config/.zshrc   $HOME/
-                zsh
-            fi
-
-        fi
 
 
     elif [ "$DISTRO_FAMILY" = "fedora" ]; then
@@ -540,6 +522,24 @@ if [ "$1" != "configonly" ]; then
         && rm lazygit.tar.gz
     fi
     
+    if [ "$1" = "configonly" || "$1" = "full" ]; then
+
+        printf "[+] Setting default shell...\n\n"
+
+        if which zsh >/dev/null 2>&1; then
+
+            cd "$(dirname "$0")"
+            cp -v ./config/.zshrc   $HOME/
+            chsh -s $(which zsh)
+            printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
+            # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
+            cp -v ./config/.zshrc   $HOME/
+            zsh
+        fi
+
+    fi
+
+
 fi
 
 
