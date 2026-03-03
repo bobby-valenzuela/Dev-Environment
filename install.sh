@@ -435,13 +435,13 @@ if [ "$1" != "configonly" ]; then
     if [ "$DISTRO_FAMILY" = "debian" ]; then
 
 
-        echo "[+] Installing mpv..."
-        $SUDO  curl --output-dir /etc/apt/trusted.gpg.d -O https://apt.fruit.je/fruit.gpg
+        # echo "[+] Installing mpv..."
+        # $SUDO  curl --output-dir /etc/apt/trusted.gpg.d -O https://apt.fruit.je/fruit.gpg
         # ADDITION="deb http://apt.fruit.je/ubuntu $(cat /etc/os-release | grep 'VERSION_CODENAME' | awk -F= '{print $2}' | xargs) mpv"
-        ADDITION="deb http://apt.fruit.je/ubuntu $(lsb_release -cs) mpv"
-        echo $ADDITION | $SUDO  tee -a /etc/apt/sources.list.d/fruit.list
-        $SUDO  apt update
-        $SUDO  apt install mpv -y
+        # ADDITION="deb http://apt.fruit.je/ubuntu $(lsb_release -cs) mpv"
+        # echo $ADDITION | $SUDO  tee -a /etc/apt/sources.list.d/fruit.list
+        # $SUDO  apt update
+        # $SUDO  apt install mpv -y
         
         echo "[+] Installing llvm and related tools (clangd, cmake, etc)..."
         wget https://apt.llvm.org/llvm.sh
