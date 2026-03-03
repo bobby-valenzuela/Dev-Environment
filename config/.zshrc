@@ -96,6 +96,16 @@ alias ch="$PATH_DIR/cht.sh"
 # [[ -s ~/.oh-my-zsh/oh-my-zsh.sh ]] && source ~/.oh-my-zsh/oh-my-zsh.sh
 
 
+# LOAD ANY SAVED KEYS
+
+# > Claude
+if [[ -s $HOME/.claude/.credentials.json ]]; then
+    CLAUDE_TOKEN=$(jq '.[] | .accessToken' $HOME/.claude/.credentials.json 2> /dev/null )
+    if [[ ! -z "${CLAUDE_TOKEN}" ]]; then
+        export ANTHROPIC_API_KEY=${CLAUDE_TOKEN}
+    fi
+fi
+
 
 
 
