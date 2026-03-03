@@ -88,9 +88,29 @@ update_lazy(){
     sudo make install
 }
 
-create_and_assume_user(){
-    [[ ! -z "$1" ]] && echo "[!] Requires username as an argument" && exit
-    sudo useradd -m $1 && sudo usermod -aG sudo $1 && sudo passwd $1 && sudo -i -u $1
+create_and_assume_user() {
+    if [[ -z "$1" ]]; then
+        echo "[!] Usage: create_and_assume_user <username>"
+        echo "    Requires username as an argument"
+        return 1
+    fi
+
+    local user="$1"
+
+    # Decide whether we need sudo or not
+    if [[ "$EUID" -eq 0 ]]; then
+        # Already root → no sudo needed
+        useradd -m "$user" &&
+        usermod -aG sudo "$user" &&
+        passwd "$user" &&
+        su - "$user"
+    else
+        # Not root → use sudo
+        sudo useradd -m "$user" &&
+        sudo user
+        sudo passwd "$user" &&
+        sudo -i -u "$user"
+    fi
 }
 
 edit_nvim_conf(){
@@ -356,5 +376,10 @@ colorme() {
 }
 
 ubuntu_container(){
-    docker run -it --rm ubuntu:24.04 bash
+    # docker run -it --rm ubuntu:24.04 bash
+    docker run -it --rm ubuntu:24.04 bash -c "apt update && apt install -y sudo wget git"
+}
+
+fedora_container(){
+    docker run -it --rm fedora:40 bash -c "dnf update && dnf install -y wget git wheel"
 }

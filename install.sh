@@ -178,16 +178,21 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
         # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
         
-        printf "[+] Setting default shell...\n\n"
-        if which zsh >/dev/null 2>&1; then
-        
-            cd "$(dirname "$0")"
-            cp -v ./config/.zshrc   $HOME/
-            chsh -s $(which zsh)
-            printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
-            # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
-            cp -v ./config/.zshrc   $HOME/
-            zsh
+        if [ "$1" = "configonly" ]; then
+
+            printf "[+] Setting default shell...\n\n"
+
+            if which zsh >/dev/null 2>&1; then
+            
+                cd "$(dirname "$0")"
+                cp -v ./config/.zshrc   $HOME/
+                chsh -s $(which zsh)
+                printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
+                # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
+                cp -v ./config/.zshrc   $HOME/
+                zsh
+            fi
+
         fi
 
     fi
@@ -221,21 +226,92 @@ if [ "$1" != "configonly" ]; then
         $SUDO apt update 
         
         echo "[+] Installing essential core packages..."    # Not essential per se, but essentials for my workflow,enchancements, and customizations
-        $SUDO  apt install python3 perl wget tar make gcc unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc sed coreutils cargo pandoc nodejs npm ninja-build gettext -y
+        $SUDO apt install python3 -y
+        $SUDO apt install perl -y
+        $SUDO apt install wget -y
+        $SUDO apt install tar -y
+        $SUDO apt install make -y
+        $SUDO apt install gcc -y
+        $SUDO apt install unzip -y
+        $SUDO apt install git -y
+        $SUDO apt install git-all -y
+        $SUDO apt install xclip -y
+        $SUDO apt install build-essential -y
+        $SUDO apt install curl -y
+        $SUDO apt install locate -y
+        $SUDO apt install cmake -y
+        $SUDO apt install libstdc++6 -y
+        $SUDO apt install vim-gtk3 -y
+        $SUDO apt install libc6-dev -y
+        $SUDO apt install libc6-dev-i386 -y
+        $SUDO apt install nasm -y
+        $SUDO apt install binutils -y
+        $SUDO apt install libc6 -y
+        $SUDO apt install bc -y
+        $SUDO apt install sed -y
+        $SUDO apt install coreutils -y
+        $SUDO apt install cargo -y
+        $SUDO apt install pandoc -y
+        $SUDO apt install nodejs -y
+        $SUDO apt install npm -y
+        $SUDO apt install ninja-build -y
+        $SUDO apt install gettext -y
         
         echo "[+] Installing extras..."
-        $SUDO  apt install zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk pkg-config mssql-tools -y
+        $SUDO apt install zsh -y
+        $SUDO apt install tmux -y
+        $SUDO apt install p7zip-full -y
+        $SUDO apt install jq -y
+        $SUDO apt install python3-pygments -y
+        $SUDO apt install sshfs -y
+        $SUDO apt install sshpass -y
+        $SUDO apt install xsel -y
+        $SUDO apt install lua5.3 -y
+        $SUDO apt install fonts-powerline -y
+        $SUDO apt install bash -y
+        $SUDO apt install gawk -y
+        $SUDO apt install pkg-config -y
+        $SUDO apt install mssql-tools --ignore-missing -y   # Requires MicrSoft repo
 
         echo "[+] Installing various dependencies..."
-
-        $SUDO  apt install pkg-config libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libssl-dev crossbuild-essential-arm64 clang -y
+        $SUDO apt install pkg-config -y
+        $SUDO apt install libssl-dev -y
+        $SUDO apt install libxcb1-dev -y
+        $SUDO apt install libxcb-render0-dev -y
+        $SUDO apt install libxcb-shape0-dev -y
+        $SUDO apt install libxcb-xfixes0-dev -y
+        $SUDO apt install crossbuild-essential-arm64 -y
+        $SUDO apt install clang -y
 
         echo "[+] Installing various dependencies (fragile)..." # Packages which not not be found in older package repos
-        $SUDO  apt fzf ripgrep unixODBC-devel docker.io docker-compose-plugin -y
+        $SUDO apt install fzf -y
+        $SUDO apt install ripgrep -y
+        $SUDO apt install unixodbc-dev -y
+        $SUDO apt install docker.io -y
+        $SUDO apt install docker-compose-plugin -y
         
         echo "[+] Installing various sound-related dependencies..."
         $SUDO add-apt-repository ppa:ubuntuhandbook1/ffmpeg6
-        $SUDO apt install playerctl libasound2-dev ffmpeg libass9 libbluray2 libcaca0 libcdio-cdda2 libcdio-paranoia2 libcdio19 librubberband2 libzimg2 libdbus-1-dev libncursesw5-dev libpulse-dev libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev -y
+        $SUDO apt install playerctl -y
+        $SUDO apt install libasound2-dev -y
+        $SUDO apt install ffmpeg -y
+        $SUDO apt install libass9 -y
+        $SUDO apt install libbluray2 -y
+        $SUDO apt install libcaca0 -y
+        $SUDO apt install libcdio-cdda2 -y
+        $SUDO apt install libcdio-paranoia2 -y
+        $SUDO apt install libcdio19 -y
+        $SUDO apt install librubberband2 -y
+        $SUDO apt install libzimg2 -y
+        $SUDO apt install libdbus-1-dev -y
+        $SUDO apt install libncursesw5-dev -y
+        $SUDO apt install libpulse-dev -y
+        $SUDO apt install libssl-dev -y
+        $SUDO apt install libxcb1-dev -y
+        $SUDO apt install libxcb-render0-dev -y
+        $SUDO apt install libxcb-shape0-dev -y
+        $SUDO apt install libxcb-xfixes0-dev -y
+
         if systemctl --user is-active pipewire >/dev/null; then
             echo "Using PipeWire, installing specific dependencies..."
             $SUDO apt install libpipewire-0.3-0  -y
@@ -243,6 +319,23 @@ if [ "$1" != "configonly" ]; then
 
         echo "[+] (optional) installing vulkan graphics drivers..."
         $SUDO apt install mesa-utils vulkan-tools -y
+
+        if [ "$1" = "configonly" || "$1" = "" ]; then
+
+            printf "[+] Setting default shell...\n\n"
+
+            if which zsh >/dev/null 2>&1; then
+            
+                cd "$(dirname "$0")"
+                cp -v ./config/.zshrc   $HOME/
+                chsh -s $(which zsh)
+                printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
+                # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
+                cp -v ./config/.zshrc   $HOME/
+                zsh
+            fi
+
+        fi
 
 
     elif [ "$DISTRO_FAMILY" = "fedora" ]; then
