@@ -166,7 +166,7 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     sudo cp -v -f -r ./config/usr_local_bin/* /usr/local/bin/
 
     # If powerline isn't installed, oh-my-zsh+powerline should be installed for installed for good measure - and shell updated
-    if [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k/ ]; then
+    # if [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k/ ]; then
 
         # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
         if [ -d $HOME/.oh-my-zsh ]; then
@@ -197,7 +197,7 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
 
         fi
 
-    fi
+    # fi
 
     echo "[+] Configuration files copied!"
 
@@ -518,7 +518,7 @@ if [ "$1" != "configonly" ]; then
         LAZYGIT_VERSION='0.40.2'
         curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
         && tar xf lazygit.tar.gz lazygit \
-        && mv -f lazygit /usr/local/bin/ \
+        && $SUDO mv -f lazygit /usr/local/bin/ \
         && rm lazygit.tar.gz
     fi
     
