@@ -430,7 +430,11 @@ fi
 # ────────────────────────────────────────────────
 
 if [ "$1" = "full" -o "$1" = "configonly" ]; then
-    
+
+    echo "# ────────────────────────────────────────────────"
+    echo "#        CONFIG INSTALLATION "
+    echo "# ────────────────────────────────────────────────"
+
     printf "[+] Home: $HOME\n"
     
     # Execute from the dir the script is in
@@ -536,7 +540,12 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
 fi
 
 
-echo "Done!"
+printf "\n\n\n"
+echo "# ────────────────────────────────────────────────"
+echo "#        FINISHED! "
+echo "# ────────────────────────────────────────────────"
+printf "\n\n\n"
+
 echo "→ You may need to log out/in or run: source ~/.zshrc (or ~/.bashrc)"
 echo "→ Some tools require fonts (Nerd Fonts) or extra setup"
 
