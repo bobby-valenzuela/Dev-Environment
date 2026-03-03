@@ -339,14 +339,14 @@ if [ "$1" != "configonly" ]; then
         
         echo "[+] Installing Yazi..."
         $SUDO  apt install ffmpeg -y 
-        $SUDO  apt instal 7zip  -y
-        $SUDO  apt instal jq  -y
-        $SUDO  apt instal poppler-utils  -y
-        $SUDO  apt instal fd-find  -y
-        $SUDO  apt instal ripgrep  -y
-        $SUDO  apt instal fzf  -y
-        $SUDO  apt instal zoxide  -y
-        $SUDO  apt instal imagemagick -y
+        $SUDO  apt install 7zip  -y
+        $SUDO  apt install jq  -y
+        $SUDO  apt install poppler-utils  -y
+        $SUDO  apt install fd-find  -y
+        $SUDO  apt install ripgrep  -y
+        $SUDO  apt install fzf  -y
+        $SUDO  apt install zoxide  -y
+        $SUDO  apt install imagemagick -y
         
         git clone https://github.com/sxyazi/yazi.git
         cd yazi
