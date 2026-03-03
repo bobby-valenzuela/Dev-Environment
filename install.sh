@@ -386,8 +386,7 @@ if [ "$1" != "configonly" ]; then
         echo "TBD"
     fi
 
-    echo -e "\n\n\n[+] ______ Finished main packages ______\n\n\n"
-
+    printf "\n\n[+] ______ Finished main packages ______\n\n"
 
     echo "# ────────────────────────────────────────────────"
     echo "#        PACKAGE INSTALLATION (Part IV: Workflow setup)"
