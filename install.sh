@@ -101,9 +101,11 @@ fi
 # Unless we're explicitly calling to only copy the configs, then let's start installing
 if [ "$1" != "configonly" ]; then
 
-    echo "# ────────────────────────────────────────────────"
+    printf "\n\n"
+    echo "# ────────────────────────────────────────────────────────────────────────"
     echo "#        PACKAGE INSTALLATION (Part I: Core install from package manager)"
-    echo "# ────────────────────────────────────────────────"
+    echo "# ────────────────────────────────────────────────────────────────────────"
+    printf "\n\n"
 
     if [ "$DISTRO_FAMILY" = "debian" ]; then
 
@@ -386,7 +388,7 @@ if [ "$1" != "configonly" ]; then
         echo "TBD"
     fi
 
-    printf "\n\n[+] ______ Finished main packages ______\n\n"
+    printf "\n\n\n"
 
     echo "# ────────────────────────────────────────────────"
     echo "#        PACKAGE INSTALLATION (Part IV: Workflow setup)"
