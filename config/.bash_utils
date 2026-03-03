@@ -377,9 +377,9 @@ colorme() {
 
 ubuntu_container(){
     # docker run -it --rm ubuntu:24.04 bash
-    docker run -it --rm ubuntu:24.04 bash -c "apt update && apt install -y sudo wget git"
+    docker run -it --rm ubuntu:24.04 bash -c "apt update && apt install -y sudo wget git curl"
 }
 
 fedora_container(){
-    docker run -it --rm fedora:40 bash -c "dnf update && dnf install -y wget git wheel"
+    docker run -it --rm fedora:40 bash -c "dnf update && dnf install -y wget git curl wheel"
 }
