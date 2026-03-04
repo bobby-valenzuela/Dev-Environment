@@ -28,9 +28,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
         local root = vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):match("(.-)\n?$")
         if root and root ~= "" and vim.fn.filereadable(root .. "/avante.md") == 0 then
             local content = {
-            "# Project Instructions ΓÇô Strict Selected-Lines-Only Mode",
+            "# Project Instructions - Strict Selected-Lines-Only Mode",
             "",
-            "## Core Behavioral Rule (highest priority ΓÇô always obey this unless explicitly told otherwise)",
+            "## Core Behavioral Rule (highest priority - always obey this unless explicitly told otherwise)",
             "",
             "- If I have selected lines of code, **ONLY** edit code from the **currently selected lines** (the lines I have visually selected / highlighted in Neovim when I send the request).",
             "- You may suggest edits to code directly relating to that line (for example if I'm in a function you can suggest edits to other parts of the function if they directly relate to changes we're makling in the selected lines of code or to other lines of code that call this function.",
