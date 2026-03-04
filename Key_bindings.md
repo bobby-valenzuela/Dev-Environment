@@ -2,100 +2,128 @@
 
 This document outlines key bindings for TMUX, Vim, and LazyVim, organized for clarity and consistency. Key bindings use the `<C-...>` syntax (e.g., `<C-r>` for Ctrl+r) throughout for uniformity. 
    
-### Table of Contents
+## Table of Contents
+
 - [SHELL](#shell)
-  - [Apache](#apache)
-  - [Dir Navigation](#dir-navigation)
-  - [Docker](#docker)
-  - [Git](#git)
-  - [PBX](#pbx)
-  - [Nvim](#nvim)
-- [TMUX](#tmux)
-  - [Configuration and Plugins](#tmux-configuration-and-plugins)
-  - [Copy and Paste](#tmux-copy-and-paste)
-  - [Sessions](#tmux-sessions)
-  - [Windows](#tmux-windows)
-  - [Panes](#tmux-panes)
-- [Oh-my-ZSH Plugins](#oh-my-zsh-plugins)
+    - [Oh-my-ZSH Plugins](#oh-my-zsh-plugins)
+    - [Nvim](#nvim)
+    - [Apache](#apache)
+    - [Diagnostics](#diagnostics)
+    - [Dir navigation](#dir-navigation)
+    - [Docker](#docker)
+    - [Git](#git)
+    - [PBX [custom]](#pbx-custom)
+    - [YAZI](#yazi)
+    - [TMUX](#tmux)
+  - [TMUX Configuration and Plugins](#tmux-configuration-and-plugins)
+  - [TMUX Copy and Paste](#tmux-copy-and-paste)
+  - [TMUX Sessions](#tmux-sessions)
+  - [TMUX Windows](#tmux-windows)
+  - [TMUX Panes](#tmux-panes)
 - [Vim](#vim)
-  - [General Commands](#vim-general-commands)
-  - [File Explorer (netrw)](#vim-file-explorer-netrw)
-  - [File and Buffer Management](#vim-file-and-buffer-management)
-  - [Navigation](#vim-navigation)
-  - [Searching and Replacing](#vim-searching-and-replacing)
-  - [Editing and Text Manipulation](#vim-editing-and-text-manipulation)
-  - [Macros and Automation](#vim-macros-and-automation)
-  - [Custom Key Bindings](#vim-custom-key-bindings)
-  - [Troubleshooting](#vim-troubleshooting)
+  - [Vim General Commands](#vim-general-commands)
+  - [Vim File Explorer (netrw)](#vim-file-explorer-netrw)
+  - [Vim File and Buffer Management](#vim-file-and-buffer-management)
+  - [Vim Navigation](#vim-navigation)
+  - [Vim Searching and Replacing](#vim-searching-and-replacing)
+  - [Vim Editing and Text Manipulation](#vim-editing-and-text-manipulation)
+  - [Vim Macros and Automation](#vim-macros-and-automation)
+  - [Vim Custom Key Bindings](#vim-custom-key-bindings)
+  - [Vim Troubleshooting](#vim-troubleshooting)
 - [LazyVim](#lazyvim)
-  - [General Commands](#lazyvim-general-commands)
-  - [Commenting](#lazyvim-commenting)
-  - [Surrounding](#lazyvim-surrounding)
-  - [LSP-Related Commands](#lazyvim-lsp-related-commands)
-  - [Searching](#lazyvim-searching)
-  - [Harpoon](#lazyvim-harpoon)
-  - [Windows](#lazyvim-windows)
+  - [LazyVim General Commands](#lazyvim-general-commands)
+  - [LazyVim Commenting](#lazyvim-commenting)
+  - [LazyVim Surrounding](#lazyvim-surrounding)
+  - [LazyVim LSP-Related Commands](#lazyvim-lsp-related-commands)
+  - [LazyVim Searching](#lazyvim-searching)
+  - [LazyVim Harpoon](#lazyvim-harpoon)
+  - [LazyVim Windows](#lazyvim-windows)
+- [Neovim Keybindings](#neovim-keybindings)
+  - [General Information](#general-information)
+  - [Non-Leader Custom Motions](#non-leader-custom-motions)
+  - [Leader-based Custom Motions](#leader-based-custom-motions)
+  - [Change / Replace Word Variants](#change--replace-word-variants)
+  - [Telescope](#telescope)
+  - [Harpoon](#harpoon)
+  - [Git (General + LazyGit)](#git-general--lazygit)
+  - [Gitsigns (buffer-local – usually in plugin file)](#gitsigns-buffer-local--usually-in-plugin-file)
+  - [Vim-Fugitive](#vim-fugitive)
+  - [Indent](#indent)
+  - [LSP](#lsp)
+  - [Trouble](#trouble)
 
 ---
 
-### SHELL
+# SHELL
 
 `_` - sudo  
-`blastoff` / `land` - Switch from current zsh theme to starship (catppuccin mocha)
-`ccat` - colorize_cat  
-`ch` - /home/bobby/bin/cht.sh (command-line client for cheat.sh cheat sheets). Example `ch perl/array`  
-`chatgpt` - [custom] - CLI interface to ChatGPT/OpenAI  
-`cless` - colorize_less  
-`clear_nvim_swaps` - [custom] self-explanatory
-`create_and_assume_user` - [custom] self-explanatory
-`csvlens` - Interactive CSV file viewer  
-`diffy` - [custom] see diff between two files (side-by-side)
-`dirsync` - [custom] Directory synchronizer (sync files between directories)  
-`docx_to_md` - [custom] self-explanatory
-`edit_nvim_conf` [custom] - open nvim in ~/.config/nvim/
-`mp3_dl` - [custom] Download MP3 audio from youtube URL
-`egrep` - egrep --color=auto (grep -E)  
-`eget` - Easy binary downloader from GitHub releases  
-`ff` - (fuuzzy finder) fzf --height 40% --layout reverse --border  
-`fgrep` - fgrep --color=auto  
-`fv` - 'fuzzy-vim' fuzzy-find a file in the pwd to open with nvim. `nvim $(fzf --height 40% --layout reverse --border)`  
-`fzf` - General-purpose command-line fuzzy finder  
-`ggh` - SSH connection manager  
-`grok` - [custom] - xAI Grok CLI  
-`lazydocker` - Simple terminal UI for managing Docker  
-`lazygit` / `lg` - Simple terminal UI for git commands  
-`lazysql` - lazy-based SQL tool  
-`ollama` - Run and manage large language models locally (CLI for Ollama)  
-`pandoc` - Universal document converter (markup to markup/PDF/etc.)  
-`perltidy` - Indent and reformat Perl scripts  
-`postboy` - [custom] Simple CLI-based API tool  
-`posting` - Postman in CLI
-`posty` - [custom] Wrapper for posting with saved collections
-`qc` / `quickconnect` - [custom] quickconnect - ssh and rdp in cli  
-`reposync` - [custom] -  repo synchronization tool  
-`scpdownloads` - [custom] cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads  
-`spf` - (custom script - possibly SPF checker or sender policy framework tool)  
-`sqlcmd` - Microsoft SQL Server command-line query tool  
-`ssh_keyupdate` - [custom] (complex ssh-agent + ssh-add command)  
-`starship` - Cross-shell prompt (customizable prompt engine)  
-`tmux` - tmux -2  
-`update_lazy` - [custom] self-explanatory
-`upandup` - [custom] sudo apt update && sudo apt upgrade  
-`update_aws_creds.sh` - (custom script - updates AWS credentials)  
-`vscode-cleanup` - [custom] cleans VS Code cache/data  
-`vscode-cleanup-all` - [custom] cleans VS Code cache/data - all  
-`vscode-cleanup-pbx` - [custom] cleans VS Code cache/data - pbx
-`which-command` - whence  (?)
-`yt-dlp` - Feature-rich command-line audio/video downloader  
-`wcp` - [custom] Copy from WSL to Windows host
-`tmux_init` [custom] - starts up predefined tmux windows/panes
+`blastoff` / `land` - Switch from current zsh theme to starship (catppuccin mocha)  
+`ccat` - colorize_cat    
+`ch` - /home/bobby/bin/cht.sh (command-line client for cheat.sh cheat sheets). Example `ch perl/array`    
+`chatgpt` - [custom] - CLI interface to ChatGPT/OpenAI    
+`cless` - colorize_less    
+`clear_nvim_swaps` - [custom] self-explanatory  
+`create_and_assume_user` - [custom] self-explanatory (note: adds user to sudo group)    
+`colorme` - [custom] Pipe to this to color your text  
+`csvlens` - Interactive CSV file viewer    
+`diffy` - [custom] see diff between two files (side-by-side)  
+`dirsync` - [custom] Directory synchronizer (sync files between directories)    
+`docx_to_md` - [custom] self-explanatory  
+`docker_force_old_version` - [custom] Set Docker version environment variable to 1.43  
+`dockbuntu` - [custom] Spin up quick ubuntu container  
+`mp3_dl` - [custom] Download MP3 audio from youtube URL  
+`egrep` - egrep --color=auto (grep -E)    
+`eget` - Easy binary downloader from GitHub releases    
+`ff` - (fuuzzy finder) fzf --height 40% --layout reverse --border    
+`fgrep` - fgrep --color=auto    
+`fv` - 'fuzzy-vim' fuzzy-find a file in the pwd to open with nvim. `nvim $(fzf --height 40% --layout reverse --border)`    
+`fzf` - General-purpose command-line fuzzy finder    
+`ggh` - SSH connection manager    
+`grok` - [custom] - xAI Grok CLI    
+`lazydocker` - Simple terminal UI for managing Docker    
+`lazygit` / `lg` - Simple terminal UI for git commands    
+`lazysql` - lazy-based SQL tool    
+`ollama` - Run and manage large language models locally (CLI for Ollama)    
+`pandoc` - Universal document converter (markup to markup/PDF/etc.)    
+`perltidy` - Indent and reformat Perl scripts    
+`postboy` - [custom] Simple CLI-based API tool    
+`posting` - Postman in CLI  
+`posty` - [custom] Wrapper for posting with saved collections  
+`qc` / `quickconnect` - [custom] quickconnect - ssh and rdp in cli    
+`reposync` - [custom] -  repo synchronization tool    
+`scpdownloads` - [custom] cd /mnt/c/Users/BobbyValenzuela/OneDrive\ -\ Probax/Documents/SCP-Downloads    
+`spf` - (custom script - possibly SPF checker or sender policy framework tool)    
+`sqlcmd` - Microsoft SQL Server command-line query tool    
+`ssh_keyupdate` - [custom] (complex ssh-agent + ssh-add command)    
+`starship` - Cross-shell prompt (customizable prompt engine)    
+`tmux` - tmux -2    
+`update_lazy` - [custom] self-explanatory  
+`upandup` - [custom] sudo apt update && sudo apt upgrade    
+`update_aws_creds.sh` - (custom script - updates AWS credentials)    
+`vscode-cleanup` - [custom] cleans VS Code cache/data    
+`vscode-cleanup-all` - [custom] cleans VS Code cache/data - all    
+`vscode-cleanup-pbx` - [custom] cleans VS Code cache/data - pbx  
+`which-command` - whence  (?)  
+`yt-dlp` - Feature-rich command-line audio/video downloader    
+`wcp` - [custom] Copy from WSL to Windows host    
+`wcp` - [custom] Copy from WSL to Windows host    
+`uv_start` [custom] - Initializes a uv virtual env and syncs dependencies  
+
+---
+
+## Oh-my-ZSH Plugins  
+- `ccat/cless` - colorized cat+less  
+- `copyfile` - copy file contents to system clipboard  
+- `<C-o>` - copy cmdline contents to system clipboard  
+- Allows pressing `<C-z>` again to switch back to a background job.  
 
 
 ## Nvim
-`config_save` - Save local nvim config changes and copy to local cloned repo to be pushed up to repo
-`config_sync_alpha` - Push local nvim config changes up to alpha machine
-`config_update` - Update local nvim config with latest from repo
-`config_update_and_nvim_update` - Update local nvim config with latest from repo (replaces ~/.config/nvim and removes cache)
+`config_save` - Save local nvim config changes and copy to local cloned repo to be pushed up to repo  
+`config_sync_alpha` - Push local nvim config changes up to alpha machine  
+`local_config_save` - Update local nvim config with latest from repo  
+`local_config_update_and_nvim_update` - Update local nvim config with latest from repo (replaces ~/.config/nvim and removes cache)  
+`edit_nvim_conf` [custom] - open nvim in ~/.config/nvim/  
 `nv` - NVIM_APPNAME=nvim-lazy nvim  
 `nvim` - Neovim text editor  
 `nvim-custom` - [custom] NVIM_APPNAME="nvim-custom" nvim  
@@ -147,28 +175,6 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `pls` - ls with pretty output
 `rd` - rmdir  
 `tere` - cd + ls
-
-___YAZI__ 
-[Docs](https://yazi-rs.github.io/docs/quick-start/)  
-`ya` - (alias for yazi)  
-`yazi` - Blazing fast terminal file manager (Rust-based)  
-`yz` - (alias/variant for yazi)  
-
-<br />
-
-`.` - toggle hidden filevisibility  
-`:` - run shell command  
-`[` / `]` - tab switch  
-`<C-c>` - close tab  
-`a` - create a file (end with `/` for dir)  
-`f` - filter files  
-`space` - select file(s)  
-`t` - create new tab and 1/2/3/... to switch to specific tab  
-`Tab` - show file info  
-`z` - fuzzy find file  
-standard vim commands for movement/searching
-
-<br />
 
 ## Docker
 
@@ -477,18 +483,40 @@ __Other__
 
 `perlygrep`
 
+# YAZI  
+[Docs](https://yazi-rs.github.io/docs/quick-start/)  
+`ya` - (alias for yazi)  
+`yazi` - Blazing fast terminal file manager (Rust-based)  
+`yz` - (alias/variant for yazi)  
+
+<br />
+
+`.` - toggle hidden filevisibility  
+`:` - run shell command  
+`[` / `]` - tab switch  
+`<C-c>` - close tab  
+`a` - create a file (end with `/` for dir)  
+`f` - filter files  
+`space` - select file(s)  
+`t` - create new tab and 1/2/3/... to switch to specific tab  
+`Tab` - show file info  
+`z` - fuzzy find file  
+standard vim commands for movement/searching
+
+<br />
+
 ---
 
-## TMUX
+# TMUX
 
-### TMUX Configuration and Plugins
+## TMUX Configuration and Plugins
 - Enable TMUX plugins by install TPM: `https://github.com/tmux-plugins/tpm`
 - Reload config file: `tmux source ~/.tmux.conf`
 - Reload TMUX environment: `<C-i>`  _For re-loading Theme for example_
 - Custom Bind key I've set: `<C-t> R`  
 - Open cheat.sh: `<bind-key> S`  
 
-### TMUX Copy and Paste
+## TMUX Copy and Paste
 __Tmux search__
 - `<bind-key> [` - Enter copy mode 
   - `/` - Start search
@@ -507,7 +535,7 @@ __Neovim and Cli quick copy commands__
 - Tmux quick copy (from cli to system clipboard): `Mouse select + y (while selecting)`
 - Neovim copy (clipboard) => `Select (mouse/v) + y`
 
-### TMUX Sessions
+## TMUX Sessions
 - Open tmux as a named session: `tmux new -s <name>`  
 - To detach a tmux session: `<bind_key> D`  
 - View tmux sessions (from cli): `tmux ls`  
@@ -516,7 +544,7 @@ __Neovim and Cli quick copy commands__
 - Killing tmux sessions (from cli): `tmux kill-session -t 0 <name>` 
 __Where ‘0’ is your session id/name__
 
-### TMUX Windows  
+## TMUX Windows  
 - Rename Window: `<bind_key> ,`  
 - Create new Window: `<bind_key> c`  
 - Show all Windows: `<bind_key> S`  
@@ -524,7 +552,7 @@ __Where ‘0’ is your session id/name__
 - Switch between windows: `<bind_key> <number>`  
 - Close Window: `<bind_key> &` (or `exit` if all panes are closed)  
 
-### TMUX Panes
+## TMUX Panes
 - Split Windows Vertically: `<bind_key> |`  (with my conf I use `|` instead of `%`)  
 - Split Windows Horizontally: `<bind_key> _`  (with my conf I use `_` instead of `"`)  
 - Navigate subwindows (panes): `<bind_key> <arrow-key>`  
@@ -536,22 +564,14 @@ __Where ‘0’ is your session id/name__
 
 ---
 
-## Oh-my-ZSH Plugins  
-- `ccat/cless` - colorized cat+less  
-- `copyfile` - copy file contents to system clipboard  
-- `<C-o>` - copy cmdline contents to system clipboard  
-- Allows pressing `<C-z>` again to switch back to a background job.  
-
----
-
-## Vim
+# Vim
 There are loads of good vim cheat sheets out there and this isn't a substitution, but rather a list of common/handy ones I've found to be efficient on my workflow.  
 [Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)  
 [LeanXinY](https://learnxinyminutes.com/docs/vim/)  
 [vim.rtott](https://vim.rtorr.com/)  
 [DevHints-vim](https://devhints.io/vim)  
 
-### Vim General Commands
+## Vim General Commands
 - `ter[minal]` - Open terminal (may need to hit `i` to beging typing)  
 - `exit` / `<C-d>` then `<C-w> q` - to close terminal window  
 - `:verbose map Q` - see what is mapped to the `Q` key  
@@ -564,14 +584,14 @@ This key combination switches the terminal buffer from terminal-insert mode (whe
 You’ll notice the cursor behavior changes, and Vim’s command line becomes available (e.g., you can type : to enter commands).  
 Visual cue: In normal mode, the terminal buffer becomes “read-only” from Vim’s perspective, and you can’t type into the shell until you return to insert mode (e.g., by pressing i).  
 
-### Vim File Explorer (netrw)  
+## Vim File Explorer (netrw)  
 - `:Explore` - Explorer (opens file tree)  
 - `:Vex` - Vertical Explorer (opens file tree)  
 - `i` - Rotate betweeb views (3rd is tree mode)  
 - `v` - Open file in vertical split (opens to left by default unless `set splitright` is set  
 - `u` - Go up one level  
 
-### Vim File and Buffer Management
+## Vim File and Buffer Management
 _Finding Files_  
 - `:args **/*filename*.pl` - Search for file by partial name and file type recursively  
 - `<C-q>` - Adds :args results to Quickfix list (keybinding)  
@@ -655,7 +675,7 @@ _Managing Windows_
 - `hide`/`unhide` - Hide/Unhide a window (only 1)  
 - `:qa` - Quit All open windows (exits vim if on last tab)  
 
-### Vim Navigation
+## Vim Navigation
 _Moving along line_ 
 - `t{` - Move to next `{` and use `;` to see sebsequent match (and `,` for previous match)  
 - `e` - end of word  
@@ -682,7 +702,7 @@ _Markers_
 - `''` - Move to previous marker position  (thats two single quotes in succession, not a single double quote)  
 Note: Lowercase markers are local to a file and uppercase markers are global across all files. Meaning you can re-use `a` for different places in different files but `A` only refers to one place in a single file.  
 
-### Vim Searching and Replacing
+## Vim Searching and Replacing
 _Searching_  
 - `/` - Search (grep): type text and enter then `n`/`N` to iterate through matches  
 - `<C-q>` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)   
@@ -733,7 +753,7 @@ __Change multiple instances without multi-cursor__
 
 _(Can also use dgn to delete multiple references)_
 
-### Vim Editing and Text Manipulation
+## Vim Editing and Text Manipulation
 _SYDC (Selecting/Yanking/Deleting/Changing)_  
 - `gv` - Re-select last selected text  
 - `viw` - selects just the word.  
@@ -855,7 +875,7 @@ _Numbers_
 - `g<C-a>` - Increment Highlight Numbers in sequence (each matched item will increment one more than previous match).  
 - `g<C-x>` - Decrement Highlight Numbers in sequence (each matched item will increment one more than previous match).
 
-### Vim Macros and Automation
+## Vim Macros and Automation
 - `q<letter>` - start recording a macro  
 - `q` - stop recording a macro  
 - `@<letter>` - execute macro (once)  
@@ -883,7 +903,7 @@ _Option 2_
 - Enter Visual-Block mode (`<C-b>` for me)
 - Go down until last line and press `I`, then press `#` (or other comment character), then `Esc`.
 
-### Vim Custom Key Bindings
+## Vim Custom Key Bindings
 _Bare Vim (common settings to apply on a ad-hoc plain vim editor)_
 ```vim
 colo slate  
@@ -912,12 +932,12 @@ _Modes_
 - `<S-v>` - Visual Line Mode  
 - `<S-b>` - (custom) Visual Block Mode  (default: `<C-S-v>` or `<C-q>`)  
 
-### Custom Neovim Keybinds  
+## Custom Neovim Keybinds  
 These are my current keybinds I'm using: [Keybinds](https://github.com/bobby-valenzuela/Dev-Environment/blob/main/config/.config/nvim/lua/config/keymaps.lua)  
 
 <br />
 
-### Vim Troubleshooting  
+## Vim Troubleshooting  
 - `:highlight Delimiter` - See what styles apply to the "Delimiter" highlightgroup  
 - `:highlight Delimiter` - See what styles apply to the "Delimiter" highlightgroup (verbose)  
 - `:echo synIDattr(synID(line("."), col("."), 1), "name")` - See highlight group applying to item under cursor  
@@ -927,11 +947,11 @@ _Note: `<C-...>` should be taken to mean `Ctrl+`. All other keys are to be enter
 
 ---
 
-## LazyVim
+# LazyVim
 
 https://www.lazyvim.org/keymaps
 
-### LazyVim General Commands
+## LazyVim General Commands
 - `<leader> /` - grep (from cwd) [🔌]  
 - `<leader> <space>` - file search (from cwd)  [🔌telescope]  
 - `<leader> f t` - Open terminal (root) [🔌]   
@@ -953,29 +973,29 @@ _Commandline mode_
 - `<C-r>"` - Paste from unamed register (anything yanked). Also works in insert mode  
 - `<C-f>` - View command history  
 
-### LazyVim Commenting  
+## LazyVim Commenting  
 - `gcc` - comment out current line [🔌 vim-commentary]  
 - `gc` - comment out a select range of lines [🔌 vim-commentary]  
 - `gcgc` - uncomment adjacent lines [🔌 vim-commentary]  
 
-### LazyVim Surrounding  
+## LazyVim Surrounding  
 - `faiw"` - Surround inner word with " (press fa fast) [🔌 mini-surround]   
 - `fd"` - Remove surrounding quotes (press fd fast) [🔌 mini-surround]  
 - `fr"'` - replace surrounding double quotes with single-quotes (press fr fast) [🔌 mini-surround]  
 
-### LazyVim LSP-Related Commands  
+## LazyVim LSP-Related Commands  
 - `<C-Space>` - (in insert mode) see possible parameters.  
 - `K` - get pop-up with code info [🔌]   
 - `gd` - 'Go to Definition' -> Find where a function/sub is defined when highlighting one [🔌]   
 - `gr` - 'Go to References' -> Find where a functions/sub is referenced when highlighting one [🔌]   
 
-### LazyVim Searching  
+## LazyVim Searching  
 - `s {first_char}{second_char}` - search forward to matches and show labels + enter the label of the match you want to go to [🔌leap]  
 - `S {first_char}{second_char}` - search backward to matches and show labels + enter the label of the match you want to go to [🔌leap]  
 - `gs {first_char}{second_char}` - search _forward_ to matches and show labels + enter the label of the match you want to go to [🔌leap]. _Global search (across windows splits)_  
 - `gS {first_char}{second_char}` - search _backward_ to matches and show labels enter the label of the match you want to go to [🔌leap]. _Global search (across windows splits)_  
 
-### LazyVim Harpoon  
+## LazyVim Harpoon  
 - `:wall` - Write to all open buffers  
 - `<leader> H` - Add file to harpoon list [🔌]   
 - `<leader> h` - View harpoon quick menu [🔌]   
@@ -985,7 +1005,7 @@ _Commandline mode_
 - `[i` - Go to the top of code block (via mini-indentscope) [🔌 Identscope]  
 - `]i` - Go to the bottom of code block (via mini-indentscope) [🔌 Identscope]  
 
-### LazyVim Windows  
+## LazyVim Windows  
 - `<leader> w w` - switch windows [Lazyvim]  
 - `<leader> w q` - close window [Lazyvim]  
 - `<leader> w v` - verical split window [Lazyvim]  
@@ -997,9 +1017,149 @@ _Commandline mode_
 
 
 
+# Neovim Keybindings
 
+## General Information
+- **ggh** — SSH connection manager
 
+## Non-Leader Custom Motions
 
+| Mode | Key              | Action                                 | Description                                  |
+|------|------------------|----------------------------------------|----------------------------------------------|
+| n    | `<C-d>`          | `22<C-e>`                              | Scroll down 22 lines                         |
+| n    | `<C-u>`          | `22<C-y>`                              | Scroll up 22 lines                           |
+| n    | `<C-e>`          | `4<C-e>`                               | Scroll down faster (4×)                      |
+| n    | `<C-y>`          | `4<C-y>`                               | Scroll up faster (4×)                        |
+| n    | `E!`             | `:bufdo e!`                            | Reload (discard changes) all buffers         |
+| n    | `<C-_>`          | `:split \| resize 15 \| ... terminal`  | Open small terminal below                    |
+| n    | `<Esc>`          | `:nohlsearch<CR><Esc>`                 | Clear search highlight + normal Esc          |
+| n    | `<C-b>`          | `<C-v>`                                | Enter block-wise visual mode                 |
+| n    | `<F12>`          | `:cn`                                  | Next quickfix item                           |
+| n    | `<F11>`          | `:cp`                                  | Previous quickfix item                       |
+| v    | `>`              | `>gv`                                  | Indent + keep visual selection               |
+| v    | `<`              | `<gv`                                  | Outdent + keep visual selection              |
 
+## Leader-based Custom Motions
 
+| Key              | Action / Command                               | Description                                          |
+|------------------|------------------------------------------------|------------------------------------------------------|
+| `<leader>ld`     | `:set nonumber norelativenumber`               | Disable line numbers                                 |
+| `<leader>le`     | `:set number relativenumber`                   | Enable line + relative numbers                       |
+| `<leader>ll`     | Toggle number + relativenumber                 | Toggle line numbers (both modes)                     |
+| `<leader>h`      | `:nohlsearch<CR><esc>`                         | Clear search highlight                               |
+| `<leader>rm`     | `:delm a-zA-Z0-9`                              | Remove all marks                                     |
+| `<leader>tb`     | `:highlight Normal guibg=NONE ctermbg=NONE`    | Set transparent background                           |
+| `<leader><down><down>` | `20<C-e>`                                | Jump down 20 lines                                   |
+| `<leader><up><up>`     | `20<C-y>`                                | Jump up 20 lines                                     |
+| `<leader><leader>` | `:Neotree toggle`                            | Toggle Neo-tree file explorer                        |
 
+### Change / Replace Word Variants
+
+| Key       | Action                                          | Description                                          |
+|-----------|-------------------------------------------------|------------------------------------------------------|
+| `<leader>cw`  | `*Ncgn`                                     | Change next occurrence of word under cursor          |
+| `<leader>cW`  | `* \| :%s::`                                | Replace all occurrences of word (whole doc)          |
+| `<leader>aw`  | `yiw \| :%s:\V<C-r>":<C-r>"`               | Append to all occurrences of word                    |
+| `<leader>cy`  | `:%s:\V<C-r>":`                             | Replace all with last yanked text                    |
+| `<leader>ay`  | `:%s:\V<C-r>":<C-r>"`                       | Append last yanked text to all matches               |
+| `<leader>fw`  | `yiw \| :vimgrep ... \| :cope`              | Find word under cursor → quickfix list               |
+| `<leader>fW`  | Telescope `grep_string` on `<cword>`            | Telescope: grep string (word under cursor)           |
+| `<leader>fs`  | Telescope `grep_string` `"sub " .. <cword>`     | Telescope: search for `sub <word>`                   |
+
+## Telescope
+
+| Key       | Action                             | Description                             |
+|-----------|------------------------------------|-----------------------------------------|
+| `<leader>ff` | `find_files`                    | Fuzzy find files                        |
+| `<leader>fg` | `live_grep`                     | Live grep (project-wide)                |
+| `<leader>fb` | `buffers`                       | Fuzzy find open buffers                 |
+| `<leader>fh` | `help_tags`                     | Search help tags                        |
+| `<leader>fc` | `command_history`               | Search command-line history             |
+
+## Harpoon
+
+| Key       | Action                                  | Description                          |
+|-----------|-----------------------------------------|--------------------------------------|
+| `<leader>m`  | `harpoon.ui:toggle_quick_menu`       | Toggle Harpoon quick menu            |
+| `<leader>M`  | Telescope Harpoon menu                  | Open Harpoon in Telescope            |
+| `<leader>a`  | `harpoon:list():add()`               | Add current file to Harpoon          |
+| `<leader>N`  | `harpoon:list():prev()`              | Previous Harpoon file                |
+| `<leader>n`  | `harpoon:list():next()`              | Next Harpoon file                    |
+| `<leader>1` – `<leader>9` | `select(1..9)`      | Jump to Harpoon slot 1–9             |
+
+## Git (General + LazyGit)
+
+| Key       | Action                          | Description                       |
+|-----------|---------------------------------|-----------------------------------|
+| `<leader>gu` | `git reset --hard HEAD~1`    | Undo last commit (hard)           |
+| `<leader>ga` | `git stash save`             | Stash current changes             |
+| `<leader>gg` | `:LazyGitCurrentFile`        | Open LazyGit                      |
+
+## Gitsigns (buffer-local – usually in plugin file)
+
+Common keys (often buffer-local):
+
+- `]h` / `[h` — Next / Prev hunk
+- `]H` / `[H` — Last / First hunk
+- `<leader>ghs` — Stage hunk
+- `<leader>ghr` — Reset hunk
+- `<leader>ghu` — Undo stage hunk
+- `<leader>ghp` — Preview hunk inline
+- `<leader>ghS` — Stage whole buffer
+- `<leader>ghR` — Reset whole buffer
+- `<leader>ghb` — Blame line (full)
+- `<leader>ghd` — Diff this
+- `ih` (operator-pending) — Select hunk textobject
+
+## Vim-Fugitive
+
+| Key       | Action                  | Description                    |
+|-----------|-------------------------|--------------------------------|
+| `<leader>gs` | `:Git`               | Git status                     |
+| `<leader>gc` | `:Git commit`        | Git commit                     |
+| `<leader>gb` | `:Git blame`         | Git blame                      |
+| `<leader>gd` | `:Gdiffsplit`        | Git diff split                 |
+| `<leader>go` | `:GBrowse`           | Open file in remote (GitHub)   |
+| `<leader>gl` | `:Gclog`             | Git commit log (current file)  |
+
+## Indent
+
+| Key          | Action                            | Description                     |
+|--------------|-----------------------------------|---------------------------------|
+| `<leader>ie` | `Snacks.indent.enable()`       | Enable Snacks indent            |
+| `<leader>id` | `Snacks.indent.disable()`      | Disable Snacks indent           |
+| `<leader>iee`| `:IBLEnable`                   | Enable indent-blankline         |
+| `<leader>idd`| `:IBLDisable`                  | Disable indent-blankline        |
+
+## LSP
+
+| Key       | Action                            | Description                             |
+|-----------|-----------------------------------|-----------------------------------------|
+| `gd`      | `definition`                      | Go to definition                        |
+| `gD`      | `declaration`                     | Go to declaration                       |
+| `gr`      | `references`                      | Find references                         |
+| `gi`      | `implementation`                  | Go to implementation                    |
+| `K`       | `hover`                           | Hover documentation                     |
+| `<C-k>`   | `signature_help`                  | Signature help                          |
+| `<leader>rn` | `rename`                       | Rename symbol                           |
+| `<leader>ca` | `code_action`                  | Code actions                            |
+| `<leader>lf` | `format`                       | Format buffer                           |
+| `<leader>lr` | `:LspRestart`                  | Restart LSP                             |
+| `<leader>li` | `:LspInfo`                     | LSP information                         |
+| `]d` / `[d`  | `goto_next` / `goto_prev`      | Next / Prev diagnostic                  |
+| `<leader>dl` | `open_float`                   | Show diagnostic float                   |
+| `<leader>dd` / `<leader>de` | disable/enable diagnostics (buffer) |
+| `<leader>l`  | `lint.try_lint()`              | Trigger linting (current file)          |
+
+## Trouble
+
+| Key          | Action                                          | Description                              |
+|--------------|-------------------------------------------------|------------------------------------------|
+| `<leader>tT` | `diagnostics toggle`                         | Toggle Trouble (all diagnostics)         |
+| `<leader>tt` | `diagnostics toggle filter.buf=0`            | Toggle Trouble (current buffer only)     |
+| `<leader>tr` | `lsp_references toggle`                      | Toggle references                        |
+| `<leader>td` | `lsp_definitions toggle`                     | Toggle definitions                       |
+| `<leader>tq` | `quickfix toggle`                            | Toggle quickfix view                     |
+| `<leader>ts` | `symbols toggle`                             | Toggle document symbols                  |
+| `<leader>tc` | `close`                                      | Close Trouble window                     |
+| `<leader>tn` / `<leader>tp` | next / previous item          | Navigate Trouble list                    |

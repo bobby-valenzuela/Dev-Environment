@@ -174,7 +174,7 @@ if [ "$1" != "configonly" ]; then
         $SUDO apt install crossbuild-essential-arm64 -y
         $SUDO apt install clang -y
 
-        echo "[+] Installing various dependencies (fragile)..." # Packages which not not be found in older package repos
+        echo "[+] Installing various dependencies (fragile)..." # Packages which may not be found in older package repos
         $SUDO apt install fzf -y
         $SUDO apt install ripgrep -y
         $SUDO apt install unixodbc-dev -y
@@ -219,17 +219,15 @@ if [ "$1" != "configonly" ]; then
     fi
 
 
+    # ────────────────────────────────────────────────
+    #         Distro-agnostic tool installs
+    # ──────────────────────────────────────────────── 
+
     echo "# ────────────────────────────────────────────────"
     echo "#        PACKAGE INSTALLATION (Part II: Distro-agnostic Tools not via package manager)"
     echo "# ────────────────────────────────────────────────"
 
-
-    # ────────────────────────────────────────────────
-    #         Distro-agnostic tool installs
-    # ──────────────────────────────────────────────── 
-    echo -e "\n[+] ______ Installing Distro-agnostic tool installs _______"            # Software that isn't installed via a distro's package manager (may contain fixed versions). The order below is important.
-    
-
+    # Software that isn't installed via a distro's package manager (may contain fixed versions). The order below is important.
     echo "[+] Installing prerequisites!"
 
     echo "[+] Enabling docker service..."
@@ -323,7 +321,6 @@ if [ "$1" != "configonly" ]; then
 
     if [ "$DISTRO_FAMILY" = "debian" ]; then
 
-
         # echo "[+] Installing mpv..."
         # $SUDO  curl --output-dir /etc/apt/trusted.gpg.d -O https://apt.fruit.je/fruit.gpg
         # ADDITION="deb http://apt.fruit.je/ubuntu $(cat /etc/os-release | grep 'VERSION_CODENAME' | awk -F= '{print $2}' | xargs) mpv"
@@ -339,7 +336,6 @@ if [ "$1" != "configonly" ]; then
         # or for latest stable release...
         # sudo ./llvm.sh all
         
-        echo "[+] Installing Yazi..."
         $SUDO  apt install ffmpeg -y 
         $SUDO  apt install 7zip  -y
         $SUDO  apt install jq  -y
@@ -350,6 +346,7 @@ if [ "$1" != "configonly" ]; then
         $SUDO  apt install zoxide  -y
         $SUDO  apt install imagemagick -y
         
+        echo "[+] Installing Yazi..."
         git clone https://github.com/sxyazi/yazi.git
         cd yazi
         cargo build --release --locked
@@ -362,7 +359,9 @@ if [ "$1" != "configonly" ]; then
         $SUDO apt-get install automake -y
         $SUDO apt install libevent-dev -y
         $SUDO apt install bison -y
-        $SUDO apt install libncurses5-dev libncursesw5-dev -y
+        $SUDO apt install libncurses5-dev 
+        $SUDO apt install libncursesw5-dev -y
+
         git clone https://github.com/tmux/tmux.git
         cd tmux
         sh autogen.sh
@@ -372,7 +371,10 @@ if [ "$1" != "configonly" ]; then
 
         echo "[+] Installing Spotify Player..."    
         $SUDO apt-get install autotools-dev -y
-        $SUDO apt install pulseaudio pulseaudio-module-bluetooth pulseaudio-utils pavucontrol -y
+        $SUDO apt install pulseaudio -y
+        $SUDO apt install pulseaudio-module-bluetooth -y
+        $SUDO apt install pulseaudio-utils -y
+        $SUDO apt install pavucontrol -y
         $SUDO apt install libsixel-bin -y  # sixel encoder/decoder
         cargo install spotify_player --no-default-features --features pulseaudio-backend,media-control,sixel
 
@@ -520,6 +522,8 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     
     fi
 
+    echo "[+] Configuration files copied!"
+
 
     printf "[+] Setting default shell...\n\n"
 
@@ -531,12 +535,12 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
         chsh -s $(which zsh)
         printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
         cp -v ./config/.zshrc   $HOME/
+        echo "→ You may need to log out/in or run: source ~/.zshrc (or ~/.bashrc)"
+        echo "→ Some tools require fonts (Nerd Fonts) or extra setup"
         zsh
+    else
+
     fi
-
-
-
-    echo "[+] Configuration files copied!"
 
 fi
 
@@ -547,8 +551,6 @@ echo "#        FINISHED! "
 echo "# ────────────────────────────────────────────────"
 printf "\n\n\n"
 
-echo "→ You may need to log out/in or run: source ~/.zshrc (or ~/.bashrc)"
-echo "→ Some tools require fonts (Nerd Fonts) or extra setup"
 
 
 
