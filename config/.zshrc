@@ -102,7 +102,7 @@ alias ch="$PATH_DIR/cht.sh"
 if [[ -s $HOME/.claude/.credentials.json ]]; then
     CLAUDE_TOKEN=$(jq '.[] | .accessToken' $HOME/.claude/.credentials.json 2> /dev/null )
     if [[ ! -z "${CLAUDE_TOKEN}" ]]; then
-        export ANTHROPIC_API_KEY=${CLAUDE_TOKEN}
+        export ANTHROPIC_API_KEY=${CLAUDE_TOKEN//\"/}
     fi
 fi
 
