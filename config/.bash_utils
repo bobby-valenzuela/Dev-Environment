@@ -375,9 +375,15 @@ colorme() {
     pygmentize -f terminal "$@"
 }
 
-ubuntu_container(){
-    # docker run -it --rm ubuntu:24.04 bash
-    docker run -it --rm ubuntu:24.04 bash -c "apt update && apt install -y sudo wget git curl"
+docker_force_old_version(){
+    export DOCKER_API_VERSION=1.43
+}
+
+# Spin up quick ubuntu container
+dockbuntu(){
+    # force non-newest docker version as api doesn't support past 1.43 as of 3/26
+    docker_force_old_version
+    docker run -it --rm ubuntu:24.04 bash -c "apt update && apt install -y sudo wget git curl && exec bash"
 }
 
 # fedora_container(){
