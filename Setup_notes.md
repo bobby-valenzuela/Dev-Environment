@@ -1,8 +1,28 @@
-### Table of Contents
 
-- [Setup](#setup)
-- [Trouble Shooting (WSL)](#trouble-shooting-wsl)
-
+# Table of Contents
+
+- [Setup](#setup)
+  - [Prerequisites](#prerequisites)
+  - [Reference: Included Programs](#reference-included-programs)
+  - [Included in Common Programs list but could benefit from a later version](#included-in-common-programs-list-but-could-benefit-from-a-later-version)
+  - [Reference: Handled by install.sh script and/or config files](#reference-handled-by-installsh-script-andor-config-files)
+    - [ZSH](#zsh)
+    - [VIM](#vim)
+- [System Compatibility](#system-compatability)
+  - [Enabling Systemd](#enabling-systemd)
+  - [Running Neovim on older machines](#running-neovim-on-older-machines)
+  - [Updating WSL, Ubuntu distro, and GLIBC](#updating-wsl-ubuntu-distro-and-glibc)
+- [Troubleshooting](#troubleshooting)
+  - [Troubleshooting WSL](#troubleshooting-wsl)
+    - [Display Issues](#display-issues)
+  - [Troubleshooting Display/Graphics Issues](#troubleshooting-displaygraphics-issues)
+- [Misc Neovim configurations and installs](#misc-neovim-configurations-and-installs)
+  - [Install perl language server](#install-perl-language-server)
+  - [Perl syntax highlighting](#perl-syntax-highlighting)
+  - [Dadbod DB setup](#dadbod-db-setup)
+  - [Kickstart notes](#kickstart-notes)
+- [Shell tools](#shell-tools)
+  - [Harlequin SQL](#harlequin-sql)
 <br />
 
 # Setup
@@ -21,101 +41,13 @@ Another font thats worth installing as it comes up in some packages [Noto Font](
 
 <br />
 
-## Common Programs
-
-__Essential__  
-```bash
-sudo apt update && sudo apt install python3 perl wget tar make gcc  unzip git git-all xclip  build-essential curl locate cmake libstdc++6 vim-gtk3 libc6-dev libc6-dev-i386 nasm binutils libc6 bc coreutils cargo pandoc docker.io docker-compose-plugin nodejs npm -y
-```
+## Reference: Included Programs
 
 <br />
 
-__Extras__  
-Not essential per se, but essentials for my workflow,enchancements, and customizations    
-```bash
-sudo apt update && sudo apt install fzf ripgrep zsh tmux p7zip-full jq python3-pygments sshfs sshpass xsel lua5.3 fonts-powerline bash gawk playerctl libasound2-dev pkg-config mesa-utils vulkan-tools -y
-```
 
-<br />
-
-__Non-repo installs__  
-Software that isn't installed via a distro's package manager (may contain fixed versions). The order below is important.  
-```bash
-echo "[+] Enabling docker service..."
-sudo systemctl enable docker
-sudo systemctl start docker
-
-echo "[+] Installing Rust/Rustup..."
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-rustup update
-
-echo "[+] Installing uv python package manager..."
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-echo "[+] Installing Go..."
-rm -rf /usr/local/go
-wget https://go.dev/dl/go1.24.4.linux-amd64.tar.gz -O go1.24.4.linux-amd64.tar.gz
-tar -xvf go1.24.4.linux-amd64.tar.gz
-sudo mv go /usr/local/
-rm -rf go1.24.4.linux-amd64.tar.gz
-
-echo "[+] Installing ggh ssh manager..."
-curl https://raw.githubusercontent.com/byawitz/ggh/master/install/unix.sh | sh
-
-echo "[+] Installing tere..."
-cargo install tere
-
-echo "[+] Installing csvlens"
-cargo install csvlens
-
-echo "[+] Installing Dust..."
-cargo install du-dust
-
-echo "[+] Installing YouTube-downloader..."
-sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -O /usr/local/bin/yt-dlp; sudo chmod +x /usr/local/bin/yt-dlp
-
-echo "[+] Installing Tufw (UFW GUI)..."
-sudo wget https://github.com/peltho/tufw/releases/download/v0.2.4/tufw_0.2.4_linux_amd64.deb -O ./tufw_0.2.4_linux_amd64.deb
-sudo apt install ./tufw_0.2.4_linux_amd64.deb -y
-sudo rm ./tufw_0.2.4_linux_amd64.deb
-
-echo "[+] Installing eget..."
-go install github.com/zyedidia/eget@latest
-
-echo "[+] Installing lazygit..."
-go install github.com/jesseduffield/lazygit@latest
-
-echo "[+] Installing lazydocker..."
-curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
-
-echo "[+] Installing Posting via uv..."
-uv tool install --python 3.13 posting
-
-echo "[+] Installing mpv..."
-sudo curl --output-dir /etc/apt/trusted.gpg.d -O https://apt.fruit.je/fruit.gpg
-ADDITION="deb http://apt.fruit.je/ubuntu $(cat /etc/os-release | grep 'VERSION_CODENAME' | awk -F= '{print $2}' | xargs) mpv"
-echo $ADDITION | sudo tee -a /etc/apt/sources.list.d/fruit.list
-sudo apt update
-sudo apt install mpv -y
-
-echo "[+] Installing llvm and related tools (clangd, cmake, etc)..."
-wget https://apt.llvm.org/llvm.sh
-chmod +x llvm.sh
-sudo ./llvm.sh 20 all
-# or for latest stable release...
-# sudo ./llvm.sh all
-
-echo "[+] Installing Yazi..."
-sudo apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
-
-git clone https://github.com/sxyazi/yazi.git
-cd yazi
-cargo build --release --locked
-sudo mv target/release/yazi target/release/ya /usr/local/bin/
-
-```
-
-Info on these installs  
+Note: You'll find all these programs to install in the install.sh file so if you rin the scripts in the README.md you shoudln't have to manualy install any of these.
+However, I've added these to highlight some specific ones that are included and add some some extra info/documentation on some programs I've included.
 - [uv](https://docs.astral.sh/)
 - [go](https://go.dev/doc/install)
 - [ggh](https://github.com/byawitz/ggh)
@@ -136,21 +68,16 @@ Info on these installs
 
 
 
-__Installing vulkan drivers (Graphics card drivers)__
-
-```bash
-sudo apt update
-sudo apt install mesa-utils vulkan-tools
-```
-
-<br />
-
-## Included in Common Programs list but could benefit from a later version
+**Included in Common Programs list but could benefit from a later version**  
 Some packages are best to download from source and compile to make sure we get the latest version:  
 - [Install Python](https://www.python.org/downloads/source/)  
 - [Install Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)    
 - [Install fzf](https://github.com/junegunn/fzf)
+- [Install tmux: Terminal MultiPlexer](https://github.com/tmux/tmux/wiki/Installing)
+- [Install tmux plugin manager](https://github.com/tmux-plugins/tpm)
 - [Install powerline fonts](https://github.com/powerline/fonts)
+- [Playerctl](https://github.com/altdesktop/playerctl)
+- [Pandoc](https://github.com/jgm/pandoc)
 - [Install node version manager (nvm)](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)  ([Alternate installation methods](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04))
   ```bash
     # NVM
@@ -160,28 +87,19 @@ Some packages are best to download from source and compile to make sure we get t
     nvm list              # View installed versions
     nvm use v14.10.0      # Use specific version
    ```
-
-<br />
-
-## Included in Common Programs list but adding here for reference
-__TMUX__
-- [Install tmux: Terminal MultiPlexer](https://github.com/tmux/tmux/wiki/Installing)
-- [Install tmux plugin manager](https://github.com/tmux-plugins/tpm)
   - One cmd: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm` 
 - [Install Catppuccin Theme](https://github.com/catppuccin/tmux)
   - Already installed if tpm is installed. 
   - Install all plugins loaded with `<prefix>+I` in a tmux session.
   - Replace ~/.tmux.conf with saved one and source with `tmux source-file ~/.tmux.conf`
-- [Playerctl](https://github.com/altdesktop/playerctl)
-- [Pandoc](https://github.com/jgm/pandoc)
 
 <br />
 
-
 <br />
 
-## Handled by install.sh script and/or config files
+## Reference: Handled by install.sh script and/or config files
 
+Again, just adding these for reference to klnow what was installed and how to usually go about setting these things up.
 ### ZSH 
 - [Install ZSH with OhMyZsh](https://ohmyz.sh/) 
   - ⚠️Replace ~/.zshrc with one saved.
@@ -212,27 +130,9 @@ __TMUX__
 
 <br />
 
-## WSL Troubleshooting
-
-### Display Issues
-I've been using this without issue in WSL, butin case you're having issues, it could be to do with your `DISPLAY1 environment variable.
-If you still get the “cannot open display” error, set the DISPLAY variable as shown below.
-```bash
-echo "export DISPLAY=localhost:0.0" >> ~/.bashrc
-```
-Note: IP is the local workstation’s IP where you want the GUI application to be displayed.  
-
-__Helpful Related Links (WSL + GUI)__
-- [Link 0](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
-- [Link 1](https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj)
-- [Link 2](https://wiki.ubuntu.com/WSL#Running_Graphical_Applications)
-- [Link 3](https://wiki.iihe.ac.be/Use_X11_forwarding_with_WSL)
-
 <br />
 
-<br />
-
-<br />
+## System Compatability
 
 ### Enabling Systemd  
 Edit /etc/wsl.conf in your WSL distribution:
@@ -247,8 +147,23 @@ systemd=true
 Verify systemd is running:
 `systemctl --user status dbus`
 
+<br />
 
-## Updating WSL, Ubuntu distro, and GLIC
+### Running Neovim on older machines  
+https://mihai.fm/running-neovim-on-older-linux-boxes/  
+https://stackoverflow.com/questions/46534957/configure-error-these-critical-programs-are-missing-or-too-old-gcc-make-w/62252633#62252633  
+
+Force system to look at a specific GLIBC:  
+```bash
+patchelf --set-interpreter /home/ubuntu/glibc/lib/ld-linux-x86-64.so.2 --set-rpath /home/ubuntu/glibc/lib:/usr/lib64 ./nvim-linux64/bin/nvim
+```
+
+
+This is a very common trick to make a prebuilt Linux binary (like the official nvim-linux64 tarball from GitHub releases) run on a system with an older glibc version than what Neovim was compiled against.
+
+<br />
+
+### Updating WSL, Ubuntu distro, and GLIC
 Updating your ubuntu distro in WSL (in case its like < 24.0) and GLIBC  
 If you're on an older version of ubuntu, it may use an older version of GLIBC like 2.31. Programs like yazi (ya package manager) and Neovim (particularly it's LSP features) require a newer GLIBC. Since manually updating GLIBC isn't recomended we need to update the distro to get the latest GLIBC for our system.  
 
@@ -322,20 +237,52 @@ wsl --shutdown
 
 <br />
 
-<br />
+
+
+# Troubleshooting
+
+## Troubleshooting WSL
+
+### Display Issues
+I've been using this without issue in WSL, butin case you're having issues, it could be to do with your `DISPLAY1 environment variable.
+If you still get the “cannot open display” error, set the DISPLAY variable as shown below.
+```bash
+echo "export DISPLAY=localhost:0.0" >> ~/.bashrc
+```
+Note: IP is the local workstation’s IP where you want the GUI application to be displayed.  
+
+__Helpful Related Links (WSL + GUI)__
+- [Link 0](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
+- [Link 1](https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj)
+- [Link 2](https://wiki.ubuntu.com/WSL#Running_Graphical_Applications)
+- [Link 3](https://wiki.iihe.ac.be/Use_X11_forwarding_with_WSL)
+
+
+
+## Troubleshooting Display/Graphics Issues
+
+
+__Installing vulkan drivers (Graphics card drivers)__
+
+```bash
+sudo apt update
+sudo apt install mesa-utils vulkan-tools
+```
 
 <br />
 
 
 
+---
 
 
 
-# OTHER & MISC.
+
+# Misc Neovim configurations and installs
 
 <br />
 
-### INSTALL PERL LANGUAGE SERVER ###
+## Install perl language server
 
 General Guide: https://climatechangechat.com/setting_up_lsp_nvim-lspconfig_and_perl_in_neovim.html#basic-setup-get-a-perl-language-server-up-and-running-with-neovim
 
@@ -357,7 +304,7 @@ lspconfig.perlpls.setup({})
 
 <br />
 
-### PERL SYNTAX HIGHLIGHTING ###
+## Perl syntax highlighting ###
 
 Install Treesitter-perl: https://metacpan.org/pod/Text::Treesitter
 
@@ -387,37 +334,9 @@ return {
 ---
 
 
-__Harlequin SQL__
+## __Dadbod DB setup__
 
-[Harlequin](https://github.com/tconbeer/harlequin)  
-- `F2` - focus on query editor  
-- `F5` Focus on the Results Viewer.  
-- `F6` Focus on the Data Catalog.  
-- `F8` Show the Query History Viewer.  
-- `F9`, `ctrl+b` Toggle the sidebar.  
-- `F10` Toggle full screen mode for the current widget.  
-- `ctrl+e` Export the returned data to a CSV, Parquet, or JSON file.  
-- `ctrl+r` Refresh the Data Catalog.  
-- `ctrl+enter`, `ctrl+j` Run the query  
-- `ctrl+s` Save the contents of the Query Editor to a file.  
-- `ctrl+n` Create a new buffer (editor tab).  
-- `ctrl+w` Close the current buffer (editor tab).  
-- `ctrl+k` View the next buffer (editor tab).  
-- `ctrl+/`, `ctrl+\_` Toggle comments on selected line(s).  
-- MySQL Connection: `harlequin -a mysql -h server.com -p 3306 -U user --password pass --theme tokyo-night`  
-- SQL Server: `harlequin -a odbc 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:server.com,1433;Database=mydb;Uid=user;Pwd=pass;Encrypt=yes;TrustServerCertificate=yes;Connection Timeout=30;' --theme tokyo-night`  
-
-Initialize project, Install harlequin, and add adapters
-```bash
-uv init
-uv tool install harlequin
-uv tool install 'harlequin[postgres,mysql,s3,odbc]'
-sudo apt install unixodbc -y # ODBC
-```
-
-<br />
-
-__Dadbod DB setup__
+A neovim plugin to run SQL  
 - Install MySql
  ```bash
 sudo apt install mysql-server
@@ -462,7 +381,7 @@ connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:{SERVER},
 
 <br />
 
-__Kickstart notes__  
+## Kickstart notes  
 https://github.com/bobby-valenzuela/kickstart.nvim.git  
 `git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim-kickstart`  
 When you run Neovim using nvim-kickstart alias it will use the alternative config directory and the matching local directory ~/.local/share/nvim-kickstart. You can apply this approach to any Neovim distribution that you would like to try out.  
@@ -470,9 +389,41 @@ When you run Neovim using nvim-kickstart alias it will use the alternative confi
 
 <br />
 
-__Running Neovim on older machines__  
-https://mihai.fm/running-neovim-on-older-linux-boxes/  
-https://stackoverflow.com/questions/46534957/configure-error-these-critical-programs-are-missing-or-too-old-gcc-make-w/62252633#62252633  
+
+# Shell tools  
 
 
-patchelf --set-interpreter /home/ubuntu/glibc/lib/ld-linux-x86-64.so.2 --set-rpath /home/ubuntu/glibc/lib:/usr/lib64 ./nvim-linux64/bin/nvim
+## Harlequin SQL  
+
+Though I don't currently have it installed, harlequin is a great TUI for executing SQL queries.  
+
+[Harlequin](https://github.com/tconbeer/harlequin)  
+- `F2` - focus on query editor  
+- `F5` Focus on the Results Viewer.  
+- `F6` Focus on the Data Catalog.  
+- `F8` Show the Query History Viewer.  
+- `F9`, `ctrl+b` Toggle the sidebar.  
+- `F10` Toggle full screen mode for the current widget.  
+- `ctrl+e` Export the returned data to a CSV, Parquet, or JSON file.  
+- `ctrl+r` Refresh the Data Catalog.  
+- `ctrl+enter`, `ctrl+j` Run the query  
+- `ctrl+s` Save the contents of the Query Editor to a file.  
+- `ctrl+n` Create a new buffer (editor tab).  
+- `ctrl+w` Close the current buffer (editor tab).  
+- `ctrl+k` View the next buffer (editor tab).  
+- `ctrl+/`, `ctrl+\_` Toggle comments on selected line(s).  
+- MySQL Connection: `harlequin -a mysql -h server.com -p 3306 -U user --password pass --theme tokyo-night`  
+- SQL Server: `harlequin -a odbc 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:server.com,1433;Database=mydb;Uid=user;Pwd=pass;Encrypt=yes;TrustServerCertificate=yes;Connection Timeout=30;' --theme tokyo-night`  
+
+Initialize project, Install harlequin, and add adapters
+```bash
+uv init
+uv tool install harlequin
+uv tool install 'harlequin[postgres,mysql,s3,odbc]'
+sudo apt install unixodbc -y # ODBC
+```
+
+<br />
+
+
+
