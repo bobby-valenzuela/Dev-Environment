@@ -160,7 +160,7 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 
 ## Git  
 
-## Custom  
+### Custom  
 `git_apply_stash_by_name`  
 `git_merge_changes_from_stash`  
 `git_fixconflict`  
@@ -392,10 +392,10 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 
 
 ## Nvim  
-`config_save` - Save local nvim config changes and copy to local cloned repo to be pushed up to repo  
 `config_sync_alpha` - Push local nvim config changes up to alpha machine  
 `local_config_save` - Update local nvim config with latest from repo  
-`local_config_update_and_nvim_update` - Update local nvim config with latest from repo (replaces ~/.config/nvim and removes cache)  
+`local_config_update` - Update local config files with latest from repo (doesn't replace ~/.config/nvim and keeps cache)  
+`local_config_update_and_nvim_update` - Update local config files and nvim config with latest from repo (replaces ~/.config/nvim and removes cache)  
 `edit_nvim_conf` [custom] - open nvim in ~/.config/nvim/  
 `nv` - NVIM_APPNAME=nvim-lazy nvim  
 `nvim` - Neovim text editor  
@@ -487,13 +487,13 @@ repo synchronization tool
 - Custom Bind key I've set: `<C-t> R`  
 - Open cheat.sh: `<bind-key> S`  
 
-## TMUX Copy and Paste  
-__Tmux search__  
+## Tmux search  
 - `<bind-key> [` - Enter copy mode  
   - `/` - Start search  
   - Enter search term and then `<Enter>` (then use `n`/`N` to search throughout matches - search starts at top of page, use `N` to search backwards)  
-  - End search: `q`  
-
+  - End search: `q` 
+## TMUX Copy and Paste  
+ 
 __tmux copy/paste [MAIN]__  _(copy to tmux buffer and clipboard)_  
 - Enter copy mode: `<bind-key> [`  
 - Use arrows to find text to start to copy from  
@@ -537,8 +537,35 @@ __Where ‘0’ is your session id/name__
 
 # Vim  
 
-## Vim Custom Key Bindings  
-_Bare Vim (common settings to apply on a ad-hoc plain vim editor)_  
+## Vim General Commands  
+- `ter[minal]` - Open terminal (may need to hit `i` to beging typing)  
+- `exit` / `<C-d>` then `<C-w> q` - to close terminal window  
+- `:verbose map Q` - see what is mapped to the `Q` key  
+- `<C-\> <C-n>` - Exit "terminal mode".  
+
+_On "Ctrl-\ Ctrl-n"_  
+This key combination switches the terminal buffer from terminal-insert mode (where you interact with the shell) to Vim’s normal mode. In normal mode, you can use Vim commands like :hide, navigate windows, or edit other buffers. In terminal-insert mode, Vim passes most keystrokes directly to the shell, so you can’t use Vim commands like :hide until you enter normal mode.  
+`<C-\>` is a special prefix in Vim’s terminal mode to signal a command to Vim itself rather than the shell.  
+`<C-n>` (or Ctrl-N) tells Vim to switch to normal mode.  
+You’ll notice the cursor behavior changes, and Vim’s command line becomes available (e.g., you can type : to enter commands).  
+Visual cue: In normal mode, the terminal buffer becomes “read-only” from Vim’s perspective, and you can’t type into the shell until you return to insert mode (e.g., by pressing i).  
+
+There are loads of good vim cheat sheets out there and this isn't a substitution, but rather a list of common/handy ones I've found to be efficient on my workflow.  
+[Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)  
+[LeanXinY](https://learnxinyminutes.com/docs/vim/)  
+[vim.rtott](https://vim.rtorr.com/)  
+[DevHints-vim](https://devhints.io/vim)  
+
+
+## Modes_  
+- `<C-b>` - Visual-Block mode (Ctrl+B)  
+- `<S-v>` - Visual Line Mode  
+
+---  
+
+
+## Bare Vim  
+(common settings to apply on a ad-hoc plain vim editor)
 
 
 ```vim  
@@ -556,24 +583,6 @@ filetype on
 set wrap! (toggle on of off)
 ```
 
-There are loads of good vim cheat sheets out there and this isn't a substitution, but rather a list of common/handy ones I've found to be efficient on my workflow.  
-[Ultimate Cheat Sheet](https://catswhocode.com/vim-cheat-sheet)  
-[LeanXinY](https://learnxinyminutes.com/docs/vim/)  
-[vim.rtott](https://vim.rtorr.com/)  
-[DevHints-vim](https://devhints.io/vim)  
-
-## Vim General Commands  
-- `ter[minal]` - Open terminal (may need to hit `i` to beging typing)  
-- `exit` / `<C-d>` then `<C-w> q` - to close terminal window  
-- `:verbose map Q` - see what is mapped to the `Q` key  
-- `<C-\> <C-n>` - Exit "terminal mode".  
-
-_On "Ctrl-\ Ctrl-n"_  
-This key combination switches the terminal buffer from terminal-insert mode (where you interact with the shell) to Vim’s normal mode. In normal mode, you can use Vim commands like :hide, navigate windows, or edit other buffers. In terminal-insert mode, Vim passes most keystrokes directly to the shell, so you can’t use Vim commands like :hide until you enter normal mode.  
-`<C-\>` is a special prefix in Vim’s terminal mode to signal a command to Vim itself rather than the shell.  
-`<C-n>` (or Ctrl-N) tells Vim to switch to normal mode.  
-You’ll notice the cursor behavior changes, and Vim’s command line becomes available (e.g., you can type : to enter commands).  
-Visual cue: In normal mode, the terminal buffer becomes “read-only” from Vim’s perspective, and you can’t type into the shell until you return to insert mode (e.g., by pressing i).  
 
 ## Vim File Explorer (netrw)  
 - `:Explore` - Explorer (opens file tree)  
@@ -583,11 +592,11 @@ Visual cue: In normal mode, the terminal buffer becomes “read-only” from Vim
 - `u` - Go up one level  
 
 ## Vim File and Buffer Management  
-_Finding Files_  
+#### Finding Files
 - `:args **/*filename*.pl` - Search for file by partial name and file type recursively  
 - `<C-q>` - Adds :args results to Quickfix list (keybinding)  
 
-_Working with vim cmd/shell_  
+#### Working with vim cmd/shell
 - `<C-r>3` - Paste from 3 register (in insert mode or into vim command line). Useful for pasting into a search regex  
 - `:read !<shell_command>` - Paste shell output into buffer.  
 - `:g/function/d` - Delete all lines matching the pattern 'function'  
@@ -596,7 +605,7 @@ _Working with vim cmd/shell_
 - `<C-l>` - Move window to far left  
 - `<C-w>` - delete previous word  
 
-_Managing Changes_  
+#### Managing Changes
 - `:wa` / `wall` - ("write all") save all open buffers  
 - `:e!` - erase all unsaved changes  
 - `:bufdo e!` - erase all unsaved changes (in all open buffers)  
@@ -607,7 +616,7 @@ _Managing Changes_
 - `:earlier 2h` - [Time-based undo] Reverts file to state 2hours ago (can use `m` or `s` for minutes/seconds)  
 - `:later 2h` - [Time-based redo] Reverts file to state 2hours ago (can use `m` or `s` for minutes/seconds)  
 
-_Buffers_  
+### Buffers
 - `:E` - Open file nav (short for `explore`)  
 - `:e ~/.vimrc` - edit a file by name (short for `:edit`).  
 - `:e` - reload current buffer from disk  
@@ -618,11 +627,11 @@ _Buffers_
 - `<C-^>` (which is Ctrl+6) - swap back and forth between current (#) and alternate (a%) buffers.  
 - `:b6` - Go to buffer 6  
 
-_Viewing Buffers_  
+### Viewing Buffers
 - `:b` then `<C-d>` - show all open buffers to cycle though.  
 - `:ls` - view buffers or (`buffers` with plugin)  
 
-_Switching Buffers_  
+### Switching Buffers
 - `:b file1.txt` - Select by filename (tab shows open buffers, but can open new files as well)  
 - `:bn` - rotate to next buffer.  
 - `:bp` - rotate back to previous buffer.  
@@ -630,11 +639,12 @@ _Switching Buffers_
 - `:bf` or `:bl` - go to first/last buffer (f/l)  
 - `:badd myfile.txt` - add a new buffer by filename  
 
-_Deleting Buffers_  
+### Deleting Buffers
 - `:bd myfile.txt` - delete a buffer by buffer number or filename  
 - `:%bd` - Delete all open buffers  
 
-_Tabs_  
+## Windows and Panes  
+### Tabs
 - `:tabnew` or `:tabnew {file}` - open a file in a new tab  
 - `<C-w> T` - move the current split window into its own tab  
 - `gt` - move to the next tab  
@@ -644,7 +654,7 @@ _Tabs_
 - `:tabo` - Tabonly - close all tabs except for the current one  
 - `:tabdo {cmd}` - run the command on all tabs (e.g. :tabdo q - closes all opened tabs)  
 
-_Windows_  
+### Windows
 - `<C-w> s` - Split open buffer horizontally  
 - `<C-w> v` - Split open buffer vertically  
 - `:vert sb {filename}` - Split buffer with another open buffer (you can enter file name or use tab to cycle through open buffers)  
@@ -652,7 +662,7 @@ _Windows_
 - `:sp {filename}` - Split the window and open filename (if empty just splits the same buffer)  
 - `:vs file` - Vertically split window  (enter open/unopened file)  
 
-_Managing Windows_  
+### Managing Windows
 - `<C-w> q` or `:clo` - Close current window  
 - `<C-w> <up>` - Put cursor in top window (works for any direction)  
 - `<C-w> w` - Switch to next window  
@@ -666,14 +676,24 @@ _Managing Windows_
 - `hide`/`unhide` - Hide/Unhide a window (only 1)  
 - `:qa` - Quit All open windows (exits vim if on last tab)  
 
+### Folding    
+- `zf` - Create a fold from selected lines  
+- `zf10j` - Create fold from current line to 10 lines down  
+- `zc` - fold a block of code (z = fold and c = close)  
+- `zo` - unfold a block of code (z = fold and c = open)  
+- `zM` - fold all blocks in buffer  
+- `zR` - unfolds all in buffer  
+
+
 ## Vim Navigation  
-_Moving along line_  
+
+### Moving along line
 - `t{` - Move to next `{` and use `;` to see sebsequent match (and `,` for previous match)  
 - `e` - end of word  
 - `E` - end of word (punctuation included)  
 - `{` / `}` - Move up/down in paragraphs  
 
-_Moving along file_  
+### Moving along file
 - `gg` - Go to top of file  
 - `G` - go to bottom of file  
 - `: {num}` - Go to line  
@@ -683,7 +703,8 @@ _Moving along file_
 - `gd` - go to definition (where func/sub is defined)  
 - `<C-o>` / `<C-i>` - Jump forward/backward in jump list (`:jumps`)  
 
-_Markers_  
+### Markers
+- `<leader> rm` - Remove markers  
 - `:marks` - View all markers  
 - `:cc 22` - View the 22nd quickfix item  
 - `'` - View all markers w/explanations [🔌]  
@@ -694,13 +715,13 @@ _Markers_
 Note: Lowercase markers are local to a file and uppercase markers are global across all files. Meaning you can re-use `a` for different places in different files but `A` only refers to one place in a single file.  
 
 ## Vim Searching and Replacing  
-_Searching_  
+#### Searching
 - `/` - Search (grep): type text and enter then `n`/`N` to iterate through matches  
 - `<C-q>` - Save search results in a quickfix list (we can even grep the quick fix list with `/`)  
 - `cn`/`cp` - Next/Previous item in quickfix list. Mapped to `F11`/`F12`.  
 - `<C-r> "` - Yanks the unamed register into the search box. This will paste in anything yanked.  
 
-_Searching, replacing, and RegEx_  
+#### Searching, replacing, and RegEx
 - `\r` - This represents newline  
 - `:%s/(foo)/\1\r` - Replaces matches with itself followed by a newline ('%' represents every occurence in the buffer)  
 - `:s/old/new/g` - When text is selected you can use a replace (without the %) to replace text within the selected range (use `gc` to replace with confirmation first)  
@@ -720,7 +741,7 @@ Notes
 - `:%s?foo/bar/` - replace 1st occurrence on every line  
 - `:.,$s?foo/bar/` - replace 1st occurrence on every line until end of buffer  
 
-_Quickfix list commands_  
+#### Quickfix list commands
 - `:cope` - open quickfix list  
 - `:cclose` - close quickfix list  
 - `:cnext` / `:cn` - go to next quickfix list item  
@@ -729,13 +750,13 @@ _Quickfix list commands_
 - `:cdo s/foo/bar/g` - replace text on all quickfix list items (globally - every occurence in each line)  
 - `:cdo s/foo/bar/gc` - replace text on all quickfix list items (globally - every occurence in each line)  - with confirmation  
 
-__Finding Multiple Occurrences__  
+### Finding Multiple Occurrences  
 1. Select text (in visual mode)  
 2. `#` to highlight all occurences (can use `*` but that begins at next occurence)  
 3. `n`/`N` to select next/previous occurences  
 4. `v` again to select the highlighted occurence  
 
-__Change multiple instances without multi-cursor__  
+### Change multiple instances without multi-cursor  
 1. Select text to change  
 2. `#` to highlight all matches (selects next match)  
 3. Make sure you're in normal mode  
@@ -744,8 +765,7 @@ __Change multiple instances without multi-cursor__
 
 _(Can also use dgn to delete multiple references)_  
 
-## Vim Editing and Text Manipulation  
-_SYDC (Selecting/Yanking/Deleting/Changing)_  
+## SYDC (Selecting/Yanking/Deleting/Changing)
 - `gv` - Re-select last selected text  
 - `viw` - selects just the word.  
 - `vaw` - selects the word plus any surrounding whitespace.  
@@ -763,16 +783,16 @@ _SYDC (Selecting/Yanking/Deleting/Changing)_
 - `vib` - Select inside next `()` occurrence (works with `y`/`d`)  
 - `viB` - Select inside current `{}` (works with `y`/`d`)  
 
-_Multi-Line_  
+#### Multi-Line
 - `10y` - Yank 10 lines  
 - `10d` - Delete 10 lines  
 - `10V` - Select 10 lines  
 
-_Mass Select_  
+#### Mass Select
 - `ggVG` - Select entire file  
 - `:1,500y` - Copy everything from line 1 to 500 (use `d` for delete) (can start/end on any line - usefull for slicing bits)  
 
-_Continguous Lines of text (paragraph)_  
+#### Continguous Lines of text (paragraph)
 - `yap` - Yank with newlines  
 - `yip` - Yank without newlines  
 - `cap` - Change with newlines  
@@ -782,7 +802,7 @@ _Continguous Lines of text (paragraph)_
 - `vii` - Selects the "inner indent" block (lines with the same indentation level as the cursor, excluding surrounding blank lines)  
 - `vai` - Selects "a indent" block (includes the inner block plus the lines immediately above/below with less indentation, like a function definition).  
 
-_Registers: Viewing/Yanking/Pasting_  
+#### Registers: Viewing/Yanking/Pasting
 - `:reg` - View registers (vim)  
 - `"0p` - Paste from 0 register (in normal mode)  
 - `"2p` - Paste 2nd to last thing yanked (grabs from 2 register in normal mode)  
@@ -799,7 +819,7 @@ _Registers: Viewing/Yanking/Pasting_
 
 _Note: '^J' in a register will be changed to a newline when pasting._  
 
-_Brackets && Braces_  
+### Brackets && Braces  
 - `%` - Select top/bottom of current block  
 - `v%` - Select Content within parens/brackets (inclusively) if you're right before a bracket.  
 - `vi{` - Selects everything within the block... then Esc to leave you at ending "}"  
@@ -813,15 +833,7 @@ _Brackets && Braces_
 - `[{` - Go to opening containing curly brace (can use repeatedly)  
 - `]}` - Go to closing containing curly brace (can use repeatedly)  
 
-_Folding_  
-- `zf` - Create a fold from selected lines  
-- `zf10j` - Create fold from current line to 10 lines down  
-- `zc` - fold a block of code (z = fold and c = close)  
-- `zo` - unfold a block of code (z = fold and c = open)  
-- `zM` - fold all blocks in buffer  
-- `zR` - unfolds all in buffer  
-
-_Editing_  
+## Editing    
 - `ciw` - Change inner word (replace)  
 - `xp` - swap two adjacent letters (move letter cursor one place to the right)  
 - `J` - Merge lines: Apend line below to the end of the current line.  
@@ -834,7 +846,7 @@ _Editing_
 - `:g/error/norm I#` - Insert a '#' at the start of each line that matches the pattern /error/  
 - `ct{` - Change everything from cursor position to next `{` occurence  
 
-_Casing/Capitilization_  
+### Casing/Capitilization  
 - `gu` / `gU` - Lowercase/Uppercase character under cursor  
 - `guiw` / `gUiw` - Lowercase/Uppercase word under cursor  
 - `guu` / `gUU` - Lowercase/Uppercase entire line  
@@ -844,23 +856,23 @@ _Casing/Capitilization_
 - `g~w` - change case of word (until whitespace)  
 - `g~~` - change case of entire line  
 
-_Identing_  
+### Identing  
 - `<<`/`>>` - Indent code left/right  
 - `==`/`=` - Auto indent code (`==` for one line and `=` for multiple lines)  
 
-_Sorting_  
+### Sorting  
 - `:sort` - Sort all lines  
 - `:sort!` - Sort all lines in reverse  
 - `:sort u` - Sort all lines and remove duplicates  
 - `:sort`/`:sort!` - When lines are selected, this will sort in ASC/DESC order respectively.  
 
-_Indenting_  
+### Indenting  
 - `=` - Auto-Indenting (based on rules - works on selected text as well)  
 - `=ap` - Auto-Indent Paragraph  
 - `<` - Indent Left  
 - `>` - Indent Right  
 
-_Numbers_  
+### Numbers  
 - `<C-a>` - Increment Highlighted Numbers  
 - `<C-x>` - Decrement Highlighted Numbers  
 - `g<C-a>` - Increment Highlight Numbers in sequence (each matched item will increment one more than previous match).  
@@ -877,15 +889,17 @@ _Numbers_
 - `@:` - re-run last vim command  
 - `.` - re-run last command in normal mode  
 
-__Best Practices when recording macros__  
+### Best Practices when recording macros  
 - Once recording has started, type `0` to begin at the beginning of the line.  
 - Once done with commands, type 'j' before you finish recording to ensure ending on the next line (in case this macro runs multiple times).  
 
-__Uncommenting__  
+## Commenting/Uncommenting  
+
+### Uncommenting  
 - Put your cursor on the first comment character (like #), and enter Visual-Block mode (`<C-b>` for me)  
 - Go down until the last commented line and press `x`  
 
-__Commenting__  
+### Commenting  
 
 _Option 1_  
 - Enter Visual-Block mode (`<C-b>` for me) then enter `:s/^/#/`  
@@ -903,20 +917,6 @@ _Option 2_
 - `:echo map(synstack(line("."), col(".")), 'synIDattr(v:val, "name")')` - See all highlight groups that could apply to item under cursor  
 
 _Note: `<C-...>` should be taken to mean `Ctrl+`. All other keys are to be entered in succession (not simultaneously)._  
-
----  
-
-_Custom_  
-- `<C-t>` - Tmux bind key (Ctrl+t)  
-- `<C-b>` - Visual-Block mode (Ctrl+B)  
-- `<leader> gu` - Git undo last commit  
-- `<leader> gS` - Git stash unsaved changes  
-- `<leader> rm` - Remove markers  
-- `<leader> tt` - Toggle Twlight  
-
-_Modes_  
-- `<S-v>` - Visual Line Mode  
-- `<S-b>` - (custom) Visual Block Mode  (default: `<C-S-v>` or `<C-q>`)  
 
 ---  
 
@@ -1106,5 +1106,6 @@ standard vim commands for movement/searching
 <br />  
 
 ---  
+
 
 
