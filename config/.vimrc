@@ -394,8 +394,8 @@ call plug#end()
 " # Colorscheme - cyberpunk #
 set cursorline
 set background=dark
-colorscheme cyberpunk
-# colorscheme gothic-cyberpunk
+#colorscheme cyberpunk
+ colorscheme gothic-cyberpunk
 let g:cyberpunk_cursorline="black"
 let g:airline_theme='monochrome'
 let g:airline_theme='lucius'

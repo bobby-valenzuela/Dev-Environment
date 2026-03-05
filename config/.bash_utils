@@ -180,7 +180,7 @@ tt(){
    ~/my_repos/Tomahawk/tomahawk
 }
 
-config_update_and_nvim_update(){
+local_config_update_and_nvim_update(){
     local_config_update 'update-nvim'
 }
 local_config_update(){
@@ -347,10 +347,6 @@ config_sync_alpha(){
     echo "Done!"
 }
 
-gs(){
-    gitsync "$1" "$2"
-}
-
 # Switch from current zsh theme to starship (catppuccin mocha)
 blastoff(){
     export BLASTOFF=1
@@ -446,3 +442,9 @@ uv_start(){
 
 
 }
+
+
+# gs(){
+#     gitsync "$1" "$2"
+# }
+
