@@ -469,6 +469,6 @@ mksshkey() {
 }
 
 
-restart_audio()}{
+restart_audio(){
     systemctl --user restart wireplumber pipewire pipewire-pulse
 }
