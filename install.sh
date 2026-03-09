@@ -572,7 +572,6 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
         if [[ "$2" != 'noshellswitch' ]]; then
             zsh
         fi
-    else
 
     fi
 
