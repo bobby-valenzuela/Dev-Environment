@@ -158,6 +158,7 @@ if [ "$1" != "configonly" ]; then
         $SUDO apt install sshpass -y
         $SUDO apt install xsel -y
         $SUDO apt install lua5.3 -y
+        $SUDO apt install tree -y
         $SUDO apt install fonts-powerline -y
         $SUDO apt install bash -y
         $SUDO apt install gawk -y
@@ -256,6 +257,17 @@ if [ "$1" != "configonly" ]; then
         rm -f go*.tar.gz
     fi
     
+    echo "[+] Installing entr (if needed for tmux auto-reload)..."
+    if ! command -v entr >/dev/null 2>&1; then
+        git clone https://github.com/eradman/entr.git
+        cd entr
+        ./configure
+        sudo make test
+        sudo make install
+        cd ../
+        rm -rf entr
+    fi
+
     echo "[+] Installing nvm..."
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash # Install nvm version 0.40.3
     export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -291,6 +303,8 @@ if [ "$1" != "configonly" ]; then
     
     echo "[+] Installing TPM (tmux)..."
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    echo "[+] Installing fd..."
+    cargo install fd-find
 
     echo "[+] Installing YouTube-downloader..."
     $SUDO  wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -O /usr/local/bin/yt-dlp; $SUDO chmod +x /usr/local/bin/yt-dlp
@@ -308,7 +322,10 @@ if [ "$1" != "configonly" ]; then
     
     echo "[+] Installing lazygit..."
     go install github.com/jesseduffield/lazygit@latest
-    
+
+    echo "[+] Installing glow..."
+    go install github.com/charmbracelet/glow/v2@latest
+
     echo "[+] Installing lazydocker..."
     curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
     
