@@ -206,40 +206,40 @@ local_config_update(){
         # Save any unsaved changed and pull down the latest
         git stash save
         git pull
+        ./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell and omit the below
 
 
-
-	if [[ "$1" = "update-nvim" ]]; then
-		./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell
-		./install.sh nvimonly
-	else
-		./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell
-
-	fi
+        # if [[ "$1" = "update-nvim" ]]; then
+        #     ./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell
+        #     ./install.sh nvimonly
+        # else
+        #     ./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell
+        #
+        # fi
 
 
     fi
 
 
-    ## Nvim is already updated - only continue if we want to keep revert back to current nvim
-    #if [[ "$1" = "update-nvim" ]]; then
-        #echo "Nvim config updated..."
-        #return
-    #fi
-#
-    ## [+] Restore main nvim profile
-    ## At this point our nvim config would have been moved to nvim-backup and a fresh install would be in place
-    ## Revert that if we're not interested in updated nvim
-    #echo "Restoring nvim config..."
-    #if [ -d ~/.config/nvim-new ]; then
-        #rm -rf ~/.config/nvim-new
-    #fi
-    #mv ~/.config/nvim ~/.config/nvim-new
-    #mv ~/.config/nvim-backup ~/.config/nvim
-#
-    ## Restore cache
-    #rm -rf ~/.local/share/nvim/
-    #mv ~/.local/share/nvim-backup ~/.local/share/nvim
+    # Nvim is already updated - only continue if we want to keep revert back to current nvim
+    if [[ "$1" = "update-nvim" ]]; then
+        echo "[+] Nvim config updated!"
+        return
+    fi
+
+    # [+] Restore main nvim profile
+    # At this point our nvim config would have been moved to nvim-backup and a fresh install would be in place
+    # Revert that if we're not interested in updated nvim
+    echo "Restoring nvim config to previous one..."
+    if [ -d ~/.config/nvim-new ]; then
+        rm -rf ~/.config/nvim-new
+    fi
+    mv ~/.config/nvim ~/.config/nvim-new
+    mv ~/.config/nvim-backup ~/.config/nvim
+
+    # Restore cache
+    rm -rf ~/.local/share/nvim/
+    mv ~/.local/share/nvim-backup ~/.local/share/nvim
 
 }
 
