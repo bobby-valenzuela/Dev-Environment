@@ -568,7 +568,10 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
         cp -v ./config/.zshrc   $HOME/
         echo "→ You may need to log out/in or run: source ~/.zshrc (or ~/.bashrc)"
         echo "→ Some tools require fonts (Nerd Fonts) or extra setup"
-        zsh
+
+        if [[ "$2" != 'noshellswitch' ]]; then
+            zsh
+        fi
     else
 
     fi

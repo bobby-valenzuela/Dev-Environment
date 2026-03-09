@@ -206,7 +206,7 @@ local_config_update(){
         # Save any unsaved changed and pull down the latest
         git stash save
         git pull
-        ./install.sh configonly
+        ./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell and avoid running the below
     fi
 
 
