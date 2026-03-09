@@ -528,7 +528,7 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
 
 
     # 'noshellswitch' means we're just updating our local files - no need to install ohmyzsh/fonts/powerline
-    if [ "$2" = "noshellswitch" ]; then
+    if [ "$2" != "noshellswitch" ]; then
 
         # Install fonts
         printf "[+] Installing fonts..."
