@@ -509,6 +509,7 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     fi
     cp -f -v -r ./config/.config/nvim/colors  $HOME/.vim/
 
+
     # __________ Spotify-player ___________
     if [ ! -d $HOME/.config/spotify-player/ ]; then
         mkdir -p $HOME/.config/spotify-player
@@ -522,44 +523,48 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     # Copy Yazi config
     cp -v -f -r ./config/.config/yazi  $HOME/.config/
 
-
     # Install custom shell scripts and exes
     sudo cp -v -f -r ./config/usr_local_bin/* /usr/local/bin/
 
-    # Install fonts
-    printf "[+] Installing fonts..."
-    unzip -o ./fonts/JetBrainsMonoNerdFont-REGULARFONTSONLY.zip  -d ./fonts/
-    sudo cp ./fonts/*.ttf /usr/share/fonts/truetype/
 
-    # for file in $(find ./fonts/ -type f -iname "*.ttf")
-    # do
-    #     echo $file
-    # done
+    # 'noshellswitch' means we're just updating our local files - no need to install ohmyzsh/fonts/powerline
+    if [ "$2" = "noshellswitch" ]; then
 
-    # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
-    if [ -d $HOME/.oh-my-zsh ]; then
-        rm -rf $HOME/.oh-my-zsh
-    fi
+        # Install fonts
+        printf "[+] Installing fonts..."
+        unzip -o ./fonts/JetBrainsMonoNerdFont-REGULARFONTSONLY.zip  -d ./fonts/
+        sudo cp ./fonts/*.ttf /usr/share/fonts/truetype/
 
-    printf "[+] Installing oh-my-zsh...\n\n"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+        # for file in $(find ./fonts/ -type f -iname "*.ttf")
+        # do
+        #     echo $file
+        # done
 
-    # If powerline isn't installed, oh-my-zsh+powerline should be installed for installed for good measure - and shell updated
-    if [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k/ ]; then
+        # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
+        if [ -d $HOME/.oh-my-zsh ]; then
+            rm -rf $HOME/.oh-my-zsh
+        fi
 
-        printf "[+] Installing powerlevel10k...\n\n"
-        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
-        # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    
+        printf "[+] Installing oh-my-zsh...\n\n"
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+        # If powerline isn't installed, oh-my-zsh+powerline should be installed for installed for good measure - and shell updated
+        if [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k/ ]; then
+
+            printf "[+] Installing powerlevel10k...\n\n"
+            git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+            # sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+        
+        fi
+
     fi
 
     echo "[+] Configuration files copied!"
 
 
-    printf "[+] Setting default shell...\n\n"
-
     if which zsh >/dev/null 2>&1; then
     
+        printf "[+] Setting default shell...\n\n"
         # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
         cd "$(dirname "$0")"
         cp -v ./config/.zshrc   $HOME/
