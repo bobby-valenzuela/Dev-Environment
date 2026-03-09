@@ -161,8 +161,10 @@ if [ "$1" != "configonly" ]; then
         $SUDO apt install fonts-powerline -y
         $SUDO apt install bash -y
         $SUDO apt install gawk -y
+        $SUDO apt install htop -y
         $SUDO apt install pkg-config -y
         $SUDO apt install mssql-tools --ignore-missing -y   # Requires MicrSoft repo
+        $SUDO apt install font-manager # GUI
 
         echo "[+] Installing various dependencies..."
         $SUDO apt install pkg-config -y
@@ -289,6 +291,9 @@ if [ "$1" != "configonly" ]; then
     echo "[+] Installing Dust..."
     cargo install du-dust
     
+    echo "[+] Installing TPM (tmux)..."
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
     echo "[+] Installing YouTube-downloader..."
     $SUDO  wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -O /usr/local/bin/yt-dlp; $SUDO chmod +x /usr/local/bin/yt-dlp
 
@@ -503,6 +508,14 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     sudo cp -v -f -r ./config/usr_local_bin/* /usr/local/bin/
 
     # Install fonts
+    printf "[+] Installing fonts..."
+    unzip -o ./fonts/JetBrainsMonoNerdFont-REGULARFONTSONLY.zip  -d ./fonts/
+    sudo cp ./fonts/*.ttf /usr/share/fonts/truetype/
+
+    # for file in $(find ./fonts/ -type f -iname "*.ttf")
+    # do
+    #     echo $file
+    # done
 
     # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
     if [ -d $HOME/.oh-my-zsh ]; then
