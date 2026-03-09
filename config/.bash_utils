@@ -194,7 +194,7 @@ local_config_update(){
 
     if [[ ! -d $LOCAL_REPO/ ]]; then
         echo "[!] Repo does not exist! Cloning and updating..."
-        cd $HOME/Documents/Repos/
+        cd $LOCAL_REPO/
         sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
     else
 
@@ -206,29 +206,40 @@ local_config_update(){
         # Save any unsaved changed and pull down the latest
         git stash save
         git pull
-        ./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell and avoid running the below
+
+
+
+	if [[ "$1" = "update-nvim" ]]; then
+		./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell
+		./install.sh nvimonly
+	else
+		./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell
+
+	fi
+
+
     fi
 
 
-    # Nvim is already updated - only continue if we want to keep revert back to current nvim
-    if [[ "$1" = "update-nvim" ]]; then
-        echo "Nvim config updated..."
-        return
-    fi
-
-    # [+] Restore main nvim profile
-    # At this point our nvim config would have been moved to nvim-backup and a fresh install would be in place
-    # Revert that if we're not interested in updated nvim
-    echo "Restoring nvim config..."
-    if [ -d ~/.config/nvim-new ]; then
-        rm -rf ~/.config/nvim-new
-    fi
-    mv ~/.config/nvim ~/.config/nvim-new
-    mv ~/.config/nvim-backup ~/.config/nvim
-
-    # Restore cache
-    rm -rf ~/.local/share/nvim/
-    mv ~/.local/share/nvim-backup ~/.local/share/nvim
+    ## Nvim is already updated - only continue if we want to keep revert back to current nvim
+    #if [[ "$1" = "update-nvim" ]]; then
+        #echo "Nvim config updated..."
+        #return
+    #fi
+#
+    ## [+] Restore main nvim profile
+    ## At this point our nvim config would have been moved to nvim-backup and a fresh install would be in place
+    ## Revert that if we're not interested in updated nvim
+    #echo "Restoring nvim config..."
+    #if [ -d ~/.config/nvim-new ]; then
+        #rm -rf ~/.config/nvim-new
+    #fi
+    #mv ~/.config/nvim ~/.config/nvim-new
+    #mv ~/.config/nvim-backup ~/.config/nvim
+#
+    ## Restore cache
+    #rm -rf ~/.local/share/nvim/
+    #mv ~/.local/share/nvim-backup ~/.local/share/nvim
 
 }
 
@@ -453,4 +464,36 @@ uv_start(){
 # gs(){
 #     gitsync "$1" "$2"
 # }
+
+# Quick Ed25519 SSH key generator with custom comment
+
+# Usage: mksshkey "my name - 2026 lappy"
+
+mksshkey() {
+
+    if [ $# -eq 0 ]; then
+
+        echo "Usage: mksshkey 'your comment here'  [extra ssh-keygen options...]"
+        echo "Example:"
+        echo "  mksshkey 'bobby@work-laptop' -a 150"
+        return 1
+
+    fi
+
+    local comment="$1"
+    shift  # remove the comment so remaining args go to ssh-keygen
+    ssh-keygen -t ed25519 -C "$comment" "$@"
+
+}
+
+restart_audio(){
+
+    systemctl --user restart wireplumber pipewire pipewire-pulse
+
+}
+
+
+
+
+
 
