@@ -32,6 +32,9 @@ export PATH="$PATH:$HOME/go/bin"
 # Add /usr/local/go/bin to PATH in case you have a later version here
 export PATH=/usr/local/go/bin:$PATH
 
+# Add /opt/Applications/ to $PATH
+export PATH=/opt/Applications/:$PATH
+
 # Add .local/bin to PATH
 export PATH="$HOME/.local/bin":$PATH
 export PATH="$HOME/.local/lib":$PATH

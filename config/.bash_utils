@@ -189,8 +189,12 @@ local_config_update(){
     LOCAL_REPO=~/my_repos/Dev-Environment
 
     if [[ ! -d $LOCAL_REPO/ ]]; then
+        LOCAL_REPO=~/Documents/Repos/Dev-Environment
+    fi
+
+    if [[ ! -d $LOCAL_REPO/ ]]; then
         echo "[!] Repo does not exist! Cloning and updating..."
-        cd $HOME/my_repos/
+        cd $HOME/Documents/Repos/
         sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
     else
 
@@ -234,7 +238,9 @@ local_config_save(){
 
     # Sync local config files with cloned repo so i can push up my changes
     if [[ ! -d $LOCAL_REPO/config/ ]]; then
-        mkdir -p $LOCAL_REPO/config/
+
+        LOCAL_REPO=~/Documents/Repos/Dev-Environment
+        mkdir -p $LOCAL_REPO/config/ 2> /dev/null
     fi
     DEST=$LOCAL_REPO/config/
 
@@ -244,7 +250,7 @@ local_config_save(){
       return 1
     fi
 
-    printf "Running...\n"
+    printf "Running... [ARG1: $1]\n"
 
     # FILES
     cp -v ~/.bash_aliases  $DEST
