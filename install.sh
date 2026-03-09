@@ -502,6 +502,7 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
     # Install custom shell scripts and exes
     sudo cp -v -f -r ./config/usr_local_bin/* /usr/local/bin/
 
+    # Install fonts
 
     # This removes powerline (since powerline install in ~/.oh-my-zsh) so make sure this is before powerline install
     if [ -d $HOME/.oh-my-zsh ]; then
