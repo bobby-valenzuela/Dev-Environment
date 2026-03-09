@@ -446,3 +446,25 @@ uv_start(){
 
 
 }
+
+
+# Quick Ed25519 SSH key generator with custom comment
+# Usage: mksshkey "my name - 2026 lappy"
+mksshkey() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: mksshkey 'your comment here'  [extra ssh-keygen options...]"
+        echo "Example:"
+        echo "  mksshkey 'bobby@work-laptop' -a 150"
+        return 1
+    fi
+
+    local comment="$1"
+    shift  # remove the comment so remaining args go to ssh-keygen
+
+    ssh-keygen -t ed25519 -C "$comment" "$@"
+}
+
+
+restart_audio()}{
+    systemctl --user restart wireplumber pipewire pipewire-pulse
+}
