@@ -126,8 +126,10 @@ create_desktop_entry() {
     local path="$2"
     local cli_name="$3"
 
+    echo "[+] Creating dekstop entry (.desktop) with details: name: >${name}< | path: >${path}< | cli_name: >${cli_name}<"
     local icon_path=$(get_icon_path "$cli_name")
-
+    echo "[+] icon_path: ${icon_path}"
+    
     desktop_file="~/.local/share/applications/${cli_name// /-}.desktop"
     echo "[Desktop Entry]
 Type=Application
@@ -136,7 +138,7 @@ Comment=
 Exec=$path
 Icon=$icon_path
 Terminal=false
-Categories=Utility;" | tee "$desktop_file" >/dev/null
+Categories=Utility;" | tee "$desktop_file"
 
     chmod +x "$desktop_file"
 }
