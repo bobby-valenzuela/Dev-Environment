@@ -84,7 +84,7 @@ get_icon_path() {
                 -O "$icon_path" 2>/dev/null && downloaded=true
             ;;
         "obsidian")
-            wget -q "https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/desktop/icons/brave.png" \
+            wget -q "https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/desktop/icons/obsidian.png" \
                 -O "$icon_path" 2>/dev/null && downloaded=true
             ;;
         "steam")
