@@ -489,7 +489,7 @@ repo synchronization tool
 
 ## Tmux search  
 - `<bind-key> [` - Enter copy mode  
-  - `/` - Start search  
+  - `/`/`?` - Start search (once in copy mode)   
   - Enter search term and then `<Enter>` (then use `n`/`N` to search throughout matches - search starts at top of page, use `N` to search backwards)  
   - End search: `q` 
 ## TMUX Copy and Paste  
@@ -1106,6 +1106,7 @@ standard vim commands for movement/searching
 <br />  
 
 ---  
+
 
 
 
