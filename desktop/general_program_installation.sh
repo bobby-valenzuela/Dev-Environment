@@ -248,7 +248,7 @@ install_app() {
 
                 sudo wget -q "$cmd" -O "$target_path"
 
-                if [[ -s $target_path; then
+                if [[ -s $target_path ]]; then
                     sudo chmod +x "$target_path"
                     installed=true
                     # # create desktop entry
