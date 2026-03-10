@@ -132,7 +132,7 @@ create_desktop_entry() {
 
     desktop_file="$HOME/.local/share/applications/${cli_name// /-}.desktop"
     touch $desktop_file
-    chmod +x "$desktop_file"
+    chmod +x $desktop_file
 
     echo "[Desktop Entry]
 Type=Application
@@ -141,7 +141,7 @@ Comment=
 Exec=$path
 Icon=$icon_path
 Terminal=false
-Categories=Utility;" | tee "$desktop_file"
+Categories=Utility;" | tee $desktop_file
 
 }
 
