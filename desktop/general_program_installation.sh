@@ -76,32 +76,32 @@ get_icon_path() {
 
     case "$app_name" in
         "wezterm")
-            wget -q "https://raw.githubusercontent.com/wez/wezterm/main/assets/icon/terminal.png" \
+            wget -q "https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/desktop/icons/wezterm.png" \
                 -O "$icon_path" 2>/dev/null && downloaded=true
             ;;
         "brave-browser")
-            wget -q "https://brave.com/static-assets/images/brave_logo.png" \
+            wget -q "https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/desktop/icons/brave.png" \
                 -O "$icon_path" 2>/dev/null && downloaded=true
             ;;
         "obsidian")
-            wget -q "https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/icon.png" \
+            wget -q "https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/desktop/icons/brave.png" \
                 -O "$icon_path" 2>/dev/null && downloaded=true
             ;;
         "steam")
-            wget -q "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/512px-Steam_icon_logo.svg.png" \
+            wget -q "https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/desktop/icons/steam.png" \
                 -O "$icon_path" 2>/dev/null && downloaded=true
             ;;
 
         "signal-desktop")
-            wget -q "https://signal.org/images/signal-logo.png" \
+            wget -q "https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/desktop/icons/signal.png" \
                 -O "$icon_path" 2>/dev/null && downloaded=true
             ;;
         "audacity")
-            wget -q "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Audacity_Logo.svg/512px-Audacity_Logo.svg.png" \
+            wget -q "https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/desktop/icons/audacity.png" \
                 -O "$icon_path" 2>/dev/null && downloaded=true
             ;;
         "postman")
-            wget -q "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png" \
+            wget -q "https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/desktop/icons/postman.png" \
                 -O "$icon_path" 2>/dev/null && downloaded=true
             ;;
         *)
@@ -129,8 +129,11 @@ create_desktop_entry() {
     echo "[+] Creating dekstop entry (.desktop) with details: name: >${name}< | path: >${path}< | cli_name: >${cli_name}<"
     local icon_path=$(get_icon_path "$cli_name")
     echo "[+] icon_path: ${icon_path}"
-    
-    desktop_file="~/.local/share/applications/${cli_name// /-}.desktop"
+
+    desktop_file="$HOME/.local/share/applications/${cli_name// /-}.desktop"
+    touch $desktop_file
+    chmod +x "$desktop_file"
+
     echo "[Desktop Entry]
 Type=Application
 Name=$name
@@ -140,7 +143,6 @@ Icon=$icon_path
 Terminal=false
 Categories=Utility;" | tee "$desktop_file"
 
-    chmod +x "$desktop_file"
 }
 
 
