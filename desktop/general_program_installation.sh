@@ -22,7 +22,7 @@ declare -A apps=(
     ["Steam|steam"]="apt|sudo apt install -y steam"
     ["LibreOffice|libreoffice"]="apt|sudo apt install -y libreoffice"
     ["VLC|vlc"]="apt|sudo apt install -y vlc"
-    ["OBS Studio|obs-studio"]=";apt|sudo apt install -y obs-studio"
+    ["OBS Studio|obs-studio"]="script|placeholder"
     ["Wireshark|wireshark"]="apt|sudo apt install -y wireshark"
     ["Thonny|thonny"]="apt|sudo apt install -y thonny"
     ["Balena Etcher|balena-etcher"]="aptdeb|https://github.com/balena-io/etcher/releases/download/v2.1.4/balena-etcher_2.1.4_amd64.deb"
@@ -178,6 +178,18 @@ install_script(){
         # ["ProtonPass|proton-pass"]="flatpak |flatpak install flathub me.proton.Pass"
         echo "Skipping..."
 
+    elif [[ "${1}" = "obs-studio" ]]; then
+
+        # Optional dependencies
+        sudo apt install ffmpeg v4l2loopback-dkms -y
+        
+        # Official OBS PPA Repo
+        sudo add-apt-repository ppa:obsproject/obs-studio
+
+        sudo apt update
+        sudo apt install obs-studio -y
+
+
     elif [[ "${1}" = "wezterm" ]]; then
 
         curl -LO https://github.com/wezterm/wezterm/releases/download/20240203-110809-5046fc22/WezTerm-20240203-110809-5046fc22-Ubuntu20.04.AppImage
@@ -273,7 +285,9 @@ install_app() {
                 echo -e "${YELLOW}Installing $name via APT...${NC}"
 
                 target_path="$cli_name.deb"
-                sudo wget -q "$cmd" -O "$target_path"
+                sudo wget -q "$cmd" -O $target_path
+                echo "[-] target_path: $target_path"
+
                 sudo apt install $target_path -y
 
                 if command -v $cli_name >/dev/null 2>&1; then
