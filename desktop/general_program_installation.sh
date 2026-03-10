@@ -172,7 +172,7 @@ install_script(){
         # (Requires NetworkManager-openvpn and a keyring like GNOME Keyring or KWallet for credential storage.)
         # ["ProtonVPN|proton-vpn"]="flatpak |flatpak install flathub com.protonvpn.www"
         # ["ProtonPass|proton-pass"]="flatpak |flatpak install flathub me.proton.Pass"
-
+        echo "Skipping..."
 
     elif [[ "${1}" = "wezterm" ]]; then
 
