@@ -396,7 +396,7 @@ docker_force_old_version(){
 dockbuntu(){
     # force non-newest docker version as api doesn't support past 1.43 as of 3/26
     docker_force_old_version
-    docker run -it --rm ubuntu:24.04 bash -c "apt update && apt install -y sudo wget git curl && exec bash"
+    docker run -it --rm ubuntu:24.04 bash -c "apt update && apt install -y sudo wget git curl && DEBIAN_FRONTEND=noninteractive TZ=America/Los_Angeles apt install vim -y && exec bash"
 }
 
 # fedora_container(){
