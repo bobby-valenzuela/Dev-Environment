@@ -1,0 +1,349 @@
+#!/bin/bash
+
+# =========================================================
+# 🚀 Pop!_OS Applications Installer (AppImage > APT )
+# =========================================================
+# No flatpaks and no snaps
+
+# Colors for output
+GREEN="\033[0;32m"
+RED="\033[0;31m"
+YELLOW="\033[1;33m"
+NC="\033[0m"
+
+# -----------------------------
+# Applications List
+# -----------------------------
+# Format: [Name|cli_name]="method|cmd;method|cmd"
+declare -A apps=(
+
+    ["Brave Browser|brave-browser"]="apt|curl -fsS https://dl.brave.com/install.sh | sh"
+    ["Obsidian|obsidian"]="appimage|https://github.com/obsidianmd/obsidian-releases/releases/download/v1.12.4/Obsidian-1.12.4.AppImage"
+    ["Steam|steam"]="apt|sudo apt install -y steam"
+    ["LibreOffice|libreoffice"]="apt|sudo apt install -y libreoffice"
+    ["VLC|vlc"]="apt|sudo apt install -y vlc"
+    ["OBS Studio|obs-studio"]=";apt|sudo apt install -y obs-studio"
+    ["Wireshark|wireshark"]="apt|sudo apt install -y wireshark"
+    ["Thonny|thonny"]="apt|sudo apt install -y thonny"
+    ["Balena Etcher|balena-etcher"]="aptdeb|https://github.com/balena-io/etcher/releases/download/v2.1.4/balena-etcher_2.1.4_amd64.deb"
+    ["Audacity|audacity"]="appimage|https://github.com/audacity/audacity/releases/download/Audacity-3.7.7/audacity-linux-3.7.7-x64-20.04.AppImage;apt|sudo apt install -y audacity"
+    ["Postman|postman"]="appimage|https://github.com/suciptoid/postman-appimage/releases/download/continous/Postman-10.12.0-x86_64.AppImage;flatpak|flatpak install flathub com.getpostman.Postman -y"
+    ["Signal|signal-desktop"]="script|placeholder"
+    ["Wezterm|wezterm"]="script|placeholder"
+    ["Docker|docker"]="script|placeholder"
+    ["Telegram"]="flatpak|flatpak install flathub org.telegram.desktop -y"
+    ["Spotify"]="flatpak|flatpak install flathub com.spotify.Client -y"
+
+
+                            
+)
+
+# -----------------------------
+# Variables
+# -----------------------------
+total=${#apps[@]}
+counter=0
+failed_apps=()
+
+# Ensure /opt/Applications exists
+if [[ ! -d /opt/Applications/ ]]; then
+    sudo mkdir -p /opt/Applications
+    sudo chmod 755 /opt/Applications
+fi
+PATH="/opt/Applications/:$PATH"
+
+echo -e "${YELLOW}=========================================="
+echo -e "      Pop!_OS Applications Installer"
+echo -e "==========================================${NC}"
+sleep 1
+
+# -----------------------------
+# Function to create an icon for AppImages
+# -----------------------------
+get_icon_path() {
+    local app_name="$1"
+    local icon_dir="$HOME/.local/share/applications/icons"
+    local icon_path="${icon_dir}/${app_name}.png"
+
+    [[ ! -d "$icon_dir" ]] && mkdir -p "$icon_dir"
+
+    if [[ -f "$icon_path" ]]; then
+        echo "$icon_path"
+        return 0
+    fi
+
+    local downloaded=false
+
+    case "$app_name" in
+        "wezterm")
+            wget -q "https://raw.githubusercontent.com/wez/wezterm/main/assets/icon/terminal.png" \
+                -O "$icon_path" 2>/dev/null && downloaded=true
+            ;;
+        "brave-browser")
+            wget -q "https://brave.com/static-assets/images/brave_logo.png" \
+                -O "$icon_path" 2>/dev/null && downloaded=true
+            ;;
+        "obsidian")
+            wget -q "https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/icon.png" \
+                -O "$icon_path" 2>/dev/null && downloaded=true
+            ;;
+        "steam")
+            wget -q "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/512px-Steam_icon_logo.svg.png" \
+                -O "$icon_path" 2>/dev/null && downloaded=true
+            ;;
+
+        "signal-desktop")
+            wget -q "https://signal.org/images/signal-logo.png" \
+                -O "$icon_path" 2>/dev/null && downloaded=true
+            ;;
+        "audacity")
+            wget -q "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Audacity_Logo.svg/512px-Audacity_Logo.svg.png" \
+                -O "$icon_path" 2>/dev/null && downloaded=true
+            ;;
+        "postman")
+            wget -q "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png" \
+                -O "$icon_path" 2>/dev/null && downloaded=true
+            ;;
+        *)
+            echo "${YELLOW}No icon rule for $app_name${NC}" >&2
+            return 1
+            ;;
+    esac
+
+    if $downloaded; then
+        echo "$icon_path"
+        return 0
+    else
+        echo "${RED}Failed to download icon for $app_name${NC}" >&2
+        return 1
+    fi
+}
+# -----------------------------
+# Function to create a .desktop file for AppImages
+# -----------------------------
+create_desktop_entry() {
+    local name="$1"
+    local path="$2"
+    local cli_name="$3"
+
+    local icon_path=$(get_icon_path "$cli_name")
+
+    desktop_file="~/.local/share/applications/${cli_name// /-}.desktop"
+    echo "[Desktop Entry]
+Type=Application
+Name=$name
+Comment=
+Exec=$path
+Icon=$icon_path
+Terminal=false
+Categories=Utility;" | tee "$desktop_file" >/dev/null
+
+    chmod +x "$desktop_file"
+}
+
+
+# -----------------------------
+# Function to install app via script
+# -----------------------------
+install_script(){
+    
+    if [[ "${1}" = "signal-desktop" ]]; then
+        
+        # NOTE: These instructions only work for 64-bit Debian-based
+        # Linux distributions such as Ubuntu, Mint etc.
+
+        # 1. Install our official public software signing key:
+        wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg;
+        cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+
+        # 2. Add our repository to your list of repositories:
+        wget -O signal-desktop.sources https://updates.signal.org/static/desktop/apt/signal-desktop.sources;
+        cat signal-desktop.sources | sudo tee /etc/apt/sources.list.d/signal-desktop.sources > /dev/null
+
+        # 3. Update your package database and install Signal:
+        sudo apt update && sudo apt install signal-desktop
+
+    elif [[ "${1}" = "proton-apps" ]]; then
+
+        # TBD - Will use browser extensions for now
+        #
+        # Add Flathub (skip if already added)
+        # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        # (Requires NetworkManager-openvpn and a keyring like GNOME Keyring or KWallet for credential storage.)
+        # ["ProtonVPN|proton-vpn"]="flatpak |flatpak install flathub com.protonvpn.www"
+        # ["ProtonPass|proton-pass"]="flatpak |flatpak install flathub me.proton.Pass"
+
+
+    elif [[ "${1}" = "wezterm" ]]; then
+
+        curl -LO https://github.com/wezterm/wezterm/releases/download/20240203-110809-5046fc22/WezTerm-20240203-110809-5046fc22-Ubuntu20.04.AppImage
+        chmod +x WezTerm-20240203-110809-5046fc22-Ubuntu20.04.AppImage
+        sudo mv ./WezTerm-20240203-110809-5046fc22-Ubuntu20.04.AppImage /opt/Applications/wezterm
+
+        create_desktop_entry "Wezterm" "/opt/Applications/wezterm" "wezterm"`
+
+    elif [[ "${1}" = "docker" ]]; then
+
+        # Add Docker's official GPG key:
+        sudo apt update
+        sudo apt install ca-certificates curl
+        sudo install -m 0755 -d /etc/apt/keyrings
+        sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+        sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+        # Add the repository to Apt sources:
+        sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+        sudo apt update
+        sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+        sudo systemctl status docker
+
+    fi
+
+}
+
+
+# -----------------------------
+# Function to install app
+# -----------------------------
+install_app() {
+    local identifier="$1"
+    local priority="$2"
+    local installed=false
+    local name="${identifier%%|*}"
+    local cli_name="${identifier#*|}"
+
+    if command -v $cli_name 2>/dev/null; then
+        echo "[+] $name is already installed"
+        return
+    else
+        echo "[-] $name is NOT installed, installing..."
+    fi
+
+
+    local methods_tried=
+
+
+    IFS=';' read -ra methods <<< "$priority"
+    for method in "${methods[@]}"; do
+        type="${method%%|*}"
+        cmd="${method#*|}"
+
+        echo "[+] ID: $identifier | name: $name | cli_name: $cli_name | type: $type | cmd: $cmd"
+
+        
+        case $type in
+            appimage)
+                methods_tried+="($type) "
+                # file_name="${cmd##*/}"
+                file_name="$cli_name"
+                target_path="/opt/Applications/$file_name"
+                echo -e "${YELLOW}Downloading $name AppImage to $target_path ...${NC}"
+
+                sudo wget -q "$cmd" -O "$target_path"
+
+                if [[ -s $target_path; then
+                    sudo chmod +x "$target_path"
+                    installed=true
+                    # # create desktop entry
+                    create_desktop_entry "$name" "$target_path" "$cli_name"
+                    break
+                fi
+                ;;
+            apt)
+                echo -e "${YELLOW}Installing $name via APT...${NC}"
+                eval "$cmd"
+
+                if command -v $cli_name >/dev/null 2>&1; then
+                    installed=true
+                    break
+                fi
+                ;;
+            aptdeb)
+                echo -e "${YELLOW}Installing $name via APT...${NC}"
+
+                target_path="$cli_name.deb"
+                sudo wget -q "$cmd" -O "$target_path"
+                sudo apt install $target_path -y
+
+                if command -v $cli_name >/dev/null 2>&1; then
+                    installed=true
+                    break
+                fi
+                ;;
+            flatpak)
+                echo -e "${YELLOW}Installing $name via Flatpak...${NC}"
+                if eval "$cmd" &>/dev/null; then
+                    installed=true
+                    break
+                fi
+                ;;
+            script)
+                echo -e "${YELLOW}Installing $name via script...${NC}"
+
+                install_script "$cli_name"
+
+                if command -v $cli_name >/dev/null 2>&1; then
+                    installed=true
+                    break
+                fi
+                ;;
+
+        esac
+    done
+
+    echo -e "${YELLOW}[$((counter+1))/$total] $name installation attempt done.${NC}"
+
+    if [ "$installed" = true ]; then
+        echo -e "${GREEN}[✓] $name installed successfully (or attempted)${NC}"
+    else
+        echo -e "${RED}[✗] $name may not have installed properly.${NC}"
+        failed_apps+=("$name | $methods_tried")
+    fi
+
+    percent=$(( (counter + 1) * 100 / total ))
+    echo -e "${YELLOW}Progress: $percent%${NC}"
+    echo "------------------------------------------"
+    ((counter++))
+}
+
+# -----------------------------
+# Main Loop
+# -----------------------------
+# sudo apt update
+
+for app in "${!apps[@]}"; do
+    install_app "$app" "${apps[$app]}"
+done
+
+# -----------------------------
+# Summary
+# -----------------------------
+echo -e "${YELLOW}==========================================${NC}"
+if [ ${#failed_apps[@]} -eq 0 ]; then
+    echo -e "${GREEN}All applications installed successfully!${NC}"
+else
+    echo -e "${RED}The following applications may not have installed properly:${NC}"
+    for app in "${failed_apps[@]}"; do
+        echo -e "${RED}- $app${NC}"
+    done
+fi
+echo -e "${YELLOW}==========================================${NC}"
+
+
+
+
+# Rebuild the user .desktop database (very often helps)
+update-desktop-database ~/.local/share/applications
+
+
+
+
+
+
