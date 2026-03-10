@@ -180,7 +180,7 @@ install_script(){
         chmod +x WezTerm-20240203-110809-5046fc22-Ubuntu20.04.AppImage
         sudo mv ./WezTerm-20240203-110809-5046fc22-Ubuntu20.04.AppImage /opt/Applications/wezterm
 
-        create_desktop_entry "Wezterm" "/opt/Applications/wezterm" "wezterm"`
+        create_desktop_entry "Wezterm" "/opt/Applications/wezterm" "wezterm"
 
     elif [[ "${1}" = "docker" ]]; then
 
