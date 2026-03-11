@@ -3,7 +3,9 @@
 # =========================================================
 # 🚀 Pop!_OS Applications Installer (AppImage > APT )
 # =========================================================
-# No flatpaks and no snaps
+# Prioritizing AppImages and APT installs but will use flatpak for non-essential apps, apps that aren't easy to automate, and apps that I don't mind having scheduled updates. Snaps are dead to me
+# Works on ubuntu-based os really not just Pop!
+# Install desktop apps and creates .desktop files for appimages
 
 # Colors for output
 GREEN="\033[0;32m"
@@ -25,7 +27,6 @@ declare -A apps=(
     ["OBS Studio|obs-studio"]="script|placeholder"
     ["Wireshark|wireshark"]="apt|sudo apt install -y wireshark"
     ["Thonny|thonny"]="apt|sudo apt install -y thonny"
-    ["Balena Etcher|balena-etcher"]="aptdeb|https://github.com/balena-io/etcher/releases/download/v2.1.4/balena-etcher_2.1.4_amd64.deb"
     ["Audacity|audacity"]="appimage|https://github.com/audacity/audacity/releases/download/Audacity-3.7.7/audacity-linux-3.7.7-x64-20.04.AppImage;apt|sudo apt install -y audacity"
     ["Postman|postman"]="appimage|https://github.com/suciptoid/postman-appimage/releases/download/continous/Postman-10.12.0-x86_64.AppImage;flatpak|flatpak install flathub com.getpostman.Postman -y"
     ["Signal|signal-desktop"]="script|placeholder"
@@ -34,9 +35,15 @@ declare -A apps=(
     ["Telegram"]="flatpak|flatpak install flathub org.telegram.desktop -y"
     ["Spotify"]="flatpak|flatpak install flathub com.spotify.Client -y"
 
-
                             
 )
+# I've choosen specific installtion methods for each app that's optimal. 
+# Here are some reasons:
+    # Brave     - apt | gets updates somewhat frequently
+    # Obsidian  - appimage | auto updates itself
+    # Steam     - apt | sweet spot with size/updates/performace
+    # Telegram  - flatpak | appimage is janky and flatpak is polished
+    # etc... (for example, sometimes app images are unavialable or unnofical or apt is old so I'll use flatpak in those cases too)
 
 # -----------------------------
 # Variables
@@ -363,5 +370,8 @@ update-desktop-database ~/.local/share/applications
 
 
 
+# Currently no working - need to find a way to redo, though these aren't important so I have no problem doing these manually until I can automate these later.
+
+#    ["Balena Etcher|balena-etcher"]="aptdeb|https://github.com/balena-io/etcher/releases/download/v2.1.4/balena-etcher_2.1.4_amd64.deb"
 
 

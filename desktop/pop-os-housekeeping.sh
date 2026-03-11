@@ -1,6 +1,7 @@
 #!/bin/bash
 # General system maintenance only - no third-party apps beyond essentials
 # Run as normal user; uses sudo when needed
+# Works on ubuntu-based os really not just Pop!
 
 set -euo pipefail  # Exit on errors, unset vars, pipe failures
 
@@ -34,7 +35,7 @@ echo "────────────────────────�
 #sudo fwupdmgr refresh --force
 #sudo fwupdmgr get-updates
 #sudo fwupdmgr update -y || echo "→ Firmware update may need reboot or manual step."
-# This tends to interrupt script - run this step as needed
+# This tends to interrupt script - run this step as needed at the end
 echo "[-] Skipping..."
 
 # ────────────────────────────────────────────────
@@ -89,4 +90,11 @@ echo ""
 read -p "Would you like to reboot now? (y/N): " answer
 if [[ "$answer" =~ ^[Yy]$ ]]; then
     sudo reboot
+fi
+
+read -p "Since we're not reboting, want to update the firmware? (y/N): " answer2
+if [[ "$answer2" =~ ^[Yy]$ ]]; then
+    sudo fwupdmgr refresh --force
+    sudo fwupdmgr get-updates
+    sudo fwupdmgr update -y || echo "→ Firmware update may need reboot or manual step."
 fi
