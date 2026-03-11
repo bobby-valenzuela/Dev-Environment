@@ -169,6 +169,11 @@ if [ "$1" != "configonly" ]; then
         $SUDO apt install pkg-config -y
         $SUDO apt install mssql-tools --ignore-missing -y   # Requires MicrSoft repo
         $SUDO apt install font-manager # GUI
+        
+        # Fastfetch
+        $SUDO add-apt-repository ppa:zhangsongcui3371/fastfetch
+        $SUDO apt update
+        $SUDO apt install fastfetch -y
 
         echo "[+] Installing various dependencies..."
         $SUDO apt install pkg-config -y
