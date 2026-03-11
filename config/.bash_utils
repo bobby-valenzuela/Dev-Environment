@@ -493,7 +493,23 @@ restart_audio(){
 }
 
 
+change_pop_graphics(){
+
+    if [[ "${1}" = "low" ]]; then
+        sudo system76-power graphics integrated # iGPU only (best battery, no NVIDIA)
+    elif [[ "${1}" = "med" ]]; then
+        sudo system76-power graphics hybrid    # default & most battery-friendly
+
+    elif [[ "${1}" = "high" ]]; then
+        sudo system76-power graphics nvidia    # max performance (uses more power)
+    else
+        echo "Options are 'low' | 'med' | 'high'"
+    fi
+
+    echo 
+
+    local current=$(system76-power graphics )
+    echo "Current: $current"
+}
 
 
-
-# END 3
