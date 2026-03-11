@@ -24,7 +24,7 @@ declare -A apps=(
     ["Steam|steam"]="apt|sudo apt install -y steam"
     ["LibreOffice|libreoffice"]="apt|sudo apt install -y libreoffice"
     ["VLC|vlc"]="apt|sudo apt install -y vlc"
-    ["OBS Studio|obs-studio"]="script|placeholder"
+    ["OBS Studio|obs"]="script|placeholder"
     ["Wireshark|wireshark"]="apt|sudo apt install -y wireshark"
     ["Thonny|thonny"]="apt|sudo apt install -y thonny"
     ["Audacity|audacity"]="appimage|https://github.com/audacity/audacity/releases/download/Audacity-3.7.7/audacity-linux-3.7.7-x64-20.04.AppImage;apt|sudo apt install -y audacity"
@@ -32,8 +32,8 @@ declare -A apps=(
     ["Signal|signal-desktop"]="script|placeholder"
     ["Wezterm|wezterm"]="script|placeholder"
     ["Docker|docker"]="script|placeholder"
-    ["Telegram"]="flatpak|flatpak install flathub org.telegram.desktop -y"
-    ["Spotify"]="flatpak|flatpak install flathub com.spotify.Client -y"
+    ["Telegram|Telegram"]="flatpak|flatpak install flathub org.telegram.desktop -y"
+    ["Spotify|spotify"]="flatpak|flatpak install flathub com.spotify.Client -y"
 
                             
 )
@@ -51,6 +51,7 @@ declare -A apps=(
 total=${#apps[@]}
 counter=0
 failed_apps=()
+forced_app="${1}"
 
 # Ensure /opt/Applications exists
 if [[ ! -d /opt/Applications/ ]]; then
@@ -192,6 +193,8 @@ install_script(){
         
         # Official OBS PPA Repo
         sudo add-apt-repository ppa:obsproject/obs-studio
+        # sudo add-apt-repository ppa:appimagelauncher-team/daily
+
 
         sudo apt update
         sudo apt install obs-studio -y
@@ -242,16 +245,26 @@ install_app() {
     local name="${identifier%%|*}"
     local cli_name="${identifier#*|}"
 
+    if [[ ! -z "${forced_app}" && "${forced_app}" != "$cli_name" ]]; then
+        echo "Forcing is enable, skipping $cli_name"
+        return
+    fi
+
     if command -v $cli_name 2>/dev/null; then
         echo "[+] $name is already installed"
         return
     else
-        echo "[-] $name is NOT installed, installing..."
+        # Check if installed via flatpak
+        packed_flat=$(flatp list | grep -i "$name" | wc -l)
+
+        if [[ $packed_flat -gt 0 ]]; then
+            echo "[+] $name is already installed (via flatpak)"
+        else
+            echo "[-] $name is NOT installed, installing..."
     fi
 
 
     local methods_tried=
-
 
     IFS=';' read -ra methods <<< "$priority"
     for method in "${methods[@]}"; do
