@@ -51,9 +51,9 @@ sudo apt install -y \
     vkbasalt
 
 # Optional: 32-bit MangoHud support (helps some older/OpenGL games)
-sudo apt install -y mangohud:i386
+# sudo apt install -y mangohud:i386
 
-pipx install protonup -y
+pipx install protonup
 
 # ─────────────────────────────────────────────────────────────────────
 # 4. Flatpak setup — many gaming tools are best as Flatpaks
