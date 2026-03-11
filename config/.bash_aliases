@@ -70,4 +70,4 @@ alias nvim-custom='NVIM_APPNAME="nvim-custom" nvim'
 # eval $(thefuck --alias redo)
 
 alias ds="ollama run deepseek-r1:14b"
-
+alias cdev="cd $HOME/Documents/Repos/Dev-Environment/"
