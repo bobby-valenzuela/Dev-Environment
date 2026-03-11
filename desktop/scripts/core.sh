@@ -13,6 +13,9 @@ RED="\033[0;31m"
 YELLOW="\033[1;33m"
 NC="\033[0m"
 
+# DRY_RUN: Set to 1 to avoid actually installing anything - just see what would get installed
+DRY_RUN=1
+
 # -----------------------------
 # Applications List
 # -----------------------------
@@ -251,17 +254,17 @@ install_app() {
     fi
 
     if command -v $cli_name 2>/dev/null; then
-        echo "[+] $name is already installed"
+        echo -e "${GREEN}[+] $name is already installed${NC}"
         return
     else
         # Check if installed via flatpak
         packed_flat=$(flatpak list | grep -i "$name" | wc -l)
 
         if [[ $packed_flat -gt 0 ]]; then
-            echo "[+] $name is already installed (via flatpak)"
+            echo "${GREEN}[+] $name is already installed (via flatpak)${NC}"
             return
         else
-            echo "[-] $name is NOT installed, installing..."
+            echo "${YELLOW}[-] $name is NOT installed, installing...${NC}"
         fi
     fi
 
@@ -275,6 +278,9 @@ install_app() {
 
         echo "[+] ID: $identifier | name: $name | cli_name: $cli_name | type: $type | cmd: $cmd"
 
+        if [[ $DRY_RUN -gt 0 ]]; then
+            continue 
+        fi
         
         case $type in
             appimage)
