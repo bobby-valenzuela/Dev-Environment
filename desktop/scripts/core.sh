@@ -246,7 +246,7 @@ install_app() {
     local cli_name="${identifier#*|}"
 
     if [[ ! -z "${forced_app}" && "${forced_app}" != "$cli_name" ]]; then
-        echo "Forcing is enable, skipping $cli_name"
+        echo "Forcing is enabled, skipping $cli_name"
         return
     fi
 
@@ -255,12 +255,14 @@ install_app() {
         return
     else
         # Check if installed via flatpak
-        packed_flat=$(flatp list | grep -i "$name" | wc -l)
+        packed_flat=$(flatpak list | grep -i "$name" | wc -l)
 
         if [[ $packed_flat -gt 0 ]]; then
             echo "[+] $name is already installed (via flatpak)"
+            return
         else
             echo "[-] $name is NOT installed, installing..."
+        fi
     fi
 
 
