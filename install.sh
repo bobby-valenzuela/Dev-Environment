@@ -120,6 +120,8 @@ if [ "$1" != "configonly" ]; then
         $SUDO apt update 
         
         echo "[+] Installing essential core packages..."    # Not essential per se, but essentials for my workflow,enchancements, and customizations
+        $SUDO apt install curl -y
+        $SUDO apt install wget -y
         $SUDO apt install python3 -y
         $SUDO apt install perl -y
         $SUDO apt install tar -y
@@ -147,6 +149,7 @@ if [ "$1" != "configonly" ]; then
         $SUDO apt install npm -y
         $SUDO apt install ninja-build -y
         $SUDO apt install gettext -y
+        $SUDO apt install pipx && pipx ensurepath
         
         echo "[+] Installing extras..."
         $SUDO apt install zsh -y

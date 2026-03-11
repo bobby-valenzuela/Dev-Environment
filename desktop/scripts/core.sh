@@ -341,7 +341,9 @@ install_app() {
 # -----------------------------
 # Main Loop
 # -----------------------------
-# sudo apt update
+sudo apt update
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 
 for app in "${!apps[@]}"; do
     install_app "$app" "${apps[$app]}"
