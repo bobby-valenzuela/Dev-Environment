@@ -576,8 +576,14 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
         # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
         cd "$(dirname "$0")"
         cp -v ./config/.zshrc   $HOME/
-        chsh -s $(which zsh)
-        printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
+        current_shell=$(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')
+
+        if [[ "$current_shell" !=  *"zsh" ]]; then
+            chsh -s $(which zsh)
+            printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
+
+        fi
+
         cp -v ./config/.zshrc   $HOME/
         echo "→ You may need to log out/in or run: source ~/.zshrc (or ~/.bashrc)"
         echo "→ Some tools require fonts (Nerd Fonts) or extra setup"
