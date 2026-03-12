@@ -578,7 +578,7 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
         cp -v ./config/.zshrc   $HOME/
         current_shell=$(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')
 
-        if [[ "$current_shell" !=  *"zsh" ]]; then
+        if [[ "$current_shell" !=  *zsh ]]; then
             chsh -s $(which zsh)
             printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
 
