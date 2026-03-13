@@ -28,9 +28,55 @@ y() {
 	rm -f -- "$tmp"
 }
 
-docx_to_md(){
-    [[ ! "$1" =~ .docx$ ]] && echo "File must be in .docx format" && exit
-    pandoc -s $1 -f docx -t commonmark --extract-media=. -o output.md
+docx_to_md() {
+    # Check if pandoc is installed
+    command -v pandoc >/dev/null 2>&1 || { echo "pandoc is required but not installed" >&2; exit 1; }
+
+    # Validate input file
+    [[ -z "$1" || ! "$1" =~ \.docx$ ]] && { echo "File must be in .docx format" >&2; exit 1; }
+    [[ ! -f "$1" || ! -r "$1" ]] && { echo "File does not exist or is not readable" >&2; exit 1; }
+
+    # Validate second argument
+    if [[ -n "$2" && "$2" != "--preserve-img-dimensions" ]]; then
+        echo "Invalid argument: $2. Only --preserve-img-dimensions is supported" >&2
+        exit 1
+    fi
+
+    # Process file name
+    FILE=$(basename "$1")
+    FILE=${FILE// /_}
+    FILE=${FILE%.docx}
+
+    # Check for existing output file
+    [[ -f "$FILE.md" ]] && { echo "Output file $FILE.md already exists" >&2; exit 1; }
+
+    # Create unique media folder
+    MEDIA_DIR="_assets_${FILE}"
+    [[ -d "$MEDIA_DIR" ]] && { echo "Media directory $MEDIA_DIR already exists" >&2; exit 1; }
+
+    # Convert file
+    if [[ "$2" == "--preserve-img-dimensions" ]]; then
+        pandoc -s "$1" -f docx -t gfm --extract-media="$MEDIA_DIR" -o "$FILE.md" --wrap=auto --columns=80
+        printf "Created file %s.md with media extracted\n" "$FILE"
+    else
+        # Remove any fixed image dimentions. Useful as sometimes this will causes images to use html syntax as markdown since this is the only way to set specific dimensions in an  image in markdown
+        printf "About to create file %s.md...\n" "$FILE"
+        FILTER_FILE=$(mktemp filter.XXXXXX.lua)
+        /usr/bin/cat <<EOF > "$FILTER_FILE"
+function Image (img)
+    img.attributes.width = nil
+    img.attributes.height = nil
+    return img
+end
+EOF
+        pandoc -s "$1" -f docx -t gfm --extract-media="$MEDIA_DIR" -o "$FILE.md" --wrap=auto --columns=80 --lua-filter="$FILTER_FILE"
+        rm -f "$FILTER_FILE"
+        printf "Created file %s.md\n" "$FILE"
+    fi
+
+    # Remove broken image links
+    sed -i -E ':a; N; $!ba; s:(!\[([^]\n])*)(\n\s*):\1\ :g' "$FILE.md"
+
 }
 
 update_lazy(){
@@ -42,9 +88,29 @@ update_lazy(){
     sudo make install
 }
 
-create_and_assume_user(){
-    [[ ! -z "$1" ]] && echo "[!] Requires username as an argument" && exit
-    sudo useradd -m $1 && sudo usermod -aG sudo $1 && sudo passwd $1 && sudo -i -u $1
+create_and_assume_user() {
+    if [[ -z "$1" ]]; then
+        echo "[!] Usage: create_and_assume_user <username>"
+        echo "    Requires username as an argument"
+        return 1
+    fi
+
+    local user="$1"
+
+    # Decide whether we need sudo or not
+    if [[ "$EUID" -eq 0 ]]; then
+        # Already root → no sudo needed
+        useradd -m "$user" &&
+        usermod -aG sudo "$user" &&
+        passwd "$user" &&
+        su - "$user"
+    else
+        # Not root → use sudo
+        sudo useradd -m "$user" &&
+        sudo user
+        sudo passwd "$user" &&
+        sudo -i -u "$user"
+    fi
 }
 
 edit_nvim_conf(){
@@ -114,17 +180,21 @@ tt(){
    ~/my_repos/Tomahawk/tomahawk
 }
 
-config_update_and_nvim_update(){
-    config_update 'update-nvim'
+local_config_update_and_nvim_update(){
+    local_config_update 'update-nvim'
 }
-config_update(){
+local_config_update(){
     # Gets latest config files in repo (which has been cloned) and updates local files
 
     LOCAL_REPO=~/my_repos/Dev-Environment
 
     if [[ ! -d $LOCAL_REPO/ ]]; then
+        LOCAL_REPO=~/Documents/Repos/Dev-Environment
+    fi
+
+    if [[ ! -d $LOCAL_REPO/ ]]; then
         echo "[!] Repo does not exist! Cloning and updating..."
-        cd $HOME/my_repos/
+        cd $LOCAL_REPO/
         sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
     else
 
@@ -136,20 +206,31 @@ config_update(){
         # Save any unsaved changed and pull down the latest
         git stash save
         git pull
-        ./install.sh configonly
+        ./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell and omit the below
+
+
+        # if [[ "$1" = "update-nvim" ]]; then
+        #     ./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell
+        #     ./install.sh nvimonly
+        # else
+        #     ./install.sh configonly noshellswitch   # Calling with 'noshellswitch' so we dont start a new zsh shell
+        #
+        # fi
+
+
     fi
 
 
     # Nvim is already updated - only continue if we want to keep revert back to current nvim
     if [[ "$1" = "update-nvim" ]]; then
-        echo "Nvim config updated..."
+        echo "[+] Nvim config updated!"
         return
     fi
 
     # [+] Restore main nvim profile
     # At this point our nvim config would have been moved to nvim-backup and a fresh install would be in place
     # Revert that if we're not interested in updated nvim
-    echo "Restoring nvim config..."
+    echo "Restoring nvim config to previous one..."
     if [ -d ~/.config/nvim-new ]; then
         rm -rf ~/.config/nvim-new
     fi
@@ -162,13 +243,15 @@ config_update(){
 
 }
 
-config_save(){
+local_config_save(){
     # Copies all of my main config files into my git dir so i can push them up later as needed
     LOCAL_REPO=~/my_repos/Dev-Environment
 
     # Sync local config files with cloned repo so i can push up my changes
     if [[ ! -d $LOCAL_REPO/config/ ]]; then
-        mkdir -p $LOCAL_REPO/config/
+
+        LOCAL_REPO=~/Documents/Repos/Dev-Environment
+        mkdir -p $LOCAL_REPO/config/ 2> /dev/null
     fi
     DEST=$LOCAL_REPO/config/
 
@@ -178,7 +261,7 @@ config_save(){
       return 1
     fi
 
-    printf "Running...\n"
+    printf "Running... [ARG1: $1]\n"
 
     # FILES
     cp -v ~/.bash_aliases  $DEST
@@ -257,6 +340,8 @@ config_save(){
 
      echo "Done!"
 }
+alias lcu="local_config_update"
+alias lcs="local_config_save"
 
 config_sync_alpha(){
 
@@ -279,9 +364,152 @@ config_sync_alpha(){
     echo "Done!"
 }
 
-gs(){
-    gitsync "$1" "$2"
+# Switch from current zsh theme to starship (catppuccin mocha)
+blastoff(){
+    export BLASTOFF=1
+    zsh
+}
+land(){
+    export BLASTOFF=0
+    zsh
 }
 
+# dirsync_alpha(){
+#
+#     for dir in $( find ~/pbx/ -maxdepth 1 -type d -not -path "*/pbx/" -not -path "*/test" -not -path "*_custom_scripts"); do
+#         echo $dir
+#         DIR=$(basename $dir)
+#         $( dirsync $DIR alpha "ongoing" )
+#     done
+#
+# }
+#
+colorme() {
+    pygmentize -f terminal "$@"
+}
+
+docker_force_old_version(){
+    export DOCKER_API_VERSION=1.43
+}
+
+# Spin up quick ubuntu container
+dockbuntu(){
+    # force non-newest docker version as api doesn't support past 1.43 as of 3/26
+    # docker_force_old_version
+    sudo docker run -it --rm ubuntu:24.04 bash -c "apt update && apt install -y sudo wget git curl && DEBIAN_FRONTEND=noninteractive TZ=America/Los_Angeles apt install vim -y && exec bash"
+}
+
+# fedora_container(){
+#     docker run -it --rm fedora:40 bash -c "dnf update && dnf install -y wget git curl wheel"
+# }
+#
+
+uv_start(){
+    # 1. Downloads and runs the official uv installation script from Astral
+    #    - -L = follow redirects, -s = silent, -S = show errors if any, -f = fail silently on server errors
+    #    - This is the recommended one-liner way to install uv (Rust-based, very fast Python tool)
+    #    - Installs uv into ~/.cargo/bin or ~/.local/bin (depending on your system)
+    # curl -LsSf https://astral.sh/uv/install.sh | sh
+
+    # 2. Creates a new Python project in the current directory
+    #    - Generates a minimal pyproject.toml with modern metadata ([project], [build-system])
+    #    - Usually also creates a basic src/ layout or example module + README.md + .gitignore
+    #    - This is the current best-practice way to start a Python project (PEP 621 style)
+    uv init 2> /dev/null
+
+    # 3. Creates a virtual environment named .venv in the current directory
+    #    - Uses the fastest available method (often uv's own Python discovery + venv creation)
+    #    - Much faster and more reliable than python -m venv on most systems
+    #    - uv will download a Python interpreter if needed (very convenient)
+    uv venv
+
+    # 4. Activates the virtual environment you just created
+    #    - Modifies your current shell session so python, pip, uv, etc. point to .venv/bin/
+    #    - Standard POSIX-style activation (works in bash, zsh, etc.)
+    #    - After this line runs, you're "inside" the project’s isolated environment
+    source .venv/bin/activate
+
+    # 5. Adds the listed packages as dependencies to pyproject.toml
+    #    - Also resolves + installs them into the active .venv immediately
+    #    - Automatically creates/updates uv.lock with exact pinned versions (for reproducibility)
+    #    - These packages are commonly used together for OCR + image processing tasks:
+    #      • pytesseract     → Python interface to Tesseract OCR engine
+    #      • numpy           → numerical arrays & math operations
+    #      • pipreqs         → generates requirements.txt from your import statements
+    #      • opencv-python-headless → OpenCV without GUI/Qt dependencies (ideal for servers, Docker, scripts)
+    # uv add pytesseract numpy pipreqs opencv-python-headless
+
+    # 6. Ensures the virtual environment dependencies exactly matches pyproject.toml + uv.lock
+    #    - Installs anything missing, removes anything not declared
+    #    - Very useful in CI/CD, after git pull, or when collaborating
+    #    - Makes the environment 100% reproducible from the lockfile
+    uv sync
+
+    printf "\n\n"
+    echo " ────────────────────────────────────────────────────────────────────────"
+    echo "| Virtual Environment Setup and Synced!                                  |"
+    echo "|                                                                        |"
+    echo "| # Adding packages                                                      |"
+    echo "| \$: uv add numpy                                                        |"
+    echo "|                                                                        |"
+    echo "| # Running programs                                                     |"
+    echo "| \$: uv run python app.py                                                |"
+    echo " ────────────────────────────────────────────────────────────────────────"
+    printf "\n\n"
+
+
+}
+
+
+# gs(){
+#     gitsync "$1" "$2"
+# }
+
+# Quick Ed25519 SSH key generator with custom comment
+
+# Usage: mksshkey "my name - 2026 lappy"
+
+mksshkey() {
+
+    if [ $# -eq 0 ]; then
+
+        echo "Usage: mksshkey 'your comment here'  [extra ssh-keygen options...]"
+        echo "Example:"
+        echo "  mksshkey 'bobby@work-laptop' -a 150"
+        return 1
+
+    fi
+
+    local comment="$1"
+    shift  # remove the comment so remaining args go to ssh-keygen
+    ssh-keygen -t ed25519 -C "$comment" "$@"
+
+}
+
+restart_audio(){
+
+    systemctl --user restart wireplumber pipewire pipewire-pulse
+
+}
+
+
+change_pop_graphics(){
+
+    if [[ "${1}" = "low" ]]; then
+        sudo system76-power graphics integrated # iGPU only (best battery, no NVIDIA)
+    elif [[ "${1}" = "med" ]]; then
+        sudo system76-power graphics hybrid    # default & most battery-friendly
+
+    elif [[ "${1}" = "high" ]]; then
+        sudo system76-power graphics nvidia    # max performance (uses more power)
+    else
+        echo "Options are 'low' | 'med' | 'high'"
+    fi
+
+    echo 
+
+    local current=$(system76-power graphics )
+    echo "Current: $current"
+}
 
 

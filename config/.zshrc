@@ -32,6 +32,9 @@ export PATH="$PATH:$HOME/go/bin"
 # Add /usr/local/go/bin to PATH in case you have a later version here
 export PATH=/usr/local/go/bin:$PATH
 
+# Add /opt/Applications/ to $PATH
+export PATH=/opt/Applications/:$PATH
+
 # Add .local/bin to PATH
 export PATH="$HOME/.local/bin":$PATH
 export PATH="$HOME/.local/lib":$PATH
@@ -87,14 +90,24 @@ chmod +x "$PATH_DIR/cht.sh"
 alias ch="$PATH_DIR/cht.sh"
 
 
-
 # Force other bash files to load
+[[ -s ~/.creds.env ]] && source ~/.creds.env
 [[ -s ~/.bash_aliases ]] && source ~/.bash_aliases
 [[ -s ~/.bash_pbx ]] && source ~/.bash_pbx
 [[ -s ~/.bash_git ]] && source ~/.bash_git
 [[ -s ~/.bash_utils ]] && source ~/.bash_utils
-[[ -s ~/.oh-my-zsh/oh-my-zsh.sh ]] && source ~/.oh-my-zsh/oh-my-zsh.sh
+# [[ -s ~/.oh-my-zsh/oh-my-zsh.sh ]] && source ~/.oh-my-zsh/oh-my-zsh.sh
 
+
+# LOAD ANY SAVED KEYS
+
+# > Claude
+if [[ -s $HOME/.claude/.credentials.json ]]; then
+    CLAUDE_TOKEN=$(jq '.[] | .accessToken' $HOME/.claude/.credentials.json 2> /dev/null )
+    if [[ ! -z "${CLAUDE_TOKEN}" ]]; then
+        export ANTHROPIC_API_KEY=${CLAUDE_TOKEN//\"/}
+    fi
+fi
 
 
 

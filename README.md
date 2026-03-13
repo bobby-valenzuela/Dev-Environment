@@ -17,7 +17,7 @@ Instead of re-configuring everything all over from scrath on a new system, I've 
 
 __Full Installation__: Install all in ubuntu system _(installs packages and copies config files)_
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init.sh -O -)"
 ```
 
 <br />
@@ -26,25 +26,34 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 
 __Package Installation__: Install programs in ubuntu system _(installs packages only)_
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_installonly.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_installonly.sh -O -)"
 ```
 
 <br />
 
 <br />
 
-__Config installation__: Install config files in ubuntu system _(config files only)_
+__Config installation__: Install config files in ubuntu system _(config files only - includes nvim)_
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_configonly.sh -O -)"
 ```
-
 <br />
 
 <br />
+
+__Nvim-only installation__: Install config files in ubuntu system _(nvim files only)_
+```bash
+bash -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/init_nvimonly.sh -O -)"
+```
+<br />
+
+<br />
+
+
 
 __Docker VM__:Create a Docker container running Ubuntu Jammy jellyfish (v22)  
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/jammy_init.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment/refs/heads/main/jammy_init.sh -O -)"
 ```
 
 <br />
@@ -62,4 +71,4 @@ sh -c "$(wget https://raw.githubusercontent.com/bobby-valenzuela/Dev-Environment
 <br />
 
 `init.sh` - Clones repo and runs `install.sh` (installing both packages and config files)  
-`jammy_init.sh` - Sets up Docker container and runs `init.sh`  
+`jammy_init.sh` - Sets up Docker container

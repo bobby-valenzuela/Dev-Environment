@@ -1,2 +1,5 @@
 config/usr_local_bin/pandoc
 config/usr_local_bin/zig
+./config/.config/nvim/lazy-lock.json
+config/.config/nvim/lazy-lock.json
+config/.config/lazygit/state.yml

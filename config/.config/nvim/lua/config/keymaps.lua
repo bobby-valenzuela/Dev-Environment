@@ -1,10 +1,13 @@
 
 -- NON-LEADER CUSTOM MOTIONS
 
-
 -- Smaller movements up/down buffer
 vim.keymap.set('n', '<C-d>', '22<C-e>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-u>', '22<C-y>', { noremap = true, silent = true })
+
+-- Larher movements up/down buffer with Ctrl e/y
+vim.keymap.set('n', '<C-e>', '4<C-e>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-y>', '4<C-y>', { noremap = true, silent = true })
 
 -- Clear all buffers' unsaved changes
 vim.keymap.set('n', 'E!', ':bufdo e!<CR>', { noremap = true, silent = true })
@@ -72,6 +75,9 @@ vim.keymap.set('n', '<leader>h', ':nohlsearch<CR><esc>', { noremap = true, silen
 -- 'Remove Markers' | Remove all markers
 vim.keymap.set('n', '<leader>rm', ':delm a-zA-Z0-9<CR>', { desc = 'Remove All Markers', noremap = true, silent = true })
 
+-- Set Transparent background
+vim.keymap.set('n', '<leader>tb', ':highlight Normal guibg=NONE ctermbg=NONE<CR>', { desc = 'Set Transparent bg', noremap = true, silent = true })
+
 -- move up/down in 20-step jumps
 vim.keymap.set('n', '<leader><down><down>', '20<C-e>', { desc = 'Move down 20 steps', noremap = true, silent = true })
 vim.keymap.set('n', '<leader><up><up>', '20<C-y>', { desc = 'Move down 20 steps', noremap = true, silent = true })
@@ -81,10 +87,10 @@ vim.keymap.set('n', '<leader><leader>', ':Neotree toggle<CR>',
     { desc = 'Toggle Neo-tree file explorer', noremap = true, silent = true })
 
 -- Find and [c]hange [w]ord under cursor - <Esc> to apply and . to repeat
-vim.keymap.set('n', '<leader>cW', '*Ncgn', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>cw', '*Ncgn', { noremap = true, silent = true })
 
 -- Find and [c]hange [W]ord under cursor - replace all in doc
-vim.keymap.set('n', '<leader>cw', '* | :%s::', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>cW', '* | :%s::', { noremap = true, silent = true })
 
 -- Find and [a]ppend [w] word under cursor - replace all in the doc
 vim.keymap.set('n', '<leader>aw', 'yiw | :%s:\\V<C-r>":<C-r>"', { noremap = true, silent = true })
@@ -96,7 +102,14 @@ vim.keymap.set('n', '<leader>cy', ':%s:\\V<C-r>":', { noremap = true, silent = t
 vim.keymap.set('n', '<leader>ay', ':%s:\\V<C-r>":<C-r>"', { noremap = true, silent = true })
 
 -- Find all occurrences of word under cursor in current buffer and add to quickfix list
-vim.keymap.set('n', "<leader>faw", "yiw | :vim '<C-r>\"' % <C-r> | :cope <CR>", { noremap = true, silent = true })
+vim.keymap.set('n', "<leader>fw", "yiw | :vim '<C-r>\"' % <C-r> | :cope <CR>", { noremap = true, silent = true })
+-- vim.keymap.set('n', "<leader>fW", "yiw | <leader>fg | :vim '<C-r>\"' % <C-r> <CR>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fW', function()
+  require('telescope.builtin').grep_string({
+    search =  vim.fn.expand("<cword>"),   -- word under cursor
+    -- Alternative: just the word: search = vim.fn.expand("<cword>")
+  })
+end, { desc = "Search for word" })
 
 
 -- _______________________ Telescope __________________________
@@ -106,7 +119,13 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Fuzzy grep - Tele
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Fuzzy buffer search - Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Fuzzy tags - Telescope help tags' })
 vim.keymap.set('n', '<leader>fc', require('telescope.builtin').command_history, { desc = 'Fuzzy command find - Search command history' })
-
+-- vim.keymap.set('n', '<leader>fs', ':Telescope grep_string<CR>', { desc = "Search for sub def" })
+vim.keymap.set('n', '<leader>fs', function()
+  require('telescope.builtin').grep_string({
+    search = "sub " .. vim.fn.expand("<cword>"),   -- "sub " + word under cursor
+    -- Alternative: just the word: search = vim.fn.expand("<cword>")
+  })
+end, { desc = "Search for 'sub <word>' or sub definition" })
 -- _______________________ Harpoon __________________________
 local harpoon = require("harpoon")
 
@@ -259,6 +278,8 @@ vim.keymap.set("n", "<leader>gl", ":Gclog<CR>", { desc = "Git commit log" })
 -- local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ie', ':lua Snacks.indent.enable()<CR>', { desc = 'Enable Snacks indent' })
 vim.keymap.set('n', '<leader>id', ':lua Snacks.indent.disable()<CR>', { desc = 'Disable Snacks indent' })
+vim.keymap.set('n', '<leader>iee', ':IBLEnable<CR>', { desc = 'Enable Rainbow indent' })
+vim.keymap.set('n', '<leader>idd', ':IBLDisable<CR>', { desc = 'Enable Rainbow indent' })
 
 
 -- _______________________ LSP __________________________

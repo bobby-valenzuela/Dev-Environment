@@ -4,10 +4,13 @@ vim.opt.clipboard      = "unnamedplus"                         -- Allows Neovim 
 vim.opt.compatible     = false                                 -- Set compatibility to Vim-Only (not vi)
 vim.opt.encoding       = 'utf-8'                               -- Set default encoding
 vim.opt.expandtab      = true                                  -- Use spaces instead of tabs
+vim.opt.foldlevel      = 99                                    -- Everything unfolded by default
+vim.opt.foldmethod     = "expr"
+vim.opt.foldexpr       = "nvim_treesitter#foldexpr()"          -- Use Treesitter-based folding
 vim.opt.history        = 1000                                  -- Increase command history size
 vim.opt.hlsearch       = true                                  -- Highlight search matches
 vim.opt.ignorecase     = true                                  -- Ignore case in search patterns
-vim.opt.laststatus     = 2                                     -- Always show statusline
+vim.opt.laststatus     = 3                                   -- Always show statusline
 vim.opt.linebreak      = true                                  -- Companion to wrap, don't split words
 vim.opt.mouse          = 'a'                                   -- Enable mouse support
 vim.opt.number         = true                                  -- Show absolute line numbers
@@ -144,3 +147,8 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 })
 
 
+-- Override colors for Diffs
+vim.api.nvim_set_hl(0, "DiffAdd",    { bg = "#004d00", fg = "#d7ffaf" })
+vim.api.nvim_set_hl(0, "DiffChange", { bg = "#4d3d00" })
+vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#4d0000", fg = "#ff5f5f", bold = true })
+vim.api.nvim_set_hl(0, "DiffText",   { bg = "#870000", fg = "#ffffff", bold = true })
