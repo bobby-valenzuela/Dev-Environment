@@ -63,6 +63,10 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `psmem` - ps auxf | sort -nr -k 4  
 `psmem10` - ps auxf | sort -nr -k 4 | head -10  
 
+# CLI  
+`Ctrl+x+e` - Open temp buffer to run in cli  
+`fc` - edit your hand command in $EDITOR  
+
 ## Dir navigation  
 `...` - cd ../../../  
 `....` - cd ../../../../  
