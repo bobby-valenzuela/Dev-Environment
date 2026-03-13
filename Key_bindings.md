@@ -64,8 +64,8 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `psmem10` - ps auxf | sort -nr -k 4 | head -10  
 
 # CLI  
-`Ctrl+x+e` - Open temp buffer to run in cli  
-`fc` - edit your hand command in $EDITOR  
+`Ctrl+x+e` - Open temp buffer to run in cli (can run on previous commands or whatevs is in cli)  
+`fc` - edit your lsat command in $EDITOR  
 
 ## Dir navigation  
 `...` - cd ../../../  
@@ -1110,6 +1110,7 @@ standard vim commands for movement/searching
 <br />  
 
 ---  
+
 
 
 
