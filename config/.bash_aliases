@@ -82,7 +82,7 @@ alias -s ts="$EDITOR"
 alias -s pl="$EDITOR"
 alias -s py="$EDITOR"
 alias -s c="$EDITOR"
-alias -s sh="$EDITOR"
+# alias -s sh="$EDITOR"
 
 # Global aliases
 # alias -g C=" | pbcopy"
