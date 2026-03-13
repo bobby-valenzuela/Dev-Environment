@@ -572,19 +572,29 @@ if [ "$1" = "full" -o "$1" = "configonly" ]; then
 
     if which zsh >/dev/null 2>&1; then
     
-        printf "[+] Setting default shell...\n\n"
         # Installing oh-my-zsh can wipe out our ~/.zshrc - let's copy it over again in case
         cd "$(dirname "$0")"
         cp -v ./config/.zshrc   $HOME/
-        current_shell=$(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')
 
-        if [[ "$current_shell" !=  *zsh ]]; then
-            chsh -s $(which zsh)
-            printf "Shell set to: $(grep ${CALLING_USER} /etc/passwd | awk -F: '{print $7}')\n"
+        current_shell=$(getent passwd "$USER" | cut -d: -f7 || echo "")
 
-        fi
+        case "$current_shell" in
+            *zsh)
+                echo "→ Login shell is already zsh – no change needed"
+                ;;
+            *)
+                echo "[+] Current login shell: ${current_shell:-not found}"
+                echo "[+] Changing login shell to zsh... (may prompt for password)"
+                
+                if chsh -s "$(command -v zsh)"; then
+                    echo "→ Login shell updated (takes effect in new sessions)"
+                else
+                    echo "→ chsh failed – try running it manually"
+                fi
+                ;;
+        esac
 
-        cp -v ./config/.zshrc   $HOME/
+        cp -v ./config/.zshrc  $HOME/
         echo "→ You may need to log out/in or run: source ~/.zshrc (or ~/.bashrc)"
         echo "→ Some tools require fonts (Nerd Fonts) or extra setup"
 
