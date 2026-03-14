@@ -110,6 +110,9 @@ if [[ -s $HOME/.claude/.credentials.json ]]; then
 fi
 
 
+# Activate zoxide
+# eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"  # Replacing 'cd' command with 'z'. Allows 'cdi' to view z list  
 
 
 
