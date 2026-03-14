@@ -602,6 +602,12 @@ EOF
   done
 }
 
+# Dir env - load any env vars saved locally in .envrc
+function_auto_env(){
+    if [[ -s .envrc ]]; then
+        direnv allow .
+    fi
+}
 function auto_nvm() {
   [[ -f .nvmrc ]] && nvm use
 }

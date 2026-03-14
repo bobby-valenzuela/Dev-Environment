@@ -168,7 +168,8 @@ if [ "$1" != "configonly" ]; then
         $SUDO apt install htop -y
         $SUDO apt install pkg-config -y
         $SUDO apt install mssql-tools --ignore-missing -y   # Requires MicrSoft repo
-        $SUDO apt install font-manager # GUI
+        $SUDO apt install font-manager -y # GUI
+        $SUDO apt install direnv -i
         
         # Fastfetch
         $SUDO add-apt-repository ppa:zhangsongcui3371/fastfetch
@@ -300,8 +301,8 @@ if [ "$1" != "configonly" ]; then
     echo "[+] Installing ggh ssh manager..."
     curl https://raw.githubusercontent.com/byawitz/ggh/master/install/unix.sh | sh
     
-    echo "[+] Installing tere..."
-    cargo install tere
+    echo "[+] Installing zioxide..."
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
     
     echo "[+] Installing csvlens"
     cargo install csvlens

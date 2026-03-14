@@ -96,7 +96,10 @@ This document outlines key bindings for TMUX, Vim, and LazyVim, organized for cl
 `mkdir` - mkdir -pv  
 `pls` - ls with pretty output  
 `rd` - rmdir  
-`tere` - cd + ls  
+`cd` - 'cd' is now bound to 'z' (zioxode)  
+`cdi` - to view zioxide interactive list  
+
+
 
 ## Docker  
 
