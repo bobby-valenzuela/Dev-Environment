@@ -74,30 +74,3 @@ alias cdev="cd $HOME/Documents/Repos/Dev-Environment/"
 
 
 
-# ___________________ ZSH GOODIES _____________________________
-# Suffix Aliases
-alias -s md="glow -p"
-alias -s js="$EDITOR"
-alias -s ts="$EDITOR"
-alias -s pl="$EDITOR"
-alias -s py="$EDITOR"
-alias -s c="$EDITOR"
-# alias -s sh="$EDITOR"
-
-# Global aliases
-# alias -g C=" | pbcopy"
-# alias -g P=" | pbcopy"
-alias -g NULL=" &> /dev/null"   # Nothing: myscript.sh NULL
-alias -g NE=" &> /dev/null"     # No Error: df -f NE
-
-# Pipe to pbcopy / pbpaste to copy/paste output to clipboard (X11)
-# alias pbcopy='xclip -selection clipboard'
-# alias pbpaste='xclip -selection clipboard -o'
-
-# Hash locations (location aliases -> ~xx)
-hash -d z=~/.zshrc              # zsh conf (good for sourcing): . ~c 
-hash -d b=~/.bash_utils         
-hash -d n=~/.config/nvim/lua/   # Edit nvim dir: nvim -n
-
-# Ctrl-x followed by gc runs git commit with cursor inside msg
-bindkey -s '^Xgc' 'git commit -m ""\C-b'

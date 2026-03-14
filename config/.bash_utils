@@ -553,7 +553,6 @@ change_pop_graphics(){
 # Merging Hooks
 # -------------------------------------------
 
-# To merge hooks, use add-zsh-hook
 autoload -Uz add-zsh-hook
 
 
@@ -603,7 +602,7 @@ EOF
 }
 
 # Dir env - load any env vars saved locally in .envrc
-function_auto_env(){
+function auto_direnv(){
     if [[ -s .envrc ]]; then
         direnv allow .
     fi
@@ -621,3 +620,4 @@ add-zsh-hook chpwd auto_list
 add-zsh-hook chpwd auto_venv
 add-zsh-hook chpwd auto_nix
 add-zsh-hook chpwd auto_nvm
+add-zsh-hook chpwd auto_direnv
